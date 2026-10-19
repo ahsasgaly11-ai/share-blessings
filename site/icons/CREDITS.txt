@@ -1,7 +1,8 @@
 Icons in this folder
 ====================
-Most icons come from Microsoft Fluent Emoji (3D style), MIT License,
-Copyright (c) Microsoft Corporation. https://github.com/microsoft/fluentui-emoji
+Most icons are realistic 3D images supplied by the project owner for Share
+Blessings (backgrounds removed for the site).
 
-fridge, washer, ac, wardrobe, mattress, desk and blanket were rendered for
-Share Blessings with three.js in a matching style.
+milk.webp and lantern.webp come from Microsoft Fluent Emoji (3D style),
+MIT License, Copyright (c) Microsoft Corporation.
+https://github.com/microsoft/fluentui-emoji

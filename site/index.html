@@ -176,7 +176,7 @@ section.view { display: block; }
 .qitems label { position: relative; cursor: pointer; }
 .qitems input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
 .qitems span { display: grid; justify-items: center; gap: 4px; padding: 10px 4px; border: 1px solid var(--line); border-radius: 9px; font-size: .88rem; text-align: center; line-height: 1.35; color: var(--muted); }
-.qitems .i3 { width: 46px; height: 46px; margin-block: -4px; transition: transform .2s; }
+.qitems .i3 { width: 58px; height: 58px; margin-block: -4px; object-fit: contain; transition: transform .2s; }
 .qitems label:hover .i3, .qitems input:checked + span .i3 { transform: translateY(-2px) scale(1.08); }
 .qitems input:checked + span { border-color: var(--primary); background: var(--primary-soft); color: var(--ink); font-weight: 600; }
 .qitems input:focus-visible + span { outline: 3px solid var(--gold-bright); outline-offset: 2px; }
@@ -641,11 +641,11 @@ details.wo[open] { display: grid; gap: 10px; }
       <a class="cat" href="#donate" data-preset="food:legumes"><span class="ic tile3d"><img class="i3" src="icons/beans.webp" width="68" height="68" alt="" decoding="async"></span><b>بقوليات</b><small>عدس، حمص، فول</small></a>
       <a class="cat" href="#donate" data-preset="food:canned"><span class="ic tile3d"><img class="i3" src="icons/can.webp" width="68" height="68" alt="" decoding="async"></span><b>معلبات</b><small>صلاحية أطول من 30 يومًا</small></a>
       <a class="cat" href="#donate" data-preset="food:dates"><span class="ic tile3d"><img class="i3" src="icons/dates.webp" width="68" height="68" alt="" decoding="async"></span><b>تمور مغلّفة</b><small>من خير هذه الأرض</small></a>
-      <a class="cat" href="#donate" data-preset="clothes:winter"><span class="ic tile3d"><img class="i3" src="icons/coat.webp" width="68" height="68" alt="" decoding="async"></span><b>ملابس شتوية</b><small>رجال · نساء · أطفال</small></a>
-      <a class="cat" href="#donate" data-preset="clothes:kids"><span class="ic tile3d"><img class="i3" src="icons/kid.webp" width="68" height="68" alt="" decoding="async"></span><b>ملابس أطفال</b><small>يومية وصيفية</small></a>
-      <a class="cat" href="#donate" data-preset="elec:fridge"><span class="ic tile3d"><img class="i3" src="icons/fridge.webp" width="68" height="68" alt="" decoding="async"></span><b>أجهزة كهربائية</b><small>ثلاجات، غسالات، مكيفات</small></a>
-      <a class="cat" href="#donate" data-preset="furn:bed"><span class="ic tile3d"><img class="i3" src="icons/sofa.webp" width="68" height="68" alt="" decoding="async"></span><b>أثاث منزلي</b><small>أسرّة، كنب، خزائن</small></a>
-      <a class="cat" href="#donate" data-preset="other:blankets"><span class="ic tile3d"><img class="i3" src="icons/box.webp" width="68" height="68" alt="" decoding="async"></span><b>أخرى</b><small>بطانيات، أدوات مدرسية، مستلزمات منزلية</small></a>
+      <a class="cat" href="#donate" data-preset="clothes:winter"><span class="ic tile3d"><img class="i3" src="icons/cat-coat.webp" width="68" height="68" alt="" decoding="async"></span><b>ملابس شتوية</b><small>رجال · نساء · أطفال</small></a>
+      <a class="cat" href="#donate" data-preset="clothes:kids"><span class="ic tile3d"><img class="i3" src="icons/cat-kid.webp" width="68" height="68" alt="" decoding="async"></span><b>ملابس أطفال</b><small>يومية وصيفية</small></a>
+      <a class="cat" href="#donate" data-preset="elec:fridge"><span class="ic tile3d"><img class="i3" src="icons/cat-fridge.webp" width="68" height="68" alt="" decoding="async"></span><b>أجهزة كهربائية</b><small>ثلاجات، غسالات، مكيفات</small></a>
+      <a class="cat" href="#donate" data-preset="furn:bed"><span class="ic tile3d"><img class="i3" src="icons/cat-sofa.webp" width="68" height="68" alt="" decoding="async"></span><b>أثاث منزلي</b><small>أسرّة، كنب، خزائن</small></a>
+      <a class="cat" href="#donate" data-preset="other:blankets"><span class="ic tile3d"><img class="i3" src="icons/cat-box.webp" width="68" height="68" alt="" decoding="async"></span><b>أخرى</b><small>بطانيات، أدوات مدرسية، مستلزمات منزلية</small></a>
     </div>
   </div>
 
@@ -653,7 +653,7 @@ details.wo[open] { display: grid; gap: 10px; }
     <div class="sec-head"><div><p class="eyebrow">الحملات الحالية</p><h2>حملات موسمية تحتاج مشاركتك</h2></div></div>
     <div class="camps">
       <article class="camp">
-        <div class="art band"><span class="badge">حملة الموسم</span><img class="i3" src="icons/coat.webp" width="104" height="104" alt="" decoding="async"></div>
+        <div class="art band"><span class="badge">حملة الموسم</span><img class="i3" src="icons/cat-coat.webp" width="104" height="104" alt="" decoding="async"></div>
         <div class="body"><h3>كسوة الشتاء</h3><p>ملابس شتوية دافئة للأطفال والأسر قبل موسم البرد.</p>
           <div class="prog"><i data-camp-bar="winter"></i></div><div class="prog-row"><span>جُمع <b data-camp-val="winter">0</b> قطعة</span><span>الهدف <b>300</b></span></div>
           <a class="btn btn-primary btn-sm" href="#donate" data-preset="clothes:winter">شارك في الحملة</a></div>
@@ -1396,7 +1396,7 @@ function renderHome() {
 /* ================= quick donate (hero) ================= */
 const QUICK = {
   food: [['rice','أرز','d-sack'],['flour','دقيق وقمح','d-wheat'],['canned','معلبات','d-can'],['dates','تمور','d-dates'],['legumes','بقوليات','d-beans'],['milk','حليب مجفف','d-milk']],
-  clothes: [['winter','شتوية','d-coat'],['daily','يومية','d-tee'],['summer','صيفية','d-tee'],['men','رجال','d-thobe'],['women','نساء','d-dress'],['kids','أطفال','d-kid']],
+  clothes: [['winter','شتوية','d-coat'],['daily','يومية','d-tee'],['summer','صيفية','d-summer'],['men','رجال','d-thobe'],['women','نساء','d-dress'],['kids','أطفال','d-kid']],
   elec: [['fridge','ثلاجة','d-fridge'],['washer','غسالة','d-washer'],['ac','مكيف','d-ac'],['cooker','طباخ','d-cooker'],['tv','تلفزيون','d-tv'],['small','أجهزة صغيرة','d-blender']],
   furn: [['bed','سرير','d-bed'],['mattress','مرتبة','d-mattress'],['sofa','كنب','d-sofa'],['wardrobe','خزانة','d-wardrobe'],['dining','طاولة طعام','d-table'],['desk','مكتب دراسي','d-desk']],
   other: [['blankets','بطانيات','d-blanket'],['school','أدوات مدرسية','d-bag'],['hygiene','مستلزمات نظافة','d-soap'],['household','أدوات منزلية','d-pot'],['toys','ألعاب أطفال','d-ball'],['misc','أخرى','d-box']],
