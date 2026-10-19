@@ -522,320 +522,8 @@ details.wo[open] { display: grid; gap: 10px; }
   <defs>
     <pattern id="zigPat" width="28" height="14" patternUnits="userSpaceOnUse"><path d="M0 14 L14 0 L28 14 Z" style="fill:var(--bg)"/></pattern>
     <pattern id="zigPatDeep" width="28" height="14" patternUnits="userSpaceOnUse"><path d="M0 14 L14 0 L28 14 Z" style="fill:var(--primary-deep)"/></pattern>
-    <!-- 3D icon materials -->
-    <linearGradient id="gM" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#D84B75"/><stop offset=".55" stop-color="#9A1C44"/><stop offset="1" stop-color="#62102A"/></linearGradient>
-    <linearGradient id="gMd" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#A9294F"/><stop offset="1" stop-color="#560B22"/></linearGradient>
-    <linearGradient id="gG" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#FDE7B0"/><stop offset=".5" stop-color="#E4B459"/><stop offset="1" stop-color="#A8731E"/></linearGradient>
-    <linearGradient id="gGd" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#E2B357"/><stop offset="1" stop-color="#8A5C14"/></linearGradient>
-    <linearGradient id="gW" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#F3EBEE"/><stop offset="1" stop-color="#D6C7CD"/></linearGradient>
-    <linearGradient id="gS" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#F8FAFC"/><stop offset=".55" stop-color="#D3DAE1"/><stop offset="1" stop-color="#97A2AE"/></linearGradient>
-    <linearGradient id="gSd" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#97A3B0"/><stop offset="1" stop-color="#525D69"/></linearGradient>
-    <linearGradient id="gWo" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#EDB984"/><stop offset=".55" stop-color="#C07F45"/><stop offset="1" stop-color="#7C4720"/></linearGradient>
-    <linearGradient id="gWod" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#A96C3B"/><stop offset="1" stop-color="#5E3517"/></linearGradient>
-    <linearGradient id="gGr" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#ABE3B5"/><stop offset=".5" stop-color="#4FA968"/><stop offset="1" stop-color="#28683D"/></linearGradient>
-    <linearGradient id="gBr" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#C9733F"/><stop offset=".5" stop-color="#8A3E1C"/><stop offset="1" stop-color="#4A1E0B"/></linearGradient>
-    <linearGradient id="gBl" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#C6E4FF"/><stop offset=".5" stop-color="#5C9BE6"/><stop offset="1" stop-color="#26519C"/></linearGradient>
-    <linearGradient id="gSand" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#FCF4E2"/><stop offset=".55" stop-color="#E6CC98"/><stop offset="1" stop-color="#AE874A"/></linearGradient>
-    <linearGradient id="gTeal" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#B2F0E8"/><stop offset=".5" stop-color="#3FB8A8"/><stop offset="1" stop-color="#1B716A"/></linearGradient>
-    <radialGradient id="gGlow" cx=".5" cy=".45" r=".6"><stop offset="0" stop-color="#FFFBE6"/><stop offset=".55" stop-color="#FFE29A"/><stop offset="1" stop-color="#F0B947"/></radialGradient>
-    <radialGradient id="gShade" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset=".7" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#3C0A19" stop-opacity=".25"/></radialGradient>
   </defs>
 
-  <!-- 3D icons (64×64). Each starts with a soft floor shadow. -->
-  <symbol id="d-sack" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="20" ry="3" fill="#3C0A19" opacity=".16"/>
-    <path d="M24 9h16l-2 11H26z" fill="url(#gSand)"/>
-    <path d="M25 20c-8 5-13 14-13 23 0 9 8 13 20 13s20-4 20-13c0-9-5-18-13-23z" fill="url(#gSand)"/>
-    <path d="M24 20.5h16" stroke="#8A1538" stroke-width="3.5" stroke-linecap="round"/>
-    <rect x="21" y="33" width="22" height="13" rx="3.5" fill="url(#gM)"/>
-    <path d="M26.5 39.5h11" stroke="#FFE7B0" stroke-width="2.2" stroke-linecap="round"/>
-    <path d="M17 41c0-6 3-11 7-15" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".6"/>
-    <g fill="#fff" stroke="#D9C49A" stroke-width=".6"><ellipse cx="47" cy="56" rx="2.2" ry="1.2"/><ellipse cx="51.5" cy="55" rx="2" ry="1.1"/><ellipse cx="44" cy="57.5" rx="1.8" ry="1"/></g>
-  </symbol>
-  <symbol id="d-wheat" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="14" ry="2.6" fill="#3C0A19" opacity=".16"/>
-    <g fill="none" stroke="#B9852E" stroke-linecap="round"><path d="M32 57V14" stroke-width="2.6"/><path d="M32 50c-6-3-11-8-13-15" stroke-width="2.2"/><path d="M32 50c6-3 11-8 13-15" stroke-width="2.2"/></g>
-    <g fill="url(#gG)">
-      <ellipse cx="32" cy="10" rx="3.6" ry="6"/>
-      <ellipse cx="27.5" cy="19" rx="3.6" ry="6.5" transform="rotate(-28 27.5 19)"/><ellipse cx="36.5" cy="19" rx="3.6" ry="6.5" transform="rotate(28 36.5 19)"/>
-      <ellipse cx="27.5" cy="28" rx="3.6" ry="6.5" transform="rotate(-28 27.5 28)"/><ellipse cx="36.5" cy="28" rx="3.6" ry="6.5" transform="rotate(28 36.5 28)"/>
-      <ellipse cx="27.5" cy="37" rx="3.6" ry="6.5" transform="rotate(-28 27.5 37)"/><ellipse cx="36.5" cy="37" rx="3.6" ry="6.5" transform="rotate(28 36.5 37)"/>
-      <ellipse cx="18" cy="31" rx="3" ry="5.5" transform="rotate(-10 18 31)"/><ellipse cx="46" cy="31" rx="3" ry="5.5" transform="rotate(10 46 31)"/>
-    </g>
-    <g fill="#fff" opacity=".6"><ellipse cx="31" cy="8" rx="1" ry="2.4"/><ellipse cx="26.3" cy="17.5" rx="1" ry="2.4" transform="rotate(-28 26.3 17.5)"/><ellipse cx="35.3" cy="17.5" rx="1" ry="2.4" transform="rotate(28 35.3 17.5)"/><ellipse cx="26.3" cy="26.5" rx="1" ry="2.4" transform="rotate(-28 26.3 26.5)"/></g>
-    <rect x="27" y="47" width="10" height="5.5" rx="2.2" fill="url(#gM)"/>
-  </symbol>
-  <symbol id="d-can" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="18" ry="3" fill="#3C0A19" opacity=".16"/>
-    <rect x="16" y="13" width="32" height="42" rx="5" fill="url(#gS)"/>
-    <rect x="16" y="23" width="32" height="22" fill="url(#gM)"/>
-    <circle cx="32" cy="34" r="6" fill="url(#gG)"/>
-    <path d="M29.3 34.3l2 2 3.6-4" stroke="#7A1232" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <ellipse cx="32" cy="13" rx="16" ry="4.5" fill="#EEF2F6" stroke="#9AA5B1" stroke-width="1.2"/>
-    <ellipse cx="32" cy="13" rx="11" ry="2.6" fill="none" stroke="#B5BFC9"/>
-    <path d="M16 50.5c0 2.5 7 4.5 16 4.5s16-2 16-4.5" fill="none" stroke="#8A96A3" stroke-width="1.2"/>
-    <rect x="20" y="16" width="4" height="36" rx="2" fill="#fff" opacity=".5"/>
-  </symbol>
-  <symbol id="d-dates" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="20" ry="3" fill="#3C0A19" opacity=".16"/>
-    <ellipse cx="32" cy="35" rx="23" ry="4.5" fill="url(#gMd)"/>
-    <path d="M33 18c2-7 9-11 16-10-2 7-9 11-16 10z" fill="url(#gGr)"/>
-    <path d="M34.5 16.5c4-3 8-6 12.5-7.5" stroke="#fff" stroke-width="1" opacity=".55" fill="none"/>
-    <g fill="url(#gBr)"><ellipse cx="32" cy="25" rx="5" ry="7"/><ellipse cx="22" cy="29" rx="5" ry="6.5" transform="rotate(-25 22 29)"/><ellipse cx="42" cy="29" rx="5" ry="6.5" transform="rotate(25 42 29)"/><ellipse cx="27" cy="32" rx="5" ry="6.5" transform="rotate(-10 27 32)"/><ellipse cx="37" cy="32" rx="5" ry="6.5" transform="rotate(10 37 32)"/></g>
-    <g fill="#fff" opacity=".55"><ellipse cx="30.5" cy="21.5" rx="1.3" ry="2.6"/><ellipse cx="20.5" cy="26" rx="1.2" ry="2.3" transform="rotate(-25 20.5 26)"/><ellipse cx="40.5" cy="26" rx="1.2" ry="2.3" transform="rotate(25 40.5 26)"/><ellipse cx="25.5" cy="29" rx="1.1" ry="2.1"/></g>
-    <path d="M9 35c0 2.2 10.3 4 23 4s23-1.8 23-4c0 12-10 21-23 21S9 47 9 35z" fill="url(#gM)"/>
-    <path d="M12.5 42c5 3 12 4.5 19.5 4.5s14.5-1.5 19.5-4.5" stroke="#F3C567" stroke-width="2" fill="none"/>
-    <path d="M14 42c1 5 4 9 8 11" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".4" fill="none"/>
-  </symbol>
-  <symbol id="d-beans" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="20" ry="3" fill="#3C0A19" opacity=".16"/>
-    <ellipse cx="32" cy="33" rx="23" ry="5" fill="url(#gWod)"/>
-    <g fill="#F2CF94" stroke="#C89A55" stroke-width=".7"><circle cx="22" cy="31" r="3.4"/><circle cx="29" cy="28.5" r="3.4"/><circle cx="37" cy="29" r="3.4"/><circle cx="43" cy="32" r="3.2"/><circle cx="33" cy="33" r="3.2"/></g>
-    <g fill="#E07B39"><circle cx="25.5" cy="33.5" r="2"/><circle cx="40" cy="34.5" r="2"/><circle cx="33.5" cy="25" r="2"/><circle cx="18" cy="34" r="1.8"/><circle cx="46" cy="35" r="1.8"/></g>
-    <g fill="#fff" opacity=".6"><circle cx="21" cy="30" r="1"/><circle cx="28" cy="27.5" r="1"/><circle cx="36" cy="28" r="1"/></g>
-    <path d="M9 33c0 2.5 10.3 4.5 23 4.5S55 35.5 55 33c0 12-10 22-23 22S9 45 9 33z" fill="url(#gWo)"/>
-    <path d="M14 40c1 5 4 9 8 11" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".35" fill="none"/>
-  </symbol>
-  <symbol id="d-milk" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="17" ry="3" fill="#3C0A19" opacity=".16"/>
-    <path d="M38 22l8-6v34l-8 6z" fill="url(#gS)"/>
-    <path d="M28 10l8-5 10 11-8 6z" fill="url(#gS)"/>
-    <rect x="18" y="22" width="20" height="34" rx="1.5" fill="url(#gW)"/>
-    <path d="M18 22l10-12 10 12z" fill="#FFFFFF" stroke="#E2D6DB"/>
-    <rect x="18" y="32" width="20" height="14" fill="url(#gM)"/>
-    <path d="M28 35c2 2.6 3 4.2 3 5.5a3 3 0 0 1-6 0c0-1.3 1-2.9 3-5.5z" fill="#fff"/>
-    <rect x="21" y="48" width="9" height="2" rx="1" fill="#C9B6BE"/>
-  </symbol>
-  <symbol id="d-coat" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="20" ry="3" fill="#3C0A19" opacity=".16"/>
-    <path d="M21 14l11 6 11-6 9 6 5 23-7 3-3-11v21H17V35l-3 11-7-3 5-23z" fill="url(#gM)"/>
-    <g stroke="#4F0A20" stroke-width="1.6" opacity=".4" fill="none"><path d="M17 31h30"/><path d="M17 40h30"/><path d="M17 49h30"/></g>
-    <path d="M32 21v35" stroke="#F3C567" stroke-width="2.6"/>
-    <path d="M22 12c3 6 17 6 20 0l3 3c-3 8-23 8-26 0z" fill="url(#gW)"/>
-    <path d="M20 27c-1 8-1 17 0 25" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".35" fill="none"/>
-  </symbol>
-  <symbol id="d-thobe" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="60" rx="17" ry="2.6" fill="#3C0A19" opacity=".16"/>
-    <path d="M23 9l9 4 9-4 11 8-5 10-4-2v33H21V25l-4 2-5-10z" fill="url(#gW)" stroke="#CDBCC3"/>
-    <path d="M41 13l11 4-5 10-4-2v33h-4V14z" fill="#7A5A68" opacity=".1"/>
-    <path d="M27 11c2 3 8 3 10 0" fill="none" stroke="#CDBCC3" stroke-width="1.2"/>
-    <path d="M32 13v19" stroke="#CDBCC3" stroke-width="1.2"/>
-    <g fill="#B9A3AC"><circle cx="32" cy="18" r="1.1"/><circle cx="32" cy="23" r="1.1"/><circle cx="32" cy="28" r="1.1"/></g>
-    <path d="M33 32c-1 4-1 7 0 10" stroke="#8A1538" stroke-width="1.6" fill="none"/>
-    <ellipse cx="33" cy="44" rx="1.7" ry="2.6" fill="url(#gM)"/>
-  </symbol>
-  <symbol id="d-dress" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="60" rx="17" ry="2.6" fill="#3C0A19" opacity=".16"/>
-    <path d="M26 8h12l2 8 9 7-5 7-4-3 6 32H18l6-32-4 3-5-7 9-7z" fill="url(#gMd)"/>
-    <path d="M19 56h26" stroke="#E8BC63" stroke-width="2.4"/>
-    <path d="M15.5 23.5l4.5 6.3M48.5 23.5l-4.5 6.3" stroke="#E8BC63" stroke-width="2"/>
-    <path d="M28 8c1 4 7 4 8 0" fill="none" stroke="#E8BC63" stroke-width="1.6"/>
-    <path d="M32 12v40" stroke="#E8BC63" stroke-width="1" stroke-dasharray="2 2.5" opacity=".7"/>
-    <path d="M25 30c-2 9-3 17-3 24" stroke="#fff" opacity=".3" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-  </symbol>
-  <symbol id="d-tee" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="16" ry="2.8" fill="#3C0A19" opacity=".16"/>
-    <path d="M23 12l-13 7 5 11 6-3v28h22V27l6 3 5-11-13-7c-2 5-16 5-18 0z" fill="url(#gG)"/>
-    <path d="M23 12c2 5 16 5 18 0" fill="none" stroke="#A8731E" stroke-width="2"/>
-    <circle cx="32" cy="38" r="5" fill="#fff" opacity=".85"/><circle cx="32" cy="38" r="2.6" fill="url(#gM)"/>
-    <path d="M24.5 30c-1 7-1 16 0 22" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".45" fill="none"/>
-  </symbol>
-  <symbol id="d-kid" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="58" rx="14" ry="2.6" fill="#3C0A19" opacity=".16"/>
-    <path d="M24.5 16l-11 6 4.5 9 5-2.5V54h18V28.5l5 2.5 4.5-9-11-6c-2 4-13 4-15 0z" fill="url(#gBl)"/>
-    <path d="M24.5 16c2 4 13 4 15 0" fill="none" stroke="#24508F" stroke-width="2"/>
-    <path d="M32 31l2.2 4.5 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7z" fill="url(#gG)"/>
-    <path d="M25.5 31c-1 6-1 14 0 20" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".45" fill="none"/>
-  </symbol>
-  <symbol id="d-fridge" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="60" rx="19" ry="2.6" fill="#3C0A19" opacity=".16"/>
-    <path d="M46 8l4 3v44l-4 3z" fill="url(#gSd)"/>
-    <rect x="16" y="6" width="30" height="52" rx="5" fill="url(#gS)"/>
-    <path d="M16 25h30" stroke="#97A2AE" stroke-width="1.5"/>
-    <rect x="20" y="12" width="3" height="9" rx="1.5" fill="url(#gSd)"/>
-    <rect x="20" y="30" width="3" height="14" rx="1.5" fill="url(#gSd)"/>
-    <rect x="37" y="10" width="6" height="3" rx="1.5" fill="url(#gM)"/>
-    <rect x="28" y="9" width="3" height="46" rx="1.5" fill="#fff" opacity=".6"/>
-  </symbol>
-  <symbol id="d-washer" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="20" ry="3" fill="#3C0A19" opacity=".16"/>
-    <rect x="14" y="8" width="36" height="48" rx="6" fill="url(#gW)" stroke="#D2C4CA"/>
-    <path d="M14 18V14a6 6 0 0 1 6-6h24a6 6 0 0 1 6 6v4z" fill="url(#gS)"/>
-    <rect x="19" y="11.5" width="12" height="3" rx="1.5" fill="url(#gBl)"/>
-    <circle cx="42" cy="13" r="3" fill="url(#gM)"/>
-    <circle cx="32" cy="37" r="13" fill="url(#gSd)"/>
-    <circle cx="32" cy="37" r="9.5" fill="url(#gBl)"/>
-    <path d="M23.5 40c3 2 5.8 2 8.5 0s5.8-2 8.5 0" stroke="#fff" opacity=".55" fill="none" stroke-width="1.5"/>
-    <path d="M25.5 33a8 8 0 0 1 8-5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none" opacity=".85"/>
-  </symbol>
-  <symbol id="d-ac" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="18" ry="2.6" fill="#3C0A19" opacity=".12"/>
-    <rect x="7" y="14" width="50" height="20" rx="7" fill="url(#gW)" stroke="#D2C4CA"/>
-    <rect x="12" y="27" width="40" height="3.5" rx="1.75" fill="url(#gSd)"/>
-    <rect x="12" y="18" width="18" height="2" rx="1" fill="#fff"/>
-    <circle cx="48" cy="20" r="1.8" fill="#4FBF7A"/>
-    <g fill="none" stroke="#6FA8EE" stroke-width="2.6" stroke-linecap="round"><path d="M18 39c-2 4 2 6 0 10"/><path d="M32 39c-2 4 2 6 0 10"/><path d="M46 39c-2 4 2 6 0 10"/></g>
-  </symbol>
-  <symbol id="d-cooker" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="20" ry="3" fill="#3C0A19" opacity=".16"/>
-    <path d="M32 3c4 4 5 7 3 10h-6c-2-3-1-6 3-10z" fill="url(#gG)"/>
-    <path d="M32 7c1.6 1.8 2 3.2 1.2 4.5h-2.4c-.8-1.3-.4-2.7 1.2-4.5z" fill="#FFF3D1"/>
-    <rect x="14" y="14" width="36" height="42" rx="4" fill="url(#gS)"/>
-    <path d="M14 23v-5a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v5z" fill="url(#gSd)"/>
-    <g fill="#E6EBF0"><circle cx="21" cy="18.5" r="2"/><circle cx="28" cy="18.5" r="2"/><circle cx="36" cy="18.5" r="2"/><circle cx="43" cy="18.5" r="2"/></g>
-    <rect x="19" y="27" width="26" height="18" rx="3" fill="#2A2F38"/>
-    <rect x="21" y="29" width="22" height="14" rx="2" fill="url(#gBl)" opacity=".85"/>
-    <path d="M23 31h6l-4 10h-4z" fill="#fff" opacity=".35"/>
-    <rect x="20" y="49" width="24" height="3" rx="1.5" fill="url(#gSd)"/>
-  </symbol>
-  <symbol id="d-tv" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="18" ry="2.6" fill="#3C0A19" opacity=".16"/>
-    <rect x="7" y="10" width="50" height="34" rx="4" fill="#2B2F38"/>
-    <rect x="10" y="13" width="44" height="28" rx="2" fill="url(#gBl)"/>
-    <path d="M10 13h22l-14 28h-8z" fill="#fff" opacity=".22"/>
-    <circle cx="50" cy="40.5" r="1" fill="#4FBF7A"/>
-    <path d="M28 44l-4 9h16l-4-9z" fill="url(#gSd)"/>
-    <rect x="18" y="53" width="28" height="3.5" rx="1.75" fill="url(#gSd)"/>
-  </symbol>
-  <symbol id="d-blender" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="16" ry="2.8" fill="#3C0A19" opacity=".16"/>
-    <path d="M20 12h24l-4 28H24z" fill="#D9ECFC" opacity=".8" stroke="#9CC4EA" stroke-width="1.2"/>
-    <path d="M22.2 24h19.6l-2.3 16H24.5z" fill="url(#gM)" opacity=".9"/>
-    <rect x="18" y="7" width="28" height="6" rx="2.5" fill="url(#gSd)"/>
-    <path d="M24 14h3l-2.4 22h-2z" fill="#fff" opacity=".65"/>
-    <path d="M22 40h20l3 16H19z" fill="url(#gS)"/>
-    <circle cx="32" cy="48.5" r="3" fill="url(#gG)"/>
-  </symbol>
-  <symbol id="d-bed" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="24" ry="3" fill="#3C0A19" opacity=".16"/>
-    <rect x="9" y="17" width="8" height="39" rx="3" fill="url(#gWo)"/>
-    <rect x="49" y="31" width="7" height="25" rx="2.5" fill="url(#gWo)"/>
-    <rect x="15" y="39" width="36" height="9" rx="2" fill="url(#gWod)"/>
-    <rect x="15" y="32" width="36" height="8.5" rx="3" fill="url(#gW)"/>
-    <path d="M27 29.5h19.5a4.5 4.5 0 0 1 4.5 4.5v8.5H27z" fill="url(#gM)"/>
-    <path d="M27 34h24" stroke="#F3C567" stroke-width="1.6"/>
-    <ellipse cx="21.5" cy="30.5" rx="5.5" ry="3.2" fill="url(#gW)" stroke="#D8C9CF"/>
-    <rect x="11.5" y="20" width="2" height="31" rx="1" fill="#fff" opacity=".4"/>
-  </symbol>
-  <symbol id="d-mattress" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="57" rx="24" ry="3" fill="#3C0A19" opacity=".16"/>
-    <path d="M8 30v10l24 10V40z" fill="url(#gS)"/>
-    <path d="M56 30v10L32 50V40z" fill="url(#gSd)"/>
-    <path d="M8 30l24-10 24 10-24 10z" fill="url(#gW)" stroke="#D8C9CF"/>
-    <path d="M8 30l24 10 24-10" stroke="#8A1538" stroke-width="1.5" fill="none"/>
-    <g fill="#C8B3BC"><circle cx="20" cy="30" r="1.1"/><circle cx="32" cy="25" r="1.1"/><circle cx="44" cy="30" r="1.1"/><circle cx="32" cy="35" r="1.1"/><circle cx="26" cy="27.5" r=".9"/><circle cx="38" cy="27.5" r=".9"/><circle cx="26" cy="32.5" r=".9"/><circle cx="38" cy="32.5" r=".9"/></g>
-  </symbol>
-  <symbol id="d-sofa" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="58" rx="25" ry="3" fill="#3C0A19" opacity=".16"/>
-    <rect x="12" y="17" width="40" height="21" rx="6" fill="url(#gM)"/>
-    <path d="M32 19v14" stroke="#4F0A20" opacity=".35" stroke-width="1.5"/>
-    <rect x="16" y="20" width="12" height="3" rx="1.5" fill="#fff" opacity=".3"/><rect x="36" y="20" width="12" height="3" rx="1.5" fill="#fff" opacity=".3"/>
-    <rect x="17" y="26" width="10" height="9" rx="3" fill="url(#gG)" transform="rotate(-8 22 30.5)"/>
-    <rect x="12" y="34" width="40" height="12" rx="4" fill="url(#gMd)"/>
-    <rect x="5" y="27" width="11" height="23" rx="5.5" fill="url(#gM)"/>
-    <rect x="48" y="27" width="11" height="23" rx="5.5" fill="url(#gM)"/>
-    <rect x="7.5" y="30" width="2" height="15" rx="1" fill="#fff" opacity=".35"/>
-    <rect x="10" y="50" width="3.5" height="6" rx="1" fill="url(#gWod)"/><rect x="50.5" y="50" width="3.5" height="6" rx="1" fill="url(#gWod)"/>
-  </symbol>
-  <symbol id="d-wardrobe" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="60" rx="21" ry="2.6" fill="#3C0A19" opacity=".16"/>
-    <path d="M48 10l4 3v41l-4 3z" fill="url(#gWod)"/>
-    <rect x="14" y="8" width="34" height="50" rx="3" fill="url(#gWo)"/>
-    <rect x="12" y="5" width="38" height="5" rx="2" fill="url(#gWod)"/>
-    <path d="M31 12v44" stroke="#6B3E1C" stroke-width="1.5"/>
-    <g fill="none" stroke="#fff" opacity=".28" stroke-width="1.5"><rect x="17.5" y="14" width="10.5" height="38" rx="2"/><rect x="34" y="14" width="10.5" height="38" rx="2"/></g>
-    <rect x="27" y="30" width="2" height="7" rx="1" fill="url(#gG)"/><rect x="33" y="30" width="2" height="7" rx="1" fill="url(#gG)"/>
-  </symbol>
-  <symbol id="d-table" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="25" ry="3" fill="#3C0A19" opacity=".16"/>
-    <rect x="7" y="20" width="10" height="18" rx="3" fill="url(#gM)"/><rect x="47" y="20" width="10" height="18" rx="3" fill="url(#gM)"/>
-    <path d="M9 39v16M15.5 39v16M48.5 39v16M55 39v16" stroke="#560B22" stroke-width="2.4" stroke-linecap="round"/>
-    <rect x="6" y="36" width="12" height="4" rx="2" fill="url(#gMd)"/><rect x="46" y="36" width="12" height="4" rx="2" fill="url(#gMd)"/>
-    <path d="M22 34l-2 22M42 34l2 22" stroke="#7C4720" stroke-width="3.2" stroke-linecap="round"/>
-    <path d="M14 30h36l-4 6H18z" fill="url(#gWo)"/>
-    <path d="M15.5 30.5h33" stroke="#F6D2A8" stroke-width="1.5"/>
-    <path d="M30 21h4l1 9h-6z" fill="url(#gG)"/><circle cx="32" cy="18.5" r="3" fill="url(#gGr)"/>
-  </symbol>
-  <symbol id="d-desk" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="25" ry="3" fill="#3C0A19" opacity=".16"/>
-    <path d="M45 28V15" stroke="#525D69" stroke-width="2"/>
-    <path d="M38 16l7-7 7 7z" fill="url(#gG)"/>
-    <rect x="14" y="24.5" width="14" height="3.5" rx="1" fill="url(#gBl)"/>
-    <rect x="15" y="21" width="12" height="3.5" rx="1" fill="url(#gM)"/>
-    <rect x="16" y="17.5" width="10" height="3.5" rx="1" fill="url(#gG)"/>
-    <rect x="8" y="28" width="48" height="5" rx="2" fill="url(#gWo)"/>
-    <rect x="12" y="33" width="4" height="23" rx="1.5" fill="url(#gWod)"/>
-    <rect x="36" y="33" width="16" height="23" rx="2" fill="url(#gWod)"/>
-    <path d="M36 40.5h16M36 48h16" stroke="#4A2A12" stroke-width="1.2"/>
-    <g fill="url(#gG)"><rect x="42" y="36" width="4" height="1.6" rx=".8"/><rect x="42" y="43.5" width="4" height="1.6" rx=".8"/><rect x="42" y="51" width="4" height="1.6" rx=".8"/></g>
-  </symbol>
-  <symbol id="d-blanket" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="58" rx="22" ry="3" fill="#3C0A19" opacity=".16"/>
-    <rect x="12" y="42" width="40" height="12" rx="5.5" fill="url(#gM)"/>
-    <rect x="14" y="32" width="36" height="11" rx="5" fill="url(#gG)"/>
-    <rect x="16" y="21" width="32" height="12" rx="5.5" fill="url(#gW)" stroke="#D8C9CF"/>
-    <path d="M20 27h24" stroke="#8A1538" stroke-width="1.8" stroke-dasharray="3 2"/>
-    <path d="M18 37.5h28" stroke="#A8731E" stroke-width="1.4" stroke-dasharray="2 2"/>
-    <path d="M16 48h32" stroke="#fff" stroke-width="1.6" opacity=".35"/>
-  </symbol>
-  <symbol id="d-bag" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="19" ry="3" fill="#3C0A19" opacity=".16"/>
-    <path d="M24 14a8 8 0 0 1 16 0" fill="none" stroke="#560B22" stroke-width="3"/>
-    <rect x="14" y="14" width="36" height="42" rx="10" fill="url(#gM)"/>
-    <rect x="20" y="34" width="24" height="16" rx="5" fill="url(#gG)"/>
-    <path d="M20 40h24" stroke="#A8731E" stroke-width="1.5"/>
-    <rect x="30" y="38" width="4" height="4" rx="1" fill="#fff"/>
-    <path d="M19.5 24c0-3 2-5 5-5" stroke="#fff" opacity=".45" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  </symbol>
-  <symbol id="d-soap" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="57" rx="21" ry="3" fill="#3C0A19" opacity=".16"/>
-    <rect x="12" y="34" width="40" height="18" rx="8" fill="url(#gTeal)"/>
-    <rect x="17" y="37" width="30" height="5" rx="2.5" fill="#fff" opacity=".45"/>
-    <g fill="#fff" fill-opacity=".85" stroke="#7FB8E8" stroke-width="1.2"><circle cx="24" cy="24" r="6"/><circle cx="38" cy="17" r="8"/><circle cx="47" cy="29" r="4"/></g>
-    <g fill="#fff"><circle cx="22" cy="22" r="1.6"/><circle cx="35" cy="14" r="2"/><circle cx="46" cy="27.5" r="1"/></g>
-  </symbol>
-  <symbol id="d-pot" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="58" rx="22" ry="3" fill="#3C0A19" opacity=".16"/>
-    <path d="M24 9c-2-3 2-4 0-7M40 9c-2-3 2-4 0-7" stroke="#C9D3DD" fill="none" stroke-width="2" stroke-linecap="round"/>
-    <rect x="5" y="30" width="9" height="4" rx="2" fill="url(#gSd)"/><rect x="50" y="30" width="9" height="4" rx="2" fill="url(#gSd)"/>
-    <rect x="12" y="26" width="40" height="28" rx="6" fill="url(#gS)"/>
-    <path d="M12 25c0-6 9-10 20-10s20 4 20 10z" fill="url(#gS)"/>
-    <path d="M12 25.5h40" stroke="#7E8A97" stroke-width="1.5"/>
-    <rect x="28" y="10" width="8" height="5" rx="2.5" fill="url(#gM)"/>
-    <rect x="17" y="30" width="4" height="19" rx="2" fill="#fff" opacity=".65"/>
-  </symbol>
-  <symbol id="d-ball" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="16" ry="2.8" fill="#3C0A19" opacity=".18"/>
-    <circle cx="32" cy="32" r="22" fill="url(#gW)"/>
-    <path d="M32 10a22 22 0 0 0-19 11l19 11z" fill="url(#gM)"/>
-    <path d="M51 21a22 22 0 0 0-19-11v22z" fill="url(#gG)"/>
-    <path d="M13 43a22 22 0 0 0 19 11V32z" fill="url(#gG)"/>
-    <path d="M32 54a22 22 0 0 0 19-11L32 32z" fill="url(#gM)"/>
-    <circle cx="32" cy="32" r="22" fill="url(#gShade)"/>
-    <circle cx="32" cy="32" r="3" fill="#fff"/>
-    <ellipse cx="23" cy="20" rx="6" ry="3.5" transform="rotate(-35 23 20)" fill="#fff" opacity=".55"/>
-  </symbol>
-  <symbol id="d-box" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="59" rx="21" ry="3" fill="#3C0A19" opacity=".16"/>
-    <rect x="12" y="28" width="40" height="27" rx="3" fill="url(#gM)"/>
-    <rect x="9" y="20" width="46" height="10" rx="3" fill="url(#gMd)"/>
-    <rect x="29" y="20" width="6" height="35" fill="url(#gG)"/>
-    <path d="M32 20c-4-8-14-8-12-2 1 3 7 3 12 2z" fill="url(#gG)"/>
-    <path d="M32 20c4-8 14-8 12-2-1 3-7 3-12 2z" fill="url(#gG)"/>
-    <rect x="15" y="31" width="3" height="20" rx="1.5" fill="#fff" opacity=".3"/>
-  </symbol>
-  <symbol id="d-lantern" viewBox="0 0 64 64">
-    <ellipse cx="32" cy="60" rx="14" ry="2.6" fill="#3C0A19" opacity=".18"/>
-    <circle cx="32" cy="7" r="3.5" fill="none" stroke="#B9852E" stroke-width="2"/>
-    <path d="M22 18l10-8 10 8z" fill="url(#gG)"/>
-    <rect x="20" y="17" width="24" height="4" rx="1.5" fill="url(#gGd)"/>
-    <path d="M22 21h20l3 8-3 20H22l-3-20z" fill="url(#gGd)"/>
-    <path d="M25 24h14l2 6-2 16H25l-2-16z" fill="url(#gGlow)"/>
-    <path d="M32 24v22M23.5 30h17" stroke="#B9852E" stroke-width="1.4"/>
-    <path d="M32 33c2.5 2.5 3 4.5 1.5 6.5h-3c-1.5-2-1-4 1.5-6.5z" fill="#FF9A3C"/>
-    <rect x="20" y="49" width="24" height="4" rx="1.5" fill="url(#gGd)"/>
-    <path d="M24 53h16l-3 4H27z" fill="url(#gG)"/>
-  </symbol>
   <symbol id="i-sack" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 3h7l-1.3 3.2C17.5 8 19.5 11.5 19.5 15a6 6 0 0 1-6 6h-3a6 6 0 0 1-6-6c0-3.5 2-7 5.3-8.8z"/><path d="M9.5 6.2h5"/><path d="M9 14.5c1 1 5 1 6 0"/></g></symbol>
   <symbol id="i-wheat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="M12 8c-2-1-3-2.6-3-5 2 .4 3 2 3 5z"/><path d="M12 8c2-1 3-2.6 3-5-2 .4-3 2-3 5z"/><path d="M12 13c-2.2-.6-4-2-4-4.6 2.2.2 4 1.8 4 4.6z"/><path d="M12 13c2.2-.6 4-2 4-4.6-2.2.2-4 1.8-4 4.6z"/><path d="M12 18c-2.2-.6-4-2-4-4.6 2.2.2 4 1.8 4 4.6z"/><path d="M12 18c2.2-.6 4-2 4-4.6-2.2.2-4 1.8-4 4.6z"/></g></symbol>
   <symbol id="i-can" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><ellipse cx="12" cy="5" rx="6" ry="2"/><path d="M6 5v14c0 1.1 2.7 2 6 2s6-.9 6-2V5"/><path d="M6 9.5c0 1.1 2.7 2 6 2s6-.9 6-2"/><path d="M6 15c0 1.1 2.7 2 6 2s6-.9 6-2"/></g></symbol>
@@ -942,16 +630,16 @@ details.wo[open] { display: grid; gap: 10px; }
   <div class="wrap sec">
     <div class="sec-head"><div><p class="eyebrow">مجالات التبرع</p><h2>ماذا يمكنك أن تشارك؟</h2><p>اختر الصنف لتبدأ نموذج التبرع مباشرة.</p></div></div>
     <div class="cats">
-      <a class="cat" href="#donate" data-preset="food:rice"><span class="ic tile3d"><svg class="i3" width="68" height="68"><use href="#d-sack"/></svg></span><b>أرز وحبوب</b><small>أكياس مغلقة</small></a>
-      <a class="cat" href="#donate" data-preset="food:flour"><span class="ic tile3d"><svg class="i3" width="68" height="68"><use href="#d-wheat"/></svg></span><b>قمح ودقيق</b><small>بالكيلوغرام</small></a>
-      <a class="cat" href="#donate" data-preset="food:legumes"><span class="ic tile3d"><svg class="i3" width="68" height="68"><use href="#d-beans"/></svg></span><b>بقوليات</b><small>عدس، حمص، فول</small></a>
-      <a class="cat" href="#donate" data-preset="food:canned"><span class="ic tile3d"><svg class="i3" width="68" height="68"><use href="#d-can"/></svg></span><b>معلبات</b><small>صلاحية أطول من 30 يومًا</small></a>
-      <a class="cat" href="#donate" data-preset="food:dates"><span class="ic tile3d"><svg class="i3" width="68" height="68"><use href="#d-dates"/></svg></span><b>تمور مغلّفة</b><small>من خير هذه الأرض</small></a>
-      <a class="cat" href="#donate" data-preset="clothes:winter"><span class="ic tile3d"><svg class="i3" width="68" height="68"><use href="#d-coat"/></svg></span><b>ملابس شتوية</b><small>رجال · نساء · أطفال</small></a>
-      <a class="cat" href="#donate" data-preset="clothes:kids"><span class="ic tile3d"><svg class="i3" width="68" height="68"><use href="#d-kid"/></svg></span><b>ملابس أطفال</b><small>يومية وصيفية</small></a>
-      <a class="cat" href="#donate" data-preset="elec:fridge"><span class="ic tile3d"><svg class="i3" width="68" height="68"><use href="#d-fridge"/></svg></span><b>أجهزة كهربائية</b><small>ثلاجات، غسالات، مكيفات</small></a>
-      <a class="cat" href="#donate" data-preset="furn:bed"><span class="ic tile3d"><svg class="i3" width="68" height="68"><use href="#d-sofa"/></svg></span><b>أثاث منزلي</b><small>أسرّة، كنب، خزائن</small></a>
-      <a class="cat" href="#donate" data-preset="other:blankets"><span class="ic tile3d"><svg class="i3" width="68" height="68"><use href="#d-box"/></svg></span><b>أخرى</b><small>بطانيات، أدوات مدرسية، مستلزمات منزلية</small></a>
+      <a class="cat" href="#donate" data-preset="food:rice"><span class="ic tile3d"><img class="i3" src="icons/sack.webp" width="68" height="68" alt="" decoding="async"></span><b>أرز وحبوب</b><small>أكياس مغلقة</small></a>
+      <a class="cat" href="#donate" data-preset="food:flour"><span class="ic tile3d"><img class="i3" src="icons/wheat.webp" width="68" height="68" alt="" decoding="async"></span><b>قمح ودقيق</b><small>بالكيلوغرام</small></a>
+      <a class="cat" href="#donate" data-preset="food:legumes"><span class="ic tile3d"><img class="i3" src="icons/beans.webp" width="68" height="68" alt="" decoding="async"></span><b>بقوليات</b><small>عدس، حمص، فول</small></a>
+      <a class="cat" href="#donate" data-preset="food:canned"><span class="ic tile3d"><img class="i3" src="icons/can.webp" width="68" height="68" alt="" decoding="async"></span><b>معلبات</b><small>صلاحية أطول من 30 يومًا</small></a>
+      <a class="cat" href="#donate" data-preset="food:dates"><span class="ic tile3d"><img class="i3" src="icons/dates.webp" width="68" height="68" alt="" decoding="async"></span><b>تمور مغلّفة</b><small>من خير هذه الأرض</small></a>
+      <a class="cat" href="#donate" data-preset="clothes:winter"><span class="ic tile3d"><img class="i3" src="icons/coat.webp" width="68" height="68" alt="" decoding="async"></span><b>ملابس شتوية</b><small>رجال · نساء · أطفال</small></a>
+      <a class="cat" href="#donate" data-preset="clothes:kids"><span class="ic tile3d"><img class="i3" src="icons/kid.webp" width="68" height="68" alt="" decoding="async"></span><b>ملابس أطفال</b><small>يومية وصيفية</small></a>
+      <a class="cat" href="#donate" data-preset="elec:fridge"><span class="ic tile3d"><img class="i3" src="icons/fridge.webp" width="68" height="68" alt="" decoding="async"></span><b>أجهزة كهربائية</b><small>ثلاجات، غسالات، مكيفات</small></a>
+      <a class="cat" href="#donate" data-preset="furn:bed"><span class="ic tile3d"><img class="i3" src="icons/sofa.webp" width="68" height="68" alt="" decoding="async"></span><b>أثاث منزلي</b><small>أسرّة، كنب، خزائن</small></a>
+      <a class="cat" href="#donate" data-preset="other:blankets"><span class="ic tile3d"><img class="i3" src="icons/box.webp" width="68" height="68" alt="" decoding="async"></span><b>أخرى</b><small>بطانيات، أدوات مدرسية، مستلزمات منزلية</small></a>
     </div>
   </div>
 
@@ -959,19 +647,19 @@ details.wo[open] { display: grid; gap: 10px; }
     <div class="sec-head"><div><p class="eyebrow">الحملات الحالية</p><h2>حملات موسمية تحتاج مشاركتك</h2></div></div>
     <div class="camps">
       <article class="camp">
-        <div class="art band"><span class="badge">حملة الموسم</span><svg class="i3"><use href="#d-coat"/></svg></div>
+        <div class="art band"><span class="badge">حملة الموسم</span><img class="i3" src="icons/coat.webp" width="104" height="104" alt="" decoding="async"></div>
         <div class="body"><h3>كسوة الشتاء</h3><p>ملابس شتوية دافئة للأطفال والأسر قبل موسم البرد.</p>
           <div class="prog"><i data-camp-bar="winter"></i></div><div class="prog-row"><span>جُمع <b data-camp-val="winter">0</b> قطعة</span><span>الهدف <b>300</b></span></div>
           <a class="btn btn-primary btn-sm" href="#donate" data-preset="clothes:winter">شارك في الحملة</a></div>
       </article>
       <article class="camp">
-        <div class="art night"><span class="badge">رمضان</span><svg class="i3"><use href="#d-lantern"/></svg></div>
+        <div class="art night"><span class="badge">رمضان</span><img class="i3" src="icons/lantern.webp" width="104" height="104" alt="" decoding="async"></div>
         <div class="body"><h3>السلة الرمضانية</h3><p>أرز ودقيق وبقوليات وسكر تكفي الأسرة طوال الشهر.</p>
           <div class="prog"><i data-camp-bar="ramadan"></i></div><div class="prog-row"><span>جُمع <b data-camp-val="ramadan">0</b> كجم</span><span>الهدف <b>1,000</b></span></div>
           <a class="btn btn-primary btn-sm" href="#donate" data-preset="food:rice">شارك في الحملة</a></div>
       </article>
       <article class="camp">
-        <div class="art gold"><span class="badge">مستمرة</span><svg class="i3"><use href="#d-dates"/></svg></div>
+        <div class="art gold"><span class="badge">مستمرة</span><img class="i3" src="icons/dates.webp" width="104" height="104" alt="" decoding="async"></div>
         <div class="body"><h3>تمور الخير</h3><p>تمور مغلّفة توزّع مع السلال الغذائية على الأسر.</p>
           <div class="prog"><i data-camp-bar="dates"></i></div><div class="prog-row"><span>جُمع <b data-camp-val="dates">0</b> كجم</span><span>الهدف <b>200</b></span></div>
           <a class="btn btn-primary btn-sm" href="#donate" data-preset="food:dates">شارك في الحملة</a></div>
@@ -1016,7 +704,7 @@ details.wo[open] { display: grid; gap: 10px; }
       <a class="btn btn-primary" href="https://wa.me/97470776067" target="_blank" rel="noopener">تواصل عبر واتساب</a>
     </div>
     <div class="need-band">
-      <span class="tile3d" style="width:84px;height:84px"><svg class="i3" width="56" height="56"><use href="#d-box"/></svg></span>
+      <span class="tile3d" style="width:84px;height:84px"><img class="i3" src="icons/box.webp" width="56" height="56" alt="" decoding="async"></span>
       <div><h2>هل تحتاج أنت أو أسرتك إلى مساعدة؟</h2><p>قدّم طلبك وسيتواصل معك أحد المشرفين للتحقق. بياناتك لا تظهر لأي متبرّع.</p></div>
       <a class="btn btn-primary btn-lg" href="#request">قدّم طلب احتياج</a>
     </div>
@@ -1080,11 +768,11 @@ details.wo[open] { display: grid; gap: 10px; }
     <fieldset>
       <legend><i><b>٣</b></i>ماذا تريد أن تشارك؟</legend>
       <div class="seg big" role="radiogroup" aria-label="نوع التبرع">
-        <label><input type="radio" name="d_kind" value="food" checked><span><svg class="i3" width="30" height="30"><use href="#d-wheat"/></svg>مواد غذائية جافة</span></label>
-        <label><input type="radio" name="d_kind" value="clothes"><span><svg class="i3" width="30" height="30"><use href="#d-tee"/></svg>ملابس</span></label>
-        <label><input type="radio" name="d_kind" value="elec"><span><svg class="i3" width="30" height="30"><use href="#d-fridge"/></svg>أجهزة كهربائية</span></label>
-        <label><input type="radio" name="d_kind" value="furn"><span><svg class="i3" width="30" height="30"><use href="#d-sofa"/></svg>أثاث منزلي</span></label>
-        <label><input type="radio" name="d_kind" value="other"><span><svg class="i3" width="30" height="30"><use href="#d-box"/></svg>أخرى</span></label>
+        <label><input type="radio" name="d_kind" value="food" checked><span><img class="i3" src="icons/wheat.webp" width="30" height="30" alt="" decoding="async">مواد غذائية جافة</span></label>
+        <label><input type="radio" name="d_kind" value="clothes"><span><img class="i3" src="icons/tee.webp" width="30" height="30" alt="" decoding="async">ملابس</span></label>
+        <label><input type="radio" name="d_kind" value="elec"><span><img class="i3" src="icons/fridge.webp" width="30" height="30" alt="" decoding="async">أجهزة كهربائية</span></label>
+        <label><input type="radio" name="d_kind" value="furn"><span><img class="i3" src="icons/sofa.webp" width="30" height="30" alt="" decoding="async">أثاث منزلي</span></label>
+        <label><input type="radio" name="d_kind" value="other"><span><img class="i3" src="icons/box.webp" width="30" height="30" alt="" decoding="async">أخرى</span></label>
       </div>
       <div id="d_elecNote" class="note" hidden>نستقبل الأجهزة التي تعمل وآمنة فقط. اذكر عمر الجهاز تقريبًا، و<b>أرفق صورة واحدة على الأقل</b>. تُستلم الأجهزة الكبيرة بسيارة نقل بعد اعتماد المشرف.</div>
       <div id="d_furnNote" class="note" hidden>نستقبل الأثاث السليم والنظيف فقط. اذكر المقاس إن أمكن، و<b>أرفق صورة واحدة على الأقل</b>. تُستلم القطع الكبيرة بسيارة نقل بعد اعتماد المشرف.</div>
@@ -1203,11 +891,11 @@ details.wo[open] { display: grid; gap: 10px; }
     <fieldset>
       <legend><i><b>٣</b></i>ما الذي تحتاجه؟</legend>
       <div class="seg big" role="radiogroup" aria-label="نوع الاحتياج">
-        <label><input type="radio" name="r_kind" value="food" checked><span><svg class="i3" width="30" height="30"><use href="#d-wheat"/></svg>مواد غذائية</span></label>
-        <label><input type="radio" name="r_kind" value="clothes"><span><svg class="i3" width="30" height="30"><use href="#d-tee"/></svg>ملابس</span></label>
-        <label><input type="radio" name="r_kind" value="elec"><span><svg class="i3" width="30" height="30"><use href="#d-fridge"/></svg>أجهزة كهربائية</span></label>
-        <label><input type="radio" name="r_kind" value="furn"><span><svg class="i3" width="30" height="30"><use href="#d-sofa"/></svg>أثاث منزلي</span></label>
-        <label><input type="radio" name="r_kind" value="other"><span><svg class="i3" width="30" height="30"><use href="#d-box"/></svg>أخرى</span></label>
+        <label><input type="radio" name="r_kind" value="food" checked><span><img class="i3" src="icons/wheat.webp" width="30" height="30" alt="" decoding="async">مواد غذائية</span></label>
+        <label><input type="radio" name="r_kind" value="clothes"><span><img class="i3" src="icons/tee.webp" width="30" height="30" alt="" decoding="async">ملابس</span></label>
+        <label><input type="radio" name="r_kind" value="elec"><span><img class="i3" src="icons/fridge.webp" width="30" height="30" alt="" decoding="async">أجهزة كهربائية</span></label>
+        <label><input type="radio" name="r_kind" value="furn"><span><img class="i3" src="icons/sofa.webp" width="30" height="30" alt="" decoding="async">أثاث منزلي</span></label>
+        <label><input type="radio" name="r_kind" value="other"><span><img class="i3" src="icons/box.webp" width="30" height="30" alt="" decoding="async">أخرى</span></label>
       </div>
       <div id="r_foodBox" class="seg"></div>
       <div id="r_clothBox" hidden style="display:grid;gap:12px">
@@ -1625,7 +1313,7 @@ const QUICK = {
 function renderQuick() {
   const k = $('input[name=q_kind]:checked').value;
   $('#qFoot').textContent = t({ food:'نستقبل المواد الجافة المغلّفة فقط', clothes:'ملابس نظيفة وصالحة للاستخدام', elec:'أجهزة تعمل وآمنة، مع صورة واحدة على الأقل', furn:'أثاث سليم ونظيف، مع صورة واحدة على الأقل', other:'أغراض نظيفة وصالحة للاستخدام' }[k]);
-  $('#qItems').innerHTML = QUICK[k].map(([v, lbl, ic], i) => `<label><input type="radio" name="q_item" value="${v}"${i ? '' : ' checked'}><span><svg class="i3" width="46" height="46"><use href="#${ic}"/></svg>${lbl}</span></label>`).join('');
+  $('#qItems').innerHTML = QUICK[k].map(([v, lbl, ic], i) => `<label><input type="radio" name="q_item" value="${v}"${i ? '' : ' checked'}><span><img class="i3" src="icons/${ic.slice(2)}.webp" width="46" height="46" alt="" decoding="async">${lbl}</span></label>`).join('');
 }
 $$('input[name=q_kind]').forEach(r => r.addEventListener('change', renderQuick)); renderQuick();
 $('#quickForm').addEventListener('submit', e => {

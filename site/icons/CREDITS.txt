@@ -1,0 +1,7 @@
+Icons in this folder
+====================
+Most icons come from Microsoft Fluent Emoji (3D style), MIT License,
+Copyright (c) Microsoft Corporation. https://github.com/microsoft/fluentui-emoji
+
+fridge, washer, ac, wardrobe, mattress, desk and blanket were rendered for
+Share Blessings with three.js in a matching style.
