@@ -180,6 +180,8 @@ create or replace function public.submit_donation(p jsonb)
 returns jsonb language plpgsql security definer set search_path = public as $$
 declare v_id text; v jsonb; v_photos jsonb := coalesce(p->'photos', '[]'::jsonb);
 begin
+  if coalesce((select data->'intake'->>'donations' from public.site_config where id = 1), 'true') = 'false' then raise exception 'intake_closed'; end if;
+  if coalesce((select data->'kinds'->>(p->>'kind') from public.site_config where id = 1), 'true') = 'false' then raise exception 'kind_closed'; end if;
   if octet_length(p::text) > 30000 then raise exception 'payload_too_large'; end if;
   if coalesce(p->>'phone', '') !~ '^[34567][0-9]{7}$' then raise exception 'bad_phone'; end if;
   if char_length(coalesce(p->>'name', '')) not between 3 and 80 then raise exception 'bad_name'; end if;
@@ -203,6 +205,7 @@ create or replace function public.submit_request(p jsonb)
 returns jsonb language plpgsql security definer set search_path = public as $$
 declare v_id text; v jsonb; d record;
 begin
+  if coalesce((select data->'intake'->>'requests' from public.site_config where id = 1), 'true') = 'false' then raise exception 'intake_closed'; end if;
   if octet_length(p::text) > 20000 then raise exception 'payload_too_large'; end if;
   if coalesce(p->>'phone', '') !~ '^[34567][0-9]{7}$' then raise exception 'bad_phone'; end if;
   if char_length(coalesce(p->>'name', '')) not between 3 and 80 then raise exception 'bad_name'; end if;
@@ -434,5 +437,39 @@ end $$;
 revoke all on function public.admin_create_member(text, text, text, text), public.admin_set_password(uuid, text) from public, anon;
 grant execute on function public.admin_create_member(text, text, text, text), public.admin_set_password(uuid, text) to authenticated;
 
+
+-- ---------- إعدادات الموقع (يعدّلها المدير من تبويب «إعدادات الموقع») ----------
+create table if not exists public.site_config (
+  id smallint primary key default 1 check (id = 1),
+  data jsonb not null default '{}'::jsonb,
+  updated_at timestamptz not null default now()
+);
+insert into public.site_config (id) values (1) on conflict (id) do nothing;
+alter table public.site_config enable row level security;
+drop policy if exists cfg_read on public.site_config;
+create policy cfg_read on public.site_config for select to anon, authenticated using (true);
+drop policy if exists cfg_write on public.site_config;
+create policy cfg_write on public.site_config for update to authenticated
+  using (public.sb_role() = 'admin') with check (public.sb_role() = 'admin');
+revoke all on public.site_config from anon, authenticated;
+grant select on public.site_config to anon, authenticated;
+grant update (data, updated_at) on public.site_config to authenticated;
+
+-- تقدّم كل حملة: مجموع كميات التبرعات غير المرفوضة لنوعها وأصنافها (الغذاء بالكيلوغرام فقط)
+create or replace function public.campaign_progress()
+returns jsonb language sql stable security definer set search_path = public as $$
+  with c as (
+    select x from public.site_config s, jsonb_array_elements(coalesce(s.data->'campaigns', '[]'::jsonb)) x where s.id = 1),
+  it as (
+    select d.kind, i from public.donations d, jsonb_array_elements(d.data->'items') i where d.status not in ('rejected', 'cancelled'))
+  select coalesce(jsonb_object_agg(c.x->>'id', (
+    select coalesce(sum((it.i->>'qty')::numeric), 0) from it
+     where it.kind = c.x->>'kind'
+       and (jsonb_array_length(coalesce(c.x->'types', '[]'::jsonb)) = 0 or (c.x->'types') ? (it.i->>'type'))
+       and (it.kind <> 'food' or it.i->>'unit' = 'kg'))), '{}'::jsonb)
+  from c
+$$;
+revoke all on function public.campaign_progress() from public;
+grant execute on function public.campaign_progress() to anon, authenticated;
 
 notify pgrst, 'reload schema';

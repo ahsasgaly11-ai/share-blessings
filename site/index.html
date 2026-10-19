@@ -317,6 +317,34 @@ legend i b { transform: rotate(-45deg); font-weight: 700; }
 .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 label.f { display: grid; grid-template-columns: minmax(0, 1fr); gap: 5px; font-weight: 700; font-size: .96rem; min-width: 0; }
 label.f small { font-weight: 400; color: var(--muted); }
+.site-banner { background: var(--gold, #C9A24B); color: #2a1a00; text-align: center; padding: 8px 16px; font-weight: 700; font-size: .95rem; }
+.site-banner a { color: inherit; text-decoration: underline; }
+.intake-closed { margin-bottom: 14px; font-weight: 700; }
+.mt-box { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--surface-2); }
+.mt-box > summary { cursor: pointer; font-weight: 700; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.mt-box[open] > summary { margin-bottom: 10px; }
+.mt-list { display: grid; gap: 8px; margin: 10px 0; }
+.mt-list div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; display: grid; gap: 2px; }
+.mt-list small { color: var(--muted); }
+.mt-out:not([hidden]) { display: grid; gap: 8px; }
+.mt-list .tr { color: var(--primary-text); font-weight: 700; }
+.set-card { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.set-card > summary { cursor: pointer; padding: 14px 16px; font-weight: 800; font-family: var(--f-display); list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+.set-card > summary::after { content: '▾'; color: var(--muted); }
+.set-card[open] > summary::after { content: '▴'; }
+.set-card > .in { padding: 0 16px 16px; display: grid; gap: 12px; }
+.set-row { border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: grid; gap: 10px; background: var(--surface-2); }
+.set-row .row-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.set-row.off { opacity: .6; }
+.set-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.set-chips label { border: 1px solid var(--line); border-radius: 99px; padding: 2px 10px; font-size: .88rem; cursor: pointer; background: var(--surface); }
+.set-chips input { margin-inline-end: 4px; }
+.set-save { position: sticky; bottom: 0; background: var(--bg); padding: 12px 0; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; border-top: 1px solid var(--line); z-index: 2; }
+.tx-results { display: grid; gap: 4px; max-height: 260px; overflow: auto; }
+.tx-results button { text-align: start; background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer; color: var(--ink); font: inherit; font-size: .9rem; }
+.icon-pick { display: flex; gap: 8px; align-items: center; }
+.icon-pick img { width: 44px; height: 44px; object-fit: contain; }
+.donor-note textarea { border-color: var(--primary); background: var(--surface); }
 input[type=text], input[type=tel], input[type=number], input[type=date], input[type=password], select, textarea {
   width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); min-width: 0;
 }
@@ -578,6 +606,7 @@ details.wo[open] { display: grid; gap: 10px; }
     <button class="theme-btn" id="themeBtn" type="button" aria-label="تبديل الوضع الليلي"><svg width="13" height="13" style="vertical-align:-2px"><use href="#i-moon"/></svg> الوضع</button>
   </div>
 </div>
+<div id="siteBanner" class="site-banner" role="status" hidden></div>
 <header class="topbar">
   <div class="wrap">
     <a class="brand" href="#home" aria-label="شارك النعم - الرئيسية">
@@ -635,7 +664,7 @@ details.wo[open] { display: grid; gap: 10px; }
     <svg class="zig" preserveAspectRatio="none" aria-hidden="true"><rect width="100%" height="14"/></svg>
   </div>
 
-  <div class="wrap ribbon">
+  <div class="wrap ribbon" id="secStats">
     <div class="card">
       <div><b id="imKg">0</b><span>كجم مواد غذائية جافة</span></div>
       <div><b id="imPcs">0</b><span>قطعة ملابس</span></div>
@@ -660,7 +689,7 @@ details.wo[open] { display: grid; gap: 10px; }
     </div>
   </div>
 
-  <div class="wrap sec">
+  <div class="wrap sec" id="secCamps">
     <div class="sec-head"><div><p class="eyebrow">الحملات الحالية</p><h2>حملات موسمية تحتاج مشاركتك</h2></div></div>
     <div class="camps">
       <article class="camp">
@@ -704,7 +733,7 @@ details.wo[open] { display: grid; gap: 10px; }
     </div>
   </div>
 
-  <div class="wrap sec">
+  <div class="wrap sec" id="secCover">
     <div class="sec-head"><div><p class="eyebrow">مناطق التغطية</p><h2>نستلم تبرعك من جميع بلديات قطر</h2><p>يحدد المشرف موعد الاستلام من عنوانك حسب اللوحة المنزلية بعد اعتماد التبرع.</p></div></div>
     <div class="points">
       <div class="point"><b>الدوحة</b><small>السد · الدفنة · المنصورة · الهلال</small></div>
@@ -714,11 +743,11 @@ details.wo[open] { display: grid; gap: 10px; }
       <div class="point"><b>أم صلال</b><small>أم صلال محمد · أم صلال علي · أم العمد</small></div>
       <div class="point"><b>الخور والذخيرة</b><small>الخور · الذخيرة</small></div>
       <div class="point"><b>الشمال</b><small>الرويس · أبو ظلوف</small></div>
-      <div class="point"><b>الشيحانية</b><small>الشيحانية · دخان · الجميلية</small></div>
+      <div class="point"><b>الشحانية</b><small>الشحانية · دخان · الجميلية</small></div>
     </div>
     <div class="point" style="margin-top:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between">
       <div style="display:grid;gap:4px"><b>تفضّل التسليم بنفسك؟</b><small>راسلنا عبر واتساب لنحدد معك موعدًا ومكانًا قريبًا منك.</small></div>
-      <a class="btn btn-primary" href="https://wa.me/97470776067" target="_blank" rel="noopener">تواصل عبر واتساب</a>
+      <a class="btn btn-primary" data-cfg="wa" href="https://wa.me/97470776067" target="_blank" rel="noopener">تواصل عبر واتساب</a>
     </div>
     <div class="need-band">
       <span class="tile3d" style="width:84px;height:84px"><img class="i3" src="icons/box.webp" width="56" height="56" alt="" decoding="async"></span>
@@ -753,6 +782,7 @@ details.wo[open] { display: grid; gap: 10px; }
   <div class="wrap page-body">
   <div class="page-grid">
   <div style="min-width:0">
+  <div class="note bad intake-closed" id="d_closed" hidden></div>
   <form class="sheet" id="donForm" novalidate>
     <fieldset>
       <legend><i><b>١</b></i>بيانات التواصل</legend>
@@ -837,7 +867,7 @@ details.wo[open] { display: grid; gap: 10px; }
         <label class="f">اسم المستفيد<input type="text" id="d_pName"></label>
         <label class="f">عنوان المستفيد<input type="text" id="d_pAddr" placeholder="منطقة / شارع / مبنى"></label>
       </div>
-      <label class="f">ملاحظات <small>اختياري</small><textarea id="d_notes"></textarea></label>
+      <label class="f donor-note">ملاحظة للمشرفين <small>اختياري، ويمكنك كتابتها بأي لغة</small><textarea id="d_notes" maxlength="1000" rows="3" placeholder="مثال: الأنسب التواصل بعد الساعة 4 عصرًا، أو المواد في الطابق الثاني."></textarea></label>
     </fieldset>
 
     <div id="d_err" class="note bad" hidden></div>
@@ -872,6 +902,7 @@ details.wo[open] { display: grid; gap: 10px; }
   <div class="wrap page-body">
   <div class="page-grid">
   <div style="min-width:0">
+  <div class="note bad intake-closed" id="r_closed" hidden></div>
   <form class="sheet" id="reqForm" novalidate>
     <fieldset>
       <legend><i><b>١</b></i>مقدّم الطلب</legend>
@@ -1046,6 +1077,7 @@ details.wo[open] { display: grid; gap: 10px; }
         <li>Supabase: لتخزين قاعدة البيانات والصور وتسجيل دخول الفريق. خوادمها في الهند، ولذلك تُنقل بياناتك وتُخزَّن خارج دولة قطر، مشفّرة ومحمية بصلاحيات وصول.</li>
         <li>Cloudflare Pages: لاستضافة صفحات الموقع.</li>
         <li>نظام العنونة الوطني في قطر (GIS Qatar): نرسل إليه أرقام المنطقة والشارع والمبنى فقط لتحديد الموقع على الخريطة.</li>
+        <li>الترجمة الآلية (Google Translate، وخدمة MyMemory بديلًا): يستخدمها المشرفون عند الحاجة لترجمة ما كتبته في طلبك أو لترجمة رسائلهم إليك، ويُرسل إليها النص المراد ترجمته فقط.</li>
         <li>Google Fonts وشبكات توزيع المكتبات (jsDelivr وcdnjs) وخرائط OpenStreetMap: لتحميل الخطوط والمكتبات والخرائط. تتلقى هذه الخدمات عنوان IP لجهازك كأي موقع تزوره، ولا نرسل إليها بياناتك الشخصية.</li>
       </ul>
       <h2>كيف نحمي بياناتك</h2>
@@ -1143,7 +1175,7 @@ details.wo[open] { display: grid; gap: 10px; }
       <div><h4>للمتبرعين</h4><ul><li><a href="#donate">سجّل تبرعًا</a></li><li><a href="#donate" data-preset="clothes:winter">حملة كسوة الشتاء</a></li><li><a href="#track">تتبّع تبرعك</a></li><li><a href="#account">تبرعاتي وشهادة الشكر</a></li></ul></div>
       <div><h4>للمستفيدين</h4><ul><li><a href="#request">قدّم طلب احتياج</a></li><li><a href="#track">تتبّع طلبك</a></li></ul></div>
       <div><h4>الفريق</h4><ul><li><a href="#admin">بوابة المشرفين</a></li><li><a href="#home">شروط التبرع</a></li><li><a href="#privacy">سياسة الخصوصية</a></li></ul></div>
-      <div><h4>تواصل معنا</h4><ul class="contact-list"><li><a href="https://wa.me/97470776067" target="_blank" rel="noopener">واتساب: <bdi dir="ltr" style="direction:ltr;unicode-bidi:isolate">&#x200E;+974 7077 6067</bdi></a></li><li><a href="mailto:ahsas.galy11@gmail.com"><span dir="ltr">ahsas.galy11@gmail.com</span></a></li></ul></div>
+      <div><h4>تواصل معنا</h4><ul class="contact-list"><li><a data-cfg="wa" href="https://wa.me/97470776067" target="_blank" rel="noopener">واتساب: <bdi dir="ltr" data-cfg="wa-txt" style="direction:ltr;unicode-bidi:isolate">&#x200E;+974 7077 6067</bdi></a></li><li><a data-cfg="mail" href="mailto:ahsas.galy11@gmail.com"><span dir="ltr" data-cfg="mail-txt">ahsas.galy11@gmail.com</span></a></li></ul></div>
     </div>
     <div class="wrap legal"><span>© 2026 شارك النعم. جميع الحقوق محفوظة.</span><span>صُنع في قطر 🇶🇦</span></div>
   </div>
@@ -1171,12 +1203,15 @@ const LANGS = {
   id:  { n: 'Bahasa Indonesia', loc: 'id-ID' },
 };
 let LANG = 'ar', TR = null, BUNDLE = null, SAVED_LANG = 'ar';
+// OV: Arabic text overrides set by the admin; TRV bumps whenever translations change so cached node texts refresh
+let OV = {}, TRV = 0, SITE = null;
 try { const l = localStorage.getItem('shareBlessings.lang'); if (LANGS[l]) SAVED_LANG = l; } catch (e) {}
 const EN = {"شارك النعم":"Share Blessings","شارك النعم - الرئيسية":"Share Blessings – home","منصة مجتمعية للتبرع العيني في دولة قطر":"A community platform for in-kind donations in Qatar","تتبّع طلبك":"Track your request","بوابة المشرفين":"Supervisors' portal","تثبيت التطبيق":"Install app","الوضع":"Theme","تبديل الوضع الليلي":"Toggle dark mode","تبرّع عيني · مواد غذائية جافة وملابس":"In-kind giving · dry food & clothes","الأقسام":"Sections","الرئيسية":"Home","أرغب في المشاركة":"I want to give","أرغب في الحصول":"I need help","تتبّع طلبي":"Track my request","تبرعاتي":"My donations","المشرفون":"Supervisors","تبرّع الآن":"Donate now","تبرّع عيني في قطر":"In-kind giving in Qatar","منصة تربط من لديه فائض من المواد الغذائية الجافة والملابس بمن يحتاجها، عبر فريق من المشرفين والمتطوعين.":"A platform that connects people with spare dry food and clothes to those who need them, through a team of supervisors and volunteers.","للمتبرعين":"For donors","سجّل تبرعًا":"Register a donation","حملة كسوة الشتاء":"Winter clothing campaign","تتبّع تبرعك":"Track your donation","تبرعاتي وشهادة الشكر":"My donations & certificate","للمستفيدين":"For beneficiaries","قدّم طلب احتياج":"Submit a request","الفريق":"Team","شروط التبرع":"Donation rules","© {0} شارك النعم. نموذج تجريبي.":"© {0} Share Blessings. Prototype.","صُنع في قطر 🇶🇦":"Made in Qatar 🇶🇦","لأن النعمة تدوم بالمشاركة":"Blessings last when they are shared","ما يزيد عن حاجتك":"What you have to spare is a","نعمةٌ":"blessing","ينتظرها بيتٌ قريب منك":"that a home near you is waiting for","تبرّع بالأرز والدقيق والحبوب والمعلبات، والملابس، والأجهزة الكهربائية وقطع الأثاث. يراجع المشرفون كل طلب، ويستلمونه من عنوانك حسب اللوحة المنزلية، ثم يوصلونه إلى الأسر المحتاجة والمؤسسات الخيرية.":"Donate rice, flour, grains, canned food, clothes, appliances and furniture. Supervisors review every request, collect it from your address using your blue house plate, and deliver it to families in need and charities.","أرغب في الحصول على مساعدة":"I need help","مراجعة كل طلب من مشرف":"Every request reviewed by a supervisor","استلام من باب المنزل":"Pickup from your door","خصوصية تامة للمستفيد":"Full privacy for beneficiaries","تبرّع سريع":"Quick donation","خطوة واحدة للبدء":"One step to start","نوع التبرع":"Donation type","غذاء":"Food","ملابس":"Clothes","أجهزة":"Appliances","أثاث":"Furniture","أخرى":"Other","أكمل بيانات التبرع ←":"Continue →","نستقبل المواد الجافة المغلّفة فقط":"Sealed dry goods only","ملابس نظيفة وصالحة للاستخدام":"Clean, usable clothes","أجهزة تعمل وآمنة، مع صورة واحدة على الأقل":"Working, safe appliances, with at least one photo","أثاث سليم ونظيف، مع صورة واحدة على الأقل":"Sound, clean furniture, with at least one photo","أغراض نظيفة وصالحة للاستخدام":"Clean, usable items","كجم مواد غذائية جافة":"kg of dry food","قطعة ملابس":"clothing items","فردًا استفادوا":"people helped","متبرّعًا شاركوا":"donors took part","مجالات التبرع":"What you can give","ماذا يمكنك أن تشارك؟":"What can you share?","اختر الصنف لتبدأ نموذج التبرع مباشرة.":"Pick a category to start the donation form.","أرز وحبوب":"Rice & grains","أكياس مغلقة":"Sealed bags","قمح ودقيق":"Wheat & flour","بالكيلوغرام":"By the kilo","بقوليات":"Legumes","عدس، حمص، فول":"Lentils, chickpeas, beans","معلبات":"Canned food","صلاحية أطول من {0} يومًا":"Expiry more than {0} days away","تمور مغلّفة":"Packaged dates","من خير هذه الأرض":"From the bounty of this land","ملابس شتوية":"Winter clothes","رجال · نساء · أطفال":"Men · Women · Children","ملابس أطفال":"Children's clothes","يومية وصيفية":"Everyday & summer","أجهزة كهربائية":"Electrical appliances","ثلاجات، غسالات، مكيفات":"Fridges, washers, ACs","أثاث منزلي":"Home furniture","أسرّة، كنب، خزائن":"Beds, sofas, wardrobes","بطانيات، أدوات مدرسية، مستلزمات منزلية":"Blankets, school supplies, household items","الحملات الحالية":"Current campaigns","حملات موسمية تحتاج مشاركتك":"Seasonal campaigns that need you","حملة الموسم":"This season","رمضان":"Ramadan","مستمرة":"Ongoing","كسوة الشتاء":"Winter clothing","ملابس شتوية دافئة للأطفال والأسر قبل موسم البرد.":"Warm winter clothes for children and families before the cold season.","جُمع":"Collected","الهدف":"Goal","قطعة":"items","كجم":"kg","شارك في الحملة":"Join the campaign","السلة الرمضانية":"Ramadan food basket","أرز ودقيق وبقوليات وسكر تكفي الأسرة طوال الشهر.":"Rice, flour, legumes and sugar to last a family the whole month.","تمور الخير":"Dates of goodness","تمور مغلّفة توزّع مع السلال الغذائية على الأسر.":"Packaged dates distributed with family food baskets.","مسار الطلب":"How a request flows","من بيتك إلى بيت يحتاجها في أربع خطوات":"From your home to a home in need, in four steps","ثلاثة أطراف: المتبرّع والمشرف والمستفيد، ولكل خطوة حالة تراها برقم طلبك.":"Three parties – donor, supervisor and beneficiary – and every step has a status you can follow with your request number.","المتبرّع":"Donor","يسجّل التبرع":"Registers the donation","الأصناف والكمية والصلاحية، والعنوان حسب اللوحة المنزلية.":"Items, quantity and expiry, plus the address from the blue house plate.","المشرف":"Supervisor","يراجع ويجدول":"Reviews and schedules","يقبل الطلب ويحدد موعد الاستلام والمتطوّع.":"Approves the request and sets the pickup time and volunteer.","المستودع":"Warehouse","يفحص ويطابق":"Inspects and matches","فحص الصلاحية والتغليف، ثم مطابقة التبرع مع أنسب مستفيد.":"Checks expiry and packaging, then matches the donation with the best-suited beneficiary.","المستفيد":"Beneficiary","يستلم بكرامة":"Receives with dignity","أسرة متحقَّق منها أو مؤسسة خيرية، دون كشف بياناتها.":"A verified family or charity, without revealing their details.","ما نستقبله وما نعتذر عنه":"What we accept and what we can't","نستقبل":"We accept","لا نستقبل":"We can't accept","الأرز، القمح، الدقيق، وجميع أنواع الحبوب":"Rice, wheat, flour and all kinds of grains","البقوليات: عدس، حمص، فول":"Legumes: lentils, chickpeas, beans","المعلبات والمعكرونة والسكر":"Canned food, pasta and sugar","التمور والحليب المجفف المغلّف":"Packaged dates and powdered milk","ملابس نظيفة للرجال والنساء والأطفال":"Clean clothes for men, women and children","أجهزة كهربائية تعمل وآمنة، وأثاث منزلي سليم ونظيف":"Working, safe appliances and sound, clean furniture","أخرى: بطانيات، أدوات مدرسية، مستلزمات نظافة وأدوات منزلية صالحة":"Other: blankets, school supplies, hygiene and usable household items","الوجبات الجاهزة وأطعمة المطاعم":"Cooked meals and restaurant food","فائض الولائم والمناسبات":"Leftovers from banquets and events","المخبوزات والخضراوات الطازجة":"Bread, pastries and fresh vegetables","عبوات مفتوحة أو تنتهي صلاحيتها خلال {0} يومًا":"Opened packs or anything expiring within {0} days","ملابس تالفة أو غير نظيفة":"Damaged or unclean clothes","أجهزة معطلة أو أسلاكها مكشوفة، وأثاث مكسور":"Broken appliances, exposed wiring, or broken furniture","نقاط التجميع":"Collection points","تفضّل التسليم بنفسك؟":"Prefer to drop it off yourself?","المواقع التالية توضيحية في هذا النموذج.":"These locations are examples in this prototype.","الريان":"Al Rayyan","الدوحة · السد":"Doha · Al Sadd","الوكرة":"Al Wakrah","الخور":"Al Khor","يوميًا {0} ص - {1} م":"Daily {0} am – {1} pm","السبت - الخميس {0} ص - {1} م":"Sat – Thu {0} am – {1} pm","السبت - الخميس {0} م - {1} م":"Sat – Thu {0} pm – {1} pm","هل تحتاج أنت أو أسرتك إلى مساعدة؟":"Do you or your family need help?","قدّم طلبك وسيتواصل معك أحد المشرفين للتحقق. بياناتك لا تظهر لأي متبرّع.":"Submit a request and a supervisor will contact you to verify it. Donors never see your details.","الأسئلة الشائعة":"FAQ","قبل أن تبدأ":"Before you start","لماذا تقبلون المواد الجافة فقط؟":"Why do you accept dry food only?","لأنها تتحمّل التخزين والنقل دون تبريد، ويمكن فحص صلاحيتها من التاريخ المطبوع. الوجبات الجاهزة والخضار والمخبوزات تتلف بسرعة ولا يمكن ضمان سلامتها.":"Because it can be stored and transported without refrigeration, and its expiry can be checked from the printed date. Cooked meals, vegetables and bread spoil quickly and their safety can't be guaranteed.","كيف تُستلم الأجهزة الكهربائية وقطع الأثاث الكبيرة؟":"How are appliances and large furniture collected?","بسيارة نقل يرتبها المشرف بعد اعتماد التبرع. أرفق صورة واحدة على الأقل لكل قطعة، واذكر عمر الجهاز أو مقاس الأثاث، ليقرر المشرف قبولها قبل إرسال السيارة.":"By a transport vehicle arranged by the supervisor after the donation is approved. Attach at least one photo per piece and state the appliance's age or the furniture size, so the supervisor can accept it before sending the vehicle.","كيف يصل المتطوّع إلى منزلي؟":"How does the volunteer find my home?","نعتمد أرقام اللوحة المنزلية الزرقاء (المنطقة، الشارع، المبنى)، وهي كافية لتحديد موقعك بدقة. أضف رقم الشقة أو علامة مميزة في «تفاصيل المكان».":"We use the numbers on your blue house plate (zone, street, building), which pinpoint your location. Add the flat number or a landmark under “Location details”.","هل يمكنني اختيار من يستلم تبرعي؟":"Can I choose who receives my donation?","نعم. يمكنك توجيهه إلى مؤسسة عيد الخيرية، أو إلى شخص محدد بالاسم والعنوان، أو ترك القرار للمشرفين ليصل للأحق.":"Yes. You can direct it to Eid Charity, to a specific person by name and address, or leave it to the supervisors to reach those most in need.","ماذا يحدث لو رُفض تبرعي؟":"What happens if my donation is rejected?","يظهر سبب الرفض عند تتبّع الطلب، مثل قرب انتهاء الصلاحية أو أن الصنف غير جاف. يمكنك تصحيح ذلك وإرسال تبرع جديد.":"The reason appears when you track the request, such as an expiry date that is too close or an item that isn't dry. You can fix it and send a new donation.","كيف تتحققون من المستفيدين؟":"How do you verify beneficiaries?","يتحقق المشرف من كل طلب هاتفيًا أو بزيارة ميدانية أو عبر مؤسسة معتمدة قبل أن يدخل قائمة المطابقة.":"A supervisor verifies each request by phone, a home visit or an accredited organisation before it joins the matching list.","أرغب في مشاركة طعام أو ملابس أو غيرها":"I want to give food, clothes or other items","يصل طلبك إلى المشرفين للمراجعة، ثم نتواصل معك لتحديد موعد الاستلام.":"Your donation goes to the supervisors for review, then we contact you to set a pickup time.","بيانات التواصل":"Contact details","الاسم":"Name","رقم هاتف التواصل":"Contact phone","{0} أرقام":"{0} digits","المكان حسب اللوحة المنزلية":"Address from the blue house plate","المنطقة":"Zone","الشارع":"Street","المبنى":"Building","منطقة":"Zone","شارع":"Street","مبنى":"Building","تفاصيل المكان":"Location details","رقم الشقة، الطابق، علامة مميزة":"Flat number, floor, landmark","تحقق من العنوان على الخريطة":"Check the address on the map","استخدم موقعي الحالي":"Use my current location","رابط الموقع من خرائط Google":"Google Maps location link","اختياري، يساعد المتطوّع على الوصول":"Optional, helps the volunteer find you","ماذا تريد أن تشارك؟":"What would you like to give?","مواد غذائية جافة":"Dry food","نستقبل المواد الجافة المغلّفة فقط. يجب أن تكون الصلاحية أبعد من {0} يومًا، وما ينتهي خلال {1} يومًا يُوزَّع أولًا.":"We accept sealed dry goods only. Expiry must be more than {0} days away; anything expiring within {1} days is distributed first.","نستقبل الأجهزة التي تعمل وآمنة فقط. اذكر عمر الجهاز تقريبًا، و":"We accept working, safe appliances only. State the approximate age of the appliance, and ","نستقبل الأثاث السليم والنظيف فقط. اذكر المقاس إن أمكن، و":"We accept sound, clean furniture only. State the size if you can, and ","أرفق صورة واحدة على الأقل":"attach at least one photo",". تُستلم الأجهزة الكبيرة بسيارة نقل بعد اعتماد المشرف.":". Large appliances are collected by a transport vehicle after the supervisor approves.",". تُستلم القطع الكبيرة بسيارة نقل بعد اعتماد المشرف.":". Large pieces are collected by a transport vehicle after the supervisor approves.","أغراض عينية غير الطعام والملابس، مثل البطانيات والأدوات المدرسية ومستلزمات النظافة والأدوات المنزلية. صِف كل غرض بوضوح ليقرر المشرف قبوله.":"In-kind items other than food and clothes, such as blankets, school supplies, hygiene and household items. Describe each item clearly so the supervisor can accept it.","الصنف":"Item","الكمية":"Quantity","الوحدة":"Unit","تاريخ الانتهاء":"Expiry date","حذف الصنف":"Remove item","+ إضافة صنف":"+ Add item","النوع":"Type","الوصف":"Description","الحالة":"Status","العدد":"Count","الفئة":"Category","حالة القطعة":"Condition","المقاس":"Size","مثال: ثلاجة بابين 18 قدم":"e.g. two-door 18 ft fridge","مثال: ثلاجة بابين {0} قدم":"e.g. two-door {0} ft fridge","مثال: سرير مفرد خشب مع مرتبة":"e.g. single wooden bed with mattress","مثال: بطانية شتوية مزدوجة":"e.g. double winter blanket","M / {0} سنوات":"M / {0} years","صور المواد المتبرَّع بها":"Photos of the donated items","يراها المشرفون فقط":"Supervisors only","حتى {0} صور، تساعد على اعتماد التبرع بسرعة":"Up to {0} photos; they help approve the donation faster","اضغط لاختيار الصور أو التقاطها، أو اسحبها إلى هنا":"Tap to choose or take photos, or drag them here","صوّر العبوات وتاريخ الصلاحية بوضوح، أو القطع كاملة":"Photograph packs and expiry dates clearly, or the whole piece","حذف الصورة":"Remove photo","أؤكد أن جميع العبوات مغلقة ولم تُفتح.":"I confirm all packs are sealed and unopened.","أؤكد أن الملابس نظيفة وصالحة للاستخدام.":"I confirm the clothes are clean and usable.","الاستلام والجهة المستفيدة":"Pickup and recipient","طريقة التسليم":"Handover method","استلام من عنواني":"Pick up from my address","أوصله بنفسي إلى نقطة التجميع":"I'll drop it at a collection point","الوقت المفضّل":"Preferred time","الجهة المستفيدة":"Recipient","يقرر المشرفون الأحق بها":"Supervisors choose who needs it most","مؤسسة عيد الخيرية":"Eid Charity","أفراد محددون":"Specific people","اسم المستفيد":"Recipient's name","عنوان المستفيد":"Recipient's address","منطقة / شارع / مبنى":"Zone / street / building","ملاحظات":"Notes","اختياري":"Optional","إرسال التبرع للمراجعة":"Send donation for review","تعبئة مثال":"Fill an example","ماذا يحدث بعد الإرسال؟":"What happens after you send?","يراجع المشرف تبرعك خلال يوم عمل.":"A supervisor reviews your donation within one working day.","نتصل بك لتأكيد موعد الاستلام.":"We call you to confirm the pickup time.","يُفحص التبرع في المستودع.":"The donation is inspected at the warehouse.","يصلك إشعار عند تسليمه للمستفيد.":"You're notified when it reaches the beneficiary.","لا يُعتمد أي تبرع قبل مراجعة المشرف له ولصوره.":"No donation is approved before a supervisor reviews it and its photos.","احتفظ برقم الطلب الذي يظهر بعد الإرسال لتتبّع تبرعك.":"Keep the request number shown after sending to track your donation.","أرغب في الحصول على طعام أو ملابس أو غيرها":"I need food, clothes or other items","يتحقق المشرفون من الطلب ثم يطابقونه مع التبرعات المتاحة. لا تظهر بياناتك للمتبرعين.":"Supervisors verify the request, then match it with available donations. Donors never see your details.","مقدّم الطلب":"Applicant","نوع المستفيد":"Applicant type","أسرة / فرد":"Family / individual","مؤسسة خيرية":"Charity","عدد أفراد الأسرة":"Family size","اسم المؤسسة":"Organisation name","عدد المستفيدين التقريبي":"Approximate number of beneficiaries","ما الذي تحتاجه؟":"What do you need?","نوع الاحتياج":"Need type","مواد غذائية":"Food","المقاسات المطلوبة":"Sizes needed","مثال: طفل {0} سنوات، رجالي L":"e.g. child {0} years, men's L","صِف ما تحتاجه":"Describe what you need","مثال: بطانيتان، حقيبة مدرسية لطفل في الصف الثالث":"e.g. two blankets, a school bag for a third-grader","مثال: ثلاجة لأسرة من 6 أفراد":"e.g. a fridge for a family of 6","مثال: ثلاجة لأسرة من {0} أفراد":"e.g. a fridge for a family of {0}","مثال: سريران لطفلين ومرتبة":"e.g. two children's beds and a mattress","درجة الاحتياج":"Urgency","عادية":"Normal","عاجلة":"Urgent","وصف الحالة":"Your situation","يساعد المشرفين على تحديد الأولوية":"Helps supervisors set priority","أوافق على تواصل المشرفين معي للتحقق من الطلب.":"I agree to be contacted by supervisors to verify the request.","إرسال الطلب":"Send request","خصوصيتك محفوظة":"Your privacy is protected","يطّلع المشرفون وحدهم على بياناتك.":"Only supervisors see your details.","يتواصل معك مشرف للتحقق.":"A supervisor contacts you to verify.","يُطابق طلبك مع التبرعات المتاحة.":"Your request is matched with available donations.","نرتّب معك موعد التسليم.":"We arrange the delivery time with you.","لا يُعتمد أي طلب قبل تحقق المشرف منه.":"No request is approved before a supervisor verifies it.","الطلبات العاجلة تظهر أولًا في قائمة المشرفين.":"Urgent requests appear first on the supervisors' list.","راجع الحقول التالية:":"Please check the following:","اكتب الاسم الكامل.":"Enter your full name.","اكتب الاسم.":"Enter the name.","رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 3 أو 5 أو 6 أو 7.":"The phone number must be 8 digits starting with 3, 5, 6 or 7.","أكمل أرقام اللوحة المنزلية (المنطقة من 1 إلى 99).":"Complete the house plate numbers (zone 1 to 99).","أكمل أرقام اللوحة المنزلية.":"Complete the house plate numbers.","حدّد كمية كل صنف.":"Enter a quantity for each item.","أدخل تاريخ انتهاء كل صنف غذائي.":"Enter the expiry date of each food item.","صنف «{0}» ينتهي خلال أقل من {1} يومًا، ولا يمكن قبوله.":"“{0}” expires in less than {1} days and can't be accepted.","اكتب وصفًا لكل قطعة.":"Describe each piece.","أكّد أن العبوات مغلقة.":"Confirm the packs are sealed.","أكّد أن الملابس نظيفة.":"Confirm the clothes are clean.","أكّد حالة القطع وسلامتها.":"Confirm the condition and safety of the pieces.","أرفق صورة واحدة على الأقل لـ{0} حتى يقرر المشرف قبولها.":"Attach at least one photo of the {0} so the supervisor can decide.","اكتب اسم المستفيد المحدد وعنوانه.":"Enter the recipient's name and address.","حدّد عدد الأفراد.":"Enter the number of people.","اختر صنفًا غذائيًا واحدًا على الأقل.":"Choose at least one food item.","اختر فئة ونوع الملابس.":"Choose a clothing category and type.","اختر نوع الاحتياج واكتب وصفه.":"Choose what you need and describe it.","وافق على تواصل المشرفين للتحقق.":"Agree to be contacted for verification.","يلزم صنف واحد على الأقل":"At least one item is required","اختر ملفات صور فقط":"Choose image files only","الحد الأقصى {0} صور":"Maximum {0} photos","أُضيفت {0} فقط، الحد الأقصى {1} صور":"Only {0} added; maximum {1} photos","تعذّر قراءة إحدى الصور":"One of the photos couldn't be read","تعذّر حفظ التبرع لأن مساحة التخزين ممتلئة. احذف بعض الصور وحاول مرة أخرى.":"The donation couldn't be saved because storage is full. Remove some photos and try again.","تمت تعبئة مثال. يمكنك تعديله ثم الإرسال.":"Example filled in. You can edit it and send.","لديك طلب قائم من نفس النوع برقم {0} (الحالة: {1}). تابعه أو عدّله من صفحة «تتبّع طلبي» بدل تقديم طلب جديد.":"You already have an open request of this type, {0} (status: {1}). Follow or edit it from “Track my request” instead of sending a new one.","أكمل أرقام اللوحة أولًا":"Complete the plate numbers first","جارٍ البحث في العنوان الوطني...":"Searching the national address…","وُجد العنوان":"Address found","عرض على الخريطة":"Show on map","لم نجد هذا العنوان. تأكد من الأرقام أو أضف رابط الموقع.":"We couldn't find this address. Check the numbers or add a location link.","خدمة العنوان الوطني غير متاحة الآن. يمكنك إضافة رابط الموقع.":"The national address service isn't available right now. You can add a location link.","المتصفح لا يدعم تحديد الموقع":"This browser doesn't support location","جارٍ تحديد موقعك...":"Finding your location…","حُدّد موقعك":"Location found","تعذّر تحديد موقعك. اسمح للمتصفح بالوصول للموقع أو أضف الرابط.":"Couldn't get your location. Allow location access or add the link.","شكرًا لمشاركتك":"Thank you for giving","وصل طلبك":"Request received","استلمنا تبرعك وسيراجعه المشرفون":"We received your donation; supervisors will review it","سجّلنا طلبك وسيتحقق منه المشرفون":"Your request is registered; supervisors will verify it","رقم الطلب":"Request number","نسخ":"Copy","أرفقت {0} صور، يطّلع عليها المشرفون فقط":"{0} photo(s) attached, visible to supervisors only","احتفظ برقم الطلب {0}. لتتبّعه لاحقًا ستحتاج هذا الرقم وآخر 4 أرقام من هاتفك ({1}).":"Keep request number {0}. To track it later you'll need this number and the last 4 digits of your phone ({1}).","وُزّع تبرعك على {0} جزء، وسُلّم منها {1}.":"Your donation was split into {0} part(s); {1} delivered so far.","تتبّع لاحقًا":"Track later","تبرع آخر":"Another donation","طلب آخر":"Another request","نُسخ رقم الطلب":"Request number copied","حدّد الرقم وانسخه يدويًا":"Select the number and copy it manually","الخطوة التالية":"Next step","موعد التسليم في نقطة التجميع":"Drop-off time at collection point","أدخل رقم الطلب الذي ظهر لك بعد الإرسال (يبدأ بـ D للتبرعات وR لطلبات الاحتياج)، وآخر {0} أرقام من الهاتف المسجّل في الطلب.":"Enter the request number you got after sending (D for donations, R for requests) and the last {0} digits of the phone on the request.","آخر {0} أرقام من الهاتف":"Last {0} digits of phone","تتبّع":"Track","اكتب رقم الطلب.":"Enter the request number.","صيغة الرقم غير صحيحة. يبدأ رقم الطلب بحرف D أو R ثم أرقام، مثل D-1004.":"Invalid format. A request number starts with D or R followed by digits, e.g. D-1004.","اكتب آخر 4 أرقام من الهاتف المسجّل في الطلب.":"Enter the last 4 digits of the phone on the request.","لم نجد طلبًا بالرقم {0} مسجّلًا بهاتف ينتهي بـ {1}. تأكد من البيانات وحاول مرة أخرى.":"We found no request {0} registered with a phone ending in {1}. Check and try again.","لا يمكن تعديل الطلب أو إلغاؤه في هذه المرحلة. إذا احتجت تغييرًا تواصل مع الفريق واذكر رقم الطلب.":"This request can't be edited or cancelled at this stage. If you need a change, contact the team with your request number.","تعديل الطلب":"Edit request","إلغاء الطلب":"Cancel request","التعديل متاح حتى يبدأ المشرف المراجعة.":"Editing is available until a supervisor starts the review.","سبب الإلغاء":"Reason for cancelling","تأكيد الإلغاء":"Confirm cancellation","لم أعد أرغب في التبرع":"I no longer want to donate","تبرعت بها لجهة أخرى":"I gave it elsewhere","تغيّر الموعد أو العنوان":"My time or address changed","سبب آخر":"Other reason","لم أعد بحاجة":"I no longer need it","حصلت على المساعدة من جهة أخرى":"I got help elsewhere","تعديل التبرع":"Edit donation","حفظ التعديلات":"Save changes","عدد الأفراد":"Number of people","ألغى صاحب الطلب {0}: {1}":"Requester cancelled {0}: {1}","صاحب الطلب":"Requester","أُلغي الطلب":"Request cancelled","لا يمكن التعديل بعد بدء المراجعة":"Can't edit after the review has started","حدّد كمية صحيحة لكل صنف":"Enter a valid quantity for each item","لم تتغيّر أي بيانات":"Nothing changed","عدّل صاحب الطلب {0}":"Requester edited {0}","حُفظت التعديلات":"Changes saved","سجل تبرعاتك ونقاط الخير وشهادة الشكر. ادخل برقم هاتفك ورقم أحد تبرعاتك.":"Your donation history, goodness points and thank-you certificate. Sign in with your phone number and one of your donation numbers.","رقم الهاتف":"Phone number","رقم أحد تبرعاتك":"One of your donation numbers","دخول":"Sign in","لم نتمكن من التحقق. اكتب رقم الهاتف المسجّل ورقم أحد تبرعاتك (يبدأ بـ D).":"We couldn't verify you. Enter your registered phone and one of your donation numbers (starting with D).","مرحبًا":"Welcome","تبرع جديد":"New donation","خروج":"Sign out","كل تبرعاتك":"All donations","مقبولة أو جارية":"Accepted or in progress","سُلّمت بالكامل":"Fully delivered","أسر وصلها خيرك":"Families reached","نقاط الخير":"Goodness points","نقاط الخير: 10 نقاط لكل تبرع مقبول، و20 نقطة إضافية عند تسليمه كاملًا.":"Goodness points: 10 for each accepted donation, plus 20 when it's fully delivered.","الرقم":"Number","التاريخ":"Date","الأصناف":"Items","شهادة شكر وتقدير":"Certificate of Appreciation","تنزيل الشهادة (PNG)":"Download certificate (PNG)","التنزيل يعمل عند فتح الموقع في المتصفح مباشرة.":"Downloading works when the site is opened directly in a browser.","تظهر الشهادة بعد قبول أول تبرع لك.":"Your certificate appears after your first donation is accepted.","تتقدّم منصة «شارك النعم» بخالص الشكر والتقدير إلى":"Share Blessings extends its sincere thanks and appreciation to","تقديرًا لمساهمته بتبرع عيني":"in recognition of an in-kind donation","تقديرًا لمساهمته بتبرعين عينيين":"in recognition of two in-kind donations","تقديرًا لمساهمته في {0} تبرعات عينية":"in recognition of {0} in-kind donations","، سُلّم منها {0} إلى مستحقيها،":", {0} of which reached those in need,","،":",","سائلين الله أن يجعلها في ميزان حسناته، وأن يديم النعم على أهل قطر.":"with our prayers that these blessings endure for the people of Qatar.","الجهة":"Recipient","متبرّع ذهبي":"Gold donor","متبرّع متكرر":"Repeat donor","مكتب المتابعة":"Operations desk","قاعدة بيانات المشرفين لمتابعة المتبرعين والمستفيدين وحركة المستودع.":"The supervisors' database for following donors, beneficiaries and warehouse movement.","دخول المشرفين":"Supervisor sign-in","عضو الفريق":"Team member","رمز الدخول":"PIN","الرمز غير صحيح.":"Incorrect PIN.","رموز التجربة: المدير {0} · مشرفة المراجعة {1} · المتطوعان {2} و{3}":"Demo PINs: manager {0} · review supervisor {1} · volunteers {2} and {3}","بيانات تجريبية":"Demo data","التبرعات":"Donations","طلبات المستفيدين":"Beneficiary requests","المطابقة":"Matching","مهام الاستلام والتوصيل":"Pickups & deliveries","مهامي":"My tasks","المتبرعون":"Donors","التقارير":"Reports","النسخ الاحتياطي":"Backup","سجل النشاط":"Activity log","تبرعات بانتظار المراجعة":"Donations awaiting review","طلبات بانتظار التحقق":"Requests awaiting verification","تبرعات في المستودع":"Donations in warehouse","تنبيهات الصلاحية":"Expiry alerts","مستفيدون ينتظرون التخصيص":"Beneficiaries awaiting allocation","تبرعات سُلّمت":"Donations delivered","استلامات مطلوبة":"Pickups to do","توصيلات مطلوبة":"Deliveries to do","تنبيهات الصلاحية في المستودع":"Warehouse expiry alerts","منتهية":"Expired","خلال 30 يومًا":"Within 30 days","خلال 90 يومًا":"Within 90 days","انتهت منذ {0} يومًا":"Expired {0} days ago","تنتهي بعد {0} يومًا":"Expires in {0} days","استبعاد":"Write off","توزيع عاجل":"Distribute now","لا توجد مواد في المستودع تقترب صلاحيتها من الانتهاء.":"No items in the warehouse are close to expiry.","بحث بالاسم أو الرقم أو الهاتف":"Search by name, number or phone","بحث":"Search","كل الحالات":"All statuses","كل الأنواع":"All types","العنوان":"Address","التسليم":"Handover","الموعد":"Appointment","صور مرفقة":"Attached photos","صلاحية قريبة":"Expiring soon","عُدّل":"Edited","مخصّص جزئيًا":"Partly allocated","لا توجد تبرعات بهذه التصفية.":"No donations match this filter.","الأفراد":"People","الاحتياج":"Need","الأولوية":"Priority","مؤسسة":"Organisation","أسرة":"Family","مكرر محتمل":"Possible duplicate","لا توجد طلبات بهذه التصفية.":"No requests match this filter.","لا توجد طلبات متحقق منها بانتظار التخصيص.":"No verified requests are waiting for allocation.","يقترح النظام لكل مستفيد التبرعات الموجودة في المستودع حسب تطابق الأصناف والفئات، مع أولوية للطلبات العاجلة وللمواد التي تقترب صلاحيتها من الانتهاء. يمكن تخصيص جزء من التبرع فقط وتوزيع الباقي على مستفيدين آخرين.":"For each beneficiary the system suggests warehouse donations that match the items and categories, prioritising urgent requests and items close to expiry. You can allocate part of a donation and distribute the rest to other beneficiaries.","خُصّص له {0} جزء":"{0} part(s) allocated","{0} أفراد":"{0} people","موجّه لعيد الخيرية":"Directed to Eid Charity","تخصيص":"Allocate","لا يوجد في المستودع تبرع مطابق حاليًا.":"No matching donation in the warehouse right now.","لا توجد قطع حاليًا.":"No items right now.","الكميات المعروضة هي المتبقية بعد التخصيص.":"Quantities shown are what remains after allocation.","أقرب انتهاء بعد {0} يومًا":"Nearest expiry in {0} days","{0} قطعة":"{0} items","عرض المهام على الخريطة":"Show tasks on the map","المواقع تُحدَّد تلقائيًا من العنوان الوطني (اللوحة الزرقاء).":"Locations are found automatically from the national address (blue plate).","لا توجد مهام حاليًا.":"No tasks right now.","استلام من متبرّع":"Pickup from donor","توصيل لمستفيد":"Delivery to beneficiary","غير مسند":"Unassigned","فحصت {0}.":"I checked {0}.","تم الاستلام":"Picked up","تم التسليم":"Delivered","تاريخ الصلاحية وسلامة التغليف":"the expiry date and packaging","نظافة الملابس وحالتها":"the clothes' cleanliness and condition","جارٍ تحميل الخريطة...":"Loading map…","استلام":"Pickup","توصيل":"Delivery","الاتجاهات":"Directions","لم تُحدَّد مواقع المهام بعد":"Task locations haven't been found yet","تعذّر تحميل الخريطة هنا. تعمل الخريطة عند فتح الموقع من الإنترنت، ويمكنك استخدام زر «افتح الموقع في الخرائط» في كل مهمة.":"The map couldn't load here. It works when the site is opened online; you can also use “Open location in maps” on each task.","افتح الموقع في الخرائط":"Open location in maps","رابط الموقع من صاحب الطلب":"Location link from requester","حدّد الموقع من العنوان الوطني":"Locate from national address","جارٍ البحث...":"Searching…","حُدّد الموقع":"Location found","لم يُعثر على العنوان":"Address not found","خدمة العنوان غير متاحة الآن":"Address service unavailable","الهاتف":"Phone","عدد التبرعات":"Donations","سُلّمت":"Delivered","آخر تبرع":"Last donation","لا يوجد نشاط بعد.":"No activity yet.","الفترة":"Period","هذا الشهر":"This month","آخر 30 يومًا":"Last 30 days","آخر 90 يومًا":"Last 90 days","كل الفترات":"All time","آخر {0} يومًا":"Last {0} days","تصدير التبرعات (Excel)":"Export donations (Excel)","تصدير الطلبات (Excel)":"Export requests (Excel)","طباعة / حفظ PDF":"Print / save PDF","تقرير شارك النعم":"Share Blessings report","تبرعات":"Donations","مرفوضة أو ملغاة":"Rejected or cancelled","طلبات احتياج":"Requests","أفراد استفادوا":"People helped","كجم مواد غذائية":"kg of food","التبرعات حسب النوع":"Donations by type","أكثر المناطق تبرعًا":"Top donating zones","التبرعات شهريًا (آخر 6 أشهر)":"Donations per month (last 6 months)","التبرعات شهريًا (آخر {0} أشهر)":"Donations per month (last {0} months)","الكميات":"Quantities","أجهزة وأثاث وأغراض أخرى":"Appliances, furniture and other items","طلبات لم تُخصَّص بعد":"Requests not yet allocated","لا توجد بيانات في هذه الفترة.":"No data for this period.","تبرع":"donations","منطقة {0}":"Zone {0}","التصدير والطباعة يعملان عند فتح الموقع في المتصفح مباشرة، وقد لا يعملان داخل صفحة المعاينة.":"Export and printing work when the site is opened directly in a browser and may not work inside the preview.","بدأ التنزيل: {0}":"Download started: {0}","تعذّر التنزيل هنا":"Download isn't possible here","المتبرع":"Donor","الدور":"Role","مهام مفتوحة":"Open tasks","أنت":"You","تغيير":"Change","إزالة":"Remove","إضافة عضو للفريق":"Add a team member","رمز دخول من 4 أرقام":"4-digit PIN","إضافة":"Add","المدير: كل الصلاحيات وإدارة الفريق والنسخ الاحتياطي. مشرف المراجعة: اعتماد التبرعات والتحقق والتخصيص والتقارير. متطوع التوصيل: يرى مهامه فقط ويؤكد الاستلام والتسليم.":"Manager: all permissions, team and backup. Review supervisor: approves donations, verifies, allocates, reports. Delivery volunteer: sees only their tasks and confirms pickups and deliveries.","اكتب اسم العضو":"Enter the member's name","رمز الدخول 4 أرقام":"The PIN must be 4 digits","أُضيف العضو":"Member added","اضغط للتأكيد":"Tap to confirm","حفظ":"Save","حُفظ الرمز":"PIN saved","إضافة {0} إلى الفريق ({1})":"Added {0} to the team ({1})","إزالة {0} من الفريق":"Removed {0} from the team","تغيير رمز دخول {0}":"Changed PIN for {0}","تنزيل نسخة احتياطية كاملة":"Download a full backup","ملف واحد فيه كل التبرعات والطلبات والفريق والصور. احفظه في مكان آمن.":"One file with all donations, requests, team and photos. Keep it somewhere safe.","تنزيل النسخة (JSON)":"Download backup (JSON)","استعادة من ملف":"Restore from file","تستبدل الاستعادة كل البيانات الحالية بمحتوى الملف.":"Restoring replaces all current data with the file's contents.","نسخ تلقائية يومية":"Daily automatic copies","يحفظ النظام نسخة يوميًا (دون الصور) ويحتفظ بآخر 3 نسخ في هذا المتصفح.":"The system saves a copy daily (without photos) and keeps the last 3 in this browser.","{0} تبرع · {1} طلب":"{0} donations · {1} requests","استعادة":"Restore","لا توجد نسخ بعد.":"No copies yet.","إنشاء نسخة الآن":"Create a copy now","البيانات التجريبية":"Demo data","إعادة البيانات التجريبية":"Reset demo data","الملف ليس نسخة احتياطية صالحة لهذا الموقع.":"This file isn't a valid backup for this site.","الملف يحتوي {0} تبرع و{1} طلب.":"The file contains {0} donations and {1} requests.","تأكيد الاستعادة":"Confirm restore","استعادة نسخة احتياطية":"Restored a backup","استعادة نسخة تلقائية":"Restored an automatic copy","اكتملت الاستعادة":"Restore complete","أُنشئت نسخة":"Copy created","اضغط مرة أخرى للتأكيد":"Tap again to confirm","أُعيدت البيانات التجريبية":"Demo data reset","صور المادة":"Item photos","للمشرفين فقط":"Supervisors only","تكبير الصورة {0}":"Enlarge photo {0}","لم يرفق المتبرّع صورًا. تحقّق من الأصناف هاتفيًا أو عند الاستلام.":"The donor attached no photos. Check the items by phone or at pickup.","{0} · صورة {1} من {2}":"{0} · photo {1} of {2}","عرض الصورة":"Photo viewer","إغلاق":"Close","التوزيع":"Distribution","سُلّم":"Delivered","تأكيد التسليم":"Confirm delivery","بانتظار التوصيل":"Awaiting delivery","المتبقي {0}":"{0} left","المتبقي {0} {1}":"{0} {1} left","عمره {0} سنوات":"{0} years old","ينتهي {0}":"Expires {0}","بعد {0} يومًا":"in {0} days","المقاسات:":"Sizes:","عدّل صاحب الطلب بياناته {0} مرة، آخرها {1}.":"The requester edited the details {0} time(s), last on {1}.","استلام من العنوان":"Pickup from address","يوصله لنقطة التجميع":"Drops off at collection point","تنبيه: يوجد طلب مفتوح آخر بنفس الهاتف أو العنوان:":"Warning: another open request has the same phone or address:","ما خُصّص لهذا الطلب":"Allocated to this request","سبب الرفض":"Reason for rejection","تأكيد الرفض":"Confirm rejection","هذه الخطوة من صلاحية مشرف المراجعة أو المدير.":"This step is for a review supervisor or the manager.","الصور غير واضحة أو لا تطابق الوصف":"Photos unclear or don't match the description","الصلاحية قريبة جدًا":"Expiry too close","صنف غير مقبول (ليس جافًا)":"Item not accepted (not dry)","العبوات مفتوحة":"Packs opened","الملابس غير صالحة":"Clothes not usable","الجهاز لا يعمل أو غير آمن":"Appliance doesn't work or isn't safe","الأثاث تالف أو غير نظيف":"Furniture damaged or unclean","تعذّر التواصل مع المتبرّع":"Couldn't reach the donor","تعذّر التحقق من البيانات":"Couldn't verify the details","طلب مكرر":"Duplicate request","خارج نطاق الخدمة":"Outside service area","راجعت الصور ({0}) وتطابقها مع الأصناف وحالتها.":"I reviewed the photos ({0}) and they match the items and condition.","راجعت تفاصيل الأصناف (لا توجد صور مرفقة).":"I reviewed the item details (no photos attached).","اعتماد التبرع":"Approve donation","رفض":"Reject","موعد التسليم":"Drop-off date","موعد الاستلام":"Pickup date","نقطة التجميع":"Collection point","المتطوّع":"Volunteer","تحديد الموعد وإبلاغ المتبرّع":"Set the time and notify the donor","تأكيد الاستلام في المستودع":"Confirm receipt at warehouse","تخصيص من هذا التبرع":"Allocate from this donation","مؤسسة عيد الخيرية (حسب رغبة المتبرّع)":"Eid Charity (donor's choice)","{0} (حسب رغبة المتبرّع)":"{0} (donor's choice)","تطابق {0}%":"{0}% match","منتهي الصلاحية":"Expired","متطوّع التوصيل":"Delivery volunteer","لا يوجد مستفيد متحقق منه لهذا النوع بعد.":"No verified beneficiary for this type yet.","تخصيص الكميات المحددة":"Allocate the selected quantities","استبعاد كمية (منتهية أو تالفة)":"Write off a quantity (expired or damaged)","السبب":"Reason","تالف":"Damaged","غير صالح للاستخدام":"Not usable","خُصّصت الكمية كاملة. أكّد تسليم كل جزء من قائمة التوزيع أعلاه.":"Fully allocated. Confirm delivery of each part in the distribution list above.","ألغى المتبرّع هذا الطلب.":"The donor cancelled this request.","اكتمل مسار هذا الطلب.":"This request is complete.","طريقة التحقق":"Verification method","تحقق هاتفي":"Phone check","زيارة ميدانية":"Home visit","مؤسسة معتمدة":"Accredited organisation","إحالة من جهة رسمية":"Official referral","تم التحقق":"Verified","تبرعات مناسبة في المستودع":"Suitable donations in the warehouse","تخصيص منه":"Allocate from it","لا يوجد تبرع مناسب في المستودع حاليًا. سيظهر الطلب في تبويب المطابقة عند توفره.":"No suitable donation in the warehouse right now. The request will appear under Matching when one arrives.","إغلاق الطلب كمكتمل":"Close request as complete","يُغلق الطلب بعد تسليم كل ما خُصّص له.":"The request closes after everything allocated to it is delivered.","ألغى صاحب الطلب هذا الطلب.":"The requester cancelled this request.","نقطة تجميع الريان":"Al Rayyan collection point","نقطة تجميع الدوحة · السد":"Doha · Al Sadd collection point","نقطة تجميع الوكرة":"Al Wakrah collection point","نقطة تجميع الخور":"Al Khor collection point","سُجّل التسليم. شكرًا للفريق":"Delivery recorded. Thanks, team","سُجّل التسليم. شكرًا لك":"Delivery recorded. Thank you","تم الرفض وإبلاغ صاحب الطلب":"Rejected and the requester was notified","راجع الصور والتفاصيل وأكّد ذلك قبل الاعتماد":"Review the photos and details and confirm before approving","بعد مراجعة {0} صور":"after reviewing {0} photo(s)","دون صور":"no photos","اعتُمد التبرع":"Donation approved","اعتماد التبرع {0}":"Approved donation {0}","حدّد التاريخ ونقطة التجميع":"Choose the date and collection point","حدّد التاريخ والمتطوّع (أضف متطوعين من تبويب الفريق)":"Choose the date and volunteer (add volunteers in the Team tab)","جدولة {0} في {1} مع {2}":"Scheduled {0} on {1} with {2}","حُدّد الموعد":"Time set","أكّد فحص الجودة أولًا":"Confirm the quality check first","أُضيف التبرع إلى المستودع":"Donation added to the warehouse","خُصّصت الكميات":"Quantities allocated","سُجّل الاستبعاد":"Write-off recorded","تحقق من الطلب {0} ({1})":"Verified request {0} ({1})","تم التحقق وأُضيف لقائمة المطابقة":"Verified and added to the matching list","سُلّم كل ما خُصّص":"Everything allocated was delivered","اكتمل الطلب {0}":"Request {0} completed","أُغلق الطلب كمكتمل":"Request closed as complete","رفض {0}: {1}":"Rejected {0}: {1}","استلام التبرع {0} في المستودع":"Received donation {0} at the warehouse","اجتاز الفحص":"passed inspection","تبرع جديد {0} من {1}":"New donation {0} from {1}","طلب احتياج جديد {0}":"New request {0}","تخصيص {0} من {1} لـ {2}":"Allocated {0} from {1} to {2}","مع {0}":"with {0}","تسليم {0} من {1} إلى {2}":"Delivered {0} from {1} to {2}","استبعاد {0} من {1}: {2}":"Wrote off {0} from {1}: {2}","التبرع ليس في المستودع":"The donation isn't in the warehouse","المستفيد غير متحقق منه":"The beneficiary isn't verified","حدّد كمية واحدة على الأقل":"Enter at least one quantity","الكمية أكبر من المتبقي":"The quantity exceeds what's left","استُبعدت الكمية المتبقية":"Remaining quantity written off","خُصّصت الكمية كاملة":"Fully allocated","سُلّمت كل الأجزاء":"All parts delivered","لا يمكن تخطي خطوات الاعتماد":"Approval steps can't be skipped","النظام":"System","ثُبّت التطبيق على جهازك":"App installed on your device","تشغيل الجهاز وسلامة الأسلاك والقابس":"the appliance runs and the cable and plug are safe","سلامة القطعة ونظافتها وخلوّها من الحشرات":"the piece is sound, clean and free of insects","نظافة الأغراض وصلاحيتها للاستخدام":"the items are clean and usable","أؤكد أن الأجهزة تعمل وآمنة وأسلاكها سليمة.":"I confirm the appliances work, are safe and their cables are intact.","أؤكد أن الأثاث نظيف وسليم من الكسر والحشرات.":"I confirm the furniture is clean, unbroken and free of insects.","أؤكد أن الأغراض نظيفة وصالحة للاستخدام.":"I confirm the items are clean and usable.","عمر الجهاز (سنوات)":"Appliance age (years)","المقاس / الأبعاد":"Size / dimensions","جديد بالكرتون":"New in box","مستعمل ويعمل جيدًا":"Used, works well","جديد":"New","مستعمل بحالة جيدة":"Used, good condition","فُحصت الصلاحية":"expiry checked","فُحصت الحالة":"condition checked","تسليم في نقطة التجميع":"drop-off at collection point","دقيق ينتهي قريبًا: أولوية":"flour expiring soon: priority","مع D-{0}":"with D-{0}","لـ R-{0}":"for R-{0}","صورة توضيحية":"Sample photo","رمضان كريم":"Ramadan Kareem","تبرع جديد D-{0} من {1}":"New donation D-{0} from {1}","منطقة {0} · شارع {1} · مبنى {2}":"Zone {0} · Street {1} · Building {2}","صباحًا ({0} - {1})":"Morning ({0}–{1})","بعد الظهر ({0} - {1})":"Afternoon ({0}–{1})","مساءً ({0} - {1})":"Evening ({0}–{1})","١":"1","٢":"2","٣":"3","٤":"4","رقم الهاتف لا يطابق الطلب.":"The phone number doesn't match the request.","لا يمكن تنفيذ هذا الإجراء في هذه المرحلة.":"This action isn't possible at this stage.","تعذّر رفع الصور. حاول مرة أخرى.":"Couldn't upload the photos. Try again.","البيانات أكبر من المسموح.":"The data is larger than allowed.","البريد أو كلمة المرور غير صحيحة.":"Incorrect email or password.","تعذّر الاتصال بالخادم. تحقق من الإنترنت وحاول مرة أخرى.":"Couldn't reach the server. Check your connection and try again.","عدّل عضو آخر هذا السجل قبلك.":"Another team member changed this record first.","لم يُحفظ التعديل: {0} أُعيد تحميل البيانات.":"Not saved: {0} The data was reloaded.","تعذّر تحميل البيانات.":"Couldn't load the data.","اكتب اسمك":"Enter your name","حسابك ليس ضمن فريق العمل بعد. اطلب من المدير إضافة بريدك من تبويب «الفريق».":"Your account isn't on the team yet. Ask the manager to add your email in the Team tab.","أصبحت مدير المنصة":"You are now the platform manager","حُدّثت البيانات":"Data refreshed","تعذّر تحميل مكتبة الاتصال بقاعدة البيانات. تحقق من الإنترنت.":"Couldn't load the database library. Check your connection.","البريد الإلكتروني":"Email","كلمة المرور":"Password","أنشئ للعضو حسابًا أولًا من لوحة Supabase: Authentication ← Users ← Add user (بريد وكلمة مرور)، ثم أضف بريده هنا مع دوره.":"First create an account for the member in the Supabase dashboard: Authentication → Users → Add user (email and password), then add their email here with a role.","اكتب الاسم والبريد الإلكتروني":"Enter the name and email","لا يوجد حساب بهذا البريد. أنشئه أولًا من لوحة Supabase.":"No account uses this email. Create it first in the Supabase dashboard.","النسخ التلقائية":"Automatic backups","تحتفظ Supabase بنسخ يومية تلقائية في الخطة المدفوعة. في الخطة المجانية نزّل نسخة من هنا أسبوعيًا على الأقل.":"Supabase keeps daily backups on paid plans. On the free plan, download a copy here at least weekly.","تعذّر الإرسال: {0}":"Couldn't send: {0}","رقم الهاتف كاملًا لتأكيد التعديل أو الإلغاء":"Full phone number to confirm editing or cancelling","اكتب رقم الهاتف كاملًا (8 أرقام).":"Enter the full phone number (8 digits).","يدخل أعضاء الفريق بالبريد وكلمة المرور التي أنشأها المدير لهم في Supabase.":"Team members sign in with the email and password the manager created for them in Supabase.","سجّلت الدخول بنجاح، لكن حسابك ليس ضمن الفريق بعد. إذا كنت أول من يعدّ المنصة فاكتب اسمك لتصبح المدير.":"You're signed in, but your account isn't on the team yet. If you're the first person setting up the platform, enter your name to become the manager.","اسمك":"Your name","اجعلني مدير المنصة":"Make me the platform manager","متصل بقاعدة البيانات":"Connected to database","تحديث":"Refresh"};
 Object.assign(EN, {"آخر تحديث: 19 أكتوبر 2026": "Last updated: 19 October 2026", "تشرح هذه الصفحة البيانات التي تجمعها منصة «شارك النعم»، ولماذا نجمعها، ومن يطّلع عليها، وكيف نحميها، وحقوقك فيها. نلتزم في ذلك بقانون حماية خصوصية البيانات الشخصية في دولة قطر رقم (13) لسنة 2016.": "This page explains what data the Share Blessings platform collects, why, who can see it, how we protect it and what your rights are. We follow Qatar's Personal Data Privacy Protection Law No. 13 of 2016.", "من نحن": "Who we are", "«شارك النعم» منصة مجتمعية في دولة قطر تربط المتبرعين بالمواد العينية (المواد الغذائية الجافة، والملابس، والأجهزة الكهربائية، والأثاث) بالأسر والأفراد المحتاجين، عبر فريق من المشرفين والمتطوعين. للتواصل بشأن بياناتك: واتساب ⁦+974 7077 6067⁩ أو البريد ahsas.galy11@gmail.com.": "Share Blessings is a community platform in Qatar that connects donors of in-kind goods (dry food, clothes, electrical appliances and furniture) with families and individuals in need, through a team of supervisors and volunteers. For anything about your data: WhatsApp +974 7077 6067 or email ahsas.galy11@gmail.com.", "البيانات التي نجمعها": "What we collect", "من المتبرعين:": "From donors:", "الاسم ورقم الهاتف.": "Name and phone number.", "العنوان حسب اللوحة المنزلية (رقم المنطقة والشارع والمبنى)، والموقع على الخريطة المستخرج منه.": "Address from the blue plate (zone, street and building numbers) and the map location derived from it.", "تفاصيل التبرع: نوعه وكميته وحالته، وموعد الاستلام المفضّل، والملاحظات.": "Donation details: type, quantity, condition, preferred pickup time and notes.", "صور المواد المتبرع بها، إن أرفقتها.": "Photos of the donated items, if you attach them.", "من المستفيدين:": "From beneficiaries:", "الاسم ورقم الهاتف وعدد أفراد الأسرة ونوع الجهة (أسرة أو مؤسسة).": "Name, phone number, household size and type (family or organisation).", "العنوان حسب اللوحة المنزلية.": "Address from the blue plate.", "الاحتياجات ودرجة الاستعجال ووصف الحالة الذي تكتبه بنفسك.": "Needs, urgency and the description of your situation that you write yourself.", "من أعضاء الفريق: الاسم والبريد الإلكتروني والدور، وسجلّ بالإجراءات التي ينفّذونها على الطلبات.": "From team members: name, email address, role, and a log of the actions they take on requests.", "لا نجمع بيانات بطاقات الدفع ولا الحسابات البنكية، فالمنصة لا تستقبل تبرعات مالية.": "We do not collect card or bank details; the platform does not accept money.", "لماذا نستخدم بياناتك": "Why we use your data", "لمراجعة التبرعات واعتمادها، والتحقق من طلبات الاحتياج.": "To review and approve donations and to verify requests for help.", "لتحديد موعد الاستلام من المتبرع، وتوصيل المواد إلى المستفيد.": "To schedule pickup from donors and deliver goods to beneficiaries.", "للتواصل معك بشأن طلبك، وتمكينك من تتبعه وتعديله وإلغائه.": "To contact you about your request and let you track, edit or cancel it.", "لمنع تكرار الطلبات وضمان وصول المساعدة لمن يحتاجها فعلًا.": "To prevent duplicate requests and make sure help reaches those who need it.", "لإصدار إحصاءات عامة مجمّعة لا تكشف هوية أحد، مثل عدد الكيلوغرامات والأسر المستفيدة.": "To publish aggregated statistics that identify no one, such as kilograms collected and families helped.", "لا نبيع بياناتك ولا نؤجّرها، ولا نستخدمها للإعلانات أو التسويق.": "We never sell or rent your data, and we do not use it for advertising or marketing.", "من يطّلع على بياناتك": "Who can see your data", "المدير ومشرفو المراجعة: يطّلعون على الطلبات والتبرعات لمراجعتها وإدارتها.": "The administrator and review supervisors see requests and donations in order to review and manage them.", "متطوع التوصيل: يرى فقط بيانات المهام المسندة إليه (الاسم والهاتف والعنوان) لإتمام الاستلام أو التسليم.": "A delivery volunteer sees only the tasks assigned to them (name, phone and address) to complete pickup or delivery.", "صور التبرعات محفوظة في مخزن خاص لا يراه إلا أعضاء الفريق، ولا تظهر للعموم.": "Donation photos are kept in private storage visible only to team members, never to the public.", "لا يرى المتبرع بيانات المستفيد، ولا يرى المستفيد بيانات المتبرع.": "Donors never see beneficiaries' details, and beneficiaries never see donors' details.", "قد نفصح عن البيانات إذا طلبتها جهة رسمية مختصة وفق القانون.": "We may disclose data if a competent authority requests it under the law.", "الخدمات التي نعتمد عليها": "Services we rely on", "Supabase: لتخزين قاعدة البيانات والصور وتسجيل دخول الفريق. خوادمها في الهند، ولذلك تُنقل بياناتك وتُخزَّن خارج دولة قطر، مشفّرة ومحمية بصلاحيات وصول.": "Supabase: stores the database and photos and handles team sign-in. Its servers are in India, so your data is transferred and stored outside Qatar, encrypted and protected by access rules.", "Cloudflare Pages: لاستضافة صفحات الموقع.": "Cloudflare Pages: hosts the website pages.", "نظام العنونة الوطني في قطر (GIS Qatar): نرسل إليه أرقام المنطقة والشارع والمبنى فقط لتحديد الموقع على الخريطة.": "Qatar's national addressing service (GIS Qatar): we send it only the zone, street and building numbers to place the address on the map.", "Google Fonts وشبكات توزيع المكتبات (jsDelivr وcdnjs) وخرائط OpenStreetMap: لتحميل الخطوط والمكتبات والخرائط. تتلقى هذه الخدمات عنوان IP لجهازك كأي موقع تزوره، ولا نرسل إليها بياناتك الشخصية.": "Google Fonts, library CDNs (jsDelivr and cdnjs) and OpenStreetMap: load fonts, code libraries and maps. Like any website, they receive your device's IP address; we do not send them your personal data.", "كيف نحمي بياناتك": "How we protect your data", "كل الاتصالات بالموقع مشفّرة عبر HTTPS.": "All connections to the site are encrypted over HTTPS.", "لا يستطيع الزائر قراءة قاعدة البيانات مباشرة؛ يقدّم الطلبات ويتتبعها فقط عبر وظائف محددة تتحقق من رقم الطلب ورقم الهاتف.": "Visitors cannot read the database directly; they can only submit and track requests through specific functions that check the request number and phone number.", "يدخل أعضاء الفريق بحسابات شخصية، ولكل دور صلاحيات محددة، ويُسجَّل ما ينفذونه من إجراءات.": "Team members sign in with personal accounts, each role has limited permissions, and their actions are logged.", "لا يُتاح التسجيل الذاتي؛ المدير وحده يضيف أعضاء الفريق.": "Self sign-up is disabled; only the administrator can add team members.", "ما يُحفظ على جهازك": "What is stored on your device", "لا نستخدم ملفات تعريف الارتباط للتتبع أو الإعلانات. يحفظ الموقع في متصفحك فقط: اختيارك للغة والوضع الليلي، وجلسة الدخول لأعضاء الفريق، ونسخة من صفحات الموقع ليفتح دون اتصال عند تثبيته كتطبيق.": "We do not use cookies for tracking or advertising. The site stores only the following in your browser: your language and dark-mode choice, the sign-in session for team members, and a copy of the site pages so it opens offline when installed as an app.", "مدة الاحتفاظ بالبيانات": "How long we keep data", "نحتفظ ببيانات الطلبات والتبرعات طوال مدة معالجتها، ثم مدة لا تتجاوز سنتين من إغلاقها لأغراض المتابعة ومنع التكرار وإعداد التقارير، ثم نحذفها أو نزيل منها ما يكشف الهوية. تُحذف صور التبرعات حين لا تعود لازمة. ويمكنك طلب الحذف قبل ذلك في أي وقت.": "We keep request and donation data while it is being handled, then for no more than two years after it is closed for follow-up, duplicate prevention and reporting; after that we delete it or remove anything that identifies you. Donation photos are deleted once no longer needed. You can ask for deletion sooner at any time.", "حقوقك": "Your rights", "الاطلاع على بياناتك: من صفحتي «تتبّع طلبي» و«تبرعاتي»، أو بمراسلتنا.": "See your data: from the \"Track my request\" and \"My donations\" pages, or by contacting us.", "تصحيحها: يمكنك تعديل طلبك ما دام قيد المراجعة، أو مراسلتنا لتصحيح أي بيانات.": "Correct it: you can edit your request while it is under review, or contact us to correct any detail.", "سحب موافقتك وإلغاء طلبك: من صفحة التتبع ما دام الطلب لم يُستلم أو يُوزَّع.": "Withdraw consent and cancel your request: from the tracking page, as long as it has not been collected or delivered.", "طلب حذف بياناتك أو الاعتراض على معالجتها: راسلنا عبر واتساب أو البريد، ونرد خلال 30 يومًا.": "Ask us to delete your data or object to its use: contact us on WhatsApp or by email and we will respond within 30 days.", "إذا رأيت أن حقوقك لم تُحترم، يحق لك تقديم شكوى إلى الجهة المختصة بحماية البيانات الشخصية في دولة قطر.": "If you believe your rights have not been respected, you may complain to the authority responsible for personal data protection in Qatar.", "بيانات الأطفال": "Children's data", "المنصة موجّهة للبالغين. قد يتضمن طلب الأسرة معلومات عامة عن الأطفال، مثل أعمارهم ومقاسات ملابسهم، ويقدّمها وليّ الأمر وحده، ولا تُستخدم إلا لتلبية الطلب.": "The platform is for adults. A family request may include general information about children, such as ages and clothing sizes; it is provided only by a parent or guardian and used only to fulfil the request.", "التعديلات على هذه السياسة": "Changes to this policy", "قد نحدّث هذه السياسة عند تغيّر الخدمة أو الأنظمة، وننشر النسخة الجديدة في هذه الصفحة مع تاريخ التحديث.": "We may update this policy when the service or regulations change, and we will publish the new version on this page with its date.", "سياسة الخصوصية": "Privacy policy", "كيف نجمع بياناتك ونستخدمها ونحميها.": "How we collect, use and protect your data.", "أوافق على تواصل المشرفين معي للتحقق من الطلب، وعلى معالجة بياناتي وفق": "I agree that supervisors may contact me to verify the request, and to my data being processed under the", "بإرسال التبرع توافق على معالجة بياناتك وفق": "By submitting, you agree to your data being processed under the"});
-Object.assign(EN, {"مناطق التغطية": "Coverage", "نستلم تبرعك من جميع بلديات قطر": "We collect donations across all municipalities of Qatar", "يحدد المشرف موعد الاستلام من عنوانك حسب اللوحة المنزلية بعد اعتماد التبرع.": "Once your donation is approved, a supervisor schedules pickup from your address using your blue plate.", "الدوحة": "Doha", "الريان": "Al Rayyan", "الوكرة": "Al Wakrah", "الظعاين": "Al Daayen", "أم صلال": "Umm Salal", "الخور والذخيرة": "Al Khor & Al Thakhira", "الشمال": "Al Shamal", "الشيحانية": "Al Shahaniya", "السد · الدفنة · المنصورة · الهلال": "Al Sadd · Al Dafna · Al Mansoura · Al Hilal", "الريان الجديد · معيذر · الوعب · عين خالد": "New Rayyan · Muaither · Al Waab · Ain Khaled", "الوكرة · الوكير · مسيعيد": "Al Wakrah · Al Wukair · Mesaieed", "لوسيل · لعبيب · سميسمة · الظعاين": "Lusail · Leabaib · Simaisma · Al Daayen", "أم صلال محمد · أم صلال علي · أم العمد": "Umm Salal Mohammed · Umm Salal Ali · Umm Al Amad", "الخور · الذخيرة": "Al Khor · Al Thakhira", "الرويس · أبو ظلوف": "Al Ruwais · Abu Dhalouf", "الشيحانية · دخان · الجميلية": "Al Shahaniya · Dukhan · Al Jemailiya", "تفضّل التسليم بنفسك؟": "Prefer to drop it off yourself?", "راسلنا عبر واتساب لنحدد معك موعدًا ومكانًا قريبًا منك.": "Message us on WhatsApp and we will arrange a time and a place near you.", "تواصل عبر واتساب": "Contact us on WhatsApp", "تواصل معنا": "Contact us", "واتساب:": "WhatsApp:", "© 2026 شارك النعم. جميع الحقوق محفوظة.": "© 2026 Share Blessings. All rights reserved."});
+Object.assign(EN, {"أبقِ الرموز مثل {0} كما هي، فالموقع يضع مكانها أرقامًا أو أسماء.": "Keep codes like {0} as they are; the site puts numbers or names in their place.", "أصناف التبرع المتاحة": "Donation types accepted", "أقسام الصفحة الرئيسية": "Home page sections", "أماكن تسليم التبرعات": "Drop-off places", "إرفاق النص الأصلي أيضًا": "Also include the original text", "إضافة حملة": "Add campaign", "إضافة مكان": "Add place", "إضافة منطقة": "Add area", "ابحث عن أي نص في الموقع (عنوان، زر، سؤال شائع، رسالة) واكتب بديله.": "Find any text on the site (heading, button, FAQ, message) and write its replacement.", "استعادة الأصل": "Restore original", "استعادة الإعدادات الأصلية": "Restore default settings", "استقبال التبرعات والطلبات": "Donations and requests", "اسم المكان وعنوانه": "Place name and address", "اكتب الرسالة أولًا": "Write the message first", "اكتبها بلغتك، وتُترجم تلقائيًا": "Write it in your language; it is translated automatically", "الأحياء": "Neighbourhoods", "الأصناف التي تُحتسب في الحملة (إذا لم تختر شيئًا تُحتسب كل الأصناف)": "Items counted in the campaign (if you choose none, all items count)", "الأيقونة": "Icon", "الاستقبال متوقف مؤقتًا.": "Intake is paused for now.", "البلدية أو المنطقة": "Municipality or area", "الترجمة والتواصل": "Translation & contact", "التواصل": "Contact", "الحملات": "Campaigns", "الحملة ظاهرة في الموقع": "Campaign shown on the site", "الرسالة المترجمة": "Translated message", "الشارة": "Badge", "المقاسات": "Sizes", "النص الأصلي": "Original text", "النص الجديد": "New text", "النصوص المعدّلة": "Edited texts", "بحث في نصوص الموقع": "Search site texts", "تجاهل التغييرات": "Discard changes", "تحريك للأسفل": "Move down", "تحريك للأعلى": "Move up", "تحكّم من هنا في محتوى الموقع العام. اكتب بالعربية، وعند الحفظ يُترجم ما كتبته تلقائيًا إلى كل لغات الموقع.": "Control the public site content here. Write in Arabic; when you save, your text is translated automatically into every site language.", "ترجمة الرسالة": "Translate message", "ترجمة ما كتبه إلى {0}": "Translate what they wrote into {0}", "تطبيق": "Apply", "تظهر للمشرف عند تحديد موعد لمتبرع اختار أن يوصل تبرعه بنفسه، ويراها المتبرع عند تتبّع طلبه. إذا تُركت فارغة يُنسَّق المكان عبر واتساب.": "Shown to the supervisor when scheduling a donor who chose to drop off the donation, and shown to the donor when tracking it. If left empty, the place is arranged via WhatsApp.", "تعديل": "Edit", "تعديل إعدادات الموقع": "Site settings updated", "تعذّرت الترجمة الآن. تحقق من الإنترنت وحاول مرة أخرى.": "Translation is not available right now. Check your connection and try again.", "تفاصيل العنوان": "Address details", "توجد تغييرات غير محفوظة": "There are unsaved changes", "جارٍ الترجمة…": "Translating…", "جارٍ الحفظ…": "Saving…", "جارٍ ترجمة المحتوى إلى لغات الموقع… {0}": "Translating content into the site languages… {0}", "جدول الإعدادات غير موجود في قاعدة البيانات بعد. شغّل ملف site-settings.sql مرة واحدة في محرر SQL في Supabase، ثم أعد تحميل الصفحة.": "The settings table does not exist in the database yet. Run site-settings.sql once in the Supabase SQL editor, then reload the page.", "حذف": "Delete", "حفظ ونشر التغييرات": "Save and publish changes", "حُفظت الإعدادات ونُشرت على الموقع": "Settings saved and published", "حُفظت الإعدادات، وتعذّرت ترجمة {0} نصًا فستظهر بالعربية.": "Settings saved, but {0} texts could not be translated and will show in Arabic.", "خمري": "Maroon", "ذهبي": "Gold", "ليلي": "Night", "رسالة إلى {0}": "Message to {0}", "رسالة تظهر للزائر عند إيقاف الاستقبال": "Message shown to visitors when intake is paused", "رقم واتساب": "WhatsApp number", "رقم واتساب غير صحيح. اكتب 8 أرقام، أو الرقم الدولي كاملًا.": "Invalid WhatsApp number. Enter 8 digits, or the full international number.", "شريط الإعلان أعلى الموقع": "Announcement bar at the top of the site", "طُبّق التعديل. اضغط «حفظ ونشر التغييرات» لنشره.": "Change applied. Press “Save and publish changes” to publish it.", "عنوان الحملة": "Campaign title", "غير محددة": "Not specified", "لا توجد نتائج.": "No results.", "لا نستقبل هذا الصنف حاليًا.": "We are not accepting this type right now.", "لغة {0}: {1}": "{0} language: {1}", "لغة الرسالة": "Message language", "لم تُحفظ الإعدادات: {0}": "Settings not saved: {0}", "لم يكتب صاحب الطلب نصوصًا تحتاج ترجمة.": "The requester did not write any text that needs translating.", "لون البطاقة": "Card colour", "مثال: تبرّع الآن": "Example: Donate now", "مثال: نستقبل تبرعات كسوة الشتاء حتى نهاية ديسمبر": "Example: We accept winter clothing donations until the end of December", "ملاحظة المتبرّع": "Donor’s note", "نص {0}": "Text {0}", "نص الإعلان": "Announcement text", "نصوص الموقع": "Site texts", "نعتذر، استقبال التبرعات متوقف مؤقتًا. تابعنا لاحقًا.": "Sorry, donations are paused for now. Please check back later.", "نعتذر، استقبال طلبات المساعدة متوقف مؤقتًا. تابعنا لاحقًا.": "Sorry, help requests are paused for now. Please check back later.", "وصف الاحتياج": "Description of the need", "وصف الصنف": "Item description", "يمكنك تعديلها قبل الإرسال": "You can edit it before sending", "يُحدَّد المكان بالتنسيق عبر واتساب": "Place to be arranged via WhatsApp", "إظهار شريط الإعلان": "Show the announcement bar", "استقبال التبرعات مفتوح": "Donations are open", "استقبال طلبات المساعدة مفتوح": "Help requests are open", "إظهار أرقام الأثر": "Show impact numbers", "إظهار الحملات": "Show campaigns", "إظهار مناطق التغطية": "Show coverage areas", "إعدادات الموقع": "Site settings", "ملاحظة للمشرفين": "Note for the supervisors", "اختياري، ويمكنك كتابتها بأي لغة": "Optional; you can write it in any language", "مثال: الأنسب التواصل بعد الساعة 4 عصرًا، أو المواد في الطابق الثاني.": "Example: best to call after 4 pm, or the items are on the second floor.", "الترجمة الآلية (Google Translate، وخدمة MyMemory بديلًا): يستخدمها المشرفون عند الحاجة لترجمة ما كتبته في طلبك أو لترجمة رسائلهم إليك، ويُرسل إليها النص المراد ترجمته فقط.": "Machine translation (Google Translate, with MyMemory as a backup): supervisors use it when needed to translate what you wrote in your request or to translate their messages to you; only the text to be translated is sent."});
+Object.assign(EN, {"مناطق التغطية": "Coverage", "نستلم تبرعك من جميع بلديات قطر": "We collect donations across all municipalities of Qatar", "يحدد المشرف موعد الاستلام من عنوانك حسب اللوحة المنزلية بعد اعتماد التبرع.": "Once your donation is approved, a supervisor schedules pickup from your address using your blue plate.", "الدوحة": "Doha", "الريان": "Al Rayyan", "الوكرة": "Al Wakrah", "الظعاين": "Al Daayen", "أم صلال": "Umm Salal", "الخور والذخيرة": "Al Khor & Al Thakhira", "الشمال": "Al Shamal", "الشحانية": "Al Shahaniya", "السد · الدفنة · المنصورة · الهلال": "Al Sadd · Al Dafna · Al Mansoura · Al Hilal", "الريان الجديد · معيذر · الوعب · عين خالد": "New Rayyan · Muaither · Al Waab · Ain Khaled", "الوكرة · الوكير · مسيعيد": "Al Wakrah · Al Wukair · Mesaieed", "لوسيل · لعبيب · سميسمة · الظعاين": "Lusail · Leabaib · Simaisma · Al Daayen", "أم صلال محمد · أم صلال علي · أم العمد": "Umm Salal Mohammed · Umm Salal Ali · Umm Al Amad", "الخور · الذخيرة": "Al Khor · Al Thakhira", "الرويس · أبو ظلوف": "Al Ruwais · Abu Dhalouf", "الشحانية · دخان · الجميلية": "Al Shahaniya · Dukhan · Al Jemailiya", "تفضّل التسليم بنفسك؟": "Prefer to drop it off yourself?", "راسلنا عبر واتساب لنحدد معك موعدًا ومكانًا قريبًا منك.": "Message us on WhatsApp and we will arrange a time and a place near you.", "تواصل عبر واتساب": "Contact us on WhatsApp", "تواصل معنا": "Contact us", "واتساب:": "WhatsApp:", "© 2026 شارك النعم. جميع الحقوق محفوظة.": "© 2026 Share Blessings. All rights reserved."});
 // t('نص {0}', x): the current language's text, the Arabic source when untranslated; {n} are filled with the arguments
-const t = (s, ...a) => { const r = TR && TR[s] != null ? TR[s] : s; return a.length ? String(r).replace(/\{(\d+)\}/g, (_, i) => a[+i] ?? '') : r; };
+const t = (s, ...a) => { const r = TR ? (TR[s] != null ? TR[s] : s) : (OV[s] != null ? OV[s] : s); return a.length ? String(r).replace(/\{(\d+)\}/g, (_, i) => a[+i] ?? '') : r; };
 const SEP = () => LANGS[LANG].rtl ? '، ' : ', ';
 const LOCALE = () => LANGS[LANG].loc;
 /* cloud config: filled in config.js; without it the site runs as an offline demo */
@@ -1386,13 +1421,10 @@ try { const t = localStorage.getItem('shareBlessings.theme'); if (t) document.do
 /* ================= home ================= */
 function paintStats(st) {
   $('#imKg').textContent = fmtN(st.kg); $('#imPcs').textContent = fmtN(st.pcs); $('#imFam').textContent = fmtN(st.fam); $('#imDon').textContent = fmtN(st.donors);
-  const goals = { winter: 300, ramadan: 1000, dates: 200 };
-  Object.keys(goals).forEach(k => {
-    $(`[data-camp-bar="${k}"]`).style.width = Math.min(100, (+st[k] || 0) / goals[k] * 100) + '%';
-    $(`[data-camp-val="${k}"]`).textContent = fmtN(st[k]);
-  });
+  paintCamps(Object.assign({ winter: +st.winter || 0, ramadan: +st.ramadan || 0, dates: +st.dates || 0 }, campProg || {}));
 }
 function renderHome() {
+  renderCamps(); renderAreas();
   if (CLOUD) { if (pubStats) paintStats(pubStats); fetchStats(); return; }
   let kg = 0, pcs = 0;
   db.donations.filter(d => ['received','allocated','delivered'].includes(d.status)).forEach(d => d.items.forEach(it => {
@@ -1401,19 +1433,7 @@ function renderHome() {
   const fam = db.requests.filter(r => r.status === 'delivered').reduce((s, r) => s + (+r.size || 0), 0);
   const donors = new Set(db.donations.filter(d => d.status !== 'rejected').map(d => d.phone)).size;
   $('#imKg').textContent = fmtN(kg); $('#imPcs').textContent = fmtN(pcs); $('#imFam').textContent = fmtN(fam); $('#imDon').textContent = fmtN(donors);
-  // الحملات تُحسب من التبرعات غير المرفوضة
-  const camp = { winter: 0, ramadan: 0, dates: 0 };
-  db.donations.filter(d => d.status !== 'rejected').forEach(d => d.items.forEach(it => {
-    if (d.kind === 'clothes') { if (it.type === 'winter') camp.winter += +it.qty; return; }
-    if (d.kind !== 'food' || it.unit !== 'kg') return;
-    if (['rice','flour','legumes','sugar'].includes(it.type)) camp.ramadan += +it.qty;
-    if (it.type === 'dates') camp.dates += +it.qty;
-  }));
-  const goals = { winter: 300, ramadan: 1000, dates: 200 };
-  Object.keys(goals).forEach(k => {
-    $(`[data-camp-bar="${k}"]`).style.width = Math.min(100, camp[k] / goals[k] * 100) + '%';
-    $(`[data-camp-val="${k}"]`).textContent = fmtN(camp[k]);
-  });
+  paintCamps(campTotals(db.donations));
 }
 
 /* ================= quick donate (hero) ================= */
@@ -1543,6 +1563,7 @@ function mark(el, bad) { el.classList.toggle('invalid', !!bad); return !bad; }
 
 $('#donForm').addEventListener('submit', e => {
   e.preventDefault();
+  if (!intakeOpen('donations', donKind())) { toast(t(closedMsg('donations'))); return; }
   const errs = [];
   const v = id => $('#' + id).value.trim();
   if (!mark($('#d_name'), v('d_name').length < 3)) errs.push('اكتب الاسم الكامل.');
@@ -1573,10 +1594,10 @@ $('#donForm').addEventListener('submit', e => {
   box.hidden = true;
   if (CLOUD) { submitDonationCloud({ kind, name: v('d_name'), phone: v('d_phone'), addr:{ zone:v('d_zone'), street:v('d_street'), bldg:v('d_bldg') }, details: v('d_details'),
     method: $('input[name=d_method]:checked').value, slot: $('#d_slot').value, target, person: target === 'person' ? { name:v('d_pName'), addr:v('d_pAddr') } : null,
-    items, notes: v('d_notes'), near, ...geoFromForm('d') }, box); return; }
+    items, notes: v('d_notes'), lang: LANG, near, ...geoFromForm('d') }, box); return; }
   const rec = { id: nextId('d'), kind, name: v('d_name'), phone: v('d_phone'), addr:{ zone:v('d_zone'), street:v('d_street'), bldg:v('d_bldg') }, details: v('d_details'),
     method: $('input[name=d_method]:checked').value, slot: $('#d_slot').value, target, person: target === 'person' ? { name:v('d_pName'), addr:v('d_pAddr') } : null,
-    items, photos: donPhotos.slice(), notes: v('d_notes'), status:'new', allocatedTo:null, near, history:[{ status:'new', at:nowISO(), note:'' }], createdAt: nowISO(), ...geoFromForm('d') };
+    items, photos: donPhotos.slice(), notes: v('d_notes'), lang: LANG, status:'new', allocatedTo:null, near, history:[{ status:'new', at:nowISO(), note:'' }], createdAt: nowISO(), ...geoFromForm('d') };
   db.donations.unshift(rec); log(t('تبرع جديد {0} من {1}', rec.id, rec.name), rec.name);
   if (!save()) {
     db.donations.shift(); db.log.shift(); db.seq.d -= 1;
@@ -1647,6 +1668,7 @@ const checkedVals = name => $$(`input[name=${name}]:checked`).map(x => x.value);
 
 $('#reqForm').addEventListener('submit', e => {
   e.preventDefault();
+  if (!intakeOpen('requests')) { toast(t(closedMsg('requests'))); return; }
   const errs = []; const v = id => $('#' + id).value.trim();
   if (!mark($('#r_name'), v('r_name').length < 3)) errs.push('اكتب الاسم.');
   if (!mark($('#r_phone'), !phoneOk(v('r_phone')))) errs.push('رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 3 أو 5 أو 6 أو 7.');
@@ -1662,14 +1684,14 @@ $('#reqForm').addEventListener('submit', e => {
   const box = $('#r_err');
   if (CLOUD && !errs.length) { box.hidden = true; submitRequestCloud({ type: $('input[name=r_type]:checked').value, kind, name: v('r_name'), phone: v('r_phone'), size: +v('r_size'),
     addr:{ zone:v('r_zone'), street:v('r_street'), bldg:v('r_bldg') }, details: v('r_details'), foodTypes, cats, types, sizes: v('r_sizes'), goodsTypes: isGoods(kind) ? goodsTypes : [], goodsDesc: isGoods(kind) ? v('r_otherDesc') : '',
-    urg: $('#r_urg').value, notes: v('r_notes'), ...geoFromForm('r') }, box); return; }
+    urg: $('#r_urg').value, notes: v('r_notes'), lang: LANG, ...geoFromForm('r') }, box); return; }
   const same = !errs.length && db.requests.find(x => openReq(x) && x.phone === v('r_phone') && x.kind === kind);
   if (same) { box.innerHTML = t('لديك طلب قائم من نفس النوع برقم {0} (الحالة: {1}). تابعه أو عدّله من صفحة «تتبّع طلبي» بدل تقديم طلب جديد.', same.id, REQ_LBL[same.status]); box.hidden = false; box.scrollIntoView({ behavior:'smooth', block:'center' }); return; }
   if (errs.length) { box.innerHTML = `<b>${t('راجع الحقول التالية:')}</b><br>` + errs.map(x => esc(t(x))).join('<br>'); box.hidden = false; box.scrollIntoView({ behavior:'smooth', block:'center' }); return; }
   box.hidden = true;
   const rec = { id: nextId('r'), type: $('input[name=r_type]:checked').value, kind, name: v('r_name'), phone: v('r_phone'), size: +v('r_size'),
     addr:{ zone:v('r_zone'), street:v('r_street'), bldg:v('r_bldg') }, details: v('r_details'), foodTypes, cats, types, sizes: v('r_sizes'), goodsTypes: isGoods(kind) ? goodsTypes : [], goodsDesc: isGoods(kind) ? v('r_otherDesc') : '',
-    urg: $('#r_urg').value, notes: v('r_notes'), status:'new', matchedWith:null, history:[{ status:'new', at:nowISO(), note:'' }], createdAt: nowISO(), ...geoFromForm('r') };
+    urg: $('#r_urg').value, notes: v('r_notes'), lang: LANG, status:'new', matchedWith:null, history:[{ status:'new', at:nowISO(), note:'' }], createdAt: nowISO(), ...geoFromForm('r') };
   db.requests.unshift(rec); log(t('طلب احتياج جديد {0}', rec.id), rec.name); save(); resetGeo('r'); $('#r_maplink').value = '';
   $('#reqForm').hidden = true;
   $('#reqDone').innerHTML = receiptHTML(rec, 'r', true); $('#reqDone').hidden = false;
@@ -1783,11 +1805,11 @@ $('#trackForm').addEventListener('submit', e => { e.preventDefault(); doTrack();
 /* ================= team & roles ================= */
 const ROLE_LBL = { admin:'مدير', reviewer:'مشرف مراجعة', volunteer:'متطوع توصيل' };
 const PERMS = {
-  admin:     ['review','schedule','receive','allocate','deliver','verify','writeoff','reports','team','backup','tasksAll','log','people'],
+  admin:     ['review','schedule','receive','allocate','deliver','verify','writeoff','reports','team','backup','tasksAll','log','people','site'],
   reviewer:  ['review','schedule','receive','allocate','deliver','verify','writeoff','reports','tasksAll','log','people'],
   volunteer: ['tasks'],
 };
-const POINTS = ['نقطة تجميع الريان', 'نقطة تجميع الدوحة · السد', 'نقطة تجميع الوكرة', 'نقطة تجميع الخور'];
+const sitePoints = () => (SITE && SITE.points && SITE.points.length ? SITE.points : ['يُحدَّد المكان بالتنسيق عبر واتساب']);
 function loadMe() {
   if (CLOUD) { me = cloudMe; return; }
   let id = null; try { id = sessionStorage.getItem('sb.user'); } catch (e) { id = loadMe._m; }
@@ -1935,6 +1957,7 @@ const TABS = [
   { t:'people',    l:'المتبرعون',          p:'people' },
   { t:'reports',   l:'التقارير',          p:'reports' },
   { t:'team',      l:'الفريق',            p:'team' },
+  { t:'site',      l:'إعدادات الموقع',     p:'site' },
   { t:'backup',    l:'النسخ الاحتياطي',    p:'backup' },
   { t:'log',       l:'سجل النشاط',        p:'log' },
 ];
@@ -1990,8 +2013,8 @@ function renderAdmin() {
   wireOpen($('#expBanner'));
   const body = $('#tabBody');
   body.innerHTML = ({ donations: donTable, requests: reqTable, match: matchView, stock: stockView, tasks: tasksView, people: peopleView,
-    reports: reportsView, team: teamView, backup: backupView, log: logView })[tab]();
-  wireTab(body);
+    reports: reportsView, team: teamView, backup: backupView, log: logView, site: siteView })[tab]();
+  wireTab(body); if (tab === 'site') wireSite(body);
 }
 
 function expiryBanner(full) {
@@ -2464,22 +2487,23 @@ function openDrawer(k, id, pre) {
   const kv = isD
     ? `<dt>${t('المتبرّع')}</dt><dd>${esc(rec.name)}</dd><dt>${t('الهاتف')}</dt><dd class="num" dir="ltr">${esc(rec.phone)}</dd><dt>${t('العنوان')}</dt><dd>${plateTxt(rec.addr)}${rec.details ? '<br><span class="muted">' + esc(rec.details) + '</span>' : ''}<div style="margin-top:6px">${locHTML(rec, 'd:' + rec.id)}</div></dd>
        <dt>${t('التسليم')}</dt><dd>${rec.method === 'pickup' ? t('استلام من العنوان') : t('يوصله لنقطة التجميع')} · ${SLOT[rec.slot]}</dd><dt>${t('الجهة')}</dt><dd>${TARGET[rec.target]}${rec.person ? ': ' + esc(rec.person.name) + ' (' + esc(rec.person.addr) + ')' : ''}</dd>
-       ${rec.pickup ? `<dt>${t('الموعد')}</dt><dd>${fmtDate(rec.pickup.date)} · ${esc(rec.pickup.vol)}</dd>` : ''}${rec.notes ? `<dt>${t('ملاحظات')}</dt><dd>${esc(rec.notes)}</dd>` : ''}`
+       ${rec.pickup ? `<dt>${t('الموعد')}</dt><dd>${fmtDate(rec.pickup.date)} · ${esc(rec.pickup.vol)}</dd>` : ''}${rec.notes ? `<dt>${t('ملاحظة المتبرّع')}</dt><dd data-tr-src="notes">${esc(rec.notes)}</dd>` : ''}`
     : `<dt>${t('المستفيد')}</dt><dd>${esc(rec.name)} <span class="tag">${rec.type === 'org' ? t('مؤسسة') : t('أسرة')}</span></dd><dt>${t('الهاتف')}</dt><dd class="num" dir="ltr">${esc(rec.phone)}</dd><dt>${t('الأفراد')}</dt><dd class="num">${rec.size}</dd>
        <dt>${t('العنوان')}</dt><dd>${plateTxt(rec.addr)}${rec.details ? '<br><span class="muted">' + esc(rec.details) + '</span>' : ''}<div style="margin-top:6px">${locHTML(rec, 'r:' + rec.id)}</div></dd><dt>${t('الأولوية')}</dt><dd>${rec.urg === 'high' ? t('عاجلة') : t('عادية')}</dd>
-       ${rec.notes ? `<dt>${t('الحالة')}</dt><dd>${esc(rec.notes)}</dd>` : ''}`;
+       ${rec.notes ? `<dt>${t('الحالة')}</dt><dd data-tr-src="notes">${esc(rec.notes)}</dd>` : ''}`;
   const reqGot = !isD ? reqAllocs(rec) : [];
   dr.innerHTML = `<header><h3>${rec.id}</h3><span class="pill s-${rec.status}">${(isD ? DON_LBL : REQ_LBL)[rec.status]}</span><button class="btn btn-ghost btn-sm" type="button" data-close aria-label="${t('إغلاق')}">✕</button></header>
     <div class="body">${dups.length ? `<p class="note bad">${t('تنبيه: يوجد طلب مفتوح آخر بنفس الهاتف أو العنوان:')} ${dups.map(x => `<button type="button" class="linkish" data-open="r:${x.id}">${x.id}</button>`).join(' ')}</p>` : ''}${edited}
       <dl class="kv">${kv}</dl>${isD ? galleryHTML(rec) : ''}<div><h3 style="margin-bottom:8px">${isD ? t('الأصناف') : t('الاحتياج')}</h3>${items}</div>
       ${isD ? allocListHTML(rec) : reqGot.length ? `<div><h3 style="margin-bottom:8px">${t('ما خُصّص لهذا الطلب')}</h3><div class="mini-items">${reqGot.map(x => `<div><b class="num" dir="ltr">${x.d.id}</b><span>${esc(linesText(x.d, x.a.lines))}</span>${x.a.delivered ? `<span class="tag" style="color:var(--ok)">${t('سُلّم')}</span>` : `<span class="tag gold">${t('بانتظار التوصيل')}</span>`}</div>`).join('')}</div></div>` : ''}
+      ${mtBoxHTML(rec, isD)}
       <div><h3 style="margin-bottom:8px">${t('مسار الطلب')}</h3>${timelineHTML(rec, k)}</div></div>
     <footer>${actionsHTML(rec, k, pre)}</footer>`;
   dr.hidden = false; $('#scrim').hidden = false;
   $('[data-close]', dr).addEventListener('click', closeDrawer);
   $$('[data-zoom]', dr).forEach(b => b.addEventListener('click', () => openLightbox(photoSrc(rec.photos[+b.dataset.zoom]), t('{0} · صورة {1} من {2}', rec.id, +b.dataset.zoom + 1, rec.photos.length))));
   wireOpen($('.body', dr)); wireLocate(dr); hydratePhotos(dr);
-  wireActions(dr, rec, k);
+  wireActions(dr, rec, k); wireMT(dr, rec, isD);
   $('[data-close]', dr).focus();
 }
 
@@ -2495,7 +2519,7 @@ function actionsHTML(rec, k, pre) {
       case 'new': if (!can('review')) return noRight; return `<div class="review-gate"><label class="check"><input type="checkbox" id="rv"><span>${rec.photos && rec.photos.length ? t('راجعت الصور ({0}) وتطابقها مع الأصناف وحالتها.', rec.photos.length) : t('راجعت تفاصيل الأصناف (لا توجد صور مرفقة).')}</span></label>
         <div class="form-actions"><button class="btn btn-primary" data-act="approve" type="button">${t('اعتماد التبرع')}</button><button class="btn btn-danger" data-act="reject" type="button">${t('رفض')}</button></div></div>${rejectBox}`;
       case 'approved': if (!can('schedule')) return noRight; return `<div class="grid"><label class="f">${rec.method === 'dropoff' ? t('موعد التسليم') : t('موعد الاستلام')}<input type="date" id="pkDate" value="${addDays(1)}" min="${addDays(0)}"></label>
-        <label class="f">${rec.method === 'dropoff' ? t('نقطة التجميع') : t('المتطوّع')}<select id="pkVol">${rec.method === 'dropoff' ? POINTS.map(p => `<option value="${p}">${t(p)}</option>`).join('') : volunteers().map(u => `<option value="${u.id}">${esc(u.name)}</option>`).join('')}</select></label></div>
+        <label class="f">${rec.method === 'dropoff' ? t('نقطة التجميع') : t('المتطوّع')}<select id="pkVol">${rec.method === 'dropoff' ? sitePoints().map(p => `<option value="${p}">${t(p)}</option>`).join('') : volunteers().map(u => `<option value="${u.id}">${esc(u.name)}</option>`).join('')}</select></label></div>
         <button class="btn btn-primary" data-act="schedule" type="button">${t('تحديد الموعد وإبلاغ المتبرّع')}</button>`;
       case 'scheduled': if (!canReceive(rec)) return noRight; return `<label class="check"><input type="checkbox" id="qc"><span>${t('فحصت {0}.', qcText(rec))}</span></label>
         <button class="btn btn-primary" data-act="receive" type="button">${t('تأكيد الاستلام في المستودع')}</button>`;
@@ -2843,21 +2867,22 @@ function applyLabels() {
 /* ================= language switch ================= */
 const TX = new WeakMap();
 const HAS_AR = /[؀-ۿ]/;
-function lookupTr(s) {
+function lookupTr(s, M = TR) {
+  if (!M) return null;
   const core = s.trim(); if (!core) return null;
   const at = s.indexOf(core), pre = s.slice(0, at), post = s.slice(at + core.length);
   const key = core.replace(/\s+/g, ' ');
-  if (TR[key] != null) return pre + TR[key] + post;
+  if (M[key] != null) return pre + M[key] + post;
   const nums = [];
   const tk = key.replace(/\d+(?:[.,]\d+)?/g, m => { nums.push(m); return '{' + (nums.length - 1) + '}'; });
-  if (nums.length && TR[tk] != null) return pre + TR[tk].replace(/\{(\d+)\}/g, (_, i) => nums[+i]) + post;
+  if (nums.length && M[tk] != null) return pre + M[tk].replace(/\{(\d+)\}/g, (_, i) => nums[+i]) + post;
   return null;
 }
 function trText(n) {
   const cur = n.nodeValue; let rec = TX.get(n);
   if (rec && cur !== rec.ar && cur !== rec.tr) rec = null;      // code replaced the text
   if (!rec) { if (!HAS_AR.test(cur)) return; rec = { ar: cur, tr: null, l: 'ar' }; TX.set(n, rec); }
-  if (rec.l !== LANG) { rec.tr = LANG === 'ar' ? null : lookupTr(rec.ar); rec.l = LANG; }
+  if (rec.l !== LANG || rec.v !== TRV) { rec.tr = lookupTr(rec.ar, LANG === 'ar' ? OV : TR); rec.l = LANG; rec.v = TRV; }
   const v = rec.tr != null ? rec.tr : rec.ar;
   if (cur !== v) n.nodeValue = v;
 }
@@ -2868,7 +2893,7 @@ function trAttrs(el) {
     const k = 'tr' + a.replace(/-./g, m => m[1].toUpperCase()), cur = el.getAttribute(a);
     let ar = el.dataset[k + 'Ar'];
     if (ar == null || (cur !== ar && cur !== el.dataset[k + 'Tr'])) { if (!HAS_AR.test(cur)) continue; ar = cur; el.dataset[k + 'Ar'] = ar; delete el.dataset[k + 'Tr']; }
-    const v = LANG === 'ar' ? null : lookupTr(ar);
+    const v = lookupTr(ar, LANG === 'ar' ? OV : TR);
     if (v != null) { el.dataset[k + 'Tr'] = v; if (cur !== v) el.setAttribute(a, v); }
     else { delete el.dataset[k + 'Tr']; if (cur !== ar) el.setAttribute(a, ar); }
   }
@@ -2883,7 +2908,7 @@ function translateTree(root) {
   let n; while ((n = w.nextNode())) { if (n.nodeType === 3) trText(n); else trAttrs(n); }
 }
 new MutationObserver(ms => {
-  if (LANG === 'ar') return;
+  if (LANG === 'ar' && !OV_ON) return;
   for (const m of ms) {
     if (m.type === 'characterData') trText(m.target);
     else if (m.type === 'attributes') trAttrs(m.target);
@@ -2904,8 +2929,16 @@ function setLang(l) {
   }
   applyLang(l);
 }
+let OV_ON = false;
+// a language's dictionary plus the admin's own texts and their translations
+function buildTR(dict) {
+  const extra = (SITE && SITE.tr && SITE.tr[LANG]) || {}, out = Object.assign({}, dict, extra);
+  Object.entries((SITE && SITE.texts) || {}).forEach(([o, n]) => { out[o] = extra[n] != null ? extra[n] : dict[n] != null ? dict[n] : n; });
+  return out;
+}
 function applyLang(l) {
-  LANG = l; BUNDLE = l === 'ar' ? null : BUNDLES[l]; TR = BUNDLE && BUNDLE.dict;
+  LANG = l; BUNDLE = l === 'ar' ? null : BUNDLES[l]; TR = BUNDLE ? buildTR(BUNDLE.dict) : null;
+  OV = l === 'ar' ? Object.assign({}, (SITE && SITE.texts) || {}) : {}; OV_ON = Object.keys(OV).length > 0; TRV++;
   try { localStorage.setItem('shareBlessings.lang', LANG); } catch (e) {}
   const root = document.documentElement;
   root.lang = LANG; root.dir = LANGS[LANG].rtl ? 'rtl' : 'ltr';
@@ -2922,12 +2955,364 @@ function applyLang(l) {
   const qk = $('input[name=q_item]:checked'); const qv = qk && qk.value; renderQuick(); if (qv) { const el = $(`input[name=q_item][value="${qv}"]`); if (el) el.checked = true; }
   $('#d_cleanTxt').textContent = isGoods(donKind()) ? GOODS[donKind()].clean : t('أؤكد أن الملابس نظيفة وصالحة للاستخدام.');
   $('#langSel').value = LANG;
+  applySite();
   translateTree(document.body);
   route(true);
 }
 $('#langSel').innerHTML = Object.entries(LANGS).map(([k, v]) => `<option value="${k}" lang="${k}">${v.n}</option>`).join('');
 $('#langSel').value = SAVED_LANG;
 $('#langSel').addEventListener('change', e => setLang(e.target.value));
+
+/* ================= site settings (managed by the admin) =================
+   One settings record (site_config) holds the contact details, banner, intake switches, campaigns,
+   coverage areas, drop-off places and text overrides. Visitors read it; only the admin can change it.
+   Arabic texts the admin writes are machine-translated on save into every site language (SITE.tr). */
+const SITE_KEY = 'shareBlessings.site';
+const DEFAULT_SITE = {
+  contact: { whatsapp: '97470776067', email: 'ahsas.galy11@gmail.com' },
+  banner: { on: false, text: '' },
+  intake: { donations: true, requests: true, msg: '' },
+  kinds: { food: true, clothes: true, elec: true, furn: true, other: true },
+  sections: { stats: true, campaigns: true, coverage: true },
+  campaigns: [
+    { id: 'winter', on: true, title: 'كسوة الشتاء', badge: 'حملة الموسم', desc: 'ملابس شتوية دافئة للأطفال والأسر قبل موسم البرد.', icon: 'cat-coat', theme: 'band', kind: 'clothes', types: ['winter'], target: 300 },
+    { id: 'ramadan', on: true, title: 'السلة الرمضانية', badge: 'رمضان', desc: 'أرز ودقيق وبقوليات وسكر تكفي الأسرة طوال الشهر.', icon: 'lantern', theme: 'night', kind: 'food', types: ['rice', 'flour', 'legumes', 'sugar'], target: 1000 },
+    { id: 'dates', on: true, title: 'تمور الخير', badge: 'مستمرة', desc: 'تمور مغلّفة توزّع مع السلال الغذائية على الأسر.', icon: 'dates', theme: 'gold', kind: 'food', types: ['dates'], target: 200 },
+  ],
+  areas: [
+    { name: 'الدوحة', list: 'السد · الدفنة · المنصورة · الهلال' }, { name: 'الريان', list: 'الريان الجديد · معيذر · الوعب · عين خالد' },
+    { name: 'الوكرة', list: 'الوكرة · الوكير · مسيعيد' }, { name: 'الظعاين', list: 'لوسيل · لعبيب · سميسمة · الظعاين' },
+    { name: 'أم صلال', list: 'أم صلال محمد · أم صلال علي · أم العمد' }, { name: 'الخور والذخيرة', list: 'الخور · الذخيرة' },
+    { name: 'الشمال', list: 'الرويس · أبو ظلوف' }, { name: 'الشحانية', list: 'الشحانية · دخان · الجميلية' },
+  ],
+  points: [],
+  texts: {},
+  tr: {},
+};
+const ICONS = ['sack', 'wheat', 'beans', 'can', 'dates', 'milk', 'coat', 'cat-coat', 'tee', 'summer', 'thobe', 'dress', 'kid', 'cat-kid', 'fridge', 'cat-fridge', 'washer', 'ac', 'cooker', 'tv', 'blender',
+  'bed', 'mattress', 'sofa', 'cat-sofa', 'wardrobe', 'table', 'desk', 'blanket', 'bag', 'soap', 'pot', 'ball', 'box', 'cat-box', 'lantern'];
+const THEMES = { band: 'خمري', night: 'ليلي', gold: 'ذهبي' };
+const clone = o => JSON.parse(JSON.stringify(o));
+function mergeSite(d) {
+  const b = clone(DEFAULT_SITE);
+  if (!d || typeof d !== 'object') return b;
+  ['contact', 'banner', 'intake', 'kinds', 'sections'].forEach(k => { if (d[k] && typeof d[k] === 'object') Object.assign(b[k], d[k]); });
+  ['campaigns', 'areas', 'points'].forEach(k => { if (Array.isArray(d[k])) b[k] = d[k]; });
+  if (d.texts && typeof d.texts === 'object') b.texts = d.texts;
+  if (d.tr && typeof d.tr === 'object') b.tr = d.tr;
+  return b;
+}
+SITE = mergeSite(null);
+let siteErr = null, campProg = null, campProgAt = 0, siteDraft = null;
+function loadSite() {
+  if (!CLOUD) { try { SITE = mergeSite(JSON.parse(localStorage.getItem(SITE_KEY) || 'null')); } catch (e) {} return; }
+  sb.from('site_config').select('data').eq('id', 1).maybeSingle().then(({ data, error }) => {
+    if (error) { siteErr = error; return; }
+    siteErr = null; SITE = mergeSite(data && data.data);
+    if (!siteDraft) applyLang(LANG);
+  });
+}
+const showEl = (el, on) => { if (el) el.style.display = on ? '' : 'none'; };
+const kindOn = k => SITE.kinds[k] !== false;
+function intakeOpen(which, kind) {
+  if (which === 'requests') return SITE.intake.requests !== false;
+  return SITE.intake.donations !== false && (kind ? kindOn(kind) : Object.keys(KIND).some(kindOn));
+}
+const closedMsg = which => SITE.intake.msg.trim() || (which === 'requests' ? 'نعتذر، استقبال طلبات المساعدة متوقف مؤقتًا. تابعنا لاحقًا.' : 'نعتذر، استقبال التبرعات متوقف مؤقتًا. تابعنا لاحقًا.');
+const waIntl = () => { const d = String(SITE.contact.whatsapp || '').replace(/\D/g, ''); return d.length === 8 ? '974' + d : d; };
+const waPretty = () => { const d = waIntl(); return d.startsWith('974') && d.length === 11 ? `+974 ${d.slice(3, 7)} ${d.slice(7)}` : '+' + d; };
+// puts the settings on the public pages; runs after every language change and settings save
+function applySite() {
+  const S = SITE;
+  $$('[data-cfg="wa"]').forEach(a => { a.href = 'https://wa.me/' + waIntl(); });
+  $$('[data-cfg="wa-txt"]').forEach(e => { e.textContent = '‎' + waPretty(); });
+  $$('[data-cfg="mail"]').forEach(a => { a.href = 'mailto:' + S.contact.email; });
+  $$('[data-cfg="mail-txt"]').forEach(e => { e.textContent = S.contact.email; });
+  const bn = $('#siteBanner'), btxt = String(S.banner.text || '').trim();
+  bn.hidden = !(S.banner.on && btxt); bn.textContent = bn.hidden ? '' : t(btxt);
+  showEl($('#secStats'), S.sections.stats !== false);
+  showEl($('#secCamps'), S.sections.campaigns !== false && S.campaigns.some(c => c.on));
+  showEl($('#secCover'), S.sections.coverage !== false && S.areas.length > 0);
+  ['q_kind', 'd_kind'].forEach(n => {
+    $$(`input[name=${n}]`).forEach(r => showEl(r.closest('label'), kindOn(r.value)));
+    const cur = $(`input[name=${n}]:checked`);
+    if (cur && !kindOn(cur.value)) { const first = $$(`input[name=${n}]`).find(r => kindOn(r.value)); if (first) { first.checked = true; first.dispatchEvent(new Event('change', { bubbles: true })); } }
+  });
+  $$('.cat[data-preset]').forEach(a => showEl(a, kindOn(a.dataset.preset.split(':')[0])));
+  const dOpen = intakeOpen('donations'), rOpen = intakeOpen('requests');
+  $('#d_closed').hidden = dOpen; $('#d_closed').textContent = dOpen ? '' : t(closedMsg('donations'));
+  $('#r_closed').hidden = rOpen; $('#r_closed').textContent = rOpen ? '' : t(closedMsg('requests'));
+  showEl($('#donForm'), dOpen); showEl($('#reqForm'), rOpen);
+  $('#quickForm button[type=submit]').disabled = !dOpen;
+}
+
+/* ---- campaigns and coverage on the home page ---- */
+const typeMap = k => (k === 'food' ? FOOD : k === 'clothes' ? CTYPE : GOODS[k] ? GOODS[k].types : {});
+const campUnit = c => (c.kind === 'food' ? 'كجم' : 'قطعة');
+const campPreset = c => `${c.kind}:${(c.types && c.types[0]) || Object.keys(typeMap(c.kind))[0]}`;
+function renderCamps() {
+  const box = $('#secCamps .camps'); if (!box) return;
+  box.innerHTML = SITE.campaigns.filter(c => c.on).map(c => `<article class="camp">
+    <div class="art ${THEMES[c.theme] ? c.theme : 'band'}">${c.badge ? `<span class="badge">${esc(t(c.badge))}</span>` : ''}<img class="i3" src="icons/${esc(ICONS.includes(c.icon) ? c.icon : 'box')}.webp" width="104" height="104" alt="" decoding="async"></div>
+    <div class="body"><h3>${esc(t(c.title))}</h3><p>${esc(t(c.desc))}</p>
+      <div class="prog"><i data-camp-bar="${esc(c.id)}"></i></div><div class="prog-row"><span>${t('جُمع')} <b data-camp-val="${esc(c.id)}">0</b> ${t(campUnit(c))}</span><span>${t('الهدف')} <b>${fmtN(c.target)}</b></span></div>
+      <a class="btn btn-primary btn-sm" href="#donate" data-preset="${esc(campPreset(c))}">${t('شارك في الحملة')}</a></div></article>`).join('');
+  $$('[data-preset]', box).forEach(a => a.addEventListener('click', () => { pendingPreset = a.dataset.preset; if (location.hash === '#donate') applyPreset(); }));
+  if (CLOUD && Date.now() - campProgAt > 30000) {
+    campProgAt = Date.now();
+    sb.rpc('campaign_progress').then(({ data, error }) => { if (!error && data) { campProg = data; if (pubStats) paintStats(pubStats); } });
+  }
+}
+function paintCamps(totals) {
+  SITE.campaigns.filter(c => c.on).forEach(c => {
+    const v = +totals[c.id] || 0, bar = $(`[data-camp-bar="${CSS.escape(c.id)}"]`), val = $(`[data-camp-val="${CSS.escape(c.id)}"]`);
+    if (bar) bar.style.width = Math.min(100, v / Math.max(1, +c.target) * 100) + '%';
+    if (val) val.textContent = fmtN(v);
+  });
+}
+// totals per campaign from donations that were not rejected or cancelled (food counts kilograms only)
+function campTotals(dons) {
+  const out = {}; SITE.campaigns.forEach(c => { out[c.id] = 0; });
+  dons.filter(d => !['rejected', 'cancelled'].includes(d.status)).forEach(d => d.items.forEach(it => SITE.campaigns.forEach(c => {
+    if (c.kind !== d.kind || (c.types && c.types.length && !c.types.includes(it.type)) || (d.kind === 'food' && it.unit !== 'kg')) return;
+    out[c.id] += +it.qty || 0;
+  })));
+  return out;
+}
+function renderAreas() {
+  const box = $('#secCover .points'); if (!box) return;
+  box.innerHTML = SITE.areas.map(a => `<div class="point"><b>${esc(t(a.name))}</b><small>${esc(t(a.list))}</small></div>`).join('');
+}
+
+/* ================= machine translation =================
+   Used by supervisors to read what people wrote and to answer them in their language, and to translate the
+   admin's texts into every site language. Google's public endpoint first, MyMemory as a fallback. */
+const MT_CODE = { fil: 'tl' };
+const mtCache = new Map();
+async function mt(text, to, from = 'auto') {
+  text = String(text || '').trim(); if (!text) return '';
+  const tl = MT_CODE[to] || to, sl = MT_CODE[from] || from, key = `${sl}|${tl}|${text}`;
+  if (mtCache.has(key)) return mtCache.get(key);
+  let out = null;
+  try {
+    const r = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&sl=${sl}&tl=${tl}&q=${encodeURIComponent(text)}`);
+    if (r.ok) { const j = await r.json(); out = (j[0] || []).map(x => x[0]).join(''); }
+  } catch (e) {}
+  if (!out) {
+    try {
+      const r = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text.slice(0, 480))}&langpair=${sl === 'auto' ? 'autodetect' : sl}|${tl}`);
+      const j = await r.json(); if (+j.responseStatus === 200 && j.responseData) out = j.responseData.translatedText;
+    } catch (e) {}
+  }
+  if (!out) throw new Error('mt_failed');
+  mtCache.set(key, out); return out;
+}
+const langName = l => (LANGS[l] ? LANGS[l].n : t('غير محددة'));
+// free text the person typed (everything else on a request is chosen from lists the site already translates)
+function mtFields(rec) {
+  const f = [], add = (l, v) => { v = String(v || '').trim(); if (v) f.push([l, v]); };
+  add(rec.items ? 'ملاحظة المتبرّع' : 'وصف الحالة', rec.notes); add('تفاصيل العنوان', rec.details); add('المقاسات', rec.sizes);
+  add('وصف الاحتياج', rec.goodsDesc); add('وصف الاحتياج', rec.otherDesc);
+  (rec.items || []).forEach(it => { add('وصف الصنف', it.desc); add('المقاس', it.size); });
+  return f;
+}
+function mtBoxHTML(rec, isD) {
+  const f = mtFields(rec), who = isD ? t('المتبرّع') : t('المستفيد'), l = rec.lang || '', other = !!l && l !== LANG;
+  return `<details class="mt-box"${other ? ' open' : ''}><summary>🌐 ${t('الترجمة والتواصل')} <span class="tag${other ? ' gold' : ''}">${t('لغة {0}: {1}', who, langName(l))}</span></summary>
+    ${f.length ? `<div><button class="btn btn-ghost btn-sm" type="button" data-mt="in">${t('ترجمة ما كتبه إلى {0}', LANGS[LANG].n)}</button></div><div class="mt-list" id="mtIn"></div>` : `<p class="muted">${t('لم يكتب صاحب الطلب نصوصًا تحتاج ترجمة.')}</p>`}
+    <label class="f">${t('رسالة إلى {0}', who)} <small>${t('اكتبها بلغتك، وتُترجم تلقائيًا')}</small><textarea id="mtMsg" rows="3"></textarea></label>
+    <label class="f">${t('لغة الرسالة')}<select id="mtTo">${Object.entries(LANGS).map(([k, v]) => `<option value="${k}"${k === (l || 'ar') ? ' selected' : ''}>${v.n}</option>`).join('')}</select></label>
+    <div><button class="btn btn-primary btn-sm" type="button" data-mt="out">${t('ترجمة الرسالة')}</button></div>
+    <div id="mtOutBox" class="mt-out" hidden><label class="f">${t('الرسالة المترجمة')} <small>${t('يمكنك تعديلها قبل الإرسال')}</small><textarea id="mtRes" rows="4" dir="auto"></textarea></label>
+      <label class="check"><input type="checkbox" id="mtOrig"><span>${t('إرفاق النص الأصلي أيضًا')}</span></label>
+      <div><a class="btn btn-primary btn-sm" id="mtWa" target="_blank" rel="noopener">${t('إرسال عبر واتساب')}</a></div></div></details>`;
+}
+function wireMT(dr, rec) {
+  const inB = $('[data-mt="in"]', dr), outB = $('[data-mt="out"]', dr); if (!outB) return;
+  const fail = () => t('تعذّرت الترجمة الآن. تحقق من الإنترنت وحاول مرة أخرى.');
+  if (inB) inB.addEventListener('click', async () => {
+    const box = $('#mtIn', dr); inB.disabled = true; box.innerHTML = `<p class="muted">${t('جارٍ الترجمة…')}</p>`;
+    try {
+      const f = mtFields(rec), tr = await Promise.all(f.map(([, v]) => mt(v, LANG)));
+      box.innerHTML = f.map(([l, v], i) => `<div><small>${t(l)}</small><span dir="auto">${esc(v)}</span><span class="tr" dir="auto">${esc(tr[i])}</span></div>`).join('');
+    } catch (e) { box.innerHTML = `<p class="note bad">${fail()}</p>`; }
+    inB.disabled = false;
+  });
+  const upd = () => {
+    const msg = $('#mtRes', dr).value.trim(), orig = $('#mtMsg', dr).value.trim();
+    const text = $('#mtOrig', dr).checked && orig && orig !== msg ? `${msg}\n\n${orig}` : msg;
+    $('#mtWa', dr).href = `https://wa.me/974${rec.phone}?text=${encodeURIComponent(text)}`;
+  };
+  outB.addEventListener('click', async () => {
+    const msg = $('#mtMsg', dr).value.trim(), to = $('#mtTo', dr).value;
+    if (!msg) { toast(t('اكتب الرسالة أولًا')); return; }
+    outB.disabled = true;
+    try { $('#mtRes', dr).value = to === LANG ? msg : await mt(msg, to); $('#mtOutBox', dr).hidden = false; upd(); }
+    catch (e) { toast(fail()); }
+    outB.disabled = false;
+  });
+  $('#mtRes', dr).addEventListener('input', upd); $('#mtOrig', dr).addEventListener('change', upd);
+}
+
+/* ================= admin: site settings tab ================= */
+function rowActions(list, i, n) {
+  return `<div class="row-actions">${i > 0 ? `<button class="btn btn-ghost btn-sm" type="button" data-smove="${list}:${i}:-1" aria-label="${t('تحريك للأعلى')}">↑</button>` : ''}${i < n - 1 ? `<button class="btn btn-ghost btn-sm" type="button" data-smove="${list}:${i}:1" aria-label="${t('تحريك للأسفل')}">↓</button>` : ''}<button class="btn btn-danger btn-sm" type="button" data-sdel="${list}:${i}">${t('حذف')}</button></div>`;
+}
+function campEditor(c, i, n) {
+  const P = `campaigns.${i}.`, tm = typeMap(c.kind);
+  return `<div class="set-row${c.on ? '' : ' off'}">
+    <label class="check"><input type="checkbox" data-sa="${P}on"${c.on ? ' checked' : ''}><span>${t('الحملة ظاهرة في الموقع')}</span></label>
+    <div class="grid"><label class="f">${t('عنوان الحملة')}<input type="text" data-sa="${P}title" value="${esc(c.title)}" maxlength="60"></label>
+      <label class="f">${t('الشارة')} <small>${t('اختياري')}</small><input type="text" data-sa="${P}badge" value="${esc(c.badge)}" maxlength="24"></label></div>
+    <label class="f">${t('الوصف')}<input type="text" data-sa="${P}desc" value="${esc(c.desc)}" maxlength="160"></label>
+    <div class="grid">
+      <label class="f">${t('الأيقونة')}<span class="icon-pick"><img src="icons/${esc(c.icon)}.webp" alt=""><select data-sa="${P}icon">${ICONS.map(x => `<option value="${x}"${x === c.icon ? ' selected' : ''}>${x}</option>`).join('')}</select></span></label>
+      <label class="f">${t('لون البطاقة')}<select data-sa="${P}theme">${Object.entries(THEMES).map(([k, v]) => `<option value="${k}"${k === c.theme ? ' selected' : ''}>${t(v)}</option>`).join('')}</select></label>
+      <label class="f">${t('نوع التبرع')}<select data-sa="${P}kind" data-rerender>${Object.entries(KIND).map(([k, v]) => `<option value="${k}"${k === c.kind ? ' selected' : ''}>${v}</option>`).join('')}</select></label>
+      <label class="f">${t('الهدف')} <small>${t(campUnit(c))}</small><input type="number" min="1" data-sa="${P}target" value="${+c.target || 0}"></label></div>
+    <div><small class="muted">${t('الأصناف التي تُحتسب في الحملة (إذا لم تختر شيئًا تُحتسب كل الأصناف)')}</small>
+      <div class="set-chips">${Object.entries(tm).map(([k, v]) => `<label><input type="checkbox" data-ctype="${i}:${k}"${(c.types || []).includes(k) ? ' checked' : ''}>${esc(v)}</label>`).join('')}</div></div>
+    ${rowActions('campaigns', i, n)}</div>`;
+}
+function siteView() {
+  if (!siteDraft) siteDraft = clone(SITE);
+  const D = siteDraft;
+  const chk = (path, label, on) => `<label class="check"><input type="checkbox" data-sk="${path}"${on !== false ? ' checked' : ''}><span>${t(label)}</span></label>`;
+  const nTexts = Object.keys(D.texts).length;
+  return `${CLOUD && siteErr ? `<div class="note bad">${t('جدول الإعدادات غير موجود في قاعدة البيانات بعد. شغّل ملف site-settings.sql مرة واحدة في محرر SQL في Supabase، ثم أعد تحميل الصفحة.')}</div>` : ''}
+  <p class="muted">${t('تحكّم من هنا في محتوى الموقع العام. اكتب بالعربية، وعند الحفظ يُترجم ما كتبته تلقائيًا إلى كل لغات الموقع.')}</p>
+  <div style="display:grid;gap:12px">
+  <details class="set-card" open><summary>${t('التواصل')}</summary><div class="in"><div class="grid">
+    <label class="f">${t('رقم واتساب')}<input type="tel" data-sk="contact.whatsapp" value="${esc(D.contact.whatsapp)}" dir="ltr" inputmode="tel"></label>
+    <label class="f">${t('البريد الإلكتروني')}<input type="email" data-sk="contact.email" value="${esc(D.contact.email)}" dir="ltr"></label></div></div></details>
+  <details class="set-card"><summary>${t('شريط الإعلان أعلى الموقع')}</summary><div class="in">
+    ${chk('banner.on', 'إظهار شريط الإعلان', D.banner.on)}
+    <label class="f">${t('نص الإعلان')}<input type="text" data-sk="banner.text" value="${esc(D.banner.text)}" maxlength="200" placeholder="${t('مثال: نستقبل تبرعات كسوة الشتاء حتى نهاية ديسمبر')}"></label></div></details>
+  <details class="set-card"><summary>${t('استقبال التبرعات والطلبات')}</summary><div class="in">
+    ${chk('intake.donations', 'استقبال التبرعات مفتوح', D.intake.donations)}${chk('intake.requests', 'استقبال طلبات المساعدة مفتوح', D.intake.requests)}
+    <label class="f">${t('رسالة تظهر للزائر عند إيقاف الاستقبال')} <small>${t('اختياري')}</small><input type="text" data-sk="intake.msg" value="${esc(D.intake.msg)}" maxlength="200"></label>
+    <div><b>${t('أصناف التبرع المتاحة')}</b><div class="set-chips">${Object.entries(KIND).map(([k, v]) => `<label><input type="checkbox" data-sk="kinds.${k}"${D.kinds[k] !== false ? ' checked' : ''}>${v}</label>`).join('')}</div></div></div></details>
+  <details class="set-card"><summary>${t('أقسام الصفحة الرئيسية')}</summary><div class="in">
+    ${chk('sections.stats', 'إظهار أرقام الأثر', D.sections.stats)}${chk('sections.campaigns', 'إظهار الحملات', D.sections.campaigns)}${chk('sections.coverage', 'إظهار مناطق التغطية', D.sections.coverage)}</div></details>
+  <details class="set-card"><summary>${t('الحملات')} <span class="tag">${D.campaigns.length}</span></summary><div class="in">
+    ${D.campaigns.map((c, i) => campEditor(c, i, D.campaigns.length)).join('')}
+    <div><button class="btn btn-ghost btn-sm" type="button" data-sadd="campaigns">${t('إضافة حملة')}</button></div></div></details>
+  <details class="set-card"><summary>${t('مناطق التغطية')} <span class="tag">${D.areas.length}</span></summary><div class="in">
+    ${D.areas.map((a, i) => `<div class="set-row"><div class="grid"><label class="f">${t('البلدية أو المنطقة')}<input type="text" data-sa="areas.${i}.name" value="${esc(a.name)}"></label><label class="f">${t('الأحياء')}<input type="text" data-sa="areas.${i}.list" value="${esc(a.list)}"></label></div>${rowActions('areas', i, D.areas.length)}</div>`).join('')}
+    <div><button class="btn btn-ghost btn-sm" type="button" data-sadd="areas">${t('إضافة منطقة')}</button></div></div></details>
+  <details class="set-card"><summary>${t('أماكن تسليم التبرعات')} <span class="tag">${D.points.length}</span></summary><div class="in">
+    <p class="muted">${t('تظهر للمشرف عند تحديد موعد لمتبرع اختار أن يوصل تبرعه بنفسه، ويراها المتبرع عند تتبّع طلبه. إذا تُركت فارغة يُنسَّق المكان عبر واتساب.')}</p>
+    ${D.points.map((x, i) => `<div class="set-row"><label class="f">${t('اسم المكان وعنوانه')}<input type="text" data-sa="points.${i}" value="${esc(x)}"></label>${rowActions('points', i, D.points.length)}</div>`).join('')}
+    <div><button class="btn btn-ghost btn-sm" type="button" data-sadd="points">${t('إضافة مكان')}</button></div></div></details>
+  <details class="set-card"><summary>${t('نصوص الموقع')} <span class="tag">${nTexts}</span></summary><div class="in">
+    <p class="muted">${t('ابحث عن أي نص في الموقع (عنوان، زر، سؤال شائع، رسالة) واكتب بديله.')}</p>
+    <label class="f">${t('بحث في نصوص الموقع')}<input type="search" id="txQ" placeholder="${t('مثال: تبرّع الآن')}"></label>
+    <div class="tx-results" id="txRes"></div><div id="txEd"></div>
+    ${nTexts ? `<b>${t('النصوص المعدّلة')}</b><div class="mini-items">${Object.entries(D.texts).map(([o, n]) => `<div><span class="muted">${esc(o)}</span><b>${esc(n)}</b><button class="btn btn-ghost btn-sm" type="button" data-txedit="${esc(o)}">${t('تعديل')}</button><button class="btn btn-danger btn-sm" type="button" data-txdel="${esc(o)}">${t('استعادة الأصل')}</button></div>`).join('')}</div>` : ''}
+  </div></details>
+  </div>
+  <div class="set-save"><button class="btn btn-primary" type="button" id="siteSave">${t('حفظ ونشر التغييرات')}</button><button class="btn btn-ghost" type="button" id="siteUndo">${t('تجاهل التغييرات')}</button><span class="muted" id="siteStatus"></span>
+    <button class="btn btn-ghost btn-sm" type="button" id="siteReset" style="margin-inline-start:auto">${t('استعادة الإعدادات الأصلية')}</button></div>`;
+}
+function setPath(obj, path, val) { const ks = path.split('.'); let o = obj; ks.slice(0, -1).forEach(k => { o = o[k]; }); o[ks[ks.length - 1]] = val; }
+function rerenderSite() {
+  const body = $('#tabBody'), open = $$('.set-card', body).map(d => d.open), y = window.scrollY;
+  body.innerHTML = siteView(); wireSite(body);
+  $$('.set-card', body).forEach((d, i) => { d.open = !!open[i]; });
+  window.scrollTo(0, y); $('#siteStatus').textContent = t('توجد تغييرات غير محفوظة');
+}
+function txEditor(orig) {
+  const box = $('#txEd'), cur = siteDraft.texts[orig] != null ? siteDraft.texts[orig] : orig;
+  box.innerHTML = `<div class="set-row"><small class="muted">${t('النص الأصلي')}</small><div>${esc(orig)}</div>
+    <label class="f">${t('النص الجديد')}<textarea id="txNew" rows="2">${esc(cur)}</textarea></label>
+    ${/\{\d\}/.test(orig) ? `<p class="note">${t('أبقِ الرموز مثل {0} كما هي، فالموقع يضع مكانها أرقامًا أو أسماء.')}</p>` : ''}
+    <div class="row-actions"><button class="btn btn-primary btn-sm" type="button" id="txApply">${t('تطبيق')}</button></div></div>`;
+  $('#txApply').addEventListener('click', () => {
+    const v = $('#txNew').value.trim();
+    if (!v || v === orig) delete siteDraft.texts[orig]; else siteDraft.texts[orig] = v;
+    rerenderSite(); toast(t('طُبّق التعديل. اضغط «حفظ ونشر التغييرات» لنشره.'));
+  });
+  $('#txNew').focus();
+}
+function wireSite(body) {
+  const D = siteDraft, dirty = () => { $('#siteStatus').textContent = t('توجد تغييرات غير محفوظة'); };
+  $$('[data-sk],[data-sa]', body).forEach(el => el.addEventListener(el.type === 'checkbox' || el.tagName === 'SELECT' ? 'change' : 'input', () => {
+    const path = el.dataset.sk || el.dataset.sa, v = el.type === 'checkbox' ? el.checked : el.type === 'number' ? +el.value : el.value;
+    setPath(D, path, v); dirty();
+    if (path.endsWith('.icon')) el.previousElementSibling.src = `icons/${v}.webp`;
+    if (path.startsWith('campaigns') && path.endsWith('.on')) el.closest('.set-row').classList.toggle('off', !v);
+    if (el.hasAttribute('data-rerender')) { setPath(D, path.replace(/kind$/, 'types'), []); rerenderSite(); }
+  }));
+  $$('[data-ctype]', body).forEach(el => el.addEventListener('change', () => {
+    const [i, k] = el.dataset.ctype.split(':'), c = D.campaigns[+i];
+    c.types = (c.types || []).filter(x => x !== k); if (el.checked) c.types.push(k); dirty();
+  }));
+  $$('[data-sadd]', body).forEach(b => b.addEventListener('click', () => {
+    const L = b.dataset.sadd;
+    if (L === 'campaigns') D.campaigns.push({ id: 'c' + Date.now().toString(36), on: true, title: '', badge: '', desc: '', icon: 'box', theme: 'band', kind: 'food', types: [], target: 100 });
+    if (L === 'areas') D.areas.push({ name: '', list: '' });
+    if (L === 'points') D.points.push('');
+    rerenderSite();
+  }));
+  $$('[data-sdel]', body).forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.armed !== '1') { b.dataset.armed = '1'; b.textContent = t('اضغط للتأكيد'); return; }
+    const [L, i] = b.dataset.sdel.split(':'); D[L].splice(+i, 1); rerenderSite();
+  }));
+  $$('[data-smove]', body).forEach(b => b.addEventListener('click', () => {
+    const [L, i, d] = b.dataset.smove.split(':'), a = D[L], j = +i + +d;
+    if (j < 0 || j >= a.length) return; [a[+i], a[j]] = [a[j], a[+i]]; rerenderSite();
+  }));
+  const q = $('#txQ', body), res = $('#txRes', body);
+  q.addEventListener('input', () => {
+    const s = q.value.trim(), low = s.toLowerCase();
+    if (s.length < 2) { res.innerHTML = ''; return; }
+    const hits = Object.keys(EN).filter(k => k.includes(s) || String(EN[k]).toLowerCase().includes(low) || String(D.texts[k] || '').includes(s)).slice(0, 30);
+    res.innerHTML = hits.length ? hits.map(k => `<button type="button" data-txpick="${esc(k)}">${esc(D.texts[k] || k)}</button>`).join('') : `<p class="muted">${t('لا توجد نتائج.')}</p>`;
+    $$('[data-txpick]', res).forEach(b => b.addEventListener('click', () => txEditor(b.dataset.txpick)));
+  });
+  $$('[data-txedit]', body).forEach(b => b.addEventListener('click', () => txEditor(b.dataset.txedit)));
+  $$('[data-txdel]', body).forEach(b => b.addEventListener('click', () => { delete D.texts[b.dataset.txdel]; rerenderSite(); }));
+  $('#siteSave', body).addEventListener('click', saveSite);
+  $('#siteUndo', body).addEventListener('click', () => { siteDraft = null; renderAdmin(); });
+  $('#siteReset', body).addEventListener('click', e => {
+    const b = e.currentTarget; if (b.dataset.armed !== '1') { b.dataset.armed = '1'; b.textContent = t('اضغط للتأكيد'); return; }
+    siteDraft = clone(DEFAULT_SITE); rerenderSite();
+  });
+}
+async function saveSite() {
+  const D = clone(siteDraft), btn = $('#siteSave'), st = $('#siteStatus');
+  D.contact.whatsapp = String(D.contact.whatsapp || '').replace(/\D/g, '');
+  D.contact.email = String(D.contact.email || '').trim();
+  if (!(D.contact.whatsapp.length === 8 || (D.contact.whatsapp.length >= 10 && D.contact.whatsapp.length <= 15))) { toast(t('رقم واتساب غير صحيح. اكتب 8 أرقام، أو الرقم الدولي كاملًا.')); return; }
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(D.contact.email)) { toast(t('البريد الإلكتروني غير صحيح.')); return; }
+  D.campaigns = D.campaigns.filter(c => String(c.title).trim()).map(c => ({ ...c, title: c.title.trim(), badge: String(c.badge || '').trim(), desc: String(c.desc || '').trim(), target: Math.max(1, Math.round(+c.target || 1)) }));
+  D.areas = D.areas.filter(a => String(a.name).trim()).map(a => ({ name: a.name.trim(), list: String(a.list || '').trim() }));
+  D.points = D.points.map(x => String(x).trim()).filter(Boolean);
+  D.banner.text = String(D.banner.text || '').trim(); D.intake.msg = String(D.intake.msg || '').trim();
+  // texts the site already ships translated are skipped; only the admin's own wording goes to the translator
+  const src = new Set(), add = x => { x = String(x || '').trim(); if (x && EN[x] == null && HAS_AR.test(x)) src.add(x); };
+  D.campaigns.forEach(c => { add(c.title); add(c.badge); add(c.desc); }); D.areas.forEach(a => { add(a.name); add(a.list); });
+  D.points.forEach(add); add(D.banner.text); add(D.intake.msg); Object.values(D.texts).forEach(add);
+  const old = SITE.tr || {}, jobs = []; D.tr = {};
+  Object.keys(LANGS).filter(l => l !== 'ar').forEach(l => { D.tr[l] = {}; src.forEach(x => { if (old[l] && old[l][x] != null) D.tr[l][x] = old[l][x]; else jobs.push([l, x]); }); });
+  btn.disabled = true;
+  const total = jobs.length; let done = 0, failed = 0;
+  const worker = async () => { while (jobs.length) { const [l, x] = jobs.shift(); try { D.tr[l][x] = await mt(x, l, 'ar'); } catch (e) { failed++; } done++; st.textContent = t('جارٍ ترجمة المحتوى إلى لغات الموقع… {0}', `${done}/${total}`); } };
+  await Promise.all(Array.from({ length: Math.min(6, total) }, worker));
+  st.textContent = t('جارٍ الحفظ…');
+  let err = null;
+  if (CLOUD) {
+    const { error, count } = await sb.from('site_config').update({ data: D, updated_at: new Date().toISOString() }, { count: 'exact' }).eq('id', 1);
+    err = error || (count === 0 ? new Error('not_allowed') : null);
+  } else { try { localStorage.setItem(SITE_KEY, JSON.stringify(D)); } catch (e) { err = e; } }
+  btn.disabled = false;
+  if (err) { st.textContent = ''; toast(t('لم تُحفظ الإعدادات: {0}', cloudErr(err))); return; }
+  SITE = mergeSite(D); siteDraft = null;
+  log(t('تعديل إعدادات الموقع')); save();
+  toast(failed ? t('حُفظت الإعدادات، وتعذّرت ترجمة {0} نصًا فستظهر بالعربية.', failed) : t('حُفظت الإعدادات ونُشرت على الموقع'));
+  applyLang(LANG);
+}
+loadSite();
 
 /* ================= cloud mode (Supabase) =================
    When config.js holds a project URL and key, data lives in Supabase:
@@ -2946,7 +3331,7 @@ function markClean() {
 function cloudErr(e) {
   const m = (e && (e.message || e.error_description)) || String(e);
   const map = { not_found: 'رقم الهاتف لا يطابق الطلب.', not_allowed: 'لا يمكن تنفيذ هذا الإجراء في هذه المرحلة.', bad_phone: 'رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 3 أو 5 أو 6 أو 7.',
-    bad_photos: 'تعذّر رفع الصور. حاول مرة أخرى.', bad_email: 'البريد الإلكتروني غير صحيح.', weak_password: 'كلمة المرور يجب أن تكون 8 أحرف على الأقل.', bad_name: 'اكتب اسم العضو', payload_too_large: 'البيانات أكبر من المسموح.', 'Invalid login credentials': 'البريد أو كلمة المرور غير صحيحة.' };
+    bad_photos: 'تعذّر رفع الصور. حاول مرة أخرى.', bad_email: 'البريد الإلكتروني غير صحيح.', intake_closed: 'الاستقبال متوقف مؤقتًا.', kind_closed: 'لا نستقبل هذا الصنف حاليًا.', weak_password: 'كلمة المرور يجب أن تكون 8 أحرف على الأقل.', bad_name: 'اكتب اسم العضو', payload_too_large: 'البيانات أكبر من المسموح.', 'Invalid login credentials': 'البريد أو كلمة المرور غير صحيحة.' };
   const key = Object.keys(map).find(k => m.includes(k));
   return key ? t(map[key]) : (/fetch|network/i.test(m) ? t('تعذّر الاتصال بالخادم. تحقق من الإنترنت وحاول مرة أخرى.') : m);
 }
@@ -3088,7 +3473,7 @@ if (CLOUD) {
   toast(t('تعذّر تحميل مكتبة الاتصال بقاعدة البيانات. تحقق من الإنترنت.'));
 }
 
-try { if (SAVED_LANG !== 'ar') setLang(SAVED_LANG); } catch (e) { console.error(e); }
+try { setLang(SAVED_LANG); } catch (e) { console.error(e); }
 route();
 })();
 </script>
