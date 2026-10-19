@@ -310,6 +310,20 @@ section.view { display: block; }
 @media (max-width: 1000px) { .wishes { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 680px) { .wishes { grid-template-columns: 1fr; } }
 
+.move-band { border-radius: 16px; background: var(--surface); border: 1px solid var(--line); border-inline-start: 5px solid var(--gold); padding: 26px 30px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap; box-shadow: var(--shadow); }
+.move-band > div { flex: 1 1 320px; display: grid; gap: 6px; }
+.move-band p:not(.eyebrow) { color: var(--muted); }
+.mv-group { display: grid; gap: 10px; margin-bottom: 16px; }
+.mv-group h4 { display: flex; gap: 8px; align-items: center; font-size: 1rem; }
+.mv-group h4 img { width: 30px; height: 30px; }
+.mv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; }
+.mv-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.mv-item.on { border-color: var(--primary); background: var(--primary-soft, var(--surface-2)); }
+.mv-item span { font-size: .93rem; }
+.mv-item input[type=number] { width: 64px; flex: none; text-align: center; padding: 6px 4px; }
+.mv-item span { min-width: 0; line-height: 1.35; }
+.move-ids { display: flex; gap: 8px; flex-wrap: wrap; }
+@media (max-width: 680px) { .mv-grid { grid-template-columns: 1fr 1fr; gap: 6px; } .mv-item { padding: 6px 8px; } .mv-item span { font-size: .86rem; } .mv-item input[type=number] { width: 46px; padding: 6px 2px; } }
 .need-band { margin-top: 64px; border-radius: 16px; background: var(--gold-soft); border: 1px solid var(--line); padding: 28px 32px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
 .need-band > div { flex: 1 1 320px; display: grid; gap: 6px; }
 .need-band p { color: var(--muted); }
@@ -816,6 +830,14 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
     </div>
   </div>
 
+  <div class="wrap sec" id="secMove">
+    <div class="move-band">
+      <span class="tile3d" style="width:84px;height:84px"><img class="i3" src="icons/cat-sofa.webp" width="56" height="56" alt="" decoding="async"></span>
+      <div><p class="eyebrow">أنا مغادر قطر</p><h2>قبل ما تسافر… خلّ بيتك نعمة</h2><p>انتهى عقدك وستغادر؟ صوّر غرف بيتك وحدد موعد سفرك، ونستلم الأثاث والأجهزة كلها في موعد واحد قبل سفرك ونوزّعها على أسر محتاجة.</p></div>
+      <a class="btn btn-primary btn-lg" href="#move">سجّل محتويات بيتك</a>
+    </div>
+  </div>
+
   <div class="wrap sec" id="secCamps">
     <div class="sec-head"><div><p class="eyebrow">الحملات الحالية</p><h2>حملات موسمية تحتاج مشاركتك</h2></div></div>
     <div class="camps">
@@ -1012,6 +1034,93 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
     <ol><li>يراجع المشرف تبرعك خلال يوم عمل.</li><li>نتصل بك لتأكيد موعد الاستلام.</li><li>يُفحص التبرع في المستودع.</li><li>يصلك إشعار عند تسليمه للمستفيد.</li></ol>
     <div class="hl">لا يُعتمد أي تبرع قبل مراجعة المشرف له ولصوره.</div>
     <p class="muted" style="font-size:.86rem">احتفظ برقم الطلب الذي يظهر بعد الإرسال لتتبّع تبرعك.</p>
+  </aside>
+  </div>
+  </div>
+</section>
+
+<!-- ================= MOVING AWAY ================= -->
+<section class="view" id="v-move" hidden>
+  <div class="band page-hero">
+    <div class="wrap">
+      <div class="crumbs"><a href="#home">الرئيسية</a><span>/</span><span>أنا مغادر قطر</span></div>
+      <h1>قبل ما تسافر… خلّ بيتك نعمة</h1>
+      <p>سجّل محتويات بيتك مرة واحدة قبل سفرك، ونرتّب استلامها كلها في موعد واحد قبل موعد سفرك، ثم نوزّعها على أكثر من أسرة محتاجة.</p>
+    </div>
+    <svg class="zig" preserveAspectRatio="none" aria-hidden="true"><rect width="100%" height="14"/></svg>
+  </div>
+  <div class="wrap page-body">
+  <div class="page-grid">
+  <div style="min-width:0">
+  <div class="note bad intake-closed" id="m_closed" hidden></div>
+  <form class="sheet" id="moveForm" novalidate>
+    <fieldset>
+      <legend><i><b>١</b></i>بيانات التواصل وموعد السفر</legend>
+      <div class="grid">
+        <label class="f">الاسم<input type="text" id="m_name" autocomplete="name" required></label>
+        <label class="f">رقم هاتف التواصل <small>8 أرقام</small><input type="tel" id="m_phone" inputmode="numeric" maxlength="8" placeholder="5xxxxxxx" dir="ltr" required></label>
+        <label class="f">تاريخ السفر<input type="date" id="m_date" required></label>
+        <label class="f">الوقت المفضّل للاستلام
+          <select id="m_slot">
+            <option value="morning">صباحًا (8 - 12)</option>
+            <option value="afternoon">بعد الظهر (12 - 4)</option>
+            <option value="evening" selected>مساءً (4 - 9)</option>
+          </select>
+        </label>
+      </div>
+      <p class="muted" id="m_dateHint">نحاول الاستلام قبل سفرك بيومين على الأقل.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend><i><b>٢</b></i>المكان حسب اللوحة المنزلية</legend>
+      <div class="plate-row">
+        <div class="plate-inputs">
+          <label class="f">المنطقة<input type="number" id="m_zone" min="1" max="99" inputmode="numeric" required></label>
+          <label class="f">الشارع<input type="number" id="m_street" min="1" max="9999" inputmode="numeric" required></label>
+          <label class="f">المبنى<input type="number" id="m_bldg" min="1" max="9999" inputmode="numeric" required></label>
+        </div>
+        <div class="plate" aria-hidden="true" data-plate="m">
+          <div><small>Building<br>مبنى</small><b data-p="bldg">–</b></div>
+          <div><small>Street<br>شارع</small><b data-p="street">–</b></div>
+          <div><small>Zone<br>منطقة</small><b data-p="zone">–</b></div>
+        </div>
+      </div>
+      <label class="f">تفاصيل المكان <small>رقم الشقة، الطابق، وجود مصعد</small><input type="text" id="m_details"></label>
+      <div class="geo-row"><button type="button" class="btn btn-ghost btn-sm" data-geo-check="m"><svg width="14" height="14"><use href="#i-pin"/></svg>تحقق من العنوان على الخريطة</button>
+        <button type="button" class="btn btn-ghost btn-sm" data-geo-me="m">استخدم موقعي الحالي</button><span class="geo-msg" id="m_geoMsg" role="status"></span></div>
+      <label class="f">رابط الموقع من خرائط Google <small>اختياري، يساعد سيارة النقل على الوصول</small><input type="url" id="m_maplink" dir="ltr" placeholder="https://maps.app.goo.gl/..."></label>
+    </fieldset>
+
+    <fieldset>
+      <legend><i><b>٣</b></i>ماذا ستترك في البيت؟</legend>
+      <p class="muted">اكتب العدد بجانب كل ما تريد التبرع به، واترك الباقي صفرًا. لا حاجة لوصف كل قطعة.</p>
+      <div id="m_items"></div>
+      <div class="uploader">
+        <div class="head"><b>صور الغرف</b><span class="private"><svg width="12" height="12"><use href="#i-lock"/></svg>يراها المشرفون فقط</span><small class="muted">حتى 4 صور، صورة لكل غرفة تكفي</small></div>
+        <label class="drop" id="m_drop">
+          <svg width="30" height="30"><use href="#i-camera"/></svg>
+          <b>اضغط لاختيار الصور أو التقاطها</b>
+          <small>صوّر الغرفة كاملة بحيث تظهر القطع بوضوح</small>
+          <input type="file" id="m_photos" accept="image/*" multiple>
+        </label>
+        <div class="thumbs" id="m_thumbs"></div>
+      </div>
+      <label class="check"><input type="checkbox" id="m_ok"><span>أؤكد أن الأجهزة تعمل وآمنة، وأن الأثاث والأغراض نظيفة وسليمة.</span></label>
+      <label class="f">ملاحظة للمشرفين <small>اختياري، ويمكنك كتابتها بأي لغة</small><textarea id="m_notes" maxlength="1000" rows="3" placeholder="مثال: المفتاح مع حارس المبنى بعد سفري"></textarea></label>
+    </fieldset>
+
+    <div id="m_err" class="note bad" hidden></div>
+    <div class="form-actions">
+      <button class="btn btn-primary btn-lg" type="submit">إرسال محتويات البيت للمراجعة</button>
+      <small class="muted" style="flex-basis:100%">بالإرسال توافق على معالجة بياناتك وفق <a href="#privacy" target="_blank">سياسة الخصوصية</a>.</small>
+    </div>
+  </form>
+  <div id="moveDone" hidden></div>
+  </div>
+  <aside class="aside-card">
+    <h3>كيف نرتّبها لك؟</h3>
+    <ol><li>يراجع المشرفون الصور، وتظهر طلبات المغادرين أولًا حسب أقرب موعد سفر.</li><li>نحدد موعد استلام واحد لكل محتويات البيت قبل سفرك.</li><li>تُوزَّع القطع على أكثر من أسرة: الثلاجة لأسرة، والسرير لأخرى.</li><li>تتابع أثر تبرعك من أي بلد برقم الطلب.</li></ol>
+    <div class="hl">للطعام الجاف والملابس استخدم نموذج التبرع العادي.</div>
   </aside>
   </div>
   </div>
@@ -1304,7 +1413,7 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
         <a class="brand" href="#home"><svg><use href="#logo"/></svg><span><b>شارك النعم</b><small>تبرّع عيني في قطر</small></span></a>
         <p style="font-size:.9rem;max-width:30em">منصة تربط من لديه فائض من المواد الغذائية الجافة والملابس بمن يحتاجها، عبر فريق من المشرفين والمتطوعين.</p>
       </div>
-      <div><h4>للمتبرعين</h4><ul><li><a href="#donate">سجّل تبرعًا</a></li><li><a href="#donate" data-preset="clothes:winter">حملة كسوة الشتاء</a></li><li><a href="#track">تتبّع تبرعك</a></li><li><a href="#account">تبرعاتي وشهادة الشكر</a></li></ul></div>
+      <div><h4>للمتبرعين</h4><ul><li><a href="#donate">سجّل تبرعًا</a></li><li><a href="#move">أنا مغادر قطر</a></li><li><a href="#donate" data-preset="clothes:winter">حملة كسوة الشتاء</a></li><li><a href="#track">تتبّع تبرعك</a></li><li><a href="#account">تبرعاتي وشهادة الشكر</a></li></ul></div>
       <div><h4>للمستفيدين</h4><ul><li><a href="#request">قدّم طلب احتياج</a></li><li><a href="#track">تتبّع طلبك</a></li></ul></div>
       <div><h4>الفريق</h4><ul><li><a href="#admin">بوابة المشرفين</a></li><li><a href="#home">شروط التبرع</a></li><li><a href="#privacy">سياسة الخصوصية</a></li></ul></div>
       <div><h4>تواصل معنا</h4><ul class="contact-list"><li><a data-cfg="wa" href="https://wa.me/97470776067" target="_blank" rel="noopener">واتساب: <bdi dir="ltr" data-cfg="wa-txt" style="direction:ltr;unicode-bidi:isolate">&#x200E;+974 7077 6067</bdi></a></li><li><a data-cfg="mail" href="mailto:ahsas.galy11@gmail.com"><span dir="ltr" data-cfg="mail-txt">ahsas.galy11@gmail.com</span></a></li></ul></div>
@@ -1346,6 +1455,7 @@ Object.assign(EN, {"الشريط المتحرك أسفل الموقع": "Scrolli
 Object.assign(EN, {"آية أو حديث: يبقى بالعربية في كل اللغات": "Quran verse or hadith: stays in Arabic in every language"});
 Object.assign(EN, {"مناطق التغطية": "Coverage", "نستلم تبرعك من جميع بلديات قطر": "We collect donations across all municipalities of Qatar", "يحدد المشرف موعد الاستلام من عنوانك حسب اللوحة المنزلية بعد اعتماد التبرع.": "Once your donation is approved, a supervisor schedules pickup from your address using your blue plate.", "الدوحة": "Doha", "الريان": "Al Rayyan", "الوكرة": "Al Wakrah", "الظعاين": "Al Daayen", "أم صلال": "Umm Salal", "الخور والذخيرة": "Al Khor & Al Thakhira", "الشمال": "Al Shamal", "الشحانية": "Al Shahaniya", "السد · الدفنة · المنصورة · الهلال": "Al Sadd · Al Dafna · Al Mansoura · Al Hilal", "الريان الجديد · معيذر · الوعب · عين خالد": "New Rayyan · Muaither · Al Waab · Ain Khaled", "الوكرة · الوكير · مسيعيد": "Al Wakrah · Al Wukair · Mesaieed", "لوسيل · لعبيب · سميسمة · الظعاين": "Lusail · Leabaib · Simaisma · Al Daayen", "أم صلال محمد · أم صلال علي · أم العمد": "Umm Salal Mohammed · Umm Salal Ali · Umm Al Amad", "الخور · الذخيرة": "Al Khor · Al Thakhira", "الرويس · أبو ظلوف": "Al Ruwais · Abu Dhalouf", "الشحانية · دخان · الجميلية": "Al Shahaniya · Dukhan · Al Jemailiya", "تفضّل التسليم بنفسك؟": "Prefer to drop it off yourself?", "راسلنا عبر واتساب لنحدد معك موعدًا ومكانًا قريبًا منك.": "Message us on WhatsApp and we will arrange a time and a place near you.", "تواصل عبر واتساب": "Contact us on WhatsApp", "تواصل معنا": "Contact us", "واتساب:": "WhatsApp:", "© 2026 شارك النعم. جميع الحقوق محفوظة.": "© 2026 Share Blessings. All rights reserved."});
 Object.assign(EN, {"نعمة الجيران": "Blessings next door", "احتياجات قريبة منك": "Needs near you", "أسر تحقق منها المشرفون وتنتظر من يشاركها. لا نعرض اسمًا ولا عنوانًا، ونحسب المسافة داخل جهازك فقط.": "Families our supervisors have verified, waiting for someone to share with them. We never show a name or an address, and distance is worked out on your device only.", "أمنيات مجهولة": "Anonymous wishes", "كتبها المشرفون عن أسر متحقَّق منها، دون أي بيانات شخصية": "Written by supervisors about verified families, with no personal details", "عرض كل الأمنيات": "Show all wishes", "إظهار «نعمة الجيران» والأمنيات المجهولة": "Show “Blessings next door” and anonymous wishes", "{0} لأسرة من {1} أفراد": "{0} for a family of {1}", "{0} لمؤسسة خيرية": "{0} for a charity", "أسر قريبة منك تنتظر مشاركتك. اعرف الأقرب إليك": "Families near you are waiting for your help. See who is closest", "أسرة من {0} أفراد": "A family of {0}", "ألبّي هذه الأمنية": "I'll fulfil this wish", "أمنية": "Wish", "أمنية مجهولة في الموقع": "Anonymous wish on the site", "أُوقف نشر الأمنية": "The wish is no longer published", "إيقاف نشر أمنية الطلب {0}": "Stopped publishing the wish of request {0}", "احتياجات قريبة منك: {0}": "Needs near you: {0}", "احتياجات متحقَّق منها تنتظر متبرعًا: {0}": "Verified needs waiting for a donor: {0}", "استخدم موقعي": "Use my location", "اكتب نص الأمنية": "Write the wish text", "اكتبه بلغتك، ويُترجم تلقائيًا": "Write it in your language; it is translated automatically", "انشر هذا الاحتياج كأمنية مجهولة": "Publish this need as an anonymous wish", "تبرع عام بدلًا من ذلك": "Make a general donation instead", "تبرعك يلبّي أمنية مجهولة:": "Your donation answers an anonymous wish:", "تظهر للزوار مع رقم المنطقة فقط حتى يلبّيها متبرّع قريب، وتختفي تلقائيًا بعد التخصيص. لا تكتب اسمًا أو رقم هاتف أو عنوانًا.": "Visitors see it with the zone number only so a nearby donor can answer it; it disappears by itself after allocation. Do not write a name, phone number or address.", "تعذّر تحديد موقعك. اكتب رقم منطقتك من اللوحة الزرقاء بدلًا من ذلك.": "Could not find your location. Type your zone number from the blue plate instead.", "جارٍ ترجمة الأمنية…": "Translating the wish…", "حدّد موقعك لنريك الأقرب إليك.": "Set your location to see the closest ones.", "حسب موقعك الحالي": "By your current location", "حفظ الأمنية": "Save wish", "رقم المنطقة من 1 إلى 99، تجده في أعلى اللوحة الزرقاء على باب منزلك.": "The zone number is 1 to 99; it is at the top of the blue plate on your door.", "رقم منطقتك": "Your zone no.", "رقم منطقتك من اللوحة الزرقاء": "Your zone number from the blue plate", "ضمن {0} كم من موقعك تقريبًا.": "Within about {0} km of you.", "عرض": "Show", "على بعد نحو {0} كم": "About {0} km away", "في منطقتك": "In your zone", "في منطقتك.": "In your zone.", "قريبة جدًا منك": "Very close to you", "لا تكتب في الأمنية رقم هاتف أو بريدًا أو رابطًا": "Do not put a phone number, email or link in the wish", "لا توجد احتياجات قريبة منك الآن": "No needs near you right now", "منشورة": "Published", "منطقتك: {0}": "Your zone: {0}", "نشر أمنية مجهولة للطلب {0}": "Published an anonymous wish for request {0}", "نص الأمنية": "Wish text", "نُشرت الأمنية في الموقع دون أي بيانات شخصية": "The wish is on the site with no personal details", "نُشرت الأمنية، وتعذّرت ترجمتها إلى {0} لغات فتظهر فيها بلغتها الأصلية.": "The wish is published; it could not be translated into {0} languages, so it shows there in its original language.", "هذه أقرب الاحتياجات إليك، وكلها في قطر.": "Here are the closest ones to you, all within Qatar.", "يلبّي أمنية مجهولة": "Answers an anonymous wish", "يلبّيها متبرّع": "A donor is answering it", "يلبّيها متبرّع الآن": "A donor is answering it now"});
+Object.assign(EN, {"أنا مغادر قطر": "I'm leaving Qatar", "قبل ما تسافر… خلّ بيتك نعمة": "Before you fly… let your home be a blessing", "سجّل محتويات بيتك مرة واحدة قبل سفرك، ونرتّب استلامها كلها في موعد واحد قبل موعد سفرك، ثم نوزّعها على أكثر من أسرة محتاجة.": "Register your home's contents once before you leave. We collect everything in a single visit before your travel date, then share it between several families in need.", "بيانات التواصل وموعد السفر": "Contact details and travel date", "تاريخ السفر": "Travel date", "تاريخ السفر {0}": "Travels on {0}", "الوقت المفضّل للاستلام": "Preferred pickup time", "نحاول الاستلام قبل سفرك بيومين على الأقل.": "We aim to collect at least two days before you travel.", "يتبقى على سفرك {0} يومًا. نحاول الاستلام قبل سفرك بيومين على الأقل.": "{0} days until you travel. We aim to collect at least two days before.", "رقم الشقة، الطابق، وجود مصعد": "Flat number, floor, whether there is a lift", "اختياري، يساعد سيارة النقل على الوصول": "Optional; helps the truck find you", "ماذا ستترك في البيت؟": "What will you leave in the home?", "اكتب العدد بجانب كل ما تريد التبرع به، واترك الباقي صفرًا. لا حاجة لوصف كل قطعة.": "Type how many of each thing you want to give and leave the rest at zero. No need to describe every piece.", "صور الغرف": "Photos of the rooms", "حتى {0} صور، صورة لكل غرفة تكفي": "Up to {0} photos; one per room is enough", "اضغط لاختيار الصور أو التقاطها": "Tap to choose or take photos", "صوّر الغرفة كاملة بحيث تظهر القطع بوضوح": "Photograph the whole room so the pieces are clearly visible", "أؤكد أن الأجهزة تعمل وآمنة، وأن الأثاث والأغراض نظيفة وسليمة.": "I confirm the appliances work and are safe, and the furniture and other things are clean and undamaged.", "مثال: المفتاح مع حارس المبنى بعد سفري": "Example: the key is with the building guard after I leave", "إرسال محتويات البيت للمراجعة": "Send the home's contents for review", "بالإرسال توافق على معالجة بياناتك وفق": "By sending, you agree to us processing your data under the", "كيف نرتّبها لك؟": "How we arrange it for you", "يراجع المشرفون الصور، وتظهر طلبات المغادرين أولًا حسب أقرب موعد سفر.": "Supervisors review the photos; people leaving Qatar are shown first, by nearest travel date.", "نحدد موعد استلام واحد لكل محتويات البيت قبل سفرك.": "We set one pickup for everything in the home before you travel.", "تُوزَّع القطع على أكثر من أسرة: الثلاجة لأسرة، والسرير لأخرى.": "The pieces go to several families: the fridge to one, the bed to another.", "تتابع أثر تبرعك من أي بلد برقم الطلب.": "Follow where your donation went from any country with the request number.", "للطعام الجاف والملابس استخدم نموذج التبرع العادي.": "For dry food and clothes, use the regular donation form.", "انتهى عقدك وستغادر؟ صوّر غرف بيتك وحدد موعد سفرك، ونستلم الأثاث والأجهزة كلها في موعد واحد قبل سفرك ونوزّعها على أسر محتاجة.": "Contract over and leaving? Photograph your rooms and set your travel date. We collect all the furniture and appliances in one visit before you fly and share them with families in need.", "سجّل محتويات بيتك": "Register your home's contents", "حدّد تاريخ سفرك، من الغد وحتى ستة أشهر.": "Set your travel date, from tomorrow up to six months ahead.", "اكتب عدد قطعة واحدة على الأقل مما ستتركه في البيت.": "Enter a number for at least one thing you will leave in the home.", "أرفق صورة واحدة على الأقل لغرف البيت.": "Attach at least one photo of the rooms.", "سُجّل جزء من البيت فقط ({0}). أرسل الباقي مرة أخرى أو راسلنا عبر واتساب.": "Only part of the home was registered ({0}). Send the rest again or message us on WhatsApp.", "شكرًا لك، ورحلة سعيدة": "Thank you, and have a good trip", "استلمنا محتويات بيتك وسيراجعها المشرفون": "We have your home's contents; supervisors will review them", "سجّلنا {0} طلبات، طلبًا لكل نوع، وسنرتّب استلامها كلها في موعد واحد قبل سفرك في {1}.": "We registered {0} requests, one per kind, and will collect them all in one visit before you travel on {1}.", "احتفظ بهذه الأرقام. تستطيع متابعة أثر تبرعك من أي بلد عبر «تتبّع طلبي» بالرقم وآخر 4 أرقام من هاتفك ({0}).": "Keep these numbers. You can follow your donation from any country on “Track my request” with the number and the last 4 digits of your phone ({0}).", "مغادر قطر": "Leaving Qatar", "من نفس البيت:": "From the same home:", "سافر المتبرّع": "Donor has left", "يسافر اليوم": "Travels today", "يسافر بعد {0} يومًا": "Travels in {0} days", "بيوت مغادرين تنتظر الاستلام": "Homes of people leaving, waiting for pickup", "فتح": "Open", "صاحب التبرع يسافر في {0}. حدّد الاستلام قبل ذلك.": "The donor travels on {0}. Set the pickup before then.", "نفس الموعد لباقي تبرعات هذا البيت المعتمدة: {0}": "Same pickup for this home's other approved donations: {0}", "الموعد بعد تاريخ سفر المتبرّع ({0})": "That date is after the donor's travel date ({0})", "حُدّد موعد واحد لـ{0} تبرعات من نفس البيت": "One pickup set for {0} donations from the same home"});
 // t('نص {0}', x): the current language's text, the Arabic source when untranslated; {n} are filled with the arguments
 const t = (s, ...a) => { const r = TR ? (TR[s] != null ? TR[s] : s) : (OV[s] != null ? OV[s] : s); return a.length ? String(r).replace(/\{(\d+)\}/g, (_, i) => a[+i] ?? '') : r; };
 const SEP = () => LANGS[LANG].rtl ? '، ' : ', ';
@@ -1529,7 +1639,7 @@ function seed() {
 }
 
 /* ================= routing ================= */
-const VIEWS = ['home','donate','request','track','account','admin','privacy'];
+const VIEWS = ['home','donate','request','track','account','admin','privacy','move'];
 function route(keepScroll) {
   const h = (location.hash || '#home').slice(1);
   const v = VIEWS.includes(h) ? h : 'home';
@@ -1539,6 +1649,7 @@ function route(keepScroll) {
   if (v === 'home') renderHome();
   if (v === 'admin') renderAdmin();
   if (v === 'donate') applyPreset();
+  if (v === 'move') renderMove();
   if (v === 'account') renderAccount();
   if (v === 'track' && keepScroll && $('#trackOut').innerHTML) doTrack();
   if (keepScroll !== true) window.scrollTo(0, 0);
@@ -2187,12 +2298,13 @@ function matchFilter(rec) {
 }
 const addrCell = a => `<span class="num" dir="ltr">${a.zone}/${a.street}/${a.bldg}</span>`;
 function donTable() {
-  const rows = db.donations.filter(matchFilter);
-  return toolbar(DON_LBL) + `<div class="table-wrap"><table><thead><tr><th>${t('الرقم')}</th><th>${t('المتبرّع')}</th><th>${t('النوع')}</th><th>${t('الأصناف')}</th><th>${t('العنوان')}</th><th>${t('الجهة')}</th><th>${t('الحالة')}</th><th>${t('التاريخ')}</th></tr></thead><tbody>
+  // households leaving Qatar come first, closest travel date first
+  const rows = db.donations.filter(matchFilter).sort((a, b) => (moveOpen(b) - moveOpen(a)) || (moveOpen(a) && moveOpen(b) ? a.move.date.localeCompare(b.move.date) : 0));
+  return moveBanner() + toolbar(DON_LBL) + `<div class="table-wrap"><table><thead><tr><th>${t('الرقم')}</th><th>${t('المتبرّع')}</th><th>${t('النوع')}</th><th>${t('الأصناف')}</th><th>${t('العنوان')}</th><th>${t('الجهة')}</th><th>${t('الحالة')}</th><th>${t('التاريخ')}</th></tr></thead><tbody>
     ${rows.map(d => {
       const part = d.status === 'received' && (d.allocations || []).length;
       return `<tr data-open="d:${d.id}"><td class="id">${d.id}</td><td>${esc(d.name)}<br><small class="muted num" dir="ltr">${esc(d.phone)}</small></td>
-      <td>${KIND[d.kind]}${d.photos && d.photos.length ? ` <span class="tag" title="${t('صور مرفقة')}"><svg width="11" height="11" style="vertical-align:-1px"><use href="#i-camera"/></svg> ${d.photos.length}</span>` : ''}${expiringSoon(d) && ['received','approved','scheduled','new'].includes(d.status) ? ` <span class="tag hot">${t('صلاحية قريبة')}</span>` : ''}${d.edits && d.edits.length ? ` <span class="tag">${t('عُدّل')}</span>` : ''}</td>
+      <td>${KIND[d.kind]}${moveOpen(d) ? ' ' + moveTag(d) : ''}${d.photos && d.photos.length ? ` <span class="tag" title="${t('صور مرفقة')}"><svg width="11" height="11" style="vertical-align:-1px"><use href="#i-camera"/></svg> ${d.photos.length}</span>` : ''}${expiringSoon(d) && ['received','approved','scheduled','new'].includes(d.status) ? ` <span class="tag hot">${t('صلاحية قريبة')}</span>` : ''}${d.edits && d.edits.length ? ` <span class="tag">${t('عُدّل')}</span>` : ''}</td>
       <td style="max-width:240px">${esc(itemsSummary(d))}</td><td>${addrCell(d.addr)}</td><td>${TARGET[d.target]}</td>
       <td><span class="pill s-${d.status}">${DON_LBL[d.status]}</span>${part ? ` <span class="tag gold">${t('مخصّص جزئيًا')}</span>` : ''}</td><td class="num">${fmtDate(d.createdAt)}</td></tr>`;
     }).join('')}
@@ -2627,6 +2739,7 @@ function openDrawer(k, id, pre) {
   const kv = isD
     ? `<dt>${t('المتبرّع')}</dt><dd>${esc(rec.name)}</dd><dt>${t('الهاتف')}</dt><dd class="num" dir="ltr">${esc(rec.phone)}</dd><dt>${t('العنوان')}</dt><dd>${plateTxt(rec.addr)}${rec.details ? '<br><span class="muted">' + esc(rec.details) + '</span>' : ''}<div style="margin-top:6px">${locHTML(rec, 'd:' + rec.id)}</div></dd>
        <dt>${t('التسليم')}</dt><dd>${rec.method === 'pickup' ? t('استلام من العنوان') : t('يوصله لنقطة التجميع')} · ${SLOT[rec.slot]}</dd><dt>${t('الجهة')}</dt><dd>${TARGET[rec.target]}${rec.person ? ': ' + esc(rec.person.name) + ' (' + esc(rec.person.addr) + ')' : ''}</dd>
+       ${rec.move ? `<dt>${t('مغادر قطر')}</dt><dd>${t('تاريخ السفر {0}', fmtDate(rec.move.date))} ${moveOpen(rec) ? moveTag(rec) : ''}${moveSibs(rec).length ? `<br><span class="muted">${t('من نفس البيت:')}</span> ${moveSibs(rec).map(x => `<button type="button" class="linkish" data-open="d:${x.id}">${x.id}</button> <span class="tag">${KIND[x.kind]}</span>`).join(' ')}` : ''}</dd>` : ''}
        ${rec.wish ? `<dt>${t('أمنية')}</dt><dd><button type="button" class="linkish" data-open="r:${esc(rec.wish)}">${esc(rec.wish)}</button> <span class="tag gold">${t('يلبّي أمنية مجهولة')}</span></dd>` : ''}
        ${rec.pickup ? `<dt>${t('الموعد')}</dt><dd>${fmtDate(rec.pickup.date)} · ${esc(rec.pickup.vol)}</dd>` : ''}${rec.notes ? `<dt>${t('ملاحظة المتبرّع')}</dt><dd data-tr-src="notes">${esc(rec.notes)}</dd>` : ''}`
     : `<dt>${t('المستفيد')}</dt><dd>${esc(rec.name)} <span class="tag">${rec.type === 'org' ? t('مؤسسة') : t('أسرة')}</span></dd><dt>${t('الهاتف')}</dt><dd class="num" dir="ltr">${esc(rec.phone)}</dd><dt>${t('الأفراد')}</dt><dd class="num">${rec.size}</dd>
@@ -2675,9 +2788,12 @@ function actionsHTML(rec, k, pre) {
     switch (rec.status) {
       case 'new': if (!can('review')) return noRight; return `<div class="review-gate"><label class="check"><input type="checkbox" id="rv"><span>${rec.photos && rec.photos.length ? t('راجعت الصور ({0}) وتطابقها مع الأصناف وحالتها.', rec.photos.length) : t('راجعت تفاصيل الأصناف (لا توجد صور مرفقة).')}</span></label>
         <div class="form-actions"><button class="btn btn-primary" data-act="approve" type="button">${t('اعتماد التبرع')}</button><button class="btn btn-danger" data-act="reject" type="button">${t('رفض')}</button></div></div>${rejectBox}`;
-      case 'approved': if (!can('schedule')) return noRight; return `<div class="grid"><label class="f">${rec.method === 'dropoff' ? t('موعد التسليم') : t('موعد الاستلام')}<input type="date" id="pkDate" value="${addDays(1)}" min="${addDays(0)}"></label>
+      case 'approved': if (!can('schedule')) return noRight; {
+        const mvMax = rec.move && daysUntil(rec.move.date) >= 0 ? rec.move.date : '', sibs = moveSibs(rec).filter(x => x.status === 'approved');
+        return `${mvMax ? `<p class="note">${t('صاحب التبرع يسافر في {0}. حدّد الاستلام قبل ذلك.', fmtDate(rec.move.date))}</p>` : ''}<div class="grid"><label class="f">${rec.method === 'dropoff' ? t('موعد التسليم') : t('موعد الاستلام')}<input type="date" id="pkDate" value="${mvMax && mvMax < addDays(1) ? mvMax : addDays(1)}" min="${addDays(0)}"${mvMax ? ` max="${mvMax}"` : ''}></label>
         <label class="f">${rec.method === 'dropoff' ? t('نقطة التجميع') : t('المتطوّع')}<select id="pkVol">${rec.method === 'dropoff' ? sitePoints().map(p => `<option value="${p}">${t(p)}</option>`).join('') : volunteers().map(u => `<option value="${u.id}">${esc(u.name)}</option>`).join('')}</select></label></div>
-        <button class="btn btn-primary" data-act="schedule" type="button">${t('تحديد الموعد وإبلاغ المتبرّع')}</button>`;
+        ${sibs.length ? `<label class="check"><input type="checkbox" id="pkAll" checked><span>${t('نفس الموعد لباقي تبرعات هذا البيت المعتمدة: {0}', sibs.map(x => x.id).join(SEP()))}</span></label>` : ''}
+        <button class="btn btn-primary" data-act="schedule" type="button">${t('تحديد الموعد وإبلاغ المتبرّع')}</button>`; }
       case 'scheduled': if (!canReceive(rec)) return noRight; return `<label class="check"><input type="checkbox" id="qc"><span>${t('فحصت {0}.', qcText(rec))}</span></label>
         <button class="btn btn-primary" data-act="receive" type="button">${t('تأكيد الاستلام في المستودع')}</button>`;
       case 'received': {
@@ -2738,9 +2854,11 @@ function wireActions(dr, rec, k) {
   act('schedule', () => {
     const date = $('#pkDate', dr).value, v = $('#pkVol', dr).value;
     if (!date || !v) { toast(rec.method === 'dropoff' ? t('حدّد التاريخ ونقطة التجميع') : t('حدّد التاريخ والمتطوّع (أضف متطوعين من تبويب الفريق)')); return; }
+    if (rec.move && date > rec.move.date && daysUntil(rec.move.date) >= 0) { toast(t('الموعد بعد تاريخ سفر المتبرّع ({0})', fmtDate(rec.move.date))); return; }
     const vol = rec.method === 'dropoff' ? v : memberName(v);
-    rec.pickup = { date, vol, volId: rec.method === 'dropoff' ? null : v };
-    setStatus(rec, 'scheduled', `${fmtDate(date)} · ${vol}`); log(t('جدولة {0} في {1} مع {2}', rec.id, date, vol)); done(t('حُدّد الموعد'));
+    const all = [rec, ...($('#pkAll', dr) && $('#pkAll', dr).checked ? moveSibs(rec).filter(x => x.status === 'approved' && x.method === rec.method) : [])];
+    all.forEach(d => { d.pickup = { date, vol, volId: rec.method === 'dropoff' ? null : v }; setStatus(d, 'scheduled', `${fmtDate(date)} · ${vol}`); log(t('جدولة {0} في {1} مع {2}', d.id, date, vol)); });
+    done(all.length > 1 ? t('حُدّد موعد واحد لـ{0} تبرعات من نفس البيت', all.length) : t('حُدّد الموعد'));
   });
   act('receive', () => { if (!$('#qc', dr).checked) { toast(t('أكّد فحص الجودة أولًا')); return; } receiveDon(rec); done(t('أُضيف التبرع إلى المستودع')); });
   act('allocate', () => {
@@ -2772,7 +2890,7 @@ function wireActions(dr, rec, k) {
 }
 
 /* ================= location: Qatar national address (blue plate) → coordinates ================= */
-const geoState = { d: null, r: null };
+const geoState = { d: null, r: null, m: null };
 async function geocodePlate(a) {
   if (!a || !a.zone || !a.street || !a.bldg) return null;
   const url = `https://services.gisqatar.org.qa/server/rest/services/Vector/QARS_wgs84/MapServer/0/query?where=ZONE_NO%3D${+a.zone}+AND+STREET_NO%3D${+a.street}+AND+BUILDING_NO%3D${+a.bldg}&outFields=X_COORD,Y_COORD&returnGeometry=false&f=json`;
@@ -2815,7 +2933,7 @@ function geoFromForm(p) {
   return { geo: g ? { lat: g.lat, lng: g.lng } : parseMapsUrl(link), mapUrl: /^https?:\/\//i.test(link) ? link : '' };
 }
 function resetGeo(p) { geoState[p] = null; $(`#${p}_geoMsg`).textContent = ''; }
-wireGeo('d'); wireGeo('r');
+wireGeo('d'); wireGeo('r'); wireGeo('m');
 
 /* ================= edit / cancel from the tracking page ================= */
 function manageHTML(rec, k) {
@@ -3427,6 +3545,124 @@ $('#secNear').addEventListener('submit', e => {
   if (!(z >= 1 && z <= 99)) { toast(t('رقم المنطقة من 1 إلى 99، تجده في أعلى اللوحة الزرقاء على باب منزلك.')); return; }
   nearMe = { zone: z }; try { localStorage.setItem('sb.near', JSON.stringify(nearMe)); } catch (err) {} renderNear();
 });
+/* ================= «قبل ما تسافر… خلّ بيتك نعمة» =================
+   One form for a household leaving Qatar. It becomes one donation per kind (appliances, furniture, other things)
+   tied together by move.group, so supervisors see the travel date, book a single pickup and split the pieces between families. */
+const MOVE_KINDS = ['elec', 'furn', 'other'];
+let movePhotos = [];
+wirePlate('m');
+function renderMove() {
+  const kept = {}; $$('#m_items [data-mv]').forEach(i => { kept[i.dataset.mv] = i.value; });
+  $('#m_items').innerHTML = MOVE_KINDS.filter(kindOn).map(k => `<div class="mv-group"><h4><img class="i3" src="icons/${KIND_IC[k]}.webp" width="30" height="30" alt="" decoding="async">${esc(KIND[k])}</h4>
+    <div class="mv-grid">${Object.entries(GOODS[k].types).map(([v, lbl]) => { const q = +kept[`${k}:${v}`] || 0;
+      return `<label class="mv-item${q ? ' on' : ''}"><span>${esc(lbl)}</span><input type="number" min="0" max="20" inputmode="numeric" value="${q}" data-mv="${k}:${v}"></label>`; }).join('')}</div></div>`).join('');
+  $('#m_date').min = addDays(1); $('#m_date').max = addDays(180);
+  const open = intakeOpen('donations') && MOVE_KINDS.some(kindOn);
+  $('#m_closed').hidden = open; $('#m_closed').textContent = open ? '' : t(closedMsg('donations'));
+  showEl($('#moveForm'), open);
+}
+$('#m_items').addEventListener('input', e => { const i = e.target.closest('[data-mv]'); if (i) i.closest('.mv-item').classList.toggle('on', +i.value > 0); });
+$('#m_date').addEventListener('change', () => {
+  const n = $('#m_date').value ? daysUntil($('#m_date').value) : null;
+  $('#m_dateHint').textContent = n > 0 ? t('يتبقى على سفرك {0} يومًا. نحاول الاستلام قبل سفرك بيومين على الأقل.', n) : t('نحاول الاستلام قبل سفرك بيومين على الأقل.');
+});
+async function addMovePhotos(files) {
+  const list = Array.from(files || []).filter(f => /^image\//.test(f.type));
+  if (!list.length) { toast(t('اختر ملفات صور فقط')); return; }
+  const room = MAX_PHOTOS - movePhotos.length;
+  for (const f of list.slice(0, Math.max(0, room))) { try { movePhotos.push(await compressImage(f)); } catch (e) { toast(t('تعذّر قراءة إحدى الصور')); } }
+  if (list.length > room) toast(t('الحد الأقصى {0} صور', MAX_PHOTOS));
+  renderMoveThumbs();
+}
+function renderMoveThumbs() {
+  $('#m_thumbs').innerHTML = movePhotos.map((src, i) => `<div class="thumb"><img src="${src}" alt=""><button type="button" class="x" data-rm="${i}" aria-label="${t('حذف الصورة')}">×</button></div>`).join('');
+  $$('#m_thumbs [data-rm]').forEach(b => b.addEventListener('click', () => { movePhotos.splice(+b.dataset.rm, 1); renderMoveThumbs(); }));
+  $('#m_drop').hidden = movePhotos.length >= MAX_PHOTOS;
+}
+$('#m_photos').addEventListener('change', e => { addMovePhotos(e.target.files); e.target.value = ''; });
+$('#moveForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!intakeOpen('donations')) { toast(t(closedMsg('donations'))); return; }
+  const errs = [], v = id => $('#' + id).value.trim(), box = $('#m_err');
+  if (!mark($('#m_name'), v('m_name').length < 3)) errs.push('اكتب الاسم الكامل.');
+  if (!mark($('#m_phone'), !phoneOk(v('m_phone')))) errs.push('رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 3 أو 5 أو 6 أو 7.');
+  const date = v('m_date'), left = date ? daysUntil(date) : -1;
+  if (!mark($('#m_date'), !(left >= 1 && left <= 180))) errs.push('حدّد تاريخ سفرك، من الغد وحتى ستة أشهر.');
+  const zb = !mark($('#m_zone'), !(+v('m_zone') >= 1 && +v('m_zone') <= 99)), sb = !mark($('#m_street'), !(+v('m_street') >= 1)), bb = !mark($('#m_bldg'), !(+v('m_bldg') >= 1));
+  if (zb || sb || bb) errs.push('أكمل أرقام اللوحة المنزلية (المنطقة من 1 إلى 99).');
+  const byKind = {};
+  $$('#m_items [data-mv]').forEach(i => {
+    const q = Math.min(20, Math.floor(+toLatin(i.value) || 0)); if (q <= 0) return;
+    const [k, type] = i.dataset.mv.split(':'); if (!kindOn(k)) return;
+    (byKind[k] = byKind[k] || []).push({ type, desc: '', cond: Object.keys(GOODS[k].cond).slice(-1)[0], qty: q });
+  });
+  const kinds = Object.keys(byKind);
+  if (!kinds.length) errs.push('اكتب عدد قطعة واحدة على الأقل مما ستتركه في البيت.');
+  if (!movePhotos.length) errs.push('أرفق صورة واحدة على الأقل لغرف البيت.');
+  if (!$('#m_ok').checked) errs.push('أكّد حالة القطع وسلامتها.');
+  if (errs.length) { box.innerHTML = `<b>${t('راجع الحقول التالية:')}</b><br>` + [...new Set(errs)].map(x => esc(t(x))).join('<br>'); box.hidden = false; box.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+  box.hidden = true;
+  const move = { date, group: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()), kinds };
+  const base = { name: v('m_name'), phone: v('m_phone'), addr: { zone: v('m_zone'), street: v('m_street'), bldg: v('m_bldg') }, details: v('m_details'),
+    method: 'pickup', slot: $('#m_slot').value, target: 'auto', person: null, notes: v('m_notes'), lang: LANG, near: false, move, ...geoFromForm('m') };
+  const recs = [];
+  if (CLOUD) {
+    const btn = $('#moveForm button[type=submit]'); btn.disabled = true; document.body.classList.add('busy');
+    try {
+      const photos = await uploadPhotos(movePhotos);   // one upload, shared by every donation of this house
+      for (const k of kinds) {
+        const p = { ...base, kind: k, items: byKind[k], photos };
+        const { data, error } = await sb.rpc('submit_donation', { p });
+        if (error) throw error;
+        const rec = { ...p, id: data.id, status: 'new', history: [{ status: 'new', at: data.createdAt, note: '' }], createdAt: data.createdAt, allocations: [] };
+        recentRecs[rec.id] = rec; recs.push(rec);
+      }
+    } catch (err) {
+      if (!recs.length) { box.innerHTML = esc(t('تعذّر الإرسال: {0}', cloudErr(err))); box.hidden = false; return; }
+      toast(t('سُجّل جزء من البيت فقط ({0}). أرسل الباقي مرة أخرى أو راسلنا عبر واتساب.', recs.map(r => r.id).join(SEP())));
+    } finally { btn.disabled = false; document.body.classList.remove('busy'); }
+  } else {
+    kinds.forEach(k => {
+      const rec = { ...base, id: nextId('d'), kind: k, items: byKind[k], photos: movePhotos.slice(), status: 'new', allocatedTo: null, allocations: [],
+        history: [{ status: 'new', at: nowISO(), note: '' }], createdAt: nowISO() };
+      db.donations.unshift(rec); recs.push(rec); log(t('تبرع جديد {0} من {1}', rec.id, rec.name), rec.name);
+    });
+    if (!save()) {
+      db.donations.splice(0, recs.length); db.log.splice(0, recs.length); db.seq.d -= recs.length;
+      box.innerHTML = t('تعذّر حفظ التبرع لأن مساحة التخزين ممتلئة. احذف بعض الصور وحاول مرة أخرى.'); box.hidden = false; return;
+    }
+  }
+  movePhotos = []; renderMoveThumbs(); resetGeo('m'); $('#m_maplink').value = '';
+  $('#moveForm').hidden = true;
+  $('#moveDone').innerHTML = `<div class="receipt">
+    <div><p class="eyebrow">${t('شكرًا لك، ورحلة سعيدة')}</p><h2>${t('استلمنا محتويات بيتك وسيراجعها المشرفون')}</h2></div>
+    <p>${t('سجّلنا {0} طلبات، طلبًا لكل نوع، وسنرتّب استلامها كلها في موعد واحد قبل سفرك في {1}.', recs.length, fmtDate(date))}</p>
+    <div class="move-ids">${recs.map(r => `<span class="tag">${esc(KIND[r.kind])}</span><span class="code">${r.id}</span><button class="btn btn-ghost btn-sm" type="button" data-copy="${r.id}">${t('نسخ')}</button>`).join('')}</div>
+    <p class="note">${t('احتفظ بهذه الأرقام. تستطيع متابعة أثر تبرعك من أي بلد عبر «تتبّع طلبي» بالرقم وآخر 4 أرقام من هاتفك ({0}).', esc(base.phone.slice(-4)))}</p>
+    <div class="form-actions"><a class="btn btn-primary" href="#track" data-track="${recs[0].id}">${t('تتبّع لاحقًا')}</a></div></div>`;
+  $('#moveDone').hidden = false; wireReceipt($('#moveDone'));
+  window.scrollTo(0, 0);
+});
+
+/* ---- supervisors: households leaving Qatar ---- */
+const moveOpen = d => !!(d.move && d.move.date) && ['new', 'approved', 'scheduled'].includes(d.status);
+const moveSibs = d => (d.move ? db.donations.filter(x => x.id !== d.id && x.move && x.move.group === d.move.group) : []);
+function moveTag(d) {
+  const n = daysUntil(d.move.date);
+  return `<span class="tag ${n <= 7 ? 'hot' : 'gold'}">✈ ${n < 0 ? t('سافر المتبرّع') : n === 0 ? t('يسافر اليوم') : t('يسافر بعد {0} يومًا', n)}</span>`;
+}
+// one line per household, closest travel date first
+function moveBanner() {
+  const groups = {};
+  db.donations.filter(moveOpen).forEach(d => { (groups[d.move.group] = groups[d.move.group] || []).push(d); });
+  const list = Object.values(groups).sort((a, b) => a[0].move.date.localeCompare(b[0].move.date));
+  if (!list.length) return '';
+  return `<div class="exp-banner${list.some(g => daysUntil(g[0].move.date) <= 7) ? ' hot' : ''}"><div class="exp-head"><b>${t('بيوت مغادرين تنتظر الاستلام')}</b><span class="tag">${list.length}</span></div>
+    <ul class="exp-list">${list.slice(0, 6).map(g => `<li>${moveTag(g[0])}<span>${esc(g[0].name)} · ${t('منطقة {0}', esc(g[0].addr.zone))} · ${g.map(d => esc(KIND[d.kind])).join(SEP())}</span>
+      <span class="muted">${g.map(d => `<b class="num" dir="ltr">${d.id}</b> ${DON_LBL[d.status]}`).join(SEP())}</span>
+      <button class="btn btn-ghost btn-sm" type="button" data-open="d:${g[0].id}">${t('فتح')}</button></li>`).join('')}</ul></div>`;
+}
+
 // the note above the donation form while a donor answers a wish
 function syncWishNote() {
   const n = $('#d_wish'), w = pendingWish;
