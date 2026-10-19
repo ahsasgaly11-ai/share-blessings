@@ -2417,16 +2417,37 @@ function downloadBlob(blob, name) {
 }
 
 /* ---- team ---- */
+function genPassword() {
+  const a = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789', r = crypto.getRandomValues(new Uint32Array(10));
+  return 'Sb-' + [...r].map(x => a[x % a.length]).join('');
+}
+function showCreds(name, email, pass) {
+  const box = $('#credBox'); if (!box) return;
+  const text = pass ? t('بيانات الدخول إلى بوابة المشرفين في شارك النعم:\nالرابط: {0}\nالبريد: {1}\nكلمة المرور: {2}', location.origin + location.pathname + '#admin', email, pass) : '';
+  box.innerHTML = `<div class="note" style="margin-top:16px;display:grid;gap:8px">
+    <b>${pass ? t('بيانات دخول {0}', esc(name)) : t('أُضيف {0} إلى الفريق', esc(name))}</b>
+    ${pass ? `<div dir="ltr" class="num" style="text-align:left">${esc(email)}<br><b style="font-size:1.15em;user-select:all">${esc(pass)}</b></div>
+      <span class="muted">${t('انسخها الآن وأرسلها للعضو، فلن تظهر مرة أخرى.')}</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary btn-sm" type="button" id="credCopy">${t('نسخ بيانات الدخول')}</button>
+      <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(text)}">${t('إرسال عبر واتساب')}</a></div>`
+    : `<span class="muted">${t('لهذا البريد حساب سابق، فيدخل بكلمة مروره الحالية.')}</span>`}</div>`;
+  const c = $('#credCopy', box);
+  if (c) c.addEventListener('click', async () => { try { await navigator.clipboard.writeText(text); toast(t('نُسخت بيانات الدخول')); } catch (e) { toast(t('انسخها يدويًا')); } });
+  box.scrollIntoView({ block: 'center', behavior: 'smooth' });
+}
 function teamView() {
   if (CLOUD) return `<div class="table-wrap"><table><thead><tr><th>${t('الاسم')}</th><th>${t('البريد الإلكتروني')}</th><th>${t('الدور')}</th><th></th></tr></thead><tbody>
     ${db.team.map(u => `<tr><td><b>${esc(u.name)}</b>${u.id === me.id ? ` <span class="tag">${t('أنت')}</span>` : ''}</td><td class="num" dir="ltr">${esc(u.email || '')}</td><td>${ROLE_LBL[u.role]}</td>
-      <td>${u.id !== me.id ? `<button class="btn btn-danger btn-sm" type="button" data-del="${u.id}">${t('إزالة')}</button>` : ''}</td></tr>`).join('')}</tbody></table></div>
+      <td>${u.id !== me.id ? `<button class="btn btn-ghost btn-sm" type="button" data-resetpw="${u.id}">${t('كلمة مرور جديدة')}</button> <button class="btn btn-danger btn-sm" type="button" data-del="${u.id}">${t('إزالة')}</button>` : ''}</td></tr>`).join('')}</tbody></table></div>
+    <div id="credBox"></div>
     <form class="sheet" id="teamForm" style="margin-top:16px"><fieldset><legend>${t('إضافة عضو للفريق')}</legend>
-      <p class="note">${t('أنشئ للعضو حسابًا أولًا من لوحة Supabase: Authentication ← Users ← Add user (بريد وكلمة مرور)، ثم أضف بريده هنا مع دوره.')}</p>
       <div class="grid"><label class="f">${t('الاسم')}<input type="text" id="tm_name"></label>
-        <label class="f">${t('البريد الإلكتروني')}<input type="email" id="tm_email" dir="ltr"></label>
-        <label class="f">${t('الدور')}<select id="tm_role">${opts(ROLE_LBL, 'volunteer')}</select></label></div>
-      <div><button class="btn btn-primary" type="submit">${t('إضافة')}</button></div>
+        <label class="f">${t('البريد الإلكتروني')}<input type="email" id="tm_email" dir="ltr" autocomplete="off"></label>
+        <label class="f">${t('الدور')}<select id="tm_role">${opts(ROLE_LBL, 'volunteer')}</select></label>
+        <label class="f">${t('كلمة المرور')}<span style="display:flex;gap:6px"><input type="text" id="tm_pass" dir="ltr" autocomplete="off" value="${genPassword()}" style="flex:1;min-width:0"><button class="btn btn-ghost btn-sm" type="button" id="tm_gen">${t('توليد')}</button></span></label></div>
+      <p class="muted">${t('يُنشأ حساب العضو مباشرة. أرسل له البريد وكلمة المرور، ويستطيع تغييرها بعد الدخول. إذا كان للبريد حساب سابق يُضاف إلى الفريق بكلمة مروره الحالية.')}</p>
+      <div><button class="btn btn-primary" type="submit">${t('إنشاء الحساب وإضافته')}</button></div>
+      <p class="muted">${t('المدير: كل الصلاحيات وإدارة الفريق والنسخ الاحتياطي. مشرف المراجعة: اعتماد التبرعات والتحقق والتخصيص والتقارير. متطوع التوصيل: يرى مهامه فقط ويؤكد الاستلام والتسليم.')}</p>
     </fieldset></form>`;
   return `<div class="table-wrap"><table><thead><tr><th>${t('الاسم')}</th><th>${t('الدور')}</th><th>${t('مهام مفتوحة')}</th><th>${t('رمز الدخول')}</th><th></th></tr></thead><tbody>
     ${db.team.map(u => {
@@ -2504,12 +2525,17 @@ function wireTab(body) {
   const tf = $('#teamForm', body);
   if (tf && CLOUD) tf.addEventListener('submit', async e => {
     e.preventDefault();
-    const name = $('#tm_name').value.trim(), email = $('#tm_email').value.trim(), role = $('#tm_role').value;
-    if (name.length < 3 || !/@/.test(email)) { toast(t('اكتب الاسم والبريد الإلكتروني')); return; }
-    const { data, error } = await sb.rpc('add_staff', { p_email: email, p_name: name, p_role: role });
+    const name = $('#tm_name').value.trim(), email = $('#tm_email').value.trim().toLowerCase(), role = $('#tm_role').value, pass = $('#tm_pass').value.trim();
+    if (name.length < 3 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { toast(t('اكتب الاسم والبريد الإلكتروني')); return; }
+    if (pass.length < 8) { toast(t('كلمة المرور يجب أن تكون 8 أحرف على الأقل.')); return; }
+    const btn = $('button[type=submit]', tf); btn.disabled = true;
+    const { data, error } = await sb.rpc('admin_create_member', { p_email: email, p_name: name, p_role: role, p_password: pass });
+    btn.disabled = false;
     if (error) { toast(cloudErr(error)); return; }
-    if (data === 'no_user') { toast(t('لا يوجد حساب بهذا البريد. أنشئه أولًا من لوحة Supabase.')); return; }
-    log(t('إضافة {0} إلى الفريق ({1})', name, ROLE_LBL[role])); save(); await reloadCloud(); renderAdmin(); toast(t('أُضيف العضو'));
+    if (data === 'already_staff') { toast(t('هذا البريد ضمن الفريق بالفعل.')); return; }
+    log(t('إضافة {0} إلى الفريق ({1})', name, ROLE_LBL[role])); save(); await reloadCloud(); renderAdmin();
+    showCreds(name, email, data === 'created' ? pass : null);
+    toast(t('أُضيف العضو'));
   });
   else if (tf) tf.addEventListener('submit', e => {
     e.preventDefault();
@@ -2523,6 +2549,15 @@ function wireTab(body) {
     const u = db.team.find(x => x.id === b.dataset.del);
     if (CLOUD) { sb.rpc('remove_staff', { p_uid: u.id }).then(async ({ error }) => { if (error) { toast(cloudErr(error)); return; } log(t('إزالة {0} من الفريق', u.name)); save(); await reloadCloud(); renderAdmin(); }); return; }
     db.team = db.team.filter(x => x.id !== u.id); log(t('إزالة {0} من الفريق', u.name)); save(); renderAdmin();
+  }));
+  const tg = $('#tm_gen', body); if (tg) tg.addEventListener('click', () => { $('#tm_pass').value = genPassword(); });
+  $$('[data-resetpw]', body).forEach(b => b.addEventListener('click', async () => {
+    if (b.dataset.armed !== '1') { b.dataset.armed = '1'; b.textContent = t('اضغط للتأكيد'); return; }
+    const u = db.team.find(x => x.id === b.dataset.resetpw), pass = genPassword();
+    b.disabled = true;
+    const { error } = await sb.rpc('admin_set_password', { p_uid: u.id, p_password: pass });
+    if (error) { b.disabled = false; toast(cloudErr(error)); return; }
+    log(t('تعيين كلمة مرور جديدة لـ {0}', u.name)); save(); renderAdmin(); showCreds(u.name, u.email, pass);
   }));
   $$('[data-pin]', body).forEach(b => b.addEventListener('click', () => {
     const cell = b.parentElement, u = db.team.find(x => x.id === b.dataset.pin);
@@ -3078,7 +3113,7 @@ function markClean() {
 function cloudErr(e) {
   const m = (e && (e.message || e.error_description)) || String(e);
   const map = { not_found: 'رقم الهاتف لا يطابق الطلب.', not_allowed: 'لا يمكن تنفيذ هذا الإجراء في هذه المرحلة.', bad_phone: 'رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 3 أو 5 أو 6 أو 7.',
-    bad_photos: 'تعذّر رفع الصور. حاول مرة أخرى.', payload_too_large: 'البيانات أكبر من المسموح.', 'Invalid login credentials': 'البريد أو كلمة المرور غير صحيحة.' };
+    bad_photos: 'تعذّر رفع الصور. حاول مرة أخرى.', bad_email: 'البريد الإلكتروني غير صحيح.', weak_password: 'كلمة المرور يجب أن تكون 8 أحرف على الأقل.', bad_name: 'اكتب اسم العضو', payload_too_large: 'البيانات أكبر من المسموح.', 'Invalid login credentials': 'البريد أو كلمة المرور غير صحيحة.' };
   const key = Object.keys(map).find(k => m.includes(k));
   return key ? t(map[key]) : (/fetch|network/i.test(m) ? t('تعذّر الاتصال بالخادم. تحقق من الإنترنت وحاول مرة أخرى.') : m);
 }
@@ -3189,7 +3224,16 @@ if (CLOUD) {
   Object.assign(EN, { 'تغيير كلمة المرور': 'Change password', 'كلمة المرور الجديدة': 'New password', 'أعد كتابتها': 'Repeat it',
     '8 أحرف على الأقل.': 'At least 8 characters.', 'حفظ': 'Save', 'إلغاء': 'Cancel',
     'كلمة المرور يجب أن تكون 8 أحرف على الأقل.': 'The password must be at least 8 characters.',
-    'كلمتا المرور غير متطابقتين.': 'The passwords do not match.', 'تم تغيير كلمة المرور': 'Password changed' });
+    'كلمتا المرور غير متطابقتين.': 'The passwords do not match.', 'تم تغيير كلمة المرور': 'Password changed',
+    'كلمة مرور جديدة': 'New password', 'توليد': 'Generate', 'إنشاء الحساب وإضافته': 'Create account and add',
+    'يُنشأ حساب العضو مباشرة. أرسل له البريد وكلمة المرور، ويستطيع تغييرها بعد الدخول. إذا كان للبريد حساب سابق يُضاف إلى الفريق بكلمة مروره الحالية.': 'The account is created right away. Send the member the email and password; they can change it after signing in. If the email already has an account, it is added to the team with its current password.',
+    'هذا البريد ضمن الفريق بالفعل.': 'This email is already on the team.', 'تعيين كلمة مرور جديدة لـ {0}': 'New password set for {0}',
+    'بيانات دخول {0}': 'Sign-in details for {0}', 'أُضيف {0} إلى الفريق': '{0} was added to the team',
+    'انسخها الآن وأرسلها للعضو، فلن تظهر مرة أخرى.': 'Copy it now and send it to the member; it will not be shown again.',
+    'نسخ بيانات الدخول': 'Copy sign-in details', 'إرسال عبر واتساب': 'Send via WhatsApp', 'نُسخت بيانات الدخول': 'Sign-in details copied',
+    'انسخها يدويًا': 'Copy it manually', 'لهذا البريد حساب سابق، فيدخل بكلمة مروره الحالية.': 'This email already had an account, so they sign in with their current password.',
+    'بيانات الدخول إلى بوابة المشرفين في شارك النعم:\nالرابط: {0}\nالبريد: {1}\nكلمة المرور: {2}': 'Share Blessings supervisors\' portal sign-in:\nLink: {0}\nEmail: {1}\nPassword: {2}',
+    'البريد الإلكتروني غير صحيح.': 'The email address is not valid.' });
   const pwBox = $('#pwBox');
   const pwClose = () => { pwBox.hidden = true; pwBox.reset(); };
   $('#pwBtn').addEventListener('click', () => { pwBox.hidden = !pwBox.hidden; if (!pwBox.hidden) $('#pwNew').focus(); });
