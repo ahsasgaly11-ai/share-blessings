@@ -191,6 +191,9 @@ begin
      or exists (select 1 from jsonb_array_elements_text(v_photos) x where x !~ '^incoming/[0-9a-f-]{36}\.jpg$') then
     raise exception 'bad_photos';
   end if;
+  -- تبرع يلبّي أمنية مجهولة: رقم الطلب فقط، وأي قيمة أخرى تُهمل
+  if p ? 'wish' and (coalesce(p->>'wish', '') !~ '^R-[0-9]{1,9}$'
+     or not exists (select 1 from public.requests where id = p->>'wish' and status = 'verified')) then p := p - 'wish'; end if;
   v_id := 'D-' || nextval('public.donation_seq');
   v := (p - 'id' - 'status' - 'history' - 'allocations' - 'edits' - 'pickup' - 'writeoffs' - '_v' - 'createdAt')
        || jsonb_build_object('id', v_id, 'status', 'new', 'photos', v_photos,
@@ -471,5 +474,29 @@ returns jsonb language sql stable security definer set search_path = public as $
 $$;
 revoke all on function public.campaign_progress() from public;
 grant execute on function public.campaign_progress() to anon, authenticated;
+
+-- ---------- نعمة الجيران والأمنيات المجهولة ----------
+-- ما يراه الزائر: عدد الاحتياجات المتحقَّق منها في كل منطقة (رقم المنطقة من اللوحة فقط)،
+-- والأمنيات التي نشرها مشرف بنص كتبه بنفسه. لا أسماء ولا هواتف ولا شوارع ولا مبانٍ.
+create or replace function public.public_needs()
+returns jsonb language sql stable security definer set search_path = public as $$
+  select jsonb_build_object(
+    'zones', coalesce((select jsonb_agg(jsonb_build_object('z', z, 'k', kind, 'n', n)) from (
+        select (data->'addr'->>'zone')::int as z, kind, count(*) as n from public.requests
+         where status = 'verified' and coalesce(data->'addr'->>'zone', '') ~ '^[0-9]{1,2}$'
+         group by 1, 2) s), '[]'::jsonb),
+    'wishes', coalesce((select jsonb_agg(w order by w->>'urg' = 'high' desc, w->>'at') from (
+        select jsonb_build_object(
+          'id', r.id, 'z', (r.data->'addr'->>'zone')::int, 'k', r.kind, 't', r.data->>'type',
+          'text', left(r.data->'wish'->>'text', 160), 'tr', coalesce(r.data->'wish'->'tr', '{}'::jsonb),
+          'lang', r.data->'wish'->>'lang', 'preset', r.data->'wish'->>'preset', 'size', (r.data->>'size')::int, 'urg', r.data->>'urg', 'at', r.data->'wish'->>'at',
+          'taken', exists (select 1 from public.donations d where d.data->>'wish' = r.id and d.status not in ('rejected', 'cancelled'))) as w
+          from public.requests r
+         where r.status = 'verified' and r.data->'wish'->>'on' = 'true' and coalesce(r.data->'wish'->>'text', '') <> ''
+           and coalesce(r.data->'addr'->>'zone', '') ~ '^[0-9]{1,2}$'
+         order by r.created_at limit 60) x), '[]'::jsonb))
+$$;
+revoke all on function public.public_needs() from public;
+grant execute on function public.public_needs() to anon, authenticated;
 
 notify pgrst, 'reload schema';

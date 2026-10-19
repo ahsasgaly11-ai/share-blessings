@@ -275,6 +275,41 @@ section.view { display: block; }
 .pin3d { width: 40px; height: 40px; flex: none; filter: drop-shadow(0 3px 4px rgba(60,10,25,.2)); }
 .contact-list a { display: inline-flex; gap: 6px; align-items: center; }
 
+/* نعمة الجيران والأمنيات المجهولة */
+.near-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 7px 14px; border-radius: 99px; border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.1); color: #fff; font: inherit; font-size: .93rem; cursor: pointer; }
+.near-pill[hidden] { display: none; }
+.near-pill b { color: var(--gold-bright); }
+.near-pill .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold-bright); box-shadow: 0 0 0 0 rgba(232,196,104,.7); animation: near-ping 1.8s ease-out infinite; }
+@keyframes near-ping { to { box-shadow: 0 0 0 10px rgba(232,196,104,0); } }
+.near-bar { display: flex; gap: 14px 22px; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 20px; }
+.near-sum { display: grid; gap: 2px; flex: 1 1 260px; }
+.near-sum b { font-family: var(--f-display); font-size: 1.08rem; }
+.near-sum small { color: var(--muted); }
+.near-loc { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.near-loc form { display: flex; gap: 6px; align-items: center; }
+.near-loc input { width: 92px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); font: inherit; }
+.near-kinds { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.near-kinds a { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 99px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-size: .93rem; }
+.near-kinds a b { color: var(--primary-text); font-variant-numeric: tabular-nums; }
+.near-kinds img { width: 30px; height: 30px; }
+.near-h { margin: 28px 0 12px; font-family: var(--f-display); font-size: 1.1rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.near-h small { color: var(--muted); font-family: var(--f-body); font-size: .88rem; font-weight: 400; }
+.wishes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.wish { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: grid; gap: 10px; align-content: start; }
+.wish.taken { opacity: .72; }
+.wish-top { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.wish-top img { width: 38px; height: 38px; }
+.wish-text { font-weight: 600; line-height: 1.6; }
+.wish small { color: var(--muted); }
+.wish .btn { justify-self: start; }
+.wish-note { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+.wish-note[hidden] { display: none; }
+.wish-box { border: 1px dashed var(--line); border-radius: 10px; padding: 12px 14px; }
+.wish-box summary { cursor: pointer; }
+.wish-box .in { display: grid; gap: 10px; margin-top: 10px; }
+@media (max-width: 1000px) { .wishes { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 680px) { .wishes { grid-template-columns: 1fr; } }
+
 .need-band { margin-top: 64px; border-radius: 16px; background: var(--gold-soft); border: 1px solid var(--line); padding: 28px 32px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
 .need-band > div { flex: 1 1 320px; display: grid; gap: 6px; }
 .need-band p { color: var(--muted); }
@@ -721,6 +756,7 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
           <span><svg width="18" height="18"><use href="#i-pin"/></svg>استلام من باب المنزل</span>
           <span><svg width="18" height="18"><use href="#i-eye"/></svg>خصوصية تامة للمستفيد</span>
         </div>
+        <button class="near-pill" id="nearPill" type="button" hidden><span class="dot" aria-hidden="true"></span><span id="nearPillTxt"></span></button>
       </div>
       <form class="quick" id="quickForm">
         <header><b>تبرّع سريع</b><small>خطوة واحدة للبدء</small></header>
@@ -747,6 +783,20 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
       <div><b id="imPcs">0</b><span>قطعة ملابس</span></div>
       <div><b id="imFam">0</b><span>فردًا استفادوا</span></div>
       <div><b id="imDon">0</b><span>متبرّعًا شاركوا</span></div>
+    </div>
+  </div>
+
+  <div class="wrap sec" id="secNear" hidden>
+    <div class="sec-head"><div><p class="eyebrow">نعمة الجيران</p><h2>احتياجات قريبة منك</h2><p>أسر تحقق منها المشرفون وتنتظر من يشاركها. لا نعرض اسمًا ولا عنوانًا، ونحسب المسافة داخل جهازك فقط.</p></div></div>
+    <div class="near-bar">
+      <div class="near-sum" id="nearSum"></div>
+      <div class="near-loc" id="nearLoc"></div>
+    </div>
+    <div class="near-kinds" id="nearKinds"></div>
+    <div id="wishWrap" hidden>
+      <h3 class="near-h">أمنيات مجهولة <small>كتبها المشرفون عن أسر متحقَّق منها، دون أي بيانات شخصية</small></h3>
+      <div class="wishes" id="wishList"></div>
+      <div style="margin-top:12px"><button class="btn btn-ghost btn-sm" id="wishMore" type="button" hidden>عرض كل الأمنيات</button></div>
     </div>
   </div>
 
@@ -860,6 +910,7 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
   <div class="page-grid">
   <div style="min-width:0">
   <div class="note bad intake-closed" id="d_closed" hidden></div>
+  <div class="note wish-note" id="d_wish" hidden></div>
   <form class="sheet" id="donForm" novalidate>
     <fieldset>
       <legend><i><b>١</b></i>بيانات التواصل</legend>
@@ -1294,6 +1345,7 @@ Object.assign(EN, {"ونحفظ مع كل تبرع أو طلب لغة الموق�
 Object.assign(EN, {"الشريط المتحرك أسفل الموقع": "Scrolling bar at the bottom", "إظهار الشريط المتحرك": "Show the scrolling bar", "السرعة": "Speed", "بطيئة": "Slow", "عادية": "Normal", "سريعة": "Fast", "نص الرسالة": "Message text", "إضافة رسالة": "Add message", "إخفاء الشريط": "Hide the bar", "نستلم تبرعاتكم العينية من جميع بلديات قطر": "We collect your in-kind donations from every municipality in Qatar", "كل تبرع يراجعه مشرف قبل اعتماده ويصل لأسرة متحقَّق منها": "Every donation is reviewed by a supervisor and reaches a verified family", "تابع طلبك في أي وقت برقمه من صفحة «تتبّع طلبي»": "Track your request any time with its number on the “Track my request” page", "شارك في حملة كسوة الشتاء ودفّئ أسرة محتاجة": "Join the winter clothing campaign and keep a family in need warm"});
 Object.assign(EN, {"آية أو حديث: يبقى بالعربية في كل اللغات": "Quran verse or hadith: stays in Arabic in every language"});
 Object.assign(EN, {"مناطق التغطية": "Coverage", "نستلم تبرعك من جميع بلديات قطر": "We collect donations across all municipalities of Qatar", "يحدد المشرف موعد الاستلام من عنوانك حسب اللوحة المنزلية بعد اعتماد التبرع.": "Once your donation is approved, a supervisor schedules pickup from your address using your blue plate.", "الدوحة": "Doha", "الريان": "Al Rayyan", "الوكرة": "Al Wakrah", "الظعاين": "Al Daayen", "أم صلال": "Umm Salal", "الخور والذخيرة": "Al Khor & Al Thakhira", "الشمال": "Al Shamal", "الشحانية": "Al Shahaniya", "السد · الدفنة · المنصورة · الهلال": "Al Sadd · Al Dafna · Al Mansoura · Al Hilal", "الريان الجديد · معيذر · الوعب · عين خالد": "New Rayyan · Muaither · Al Waab · Ain Khaled", "الوكرة · الوكير · مسيعيد": "Al Wakrah · Al Wukair · Mesaieed", "لوسيل · لعبيب · سميسمة · الظعاين": "Lusail · Leabaib · Simaisma · Al Daayen", "أم صلال محمد · أم صلال علي · أم العمد": "Umm Salal Mohammed · Umm Salal Ali · Umm Al Amad", "الخور · الذخيرة": "Al Khor · Al Thakhira", "الرويس · أبو ظلوف": "Al Ruwais · Abu Dhalouf", "الشحانية · دخان · الجميلية": "Al Shahaniya · Dukhan · Al Jemailiya", "تفضّل التسليم بنفسك؟": "Prefer to drop it off yourself?", "راسلنا عبر واتساب لنحدد معك موعدًا ومكانًا قريبًا منك.": "Message us on WhatsApp and we will arrange a time and a place near you.", "تواصل عبر واتساب": "Contact us on WhatsApp", "تواصل معنا": "Contact us", "واتساب:": "WhatsApp:", "© 2026 شارك النعم. جميع الحقوق محفوظة.": "© 2026 Share Blessings. All rights reserved."});
+Object.assign(EN, {"نعمة الجيران": "Blessings next door", "احتياجات قريبة منك": "Needs near you", "أسر تحقق منها المشرفون وتنتظر من يشاركها. لا نعرض اسمًا ولا عنوانًا، ونحسب المسافة داخل جهازك فقط.": "Families our supervisors have verified, waiting for someone to share with them. We never show a name or an address, and distance is worked out on your device only.", "أمنيات مجهولة": "Anonymous wishes", "كتبها المشرفون عن أسر متحقَّق منها، دون أي بيانات شخصية": "Written by supervisors about verified families, with no personal details", "عرض كل الأمنيات": "Show all wishes", "إظهار «نعمة الجيران» والأمنيات المجهولة": "Show “Blessings next door” and anonymous wishes", "{0} لأسرة من {1} أفراد": "{0} for a family of {1}", "{0} لمؤسسة خيرية": "{0} for a charity", "أسر قريبة منك تنتظر مشاركتك. اعرف الأقرب إليك": "Families near you are waiting for your help. See who is closest", "أسرة من {0} أفراد": "A family of {0}", "ألبّي هذه الأمنية": "I'll fulfil this wish", "أمنية": "Wish", "أمنية مجهولة في الموقع": "Anonymous wish on the site", "أُوقف نشر الأمنية": "The wish is no longer published", "إيقاف نشر أمنية الطلب {0}": "Stopped publishing the wish of request {0}", "احتياجات قريبة منك: {0}": "Needs near you: {0}", "احتياجات متحقَّق منها تنتظر متبرعًا: {0}": "Verified needs waiting for a donor: {0}", "استخدم موقعي": "Use my location", "اكتب نص الأمنية": "Write the wish text", "اكتبه بلغتك، ويُترجم تلقائيًا": "Write it in your language; it is translated automatically", "انشر هذا الاحتياج كأمنية مجهولة": "Publish this need as an anonymous wish", "تبرع عام بدلًا من ذلك": "Make a general donation instead", "تبرعك يلبّي أمنية مجهولة:": "Your donation answers an anonymous wish:", "تظهر للزوار مع رقم المنطقة فقط حتى يلبّيها متبرّع قريب، وتختفي تلقائيًا بعد التخصيص. لا تكتب اسمًا أو رقم هاتف أو عنوانًا.": "Visitors see it with the zone number only so a nearby donor can answer it; it disappears by itself after allocation. Do not write a name, phone number or address.", "تعذّر تحديد موقعك. اكتب رقم منطقتك من اللوحة الزرقاء بدلًا من ذلك.": "Could not find your location. Type your zone number from the blue plate instead.", "جارٍ ترجمة الأمنية…": "Translating the wish…", "حدّد موقعك لنريك الأقرب إليك.": "Set your location to see the closest ones.", "حسب موقعك الحالي": "By your current location", "حفظ الأمنية": "Save wish", "رقم المنطقة من 1 إلى 99، تجده في أعلى اللوحة الزرقاء على باب منزلك.": "The zone number is 1 to 99; it is at the top of the blue plate on your door.", "رقم منطقتك": "Your zone no.", "رقم منطقتك من اللوحة الزرقاء": "Your zone number from the blue plate", "ضمن {0} كم من موقعك تقريبًا.": "Within about {0} km of you.", "عرض": "Show", "على بعد نحو {0} كم": "About {0} km away", "في منطقتك": "In your zone", "في منطقتك.": "In your zone.", "قريبة جدًا منك": "Very close to you", "لا تكتب في الأمنية رقم هاتف أو بريدًا أو رابطًا": "Do not put a phone number, email or link in the wish", "لا توجد احتياجات قريبة منك الآن": "No needs near you right now", "منشورة": "Published", "منطقتك: {0}": "Your zone: {0}", "نشر أمنية مجهولة للطلب {0}": "Published an anonymous wish for request {0}", "نص الأمنية": "Wish text", "نُشرت الأمنية في الموقع دون أي بيانات شخصية": "The wish is on the site with no personal details", "نُشرت الأمنية، وتعذّرت ترجمتها إلى {0} لغات فتظهر فيها بلغتها الأصلية.": "The wish is published; it could not be translated into {0} languages, so it shows there in its original language.", "هذه أقرب الاحتياجات إليك، وكلها في قطر.": "Here are the closest ones to you, all within Qatar.", "يلبّي أمنية مجهولة": "Answers an anonymous wish", "يلبّيها متبرّع": "A donor is answering it", "يلبّيها متبرّع الآن": "A donor is answering it now"});
 // t('نص {0}', x): the current language's text, the Arabic source when untranslated; {n} are filled with the arguments
 const t = (s, ...a) => { const r = TR ? (TR[s] != null ? TR[s] : s) : (OV[s] != null ? OV[s] : s); return a.length ? String(r).replace(/\{(\d+)\}/g, (_, i) => a[+i] ?? '') : r; };
 const SEP = () => LANGS[LANG].rtl ? '، ' : ', ';
@@ -1508,7 +1560,7 @@ function paintStats(st) {
   paintCamps(Object.assign({ winter: +st.winter || 0, ramadan: +st.ramadan || 0, dates: +st.dates || 0 }, campProg || {}));
 }
 function renderHome() {
-  renderCamps(); renderAreas();
+  renderCamps(); renderAreas(); renderNear();
   if (CLOUD) { if (pubStats) paintStats(pubStats); fetchStats(); return; }
   let kg = 0, pcs = 0;
   db.donations.filter(d => ['received','allocated','delivered'].includes(d.status)).forEach(d => d.items.forEach(it => {
@@ -1536,7 +1588,7 @@ function renderQuick() {
 $$('input[name=q_kind]').forEach(r => r.addEventListener('change', renderQuick)); renderQuick();
 $('#quickForm').addEventListener('submit', e => {
   e.preventDefault();
-  pendingPreset = $('input[name=q_kind]:checked').value + ':' + $('input[name=q_item]:checked').value;
+  pendingWish = null; pendingPreset = $('input[name=q_kind]:checked').value + ':' + $('input[name=q_item]:checked').value;
   location.hash = '#donate'; if (location.hash === '#donate') applyPreset();
 });
 
@@ -1678,16 +1730,16 @@ $('#donForm').addEventListener('submit', e => {
   box.hidden = true;
   if (CLOUD) { submitDonationCloud({ kind, name: v('d_name'), phone: v('d_phone'), addr:{ zone:v('d_zone'), street:v('d_street'), bldg:v('d_bldg') }, details: v('d_details'),
     method: $('input[name=d_method]:checked').value, slot: $('#d_slot').value, target, person: target === 'person' ? { name:v('d_pName'), addr:v('d_pAddr') } : null,
-    items, notes: v('d_notes'), lang: LANG, near, ...geoFromForm('d') }, box); return; }
+    items, notes: v('d_notes'), lang: LANG, near, ...(pendingWish ? { wish: pendingWish.id } : {}), ...geoFromForm('d') }, box); return; }
   const rec = { id: nextId('d'), kind, name: v('d_name'), phone: v('d_phone'), addr:{ zone:v('d_zone'), street:v('d_street'), bldg:v('d_bldg') }, details: v('d_details'),
     method: $('input[name=d_method]:checked').value, slot: $('#d_slot').value, target, person: target === 'person' ? { name:v('d_pName'), addr:v('d_pAddr') } : null,
-    items, photos: donPhotos.slice(), notes: v('d_notes'), lang: LANG, status:'new', allocatedTo:null, near, history:[{ status:'new', at:nowISO(), note:'' }], createdAt: nowISO(), ...geoFromForm('d') };
+    items, photos: donPhotos.slice(), notes: v('d_notes'), lang: LANG, status:'new', allocatedTo:null, near, ...(pendingWish ? { wish: pendingWish.id } : {}), history:[{ status:'new', at:nowISO(), note:'' }], createdAt: nowISO(), ...geoFromForm('d') };
   db.donations.unshift(rec); log(t('تبرع جديد {0} من {1}', rec.id, rec.name), rec.name);
   if (!save()) {
     db.donations.shift(); db.log.shift(); db.seq.d -= 1;
     box.innerHTML = t('تعذّر حفظ التبرع لأن مساحة التخزين ممتلئة. احذف بعض الصور وحاول مرة أخرى.'); box.hidden = false; return;
   }
-  donPhotos = []; renderThumbs(); resetGeo('d'); $('#d_maplink').value = '';
+  donPhotos = []; renderThumbs(); resetGeo('d'); $('#d_maplink').value = ''; pendingWish = null; syncWishNote();
   $('#donForm').hidden = true;
   $('#donDone').innerHTML = receiptHTML(rec, 'd', true); $('#donDone').hidden = false;
   wireReceipt($('#donDone'), () => { $('#donForm').reset(); resetGeo('d'); syncDonKind(); $('#d_personWrap').hidden = true; $$('[data-plate=d] b').forEach(b => b.textContent = '–'); $('#donForm').hidden = false; $('#donDone').hidden = true; });
@@ -1702,7 +1754,7 @@ async function submitDonationCloud(p, box) {
     if (error) throw error;
     const rec = { ...p, id: data.id, status: 'new', history: [{ status: 'new', at: data.createdAt, note: '' }], createdAt: data.createdAt, allocations: [] };
     recentRecs[rec.id] = rec;
-    donPhotos = []; renderThumbs(); resetGeo('d'); $('#d_maplink').value = '';
+    donPhotos = []; renderThumbs(); resetGeo('d'); $('#d_maplink').value = ''; pendingWish = null; syncWishNote(); needsAt = 0;
     showDonDone(rec);
   } catch (e) { box.innerHTML = esc(t('تعذّر الإرسال: {0}', cloudErr(e))); box.hidden = false; }
   finally { btn.disabled = false; document.body.classList.remove('busy'); }
@@ -1801,14 +1853,14 @@ $$('[data-fill]').forEach(b => b.addEventListener('click', () => {
 /* presets: "food:rice" يعبّئ صنفًا، "clothes:winter" أو "clothes:kids" يعبّئ فئة/نوعًا */
 function applyPreset() {
   if (!pendingPreset) return;
-  const [kind, v] = pendingPreset.split(':'); pendingPreset = null;
+  const [kind, v] = pendingPreset.split(':'); pendingPreset = null; syncWishNote();
   if ($('#donForm').hidden) { $('#donForm').hidden = false; $('#donDone').hidden = true; }
   $(`input[name=d_kind][value=${kind}]`).checked = true; syncDonKind();
   if (kind === 'food') resetItems([{ type: v, qty: '', unit: 'kg', exp: '' }]);
   else if (isGoods(kind)) { const G = GOODS[kind]; resetItems([{ type: G.types[v] ? v : 'misc', desc: '', cond: Object.keys(G.cond)[0], qty: '' }]); }
   else resetItems([{ cat: CAT[v] ? v : 'kids', type: CTYPE[v] ? v : 'daily', cond: 'good', size: '', qty: '' }]);
 }
-$$('[data-preset]').forEach(a => a.addEventListener('click', () => { pendingPreset = a.dataset.preset; if (location.hash === '#donate') applyPreset(); }));
+$$('[data-preset]').forEach(a => a.addEventListener('click', () => { pendingWish = null; pendingPreset = a.dataset.preset; if (location.hash === '#donate') applyPreset(); }));
 
 /* ================= receipt & timeline ================= */
 function timelineHTML(rec, k) {
@@ -2575,6 +2627,7 @@ function openDrawer(k, id, pre) {
   const kv = isD
     ? `<dt>${t('المتبرّع')}</dt><dd>${esc(rec.name)}</dd><dt>${t('الهاتف')}</dt><dd class="num" dir="ltr">${esc(rec.phone)}</dd><dt>${t('العنوان')}</dt><dd>${plateTxt(rec.addr)}${rec.details ? '<br><span class="muted">' + esc(rec.details) + '</span>' : ''}<div style="margin-top:6px">${locHTML(rec, 'd:' + rec.id)}</div></dd>
        <dt>${t('التسليم')}</dt><dd>${rec.method === 'pickup' ? t('استلام من العنوان') : t('يوصله لنقطة التجميع')} · ${SLOT[rec.slot]}</dd><dt>${t('الجهة')}</dt><dd>${TARGET[rec.target]}${rec.person ? ': ' + esc(rec.person.name) + ' (' + esc(rec.person.addr) + ')' : ''}</dd>
+       ${rec.wish ? `<dt>${t('أمنية')}</dt><dd><button type="button" class="linkish" data-open="r:${esc(rec.wish)}">${esc(rec.wish)}</button> <span class="tag gold">${t('يلبّي أمنية مجهولة')}</span></dd>` : ''}
        ${rec.pickup ? `<dt>${t('الموعد')}</dt><dd>${fmtDate(rec.pickup.date)} · ${esc(rec.pickup.vol)}</dd>` : ''}${rec.notes ? `<dt>${t('ملاحظة المتبرّع')}</dt><dd data-tr-src="notes">${esc(rec.notes)}</dd>` : ''}`
     : `<dt>${t('المستفيد')}</dt><dd>${esc(rec.name)} <span class="tag">${rec.type === 'org' ? t('مؤسسة') : t('أسرة')}</span></dd><dt>${t('الهاتف')}</dt><dd class="num" dir="ltr">${esc(rec.phone)}</dd><dt>${t('الأفراد')}</dt><dd class="num">${rec.size}</dd>
        <dt>${t('العنوان')}</dt><dd>${plateTxt(rec.addr)}${rec.details ? '<br><span class="muted">' + esc(rec.details) + '</span>' : ''}<div style="margin-top:6px">${locHTML(rec, 'r:' + rec.id)}</div></dd><dt>${t('الأولوية')}</dt><dd>${rec.urg === 'high' ? t('عاجلة') : t('عادية')}</dd>
@@ -2584,6 +2637,7 @@ function openDrawer(k, id, pre) {
     <div class="body">${dups.length ? `<p class="note bad">${t('تنبيه: يوجد طلب مفتوح آخر بنفس الهاتف أو العنوان:')} ${dups.map(x => `<button type="button" class="linkish" data-open="r:${x.id}">${x.id}</button>`).join(' ')}</p>` : ''}${edited}
       <dl class="kv">${kv}</dl>${isD ? galleryHTML(rec) : ''}<div><h3 style="margin-bottom:8px">${isD ? t('الأصناف') : t('الاحتياج')}</h3>${items}</div>
       ${isD ? allocListHTML(rec) : reqGot.length ? `<div><h3 style="margin-bottom:8px">${t('ما خُصّص لهذا الطلب')}</h3><div class="mini-items">${reqGot.map(x => `<div><b class="num" dir="ltr">${x.d.id}</b><span>${esc(linesText(x.d, x.a.lines))}</span>${x.a.delivered ? `<span class="tag" style="color:var(--ok)">${t('سُلّم')}</span>` : `<span class="tag gold">${t('بانتظار التوصيل')}</span>`}</div>`).join('')}</div></div>` : ''}
+      ${isD ? '' : wishBoxHTML(rec)}
       ${mtBoxHTML(rec, isD)}
       <div><h3 style="margin-bottom:8px">${t('مسار الطلب')}</h3>${timelineHTML(rec, k)}</div></div>
     <footer>${actionsHTML(rec, k, pre)}</footer>`;
@@ -2595,6 +2649,21 @@ function openDrawer(k, id, pre) {
   $('[data-close]', dr).focus();
 }
 
+// a starting text for the supervisor, built from what the family chose in the form (no names, no address)
+function wishSuggest(r) {
+  const what = isGoods(r.kind) ? reqGoods(r).map(x => GOODS[r.kind].types[x]).join(SEP()) : r.kind === 'food' ? (r.foodTypes || []).map(x => FOOD[x]).join(SEP())
+    : `${KIND.clothes} ${(r.types || []).map(x => CTYPE[x]).join('/')} (${(r.cats || []).map(c => CAT[c]).join(SEP())})`;
+  return r.type === 'org' ? t('{0} لمؤسسة خيرية', what) : t('{0} لأسرة من {1} أفراد', what, r.size);
+}
+function wishBoxHTML(r) {
+  if (r.status !== 'verified' || !can('verify')) return '';
+  const w = r.wish || {};
+  return `<details class="wish-box"${w.on ? ' open' : ''}><summary><b>${t('أمنية مجهولة في الموقع')}</b>${w.on ? ` <span class="tag gold">${t('منشورة')}</span>` : ''}${wishTaken(r.id) ? ` <span class="tag">${t('يلبّيها متبرّع')}</span>` : ''}</summary><div class="in">
+    <p class="muted">${t('تظهر للزوار مع رقم المنطقة فقط حتى يلبّيها متبرّع قريب، وتختفي تلقائيًا بعد التخصيص. لا تكتب اسمًا أو رقم هاتف أو عنوانًا.')}</p>
+    <label class="check"><input type="checkbox" id="wishOn"${w.on ? ' checked' : ''}><span>${t('انشر هذا الاحتياج كأمنية مجهولة')}</span></label>
+    <label class="f">${t('نص الأمنية')} <small>${t('اكتبه بلغتك، ويُترجم تلقائيًا')}</small><textarea id="wishText" rows="2" maxlength="160" dir="auto">${esc(w.text || wishSuggest(r))}</textarea></label>
+    <div><button class="btn btn-primary btn-sm" type="button" data-act="wishSave">${t('حفظ الأمنية')}</button> <span class="muted" id="wishSt"></span></div></div></details>`;
+}
 function actionsHTML(rec, k, pre) {
   const reasons = k === 'd'
     ? ['الصور غير واضحة أو لا تطابق الوصف','الصلاحية قريبة جدًا','صنف غير مقبول (ليس جافًا)','العبوات مفتوحة','الملابس غير صالحة','الجهاز لا يعمل أو غير آمن','الأثاث تالف أو غير نظيف','تعذّر التواصل مع المتبرّع']
@@ -2613,6 +2682,7 @@ function actionsHTML(rec, k, pre) {
         <button class="btn btn-primary" data-act="receive" type="button">${t('تأكيد الاستلام في المستودع')}</button>`;
       case 'received': {
         if (!can('allocate')) return noRight;
+        pre = pre || rec.wish;   // a donation made for a wish goes to that family first
         const reqs = db.requests.filter(allocatable).map(r => ({ r, s: score(rec, r) })).filter(x => x.s > 0).sort((a, b) => b.s - a.s);
         const preReq = pre && findReq(pre);
         if (preReq && allocatable(preReq) && !reqs.some(x => x.r.id === pre)) reqs.unshift({ r: preReq, s: score(rec, preReq) });
@@ -2681,6 +2751,23 @@ function wireActions(dr, rec, k) {
   });
   act('writeoff', () => { writeOff(rec, +$('#woItem', dr).value, +$('#woQty', dr).value, $('#woWhy', dr).value); done(t('سُجّل الاستبعاد')); });
   act('verify', () => { const w = $('#vWay', dr).value; setStatus(rec, 'verified', w); log(t('تحقق من الطلب {0} ({1})', rec.id, t(w))); done(t('تم التحقق وأُضيف لقائمة المطابقة')); });
+  act('wishSave', async () => {
+    const on = $('#wishOn', dr).checked, text = $('#wishText', dr).value.trim().slice(0, 160), btn = $('[data-act="wishSave"]', dr);
+    if (on && text.length < 5) { toast(t('اكتب نص الأمنية')); return; }
+    if (on && /\d{6,}|@|https?:|www\./i.test(toLatin(text).replace(/[\s-]/g, ''))) { toast(t('لا تكتب في الأمنية رقم هاتف أو بريدًا أو رابطًا')); return; }
+    const old = rec.wish || {}, same = old.text === text && old.lang === LANG, tr = {};
+    let failed = 0; btn.disabled = true;
+    if (on) {
+      $('#wishSt', dr).textContent = t('جارٍ ترجمة الأمنية…');
+      await Promise.all(Object.keys(LANGS).filter(l => l !== LANG).map(async l => {
+        if (same && old.tr && old.tr[l]) { tr[l] = old.tr[l]; return; }
+        try { tr[l] = await mt(text, l, LANG); } catch (e) { failed++; }
+      }));
+    }
+    rec.wish = { on, text, lang: LANG, tr, preset: wishPreset(rec), at: same && old.at ? old.at : nowISO() };
+    log(on ? t('نشر أمنية مجهولة للطلب {0}', rec.id) : t('إيقاف نشر أمنية الطلب {0}', rec.id)); needsAt = 0;
+    done(!on ? t('أُوقف نشر الأمنية') : failed ? t('نُشرت الأمنية، وتعذّرت ترجمتها إلى {0} لغات فتظهر فيها بلغتها الأصلية.', failed) : t('نُشرت الأمنية في الموقع دون أي بيانات شخصية'));
+  });
   act('completeReq', () => { setStatus(rec, 'delivered', t('سُلّم كل ما خُصّص')); log(t('اكتمل الطلب {0}', rec.id)); done(t('أُغلق الطلب كمكتمل')); });
 }
 
@@ -3079,7 +3166,7 @@ const DEFAULT_SITE = {
   banner: { on: false, text: '' },
   intake: { donations: true, requests: true, msg: '' },
   kinds: { food: true, clothes: true, elec: true, furn: true, other: true },
-  sections: { stats: true, campaigns: true, coverage: true },
+  sections: { stats: true, campaigns: true, coverage: true, near: true },
   ticker: { on: true, speed: 'normal', items: ['نستلم تبرعاتكم العينية من جميع بلديات قطر', 'كل تبرع يراجعه مشرف قبل اعتماده ويصل لأسرة متحقَّق منها', 'تابع طلبك في أي وقت برقمه من صفحة «تتبّع طلبي»', 'شارك في حملة كسوة الشتاء ودفّئ أسرة محتاجة'] },
   campaigns: [
     { id: 'winter', on: true, title: 'كسوة الشتاء', badge: 'حملة الموسم', desc: 'ملابس شتوية دافئة للأطفال والأسر قبل موسم البرد.', icon: 'cat-coat', theme: 'band', kind: 'clothes', types: ['winter'], target: 300 },
@@ -3183,7 +3270,7 @@ function renderCamps() {
     <div class="body"><h3>${esc(t(c.title))}</h3><p>${esc(t(c.desc))}</p>
       <div class="prog"><i data-camp-bar="${esc(c.id)}"></i></div><div class="prog-row"><span>${t('جُمع')} <b data-camp-val="${esc(c.id)}">0</b> ${t(campUnit(c))}</span><span>${t('الهدف')} <b>${fmtN(c.target)}</b></span></div>
       <a class="btn btn-primary btn-sm" href="#donate" data-preset="${esc(campPreset(c))}">${t('شارك في الحملة')}</a></div></article>`).join('');
-  $$('[data-preset]', box).forEach(a => a.addEventListener('click', () => { pendingPreset = a.dataset.preset; if (location.hash === '#donate') applyPreset(); }));
+  $$('[data-preset]', box).forEach(a => a.addEventListener('click', () => { pendingWish = null; pendingPreset = a.dataset.preset; if (location.hash === '#donate') applyPreset(); }));
   if (CLOUD && Date.now() - campProgAt > 30000) {
     campProgAt = Date.now();
     sb.rpc('campaign_progress').then(({ data, error }) => { if (!error && data) { campProg = data; if (pubStats) paintStats(pubStats); } });
@@ -3208,6 +3295,144 @@ function campTotals(dons) {
 function renderAreas() {
   const box = $('#secCover .points'); if (!box) return;
   box.innerHTML = SITE.areas.map(a => `<div class="point area"><img class="pin3d" src="icons/pin.webp" width="40" height="40" alt="" decoding="async"><div><b>${esc(t(a.name))}</b><small>${esc(t(a.list))}</small></div></div>`).join('');
+}
+
+/* ---- «نعمة الجيران» و«أمنيات مجهولة» ----
+   The public sees verified needs counted per zone (the zone number from the blue plate, never a street or building),
+   and wishes a supervisor chose to publish in their own words. Distance is worked out in the visitor's browser
+   from the centre of each zone; the visitor's own location is never sent anywhere. */
+const NEAR_KM = 8, WISH_SHOW = 6, KIND_IC = { food: 'wheat', clothes: 'tee', elec: 'fridge', furn: 'sofa', other: 'box' };
+let needs = null, needsAt = 0, pendingWish = null, wishAll = false, nearMe = null, zoneC = {};
+try { nearMe = JSON.parse(localStorage.getItem('sb.near') || 'null'); } catch (e) {}
+try { zoneC = JSON.parse(localStorage.getItem('sb.zoneC') || '{}'); } catch (e) {}
+// centre of a zone: the average of its addresses in the national address service, kept in the browser after the first lookup
+async function zoneCenter(z) {
+  if (zoneC[z]) return zoneC[z];
+  const st = encodeURIComponent(JSON.stringify(['X', 'Y'].map(k => ({ statisticType: 'avg', onStatisticField: k + '_COORD', outStatisticFieldName: k }))));
+  try {
+    const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), 8000);
+    const res = await fetch(`https://services.gisqatar.org.qa/server/rest/services/Vector/QARS_wgs84/MapServer/0/query?where=ZONE_NO%3D${+z}&outStatistics=${st}&f=json`, { signal: ctl.signal }); clearTimeout(tm);
+    const j = await res.json(), a = j.features && j.features[0] && j.features[0].attributes;
+    const x = a && (a.X ?? a.x), y = a && (a.Y ?? a.y);
+    if (x && y) {
+      zoneC[z] = { lat: +(+y).toFixed(5), lng: +(+x).toFixed(5) };
+      try { localStorage.setItem('sb.zoneC', JSON.stringify(zoneC)); } catch (e) {}
+      return zoneC[z];
+    }
+  } catch (e) {}
+  return null;
+}
+function km(a, b) {
+  const r = Math.PI / 180, dLat = (b.lat - a.lat) * r, dLng = (b.lng - a.lng) * r;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLng / 2) ** 2;
+  return 12742 * Math.asin(Math.sqrt(h));
+}
+// the default request kind/type a donor starts from when answering a wish
+function wishPreset(r) {
+  const v = r.kind === 'food' ? (r.foodTypes || [])[0] : r.kind === 'clothes' ? (r.cats || [])[0] : reqGoods(r)[0];
+  return `${r.kind}:${v || Object.keys(typeMap(r.kind))[0]}`;
+}
+const wishTaken = id => db.donations.some(d => d.wish === id && !['rejected', 'cancelled'].includes(d.status));
+// demo mode builds the same shape that public_needs() returns
+function localNeeds() {
+  const v = db.requests.filter(r => r.status === 'verified' && +r.addr.zone >= 1 && +r.addr.zone <= 99), zm = {};
+  v.forEach(r => { const k = `${+r.addr.zone}:${r.kind}`; zm[k] = (zm[k] || 0) + 1; });
+  return { zones: Object.entries(zm).map(([k, n]) => ({ z: +k.split(':')[0], k: k.split(':')[1], n })),
+    wishes: v.filter(r => r.wish && r.wish.on && r.wish.text).map(r => ({ id: r.id, z: +r.addr.zone, k: r.kind, t: r.type, text: r.wish.text, lang: r.wish.lang, tr: r.wish.tr || {},
+      preset: r.wish.preset, size: r.size, urg: r.urg, at: r.wish.at, taken: wishTaken(r.id) })) };
+}
+async function loadNeeds(force) {
+  if (!CLOUD) { needs = localNeeds(); return; }
+  if (!force && needs && Date.now() - needsAt < 60000) return;
+  needsAt = Date.now();
+  const { data, error } = await sb.rpc('public_needs');
+  needs = error || !data ? null : data;   // until near-needs.sql runs the function is missing and the section stays hidden
+}
+function nearLbl(z, d) {
+  if (nearMe && nearMe.zone === z) return t('في منطقتك');
+  if (d == null) return t('منطقة {0}', z);
+  return d < 1.5 ? t('قريبة جدًا منك') : t('على بعد نحو {0} كم', Math.round(d));
+}
+const wishText = w => (LANG !== (w.lang || 'ar') && w.tr && w.tr[LANG]) || w.text;
+let nearSeq = 0;
+async function renderNear() {
+  const sec = $('#secNear'), pill = $('#nearPill'); if (!sec) return;
+  const seq = ++nearSeq;
+  if (SITE.sections.near === false) { sec.hidden = true; pill.hidden = true; return; }
+  await loadNeeds();
+  if (seq !== nearSeq) return;
+  const N = needs, total = N ? N.zones.reduce((s, x) => s + x.n, 0) : 0;
+  if (!N || (!total && !N.wishes.length)) { sec.hidden = true; pill.hidden = true; return; }
+  // distance from the visitor to the centre of every zone that has a need
+  const dist = {};
+  if (nearMe) {
+    const origin = nearMe.lat ? nearMe : await zoneCenter(nearMe.zone);
+    const zs = [...new Set([...N.zones.map(x => x.z), ...N.wishes.map(w => w.z)])];
+    if (origin) await Promise.all(zs.map(async z => { const c = await zoneCenter(z); if (c) dist[z] = km(origin, c); }));
+    if (seq !== nearSeq) return;
+  }
+  const located = !!nearMe, measured = Object.keys(dist).length > 0;
+  const isNear = z => (nearMe && nearMe.zone === z) || (dist[z] != null && dist[z] <= NEAR_KM);
+  const near = N.zones.filter(x => isNear(x.z)), nearN = near.reduce((s, x) => s + x.n, 0);
+  sec.hidden = false;
+  $('#nearSum').innerHTML = !located
+    ? `<b>${t('احتياجات متحقَّق منها تنتظر متبرعًا: {0}', fmtN(total))}</b><small>${t('حدّد موقعك لنريك الأقرب إليك.')}</small>`
+    : nearN
+      ? `<b>${t('احتياجات قريبة منك: {0}', fmtN(nearN))}</b><small>${measured ? t('ضمن {0} كم من موقعك تقريبًا.', NEAR_KM) : t('في منطقتك.')}</small>`
+      : `<b>${t('لا توجد احتياجات قريبة منك الآن')}</b><small>${t('هذه أقرب الاحتياجات إليك، وكلها في قطر.')}</small>`;
+  $('#nearLoc').innerHTML = located
+    ? `<span class="tag">${nearMe.zone ? t('منطقتك: {0}', nearMe.zone) : t('حسب موقعك الحالي')}</span><button class="btn btn-ghost btn-sm" type="button" data-near="clear">${t('تغيير')}</button>`
+    : `<button class="btn btn-primary btn-sm" type="button" data-near="gps"><svg width="14" height="14"><use href="#i-pin"/></svg>${t('استخدم موقعي')}</button>
+       <form data-near="zone"><input type="number" min="1" max="99" inputmode="numeric" aria-label="${t('رقم منطقتك من اللوحة الزرقاء')}" placeholder="${t('رقم منطقتك')}"><button class="btn btn-ghost btn-sm" type="submit">${t('عرض')}</button></form>`;
+  // what is needed nearby (or everywhere before the visitor sets a location), one chip per kind
+  const byKind = {}; (located && nearN ? near : N.zones).forEach(x => { byKind[x.k] = (byKind[x.k] || 0) + x.n; });
+  $('#nearKinds').innerHTML = Object.keys(KIND).filter(k => byKind[k] && kindOn(k)).map(k =>
+    `<a href="#donate" data-preset="${k}:${Object.keys(typeMap(k))[0]}"><img class="i3" src="icons/${KIND_IC[k]}.webp" width="30" height="30" alt="" decoding="async">${t(KIND[k])} <b>${fmtN(byKind[k])}</b></a>`).join('');
+  $$('#nearKinds [data-preset]').forEach(a => a.addEventListener('click', () => { pendingWish = null; pendingPreset = a.dataset.preset; if (location.hash === '#donate') applyPreset(); }));
+  // wishes: open ones first, then the closest, then urgent
+  const ws = N.wishes.slice().sort((a, b) => (a.taken - b.taken) || ((dist[a.z] ?? (nearMe && nearMe.zone === a.z ? 0 : 999)) - (dist[b.z] ?? (nearMe && nearMe.zone === b.z ? 0 : 999))) || ((b.urg === 'high') - (a.urg === 'high')));
+  $('#wishWrap').hidden = !ws.length;
+  $('#wishList').innerHTML = (wishAll ? ws : ws.slice(0, WISH_SHOW)).map(w => `<article class="wish${w.taken ? ' taken' : ''}">
+    <div class="wish-top"><img class="i3" src="icons/${KIND_IC[w.k] || 'box'}.webp" width="38" height="38" alt="" decoding="async"><span class="tag${isNear(w.z) ? ' gold' : ''}">${nearLbl(w.z, dist[w.z])}</span>${w.urg === 'high' ? `<span class="tag hot">${t('عاجلة')}</span>` : ''}</div>
+    <p class="wish-text" dir="auto" data-notr>${esc(wishText(w))}</p>
+    <small>${w.t === 'org' ? t('مؤسسة خيرية') : t('أسرة من {0} أفراد', w.size)}</small>
+    ${w.taken ? `<span class="tag gold">${t('يلبّيها متبرّع الآن')}</span>` : `<a class="btn btn-primary btn-sm" href="#donate" data-wish="${esc(w.id)}">${t('ألبّي هذه الأمنية')}</a>`}</article>`).join('');
+  $('#wishMore').hidden = wishAll || ws.length <= WISH_SHOW;
+  $$('#wishList [data-wish]').forEach(a => a.addEventListener('click', () => {
+    const w = N.wishes.find(x => x.id === a.dataset.wish); if (!w) return;
+    pendingWish = w; pendingPreset = w.preset || `${w.k}:${Object.keys(typeMap(w.k))[0]}`;
+    if (location.hash === '#donate') applyPreset();
+  }));
+  // a short line in the hero so every visitor notices there are needs around them
+  pill.hidden = false;
+  $('#nearPillTxt').innerHTML = located && nearN ? t('احتياجات قريبة منك: {0}', `<b>${fmtN(nearN)}</b>`) : t('أسر قريبة منك تنتظر مشاركتك. اعرف الأقرب إليك');
+}
+$('#nearPill').addEventListener('click', () => $('#secNear').scrollIntoView({ behavior: 'smooth', block: 'start' }));
+$('#wishMore').addEventListener('click', () => { wishAll = true; renderNear(); });
+$('#secNear').addEventListener('click', e => {
+  const b = e.target.closest('[data-near]'); if (!b || b.tagName === 'FORM') return;
+  const setMe = v => { nearMe = v; try { v ? localStorage.setItem('sb.near', JSON.stringify(v)) : localStorage.removeItem('sb.near'); } catch (err) {} renderNear(); };
+  if (b.dataset.near === 'clear') setMe(null);
+  if (b.dataset.near === 'gps') {
+    if (!navigator.geolocation) { toast(t('المتصفح لا يدعم تحديد الموقع')); return; }
+    b.disabled = true;
+    navigator.geolocation.getCurrentPosition(pos => setMe({ lat: +pos.coords.latitude.toFixed(3), lng: +pos.coords.longitude.toFixed(3) }),
+      () => { b.disabled = false; toast(t('تعذّر تحديد موقعك. اكتب رقم منطقتك من اللوحة الزرقاء بدلًا من ذلك.')); }, { timeout: 10000, maximumAge: 600000 });
+  }
+});
+$('#secNear').addEventListener('submit', e => {
+  const f = e.target.closest('[data-near="zone"]'); if (!f) return;
+  e.preventDefault();
+  const z = +toLatin($('input', f).value);
+  if (!(z >= 1 && z <= 99)) { toast(t('رقم المنطقة من 1 إلى 99، تجده في أعلى اللوحة الزرقاء على باب منزلك.')); return; }
+  nearMe = { zone: z }; try { localStorage.setItem('sb.near', JSON.stringify(nearMe)); } catch (err) {} renderNear();
+});
+// the note above the donation form while a donor answers a wish
+function syncWishNote() {
+  const n = $('#d_wish'), w = pendingWish;
+  n.hidden = !w; if (!w) { n.innerHTML = ''; return; }
+  n.innerHTML = `<span>${t('تبرعك يلبّي أمنية مجهولة:')} <b dir="auto" data-notr>«${esc(wishText(w))}»</b> · ${esc(nearLbl(w.z))}</span><button class="btn btn-ghost btn-sm" type="button" data-wish-off>${t('تبرع عام بدلًا من ذلك')}</button>`;
+  $('[data-wish-off]', n).addEventListener('click', () => { pendingWish = null; syncWishNote(); });
 }
 
 /* ================= machine translation =================
@@ -3324,7 +3549,7 @@ function siteView() {
     ${D.ticker.items.map((x, i) => `<div class="set-row"><label class="f">${t('نص الرسالة')}${isSacred(x) ? ` <span class="tag gold">${t('آية أو حديث: يبقى بالعربية في كل اللغات')}</span>` : ''}<input type="text" data-sa="ticker.items.${i}" value="${esc(x)}" maxlength="240"></label>${rowActions('ticker.items', i, D.ticker.items.length)}</div>`).join('')}
     <div><button class="btn btn-ghost btn-sm" type="button" data-sadd="ticker.items">${t('إضافة رسالة')}</button></div></div></details>
   <details class="set-card"><summary>${t('أقسام الصفحة الرئيسية')}</summary><div class="in">
-    ${chk('sections.stats', 'إظهار أرقام الأثر', D.sections.stats)}${chk('sections.campaigns', 'إظهار الحملات', D.sections.campaigns)}${chk('sections.coverage', 'إظهار مناطق التغطية', D.sections.coverage)}</div></details>
+    ${chk('sections.stats', 'إظهار أرقام الأثر', D.sections.stats)}${chk('sections.campaigns', 'إظهار الحملات', D.sections.campaigns)}${chk('sections.coverage', 'إظهار مناطق التغطية', D.sections.coverage)}${chk('sections.near', 'إظهار «نعمة الجيران» والأمنيات المجهولة', D.sections.near)}</div></details>
   <details class="set-card"><summary>${t('الحملات')} <span class="tag">${D.campaigns.length}</span></summary><div class="in">
     ${D.campaigns.map((c, i) => campEditor(c, i, D.campaigns.length)).join('')}
     <div><button class="btn btn-ghost btn-sm" type="button" data-sadd="campaigns">${t('إضافة حملة')}</button></div></div></details>
