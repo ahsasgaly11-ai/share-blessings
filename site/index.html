@@ -315,7 +315,7 @@ legend { font-family: var(--f-display); font-size: 1.02rem; padding: 0 8px; disp
 legend i { font-style: normal; width: 28px; height: 28px; border-radius: 8px; display: inline-grid; place-items: center; background: var(--primary); color: var(--primary-ink); font-size: .9rem; transform: rotate(45deg); }
 legend i b { transform: rotate(-45deg); font-weight: 700; }
 .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-label.f { display: grid; gap: 5px; font-weight: 700; font-size: .96rem; min-width: 0; }
+label.f { display: grid; grid-template-columns: minmax(0, 1fr); gap: 5px; font-weight: 700; font-size: .96rem; min-width: 0; }
 label.f small { font-weight: 400; color: var(--muted); }
 input[type=text], input[type=tel], input[type=number], input[type=date], input[type=password], select, textarea {
   width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); min-width: 0;
