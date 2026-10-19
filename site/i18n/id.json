@@ -250,7 +250,7 @@
   "مثال: ثلاجة لأسرة من {0} أفراد": "mis. kulkas untuk keluarga {0} orang",
   "مثال: سريران لطفلين ومرتبة": "mis. dua tempat tidur anak dan satu kasur",
   "درجة الاحتياج": "Tingkat urgensi",
-  "عادية": "Biasa",
+  "عادية": "Normal",
   "عاجلة": "Mendesak",
   "وصف الحالة": "Kondisi Anda",
   "يساعد المشرفين على تحديد الأولوية": "Membantu pengawas menentukan prioritas",
@@ -912,7 +912,19 @@
   "اختياري، ويمكنك كتابتها بأي لغة": "Opsional; Anda dapat menulisnya dalam bahasa apa pun",
   "مثال: الأنسب التواصل بعد الساعة 4 عصرًا، أو المواد في الطابق الثاني.": "Contoh: sebaiknya dihubungi setelah pukul 4 sore, atau barangnya ada di lantai dua.",
   "الترجمة الآلية (Google Translate، وخدمة MyMemory بديلًا): يستخدمها المشرفون عند الحاجة لترجمة ما كتبته في طلبك أو لترجمة رسائلهم إليك، ويُرسل إليها النص المراد ترجمته فقط.": "Terjemahan mesin (Google Translate, dengan MyMemory sebagai cadangan): digunakan oleh pengawas bila diperlukan untuk menerjemahkan tulisan dalam permintaan Anda atau menerjemahkan pesan mereka kepada Anda; hanya teks yang akan diterjemahkan yang dikirim.",
-  "ونحفظ مع كل تبرع أو طلب لغة الموقع التي استخدمتها عند التقديم، ليتواصل معك المشرفون بلغتك.": "Bersama setiap donasi atau permintaan, kami juga menyimpan bahasa situs yang Anda gunakan agar pengawas dapat menghubungi Anda dalam bahasa Anda."
+  "ونحفظ مع كل تبرع أو طلب لغة الموقع التي استخدمتها عند التقديم، ليتواصل معك المشرفون بلغتك.": "Bersama setiap donasi atau permintaan, kami juga menyimpan bahasa situs yang Anda gunakan agar pengawas dapat menghubungi Anda dalam bahasa Anda.",
+  "الشريط المتحرك أسفل الموقع": "Bilah berjalan di bagian bawah",
+  "إظهار الشريط المتحرك": "Tampilkan bilah berjalan",
+  "السرعة": "Kecepatan",
+  "بطيئة": "Lambat",
+  "سريعة": "Cepat",
+  "نص الرسالة": "Teks pesan",
+  "إضافة رسالة": "Tambah pesan",
+  "إخفاء الشريط": "Sembunyikan bilah",
+  "نستلم تبرعاتكم العينية من جميع بلديات قطر": "Kami menjemput donasi barang Anda dari seluruh kota di Qatar",
+  "كل تبرع يراجعه مشرف قبل اعتماده ويصل لأسرة متحقَّق منها": "Setiap donasi diperiksa pengawas dan sampai ke keluarga yang terverifikasi",
+  "تابع طلبك في أي وقت برقمه من صفحة «تتبّع طلبي»": "Lacak permintaan Anda kapan saja dengan nomornya di halaman “Lacak permintaan”",
+  "شارك في حملة كسوة الشتاء ودفّئ أسرة محتاجة": "Ikuti kampanye pakaian musim dingin dan hangatkan keluarga yang membutuhkan"
  },
  "maps": {
   "FOOD": {

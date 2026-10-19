@@ -912,7 +912,19 @@
   "اختياري، ويمكنك كتابتها بأي لغة": "Opsyonal; puwede mo itong isulat sa kahit anong wika",
   "مثال: الأنسب التواصل بعد الساعة 4 عصرًا، أو المواد في الطابق الثاني.": "Halimbawa: mas mabuting tumawag pagkalipas ng 4 pm, o nasa ikalawang palapag ang mga gamit.",
   "الترجمة الآلية (Google Translate، وخدمة MyMemory بديلًا): يستخدمها المشرفون عند الحاجة لترجمة ما كتبته في طلبك أو لترجمة رسائلهم إليك، ويُرسل إليها النص المراد ترجمته فقط.": "Machine translation (Google Translate, at MyMemory bilang backup): ginagamit ito ng mga supervisor kapag kailangan para isalin ang isinulat mo sa iyong kahilingan o para isalin ang mga mensahe nila sa iyo; ang tekstong isasalin lang ang ipinapadala.",
-  "ونحفظ مع كل تبرع أو طلب لغة الموقع التي استخدمتها عند التقديم، ليتواصل معك المشرفون بلغتك.": "Sa bawat donasyon o request, sine-save rin namin ang wikang ginamit mo sa site para makausap ka ng mga supervisor sa sarili mong wika."
+  "ونحفظ مع كل تبرع أو طلب لغة الموقع التي استخدمتها عند التقديم، ليتواصل معك المشرفون بلغتك.": "Sa bawat donasyon o request, sine-save rin namin ang wikang ginamit mo sa site para makausap ka ng mga supervisor sa sarili mong wika.",
+  "الشريط المتحرك أسفل الموقع": "Gumagalaw na bar sa ibaba",
+  "إظهار الشريط المتحرك": "Ipakita ang gumagalaw na bar",
+  "السرعة": "Bilis",
+  "بطيئة": "Mabagal",
+  "سريعة": "Mabilis",
+  "نص الرسالة": "Teksto ng mensahe",
+  "إضافة رسالة": "Magdagdag ng mensahe",
+  "إخفاء الشريط": "Itago ang bar",
+  "نستلم تبرعاتكم العينية من جميع بلديات قطر": "Kinukuha namin ang inyong mga donasyong gamit mula sa lahat ng munisipalidad ng Qatar",
+  "كل تبرع يراجعه مشرف قبل اعتماده ويصل لأسرة متحقَّق منها": "Bawat donasyon ay sinusuri ng supervisor at napupunta sa beripikadong pamilya",
+  "تابع طلبك في أي وقت برقمه من صفحة «تتبّع طلبي»": "I-track ang iyong request anumang oras gamit ang numero nito sa pahinang “I-track ang request”",
+  "شارك في حملة كسوة الشتاء ودفّئ أسرة محتاجة": "Sumali sa kampanya ng pang-winter na damit at painitin ang isang pamilyang nangangailangan"
  },
  "maps": {
   "FOOD": {
