@@ -375,6 +375,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); o
 /* ---------- admin ---------- */
 .gate { max-width: 440px; margin: 0 auto; background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--primary); border-radius: 14px; padding: 26px; display: grid; gap: 14px; box-shadow: var(--shadow); }
 .admin-head { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+#desk > * { min-width: 0; }
 .kpis { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
 .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 2px; border-inline-start: 4px solid var(--line); }
 .kpi span { font-size: .86rem; color: var(--muted); }
@@ -1311,8 +1312,16 @@ details.wo[open] { display: grid; gap: 10px; }
       <span class="tag gold local-only">بيانات تجريبية</span>
       <span class="tag cloud-only" hidden style="color:var(--ok)">متصل بقاعدة البيانات</span>
       <button class="btn btn-ghost btn-sm cloud-only" id="refreshBtn" type="button" hidden>تحديث</button>
+      <button class="btn btn-ghost btn-sm cloud-only" id="pwBtn" type="button" hidden>تغيير كلمة المرور</button>
       <button class="btn btn-ghost btn-sm" id="logoutBtn" type="button">خروج</button>
     </div>
+    <form id="pwBox" class="gate" hidden style="display:grid;gap:10px;margin:0">
+      <h3>تغيير كلمة المرور</h3>
+      <label class="f">كلمة المرور الجديدة<input type="password" id="pwNew" dir="ltr" autocomplete="new-password" minlength="8"></label>
+      <label class="f">أعد كتابتها<input type="password" id="pwNew2" dir="ltr" autocomplete="new-password" minlength="8"></label>
+      <p class="muted">8 أحرف على الأقل.</p>
+      <div style="display:flex;gap:8px"><button class="btn btn-primary btn-sm" type="submit">حفظ</button><button class="btn btn-ghost btn-sm" type="button" id="pwCancel">إلغاء</button></div>
+    </form>
     <div id="expBanner"></div>
     <div class="kpis" id="kpis"></div>
     <div class="subtabs" role="tablist" id="subtabs"></div>
@@ -3177,6 +3186,24 @@ if (CLOUD) {
   $$('.local-only').forEach(el => { el.hidden = true; });
   $$('.cloud-only').forEach(el => { el.hidden = false; });
   $('#claimBtn').addEventListener('click', claimAdmin);
+  Object.assign(EN, { 'تغيير كلمة المرور': 'Change password', 'كلمة المرور الجديدة': 'New password', 'أعد كتابتها': 'Repeat it',
+    '8 أحرف على الأقل.': 'At least 8 characters.', 'حفظ': 'Save', 'إلغاء': 'Cancel',
+    'كلمة المرور يجب أن تكون 8 أحرف على الأقل.': 'The password must be at least 8 characters.',
+    'كلمتا المرور غير متطابقتين.': 'The passwords do not match.', 'تم تغيير كلمة المرور': 'Password changed' });
+  const pwBox = $('#pwBox');
+  const pwClose = () => { pwBox.hidden = true; pwBox.reset(); };
+  $('#pwBtn').addEventListener('click', () => { pwBox.hidden = !pwBox.hidden; if (!pwBox.hidden) $('#pwNew').focus(); });
+  $('#pwCancel').addEventListener('click', pwClose);
+  $('#logoutBtn').addEventListener('click', pwClose);
+  pwBox.addEventListener('submit', async e => {
+    e.preventDefault();
+    const a = $('#pwNew').value, b = $('#pwNew2').value;
+    if (a.length < 8) { toast(t('كلمة المرور يجب أن تكون 8 أحرف على الأقل.')); return; }
+    if (a !== b) { toast(t('كلمتا المرور غير متطابقتين.')); return; }
+    const { error } = await sb.auth.updateUser({ password: a });
+    if (error) { toast(cloudErr(error)); return; }
+    pwClose(); toast(t('تم تغيير كلمة المرور'));
+  });
   $('#refreshBtn').addEventListener('click', async () => { await reloadCloud(); renderAdmin(); toast(t('حُدّثت البيانات')); });
   setInterval(() => { if (me && !document.hidden && $('#drawer').hidden && location.hash === '#admin') reloadCloud().then(renderAdmin); }, 60000);
   sb.auth.getSession().then(({ data }) => { if (data.session) startStaffSession().then(st => { if (st === 'not_staff') showClaim(); if (location.hash === '#admin') renderAdmin(); }); });
