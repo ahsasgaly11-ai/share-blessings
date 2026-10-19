@@ -82,7 +82,7 @@ body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16.5px/1.8
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--primary-deep); }
 h1, h2, h3 { font-family: var(--f-display); line-height: 1.45; text-wrap: balance; margin: 0; font-weight: 700; }
 h1 { font-size: clamp(1.9rem, 4.6vw, 3rem); font-weight: 800; }
-h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
+h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-family: var(--f-body); }
 h3 { font-size: 1.12rem; font-family: var(--f-body); font-weight: 800; }
 p { margin: 0; }
 a { color: var(--primary-text); }
@@ -246,12 +246,11 @@ section.view { display: block; }
 .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .rules > div { padding: 24px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); }
 .rules h3 { display: flex; gap: 10px; align-items: center; }
-.rules h3 i { font-style: normal; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: .94rem; }
-.rules .yes h3 i { background: var(--ok-soft); color: var(--ok); }
-.rules .no h3 i { background: var(--bad-soft); color: var(--bad); }
-.rules ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
-.rules li { padding-inline-start: 18px; position: relative; }
-.rules li::before { content: ""; position: absolute; inset-inline-start: 0; top: .75em; width: 7px; height: 7px; border-radius: 2px; transform: rotate(45deg); background: var(--ok); }
+.rules h3 .rb { width: 34px; height: 34px; filter: drop-shadow(0 3px 4px rgba(0,0,0,.18)); }
+.rules ul { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; }
+.rules li { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 12px; background: var(--surface-2); font-weight: 500; }
+.rules .ri { width: 40px; height: 40px; object-fit: contain; flex: none; filter: drop-shadow(0 3px 4px rgba(60,10,25,.18)); }
+.rules .ri.sm { width: 22px; height: 22px; margin-inline: 9px; }
 .rules .no li { color: var(--muted); }
 .rules .no li::before { background: var(--bad); }
 
@@ -262,6 +261,9 @@ section.view { display: block; }
 .point .plate-mini span { padding: 4px 8px; }
 .point .plate-mini span + span { border-left: 1px solid rgba(255,255,255,.4); }
 .point small { color: var(--muted); font-size: .9rem; }
+.point.area { display: flex; gap: 12px; align-items: center; }
+.point.area > div { display: grid; gap: 4px; min-width: 0; }
+.pin3d { width: 40px; height: 40px; flex: none; filter: drop-shadow(0 3px 4px rgba(60,10,25,.2)); }
 .contact-list a { display: inline-flex; gap: 6px; align-items: center; }
 
 .need-band { margin-top: 64px; border-radius: 16px; background: var(--gold-soft); border: 1px solid var(--line); padding: 28px 32px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
@@ -737,10 +739,10 @@ details.wo[open] { display: grid; gap: 10px; }
   <div class="wrap sec">
     <div class="sec-head"><div><p class="eyebrow">شروط التبرع</p><h2>ما نستقبله وما نعتذر عنه</h2></div></div>
     <div class="rules">
-      <div class="yes"><h3><i>✓</i>نستقبل</h3><ul>
-        <li>الأرز، القمح، الدقيق، وجميع أنواع الحبوب</li><li>البقوليات: عدس، حمص، فول</li><li>المعلبات والمعكرونة والسكر</li><li>التمور والحليب المجفف المغلّف</li><li>ملابس نظيفة للرجال والنساء والأطفال</li><li>أجهزة كهربائية تعمل وآمنة، وأثاث منزلي سليم ونظيف</li><li>أخرى: بطانيات، أدوات مدرسية، مستلزمات نظافة وأدوات منزلية صالحة</li></ul></div>
-      <div class="no"><h3><i>✕</i>لا نستقبل</h3><ul>
-        <li>الوجبات الجاهزة وأطعمة المطاعم</li><li>فائض الولائم والمناسبات</li><li>المخبوزات والخضراوات الطازجة</li><li>عبوات مفتوحة أو تنتهي صلاحيتها خلال 30 يومًا</li><li>ملابس تالفة أو غير نظيفة</li><li>أجهزة معطلة أو أسلاكها مكشوفة، وأثاث مكسور</li></ul></div>
+      <div class="yes"><h3><img class="rb" src="icons/check.webp" width="34" height="34" alt="" decoding="async">نستقبل</h3><ul>
+        <li><img class="ri" src="icons/sack.webp" width="40" height="40" alt="" decoding="async">الأرز، القمح، الدقيق، وجميع أنواع الحبوب</li><li><img class="ri" src="icons/beans.webp" width="40" height="40" alt="" decoding="async">البقوليات: عدس، حمص، فول</li><li><img class="ri" src="icons/can.webp" width="40" height="40" alt="" decoding="async">المعلبات والمعكرونة والسكر</li><li><img class="ri" src="icons/dates.webp" width="40" height="40" alt="" decoding="async">التمور والحليب المجفف المغلّف</li><li><img class="ri" src="icons/tee.webp" width="40" height="40" alt="" decoding="async">ملابس نظيفة للرجال والنساء والأطفال</li><li><img class="ri" src="icons/fridge.webp" width="40" height="40" alt="" decoding="async">أجهزة كهربائية تعمل وآمنة، وأثاث منزلي سليم ونظيف</li><li><img class="ri" src="icons/box.webp" width="40" height="40" alt="" decoding="async">أخرى: بطانيات، أدوات مدرسية، مستلزمات نظافة وأدوات منزلية صالحة</li></ul></div>
+      <div class="no"><h3><img class="rb" src="icons/cross.webp" width="34" height="34" alt="" decoding="async">لا نستقبل</h3><ul>
+        <li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async">الوجبات الجاهزة وأطعمة المطاعم</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async">فائض الولائم والمناسبات</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async">المخبوزات والخضراوات الطازجة</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async">عبوات مفتوحة أو تنتهي صلاحيتها خلال 30 يومًا</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async">ملابس تالفة أو غير نظيفة</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async">أجهزة معطلة أو أسلاكها مكشوفة، وأثاث مكسور</li></ul></div>
     </div>
   </div>
 
@@ -3109,7 +3111,7 @@ function campTotals(dons) {
 }
 function renderAreas() {
   const box = $('#secCover .points'); if (!box) return;
-  box.innerHTML = SITE.areas.map(a => `<div class="point"><b>${esc(t(a.name))}</b><small>${esc(t(a.list))}</small></div>`).join('');
+  box.innerHTML = SITE.areas.map(a => `<div class="point area"><img class="pin3d" src="icons/pin.webp" width="40" height="40" alt="" decoding="async"><div><b>${esc(t(a.name))}</b><small>${esc(t(a.list))}</small></div></div>`).join('');
 }
 
 /* ================= machine translation =================
