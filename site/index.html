@@ -101,7 +101,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* ---------- header ---------- */
 .utility { background: var(--primary-deep); color: var(--band-muted); font-size: .88rem; }
 .utility .wrap { display: flex; align-items: center; gap: 16px; padding-block: 6px; }
-.utility span { margin-inline-end: auto; }
+.utility .wrap > span { margin-inline-end: auto; }
 .utility a { color: var(--band-ink); text-decoration: none; }
 .utility a:hover { text-decoration: underline; }
 .theme-btn { white-space: nowrap; }
@@ -110,8 +110,15 @@ html[lang="hi"], html[lang="ne"] { --f-display: "Noto Sans Devanagari", "IBM Ple
 html[lang="bn"] { --f-display: "Noto Sans Bengali", "IBM Plex Sans", sans-serif; --f-body: "Noto Sans Bengali", "IBM Plex Sans", "Segoe UI", sans-serif; }
 html[lang="ur"] { --f-display: "Noto Naskh Arabic", "IBM Plex Sans Arabic", Tahoma, sans-serif; --f-body: "Noto Naskh Arabic", "IBM Plex Sans Arabic", Tahoma, sans-serif; }
 html[lang="fa"] { --f-display: "Vazirmatn", "IBM Plex Sans Arabic", Tahoma, sans-serif; --f-body: "Vazirmatn", "IBM Plex Sans Arabic", Tahoma, sans-serif; }
-select.lang-btn { font: inherit; font-size: .86rem; line-height: 1.6; max-width: 11em; }
-select.lang-btn option { color: #22161B; background: #fff; }
+.lang-menu { position: relative; }
+.lang-btn { display: inline-flex; align-items: center; gap: 6px; }
+.lang-native { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; inset-inline-start: 0; top: 0; }
+.lang-list { position: absolute; top: calc(100% + 6px); inset-inline-end: 0; z-index: 60; min-width: 200px; margin: 0; padding: 6px; list-style: none; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 18px 40px -12px rgba(40,5,15,.35), 0 4px 10px rgba(40,5,15,.1); }
+.lang-list[hidden] { display: none; }
+.lang-list button { display: flex; width: 100%; align-items: center; justify-content: flex-start; gap: 10px; border: 0; background: transparent; color: inherit; padding: 9px 12px; border-radius: 10px; font: 500 .95rem/1.4 var(--f-body); cursor: pointer; text-align: start; }
+.lang-list button:hover, .lang-list button:focus-visible { background: var(--surface-2); outline: none; }
+.lang-list button[aria-selected="true"] { color: var(--primary-text); font-weight: 700; }
+.lang-list button[aria-selected="true"]::after { content: "✓"; margin-inline-start: auto; }
 .theme-btn { border: 1px solid rgba(255,255,255,.3); background: transparent; color: var(--band-ink); border-radius: 6px; padding: 2px 10px; cursor: pointer; font-size: .86rem; }
 .topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 25; background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: 0 2px 12px rgba(60,10,28,.05); }
 .topbar .wrap { display: flex; align-items: center; gap: 20px; padding-block: 12px; flex-wrap: wrap; }
@@ -574,7 +581,7 @@ details.wo[open] { display: grid; gap: 10px; }
   .item-row .rm { justify-self: end; }
   .kpis, .acct-kpis { grid-template-columns: repeat(2, 1fr); }
   .rep-grid { grid-template-columns: 1fr; }
-  .brand small, .utility span { display: none; }
+  .brand small, .utility .wrap > span { display: none; }
   .utility .wrap { justify-content: flex-end; }
   nav.tabs { order: 3; width: 100%; }
   .need-band { padding: 22px; }
@@ -669,7 +676,11 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
     <a href="#track">تتبّع طلبك</a>
     <a href="#admin">بوابة المشرفين</a>
     <button class="theme-btn" id="installBtn" type="button" hidden>تثبيت التطبيق</button>
-    <select class="theme-btn lang-btn" id="langSel" aria-label="Language / اللغة"></select>
+    <div class="lang-menu">
+      <button class="theme-btn lang-btn" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language / اللغة"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span id="langCur" data-notr>العربية</span><span aria-hidden="true">▾</span></button>
+      <ul class="lang-list" id="langList" role="listbox" hidden data-notr></ul>
+      <select id="langSel" class="lang-native" aria-hidden="true" tabindex="-1"></select>
+    </div>
     <button class="theme-btn" id="themeBtn" type="button" aria-label="تبديل الوضع الليلي"><svg width="13" height="13" style="vertical-align:-2px"><use href="#i-moon"/></svg> الوضع</button>
   </div>
 </div>
@@ -3002,10 +3013,10 @@ const BUNDLES = { en: EN_BUNDLE };
 function setLang(l) {
   if (!LANGS[l]) l = 'ar';
   if (l !== 'ar' && !BUNDLES[l]) {
-    $('#langSel').disabled = true;
+    $('#langSel').disabled = true; langBtn.disabled = true;
     return fetch(`i18n/${l}.json`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(b => { BUNDLES[l] = b; }, () => { toast('تعذّر تحميل اللغة. تحقق من الإنترنت. / Could not load the language.'); l = LANG; })
-      .finally(() => { $('#langSel').disabled = false; applyLang(l); });
+      .finally(() => { $('#langSel').disabled = false; langBtn.disabled = false; applyLang(l); });
   }
   applyLang(l);
 }
@@ -3034,7 +3045,7 @@ function applyLang(l) {
   const rk = $('input[name=r_kind]:checked').value; if (isGoods(rk)) { chips('#r_others', GOODS[rk].types, 'r_other', o); $('#r_others').dataset.k = rk; }
   const qk = $('input[name=q_item]:checked'); const qv = qk && qk.value; renderQuick(); if (qv) { const el = $(`input[name=q_item][value="${qv}"]`); if (el) el.checked = true; }
   $('#d_cleanTxt').textContent = isGoods(donKind()) ? GOODS[donKind()].clean : t('أؤكد أن الملابس نظيفة وصالحة للاستخدام.');
-  $('#langSel').value = LANG;
+  $('#langSel').value = LANG; syncLangMenu();
   applySite();
   translateTree(document.body);
   route(true);
@@ -3042,6 +3053,23 @@ function applyLang(l) {
 $('#langSel').innerHTML = Object.entries(LANGS).map(([k, v]) => `<option value="${k}" lang="${k}">${v.n}</option>`).join('');
 $('#langSel').value = SAVED_LANG;
 $('#langSel').addEventListener('change', e => setLang(e.target.value));
+// our own menu: the native picker pops up in the wrong place on some iPads
+function syncLangMenu() {
+  const cur = $('#langSel').value;
+  $('#langCur').textContent = LANGS[cur].n;
+  $('#langList').innerHTML = Object.entries(LANGS).map(([k, v]) => `<li><button type="button" role="option" data-l="${k}" aria-selected="${k === cur}"><bdi lang="${k}" dir="${v.rtl ? 'rtl' : 'ltr'}">${v.n}</bdi></button></li>`).join('');
+}
+const langList = $('#langList'), langBtn = $('#langBtn');
+function langMenu(open) { langList.hidden = !open; langBtn.setAttribute('aria-expanded', String(open)); if (open) { const sel = $('[aria-selected="true"]', langList); if (sel) sel.focus(); } }
+langBtn.addEventListener('click', e => { e.stopPropagation(); langMenu(langList.hidden); });
+langList.addEventListener('click', e => {
+  const b = e.target.closest('[data-l]'); if (!b) return;
+  langMenu(false); langBtn.focus();
+  if (b.dataset.l !== $('#langSel').value) { $('#langSel').value = b.dataset.l; $('#langSel').dispatchEvent(new Event('change')); }
+});
+document.addEventListener('click', e => { if (!langList.hidden && !e.target.closest('.lang-menu')) langMenu(false); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !langList.hidden) { langMenu(false); langBtn.focus(); } });
+syncLangMenu();
 
 /* ================= site settings (managed by the admin) =================
    One settings record (site_config) holds the contact details, banner, intake switches, campaigns,
