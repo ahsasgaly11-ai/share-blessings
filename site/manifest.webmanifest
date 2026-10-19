@@ -1,0 +1,22 @@
+{
+  "name": "شارك النعم",
+  "short_name": "شارك النعم",
+  "description": "منصة مجتمعية للتبرع العيني في قطر: مواد غذائية جافة، ملابس، أجهزة كهربائية وأثاث.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F7F4F5",
+  "theme_color": "#8A1538",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "أرغب في المشاركة", "url": "./index.html#donate" },
+    { "name": "تتبّع طلبي", "url": "./index.html#track" },
+    { "name": "بوابة المشرفين", "url": "./index.html#admin" }
+  ]
+}

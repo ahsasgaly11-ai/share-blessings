@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دليل تشغيل شارك النعم</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@700;800&family=Almarai:wght@400;700;800&display=swap">
+<style>
+  :root { --m: #8A1538; --md: #5E0D26; --g: #A57A2E; --ink: #22161B; --mut: #574650; --line: #E6DCE0; --bg: #F7F4F5; --soft: #F7E6EC; --ok: #1E7A4C; --warn: #93600A; --warnbg: #FBEDCD; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.9 "Almarai", Tahoma, sans-serif; }
+  header { background: linear-gradient(135deg, var(--m), var(--md)); color: #fff; padding: 36px 20px 44px; }
+  header .w, main { max-width: 860px; margin: 0 auto; }
+  h1 { font: 800 2rem/1.4 "Noto Kufi Arabic", "Almarai", sans-serif; margin: 0 0 8px; }
+  header p { margin: 0; opacity: .92; }
+  main { padding: 28px 20px 60px; display: grid; gap: 18px; }
+  section { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; }
+  h2 { font: 700 1.25rem/1.5 "Noto Kufi Arabic", "Almarai", sans-serif; margin: 0 0 10px; color: var(--m); display: flex; gap: 10px; align-items: center; }
+  h2 .n { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--m); color: #fff; display: grid; place-items: center; font-size: 1rem; }
+  ol, ul { margin: 6px 0; padding-inline-start: 24px; }
+  li { margin: 4px 0; }
+  code, .k { font-family: ui-monospace, Menlo, Consolas, monospace; background: var(--soft); color: var(--md); padding: 1px 6px; border-radius: 5px; direction: ltr; unicode-bidi: embed; font-size: .9em; }
+  pre { direction: ltr; text-align: left; background: #22161B; color: #F7E6EC; padding: 14px 16px; border-radius: 10px; overflow-x: auto; font-size: .88rem; line-height: 1.6; }
+  .path { font-weight: 700; color: var(--md); }
+  .note { background: var(--warnbg); border-inline-start: 4px solid var(--warn); padding: 10px 14px; border-radius: 8px; margin: 10px 0; }
+  .ok { background: #DFF2E7; border-inline-start: 4px solid var(--ok); padding: 10px 14px; border-radius: 8px; margin: 10px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  th, td { border-bottom: 1px solid var(--line); padding: 8px 6px; text-align: start; vertical-align: top; }
+  th { color: var(--mut); font-weight: 700; }
+  .files td:first-child { white-space: nowrap; }
+  @media print { header { -webkit-print-color-adjust: exact; print-color-adjust: exact; } section { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<header><div class="w">
+  <h1>دليل تشغيل منصة «شارك النعم»</h1>
+  <p>ربط الموقع بقاعدة بيانات Supabase ونشره مجانًا على Cloudflare Pages. الوقت المتوقع: 20 إلى 30 دقيقة، دون أي برمجة.</p>
+</div></header>
+<main>
+
+<section>
+  <h2>محتويات الحزمة</h2>
+  <table class="files">
+    <tr><td><code>index.html</code></td><td>الموقع كاملًا. يعمل نسخةً تجريبية إذا تُرك <code>config.js</code> فارغًا، ويتصل بقاعدة البيانات عند تعبئته.</td></tr>
+    <tr><td><code>config.js</code></td><td>المكان الوحيد الذي تضع فيه بيانات مشروعك (الخطوة 5).</td></tr>
+    <tr><td><code>supabase-setup.sql</code></td><td>ملف إعداد قاعدة البيانات: الجداول، أرقام الطلبات، صلاحيات كل دور، وتخزين الصور الخاص.</td></tr>
+    <tr><td><code>manifest.webmanifest</code>، <code>sw.js</code>، الأيقونات</td><td>تثبيت الموقع كتطبيق على الجوال والعمل دون اتصال.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">1</span>إنشاء مشروع في Supabase</h2>
+  <ol>
+    <li>ادخل إلى <code>supabase.com</code> وأنشئ حسابًا مجانيًا (بحساب صاحب المشروع).</li>
+    <li>اضغط <span class="path">New project</span>، واكتب اسمًا مثل <code>share-blessings</code>.</li>
+    <li>اكتب كلمة مرور لقاعدة البيانات واحفظها في مكان آمن.</li>
+    <li>اختر أقرب منطقة متاحة لقطر من القائمة، ثم اضغط <span class="path">Create new project</span> وانتظر دقيقة أو دقيقتين.</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="n">2</span>تشغيل ملف إعداد قاعدة البيانات</h2>
+  <ol>
+    <li>من القائمة الجانبية افتح <span class="path">SQL Editor</span> ثم <span class="path">New query</span>.</li>
+    <li>افتح ملف <code>supabase-setup.sql</code> بأي محرر نصوص، وانسخ محتواه كاملًا والصقه.</li>
+    <li>اضغط <span class="path">Run</span>.</li>
+  </ol>
+  <div class="ok">يظهر في الأسفل <code>Success. No rows returned</code>. هذا يعني أن الإعداد اكتمل. يمكن تشغيل الملف مرة أخرى لاحقًا بأمان، ولا يحذف أي بيانات.</div>
+</section>
+
+<section>
+  <h2><span class="n">3</span>ضبط تسجيل الدخول</h2>
+  <ol>
+    <li>افتح <span class="path">Authentication</span> ثم <span class="path">Sign In / Providers</span> (أو <span class="path">Providers</span>).</li>
+    <li>تأكد أن <span class="path">Email</span> مفعّل.</li>
+    <li><b>أوقف</b> خيار <span class="path">Allow new users to sign up</span>. بهذا لا يستطيع أحد إنشاء حساب بنفسه، ويُنشئ المدير حسابات الفريق فقط.</li>
+  </ol>
+  <div class="note">المتبرعون والمستفيدون لا يحتاجون حسابات أصلًا. الحسابات لفريق العمل فقط.</div>
+</section>
+
+<section>
+  <h2><span class="n">4</span>إنشاء حسابك (المدير)</h2>
+  <ol>
+    <li>افتح <span class="path">Authentication</span> ثم <span class="path">Users</span> ثم <span class="path">Add user</span> ثم <span class="path">Create new user</span>.</li>
+    <li>اكتب بريدك وكلمة مرور قوية، وفعّل <span class="path">Auto Confirm User</span>، ثم اضغط <span class="path">Create user</span>.</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="n">5</span>وضع بيانات المشروع في <code>config.js</code></h2>
+  <ol>
+    <li>افتح <span class="path">Project Settings</span> ثم <span class="path">API Keys</span> (أو <span class="path">Data API</span>).</li>
+    <li>انسخ <span class="path">Project URL</span>، وانسخ المفتاح العام: <span class="path">Publishable key</span> (أو <span class="path">anon public</span> في تبويب المفاتيح القديمة).</li>
+    <li>افتح <code>config.js</code> وضعهما بين علامتي الاقتباس:</li>
+  </ol>
+  <pre>window.SHARE_BLESSINGS_CONFIG = {
+  supabaseUrl: 'https://abcdxyz.supabase.co',
+  supabaseAnonKey: 'sb_publishable_...'
+};</pre>
+  <div class="note"><b>لا تضع أبدًا</b> المفتاح السري (<code>secret</code> أو <code>service_role</code>) في هذا الملف. المفتاح العام آمن لأن قاعدة البيانات نفسها تمنع الزوار من قراءة أي بيانات.</div>
+</section>
+
+<section>
+  <h2><span class="n">6</span>نشر الموقع على Cloudflare Pages</h2>
+  <ol>
+    <li>أنشئ حسابًا مجانيًا على <code>dash.cloudflare.com</code>.</li>
+    <li>افتح <span class="path">Workers &amp; Pages</span> ثم <span class="path">Create</span> ثم تبويب <span class="path">Pages</span> ثم <span class="path">Upload assets</span>.</li>
+    <li>اكتب اسم المشروع (يصبح جزءًا من الرابط)، ثم اسحب مجلد الموقع كاملًا (بعد تعديل <code>config.js</code>) واضغط <span class="path">Deploy site</span>.</li>
+    <li>ستحصل على رابط مثل <code>https://share-blessings.pages.dev</code>.</li>
+  </ol>
+  <p>ارجع إلى Supabase وافتح <span class="path">Authentication</span> ثم <span class="path">URL Configuration</span>، وضع رابط موقعك في <span class="path">Site URL</span>.</p>
+  <div class="note">بديل بنفس السهولة: Netlify Drop على <code>app.netlify.com/drop</code>.</div>
+</section>
+
+<section>
+  <h2><span class="n">7</span>أول دخول</h2>
+  <ol>
+    <li>افتح رابط موقعك، ثم اضغط <span class="path">المشرفون</span>.</li>
+    <li>ادخل ببريدك وكلمة المرور من الخطوة 4.</li>
+    <li>تظهر رسالة «حسابك ليس ضمن الفريق بعد». اكتب اسمك واضغط <span class="path">اجعلني مدير المنصة</span>.</li>
+  </ol>
+  <div class="ok">يصبح أول من يفعل ذلك هو المدير، ثم تتوقف هذه الميزة تلقائيًا فلا يستطيع غيره استخدامها.</div>
+</section>
+
+<section>
+  <h2><span class="n">8</span>إضافة فريق العمل</h2>
+  <p>لكل عضو:</p>
+  <ol>
+    <li>أنشئ له حسابًا في Supabase كما في الخطوة 4 (بريده وكلمة مرور مؤقتة).</li>
+    <li>من الموقع افتح تبويب <span class="path">الفريق</span>، واكتب اسمه وبريده واختر دوره، ثم اضغط <span class="path">إضافة</span>.</li>
+    <li>أرسل له الرابط والبريد وكلمة المرور.</li>
+  </ol>
+  <table>
+    <tr><th>الدور</th><th>ما يستطيع فعله</th></tr>
+    <tr><td>المدير</td><td>كل شيء، ومنه إدارة الفريق واستعادة النسخ الاحتياطية.</td></tr>
+    <tr><td>مشرف المراجعة</td><td>اعتماد التبرعات ومراجعة الصور، التحقق من المستفيدين، التخصيص، التقارير.</td></tr>
+    <tr><td>متطوع التوصيل</td><td>يرى مهامه فقط، ويؤكد الاستلام من المتبرع والتسليم للمستفيد.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">9</span>منع توقف المشروع المجاني</h2>
+  <p>يتوقف مشروع Supabase المجاني مؤقتًا إذا لم يُستخدم أسبوعًا كاملًا. لإبقائه نشطًا مجانًا:</p>
+  <ol>
+    <li>أنشئ حسابًا مجانيًا على <code>cron-job.org</code>.</li>
+    <li>أنشئ مهمة جديدة <span class="path">Create cronjob</span> بالرابط التالي، بعد استبدال عنوان مشروعك ومفتاحك العام:</li>
+  </ol>
+  <pre>https://abcdxyz.supabase.co/rest/v1/rpc/ping?apikey=sb_publishable_...</pre>
+  <ol start="3"><li>اختر التنفيذ مرة يوميًا، واحفظ.</li></ol>
+  <div class="note">إذا توقف المشروع رغم ذلك، افتح لوحة Supabase واضغط <span class="path">Restore project</span>. البيانات لا تُحذف عند التوقف.</div>
+</section>
+
+<section>
+  <h2><span class="n">10</span>النسخ الاحتياطي</h2>
+  <p>الخطة المجانية لا تحتفظ بنسخ تلقائية. من تبويب <span class="path">النسخ الاحتياطي</span> في الموقع نزّل نسخة أسبوعيًا واحفظها في مكان آمن. تشمل النسخة التبرعات والطلبات ومسار كل طلب. أما الصور فتبقى محفوظة في Supabase.</p>
+</section>
+
+<section>
+  <h2>حل المشكلات الشائعة</h2>
+  <table>
+    <tr><th>المشكلة</th><th>الحل</th></tr>
+    <tr><td>يظهر في مكتب المشرفين «بيانات تجريبية» ورموز تجربة</td><td><code>config.js</code> فارغ أو لم يُرفع. تأكد من تعبئته ثم أعد رفع المجلد.</td></tr>
+    <tr><td>«البريد أو كلمة المرور غير صحيحة»</td><td>تأكد من البريد، ومن تفعيل <span class="path">Auto Confirm User</span> عند إنشاء الحساب.</td></tr>
+    <tr><td>«لا يوجد حساب بهذا البريد» عند إضافة عضو</td><td>أنشئ حسابه أولًا من <span class="path">Authentication ← Users</span>.</td></tr>
+    <tr><td>«حسابك ليس ضمن فريق العمل بعد»</td><td>اطلب من المدير إضافة بريدك من تبويب الفريق.</td></tr>
+    <tr><td>«عدّل عضو آخر هذا السجل قبلك»</td><td>عدّل مشرفان السجل نفسه في الوقت نفسه. أُعيد تحميل البيانات تلقائيًا، فأعد الإجراء.</td></tr>
+    <tr><td>لا تتحدث الصفحة بعد رفع نسخة جديدة</td><td>أعد تحميل الصفحة مرتين، أو أغلق التطبيق المثبّت وافتحه من جديد.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>الأمان باختصار</h2>
+  <ul>
+    <li>الزوار لا يقرؤون أي جدول. يرسلون ويتتبعون عبر دوال محددة تعيد بيانات صاحب الطلب فقط، دون الصور أو بيانات المستفيدين.</li>
+    <li>التتبع يحتاج رقم الطلب وآخر 4 أرقام من الهاتف. التعديل والإلغاء يحتاجان الهاتف كاملًا.</li>
+    <li>الصور في مخزن خاص لا يفتحه إلا الفريق، عبر روابط مؤقتة.</li>
+    <li>قاعدة البيانات نفسها ترفض تخطي أي خطوة في مسار الاعتماد.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>قبل الإطلاق للجمهور</h2>
+  <ul>
+    <li>استبدل نقاط التجميع التوضيحية في الصفحة الرئيسية بمواقع حقيقية.</li>
+    <li>أضف سياسة خصوصية ووسيلة تواصل حقيقية.</li>
+    <li>تأكد من متطلبات الترخيص لجمع التبرعات وتوزيعها في قطر، ومن الالتزام بقانون حماية البيانات الشخصية.</li>
+  </ul>
+</section>
+
+</main>
+</body>
+</html>
