@@ -21,7 +21,7 @@ sbLoadFont(l);})();</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Tajawal:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: full-bleed maroon bands (hero, page banners, footer) cut by the flag's serrated edge; content sits in a 1180px column. Admin = KPI strip → tabs → table → side drawer. */
 :root {
@@ -49,7 +49,7 @@ sbLoadFont(l);})();</script>
   --shadow: 0 1px 2px rgba(60,10,28,.06), 0 10px 30px rgba(60,10,28,.08);
   --tile-a: #FFFFFF; --tile-b: #F3E2E8; --tile-hi: rgba(255,255,255,.95); --tile-in: rgba(138,21,56,.10);
   --shadow-lg: 0 20px 50px rgba(60,10,28,.18);
-  --f-display: "Tajawal", "IBM Plex Sans Arabic", "IBM Plex Sans", Tahoma, sans-serif;
+  --f-display: "IBM Plex Sans Arabic", "IBM Plex Sans", Tahoma, sans-serif;
   --f-body: "IBM Plex Sans Arabic", "IBM Plex Sans", "Segoe UI", Tahoma, Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
@@ -429,18 +429,11 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); o
 .kpis { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
 .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 2px; border-inline-start: 4px solid var(--line); }
 .kpi span { font-size: .86rem; color: var(--muted); }
-.kpi b { font: 800 1.6rem/1.2 var(--f-display); font-variant-numeric: tabular-nums; }
+.kpi b { font: 700 1.7rem/1.2 var(--f-display); font-variant-numeric: tabular-nums; }
 .kpi.alert { border-inline-start-color: var(--warn); background: var(--warn-soft); }
 .desk-grid { display: grid; grid-template-columns: 236px minmax(0, 1fr); gap: 22px; align-items: start; }
 .desk-grid > * { min-width: 0; }
 td.id { white-space: nowrap; }
-.subtabs { display: flex; flex-direction: column; gap: 2px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 8px; position: sticky; top: 96px; }
-.subtabs button { display: flex; align-items: center; gap: 10px; width: 100%; text-align: start; border: 0; background: transparent; padding: 10px 12px; border-radius: 10px; cursor: pointer; color: var(--ink); font: 500 .95rem/1.4 var(--f-body); }
-.subtabs button:hover { background: var(--surface-2); }
-.subtabs button[aria-selected="true"] { background: var(--primary); color: #fff; font-weight: 600; }
-.subtabs .ni { width: 19px; height: 19px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.subtabs .cnt { margin-inline-start: auto; font-size: .8rem; background: var(--surface-2); color: var(--ink); border-radius: 99px; padding: 0 8px; min-width: 22px; text-align: center; }
-.subtabs button[aria-selected="true"] .cnt { background: rgba(255,255,255,.22); color: #fff; }
 @media (max-width: 860px) {
   .desk-grid { grid-template-columns: 1fr; gap: 14px; }
   .subtabs { flex-direction: row; overflow-x: auto; position: static; padding: 6px; -webkit-overflow-scrolling: touch; }
@@ -587,6 +580,50 @@ details.wo[open] { display: grid; gap: 10px; }
   footer.site .cols { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } html { scroll-behavior: auto; } }
+
+/* ===== depth layer: raised cards, glossy buttons, pressed inputs ===== */
+:root { --d3: 0 1px 0 rgba(255,255,255,.95) inset, 0 -3px 0 rgba(90,20,40,.05) inset, 0 12px 26px -12px rgba(70,12,30,.28), 0 3px 8px -2px rgba(70,12,30,.10);
+  --d3-hover: 0 1px 0 rgba(255,255,255,.95) inset, 0 -3px 0 rgba(90,20,40,.05) inset, 0 20px 34px -14px rgba(70,12,30,.34), 0 4px 10px -2px rgba(70,12,30,.12);
+  --d3-face: linear-gradient(180deg, #ffffff 0%, #fbf8f9 60%, #f6f0f2 100%); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --d3: 0 1px 0 rgba(255,255,255,.06) inset, 0 12px 26px -12px rgba(0,0,0,.7), 0 3px 8px -2px rgba(0,0,0,.4); --d3-hover: 0 1px 0 rgba(255,255,255,.08) inset, 0 20px 34px -14px rgba(0,0,0,.8); --d3-face: linear-gradient(180deg, #241a1e 0%, #1c1317 100%); } }
+:root[data-theme="dark"] { --d3: 0 1px 0 rgba(255,255,255,.06) inset, 0 12px 26px -12px rgba(0,0,0,.7), 0 3px 8px -2px rgba(0,0,0,.4); --d3-hover: 0 1px 0 rgba(255,255,255,.08) inset, 0 20px 34px -14px rgba(0,0,0,.8); --d3-face: linear-gradient(180deg, #241a1e 0%, #1c1317 100%); }
+.kpi, form.sheet, .cat, .camp, .point, .rules > div, .set-card, .table-wrap, .track-box, .gate, .ribbon .card, .mt-box, .exp-banner, .alloc-box, .rep-card, .who-chip { background: var(--d3-face); box-shadow: var(--d3); border-color: rgba(138,21,56,.08); }
+.cat, .camp, .point { transition: transform .2s ease, box-shadow .2s ease; }
+.cat:hover, .camp:hover, .point:hover { transform: translateY(-3px); box-shadow: var(--d3-hover); }
+.kpi { position: relative; border-radius: 16px; padding: 16px 18px; padding-inline-end: 70px; border-inline-start-width: 0; min-height: 96px; align-content: center; }
+.kpi-ic { position: absolute; inset-inline-end: 14px; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; filter: drop-shadow(0 4px 5px rgba(70,12,30,.22)); }
+.kpi span { font-weight: 500; color: var(--muted); }
+.kpi.alert { background: linear-gradient(180deg, #fff8ea, #fdf0d3); box-shadow: var(--d3), inset 0 0 0 1px rgba(201,162,75,.45); }
+.btn { transition: transform .12s ease, box-shadow .15s ease, background .15s ease; }
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: linear-gradient(180deg, #b0335b 0%, var(--primary) 52%, #6d0f2c 100%); box-shadow: 0 1px 0 rgba(255,255,255,.28) inset, 0 -2px 0 rgba(0,0,0,.18) inset, 0 8px 16px -6px rgba(138,21,56,.55); border-color: transparent; }
+.btn-primary:hover { background: linear-gradient(180deg, #a12a50 0%, #7b1232 60%, #5e0b24 100%); box-shadow: 0 1px 0 rgba(255,255,255,.22) inset, 0 -2px 0 rgba(0,0,0,.2) inset, 0 10px 20px -6px rgba(138,21,56,.6); }
+.btn-ghost { background: var(--d3-face); box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 2px 5px -1px rgba(70,12,30,.14); border-color: rgba(138,21,56,.12); }
+.btn-ghost:hover { box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 6px 12px -4px rgba(70,12,30,.2); }
+.btn-danger { box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 6px 12px -6px rgba(180,40,40,.5); }
+input:not([type=checkbox]):not([type=radio]), select, textarea { box-shadow: inset 0 2px 4px rgba(70,12,30,.07); }
+th { background: linear-gradient(180deg, #7b1232 0%, var(--primary-deep) 100%); }
+.table-wrap { border-radius: 16px; }
+@media (max-width: 1320px) and (min-width: 861px) { .kpis { grid-template-columns: repeat(3, 1fr); } }
+/* sidebar */
+.subtabs { display: flex; flex-direction: column; gap: 4px; background: var(--d3-face); box-shadow: var(--d3); border: 1px solid rgba(138,21,56,.08); border-radius: 18px; padding: 10px; position: sticky; top: 96px; }
+.subtabs button { display: flex; align-items: center; gap: 12px; width: 100%; text-align: start; border: 0; background: transparent; padding: 8px 10px; border-radius: 12px; cursor: pointer; color: var(--ink); font: 600 .95rem/1.35 var(--f-body); transition: background .15s, transform .15s, box-shadow .15s; }
+.subtabs button:hover { background: var(--surface-2); transform: translateX(-2px); }
+html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
+.subtabs .ni { width: 40px; height: 40px; flex: none; display: grid; place-items: center; border-radius: 11px; background: var(--surface-2); box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 3px 6px -2px rgba(70,12,30,.18); }
+.subtabs .ni img { width: 30px; height: 30px; filter: drop-shadow(0 2px 2px rgba(70,12,30,.2)); }
+.subtabs .nl { flex: 1; min-width: 0; }
+.subtabs .cnt { font-size: .78rem; font-weight: 700; background: var(--surface-2); color: var(--ink); border-radius: 99px; padding: 1px 9px; min-width: 24px; text-align: center; box-shadow: inset 0 1px 2px rgba(70,12,30,.12); }
+.subtabs button[aria-selected="true"] { background: linear-gradient(180deg, #a8264f 0%, var(--primary) 55%, #6d0f2c 100%); color: #fff; box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 -2px 0 rgba(0,0,0,.18) inset, 0 10px 18px -8px rgba(138,21,56,.6); }
+.subtabs button[aria-selected="true"] .ni { background: rgba(255,255,255,.95); }
+.subtabs button[aria-selected="true"] .cnt { background: rgba(255,255,255,.22); color: #fff; box-shadow: none; }
+@media (max-width: 860px) {
+  .subtabs { flex-direction: row; overflow-x: auto; position: static; padding: 8px; -webkit-overflow-scrolling: touch; }
+  .subtabs button { width: auto; white-space: nowrap; flex: none; padding: 6px 12px 6px 8px; }
+  .subtabs button:hover { transform: none; }
+  .subtabs .ni { width: 32px; height: 32px; } .subtabs .ni img { width: 24px; height: 24px; }
+  .kpi { min-height: 84px; padding-inline-end: 58px; } .kpi-ic { width: 38px; height: 38px; }
+}
 </style>
 </head>
 <body>
@@ -2021,20 +2058,9 @@ $('#logoutBtn').addEventListener('click', async () => {
   try { sessionStorage.removeItem('sb.user'); } catch (e) {} loadMe._m = null; me = null; renderAdmin();
 });
 
-// line icons for the dashboard sections
-const NAV_IC = {
-  donations: '<path d="M4 11h16v9H4zM3 7h18v4H3zM12 7v13M12 7c-1.5-3-5-3.5-5-1.2C7 7 9.5 7 12 7zm0 0c1.5-3 5-3.5 5-1.2C17 7 14.5 7 12 7z"/>',
-  requests: '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
-  match: '<path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/>',
-  stock: '<path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/>',
-  tasks: '<path d="M2 6h12v10H2z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
-  people: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a5.5 5.5 0 0 1 3.5 6"/>',
-  reports: '<path d="M4 20V11M10 20V5M16 20v-7M21 20H3"/>',
-  team: '<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2.5"/><path d="M5.5 17a3.5 3.5 0 0 1 7 0M15 10h4M15 14h3"/>',
-  site: '<path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/>',
-  backup: '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
-  log: '<path d="M9 6h12M9 12h12M9 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
-};
+// 3D icon for each dashboard section
+const NAV_IC = { donations: 'gift', requests: 'house', match: 'link', stock: 'stock', tasks: 'truck', people: 'people', reports: 'chart', team: 'id', site: 'gear', backup: 'db', log: 'log' };
+const kpiHTML = (l, n, a, ic) => `<div class="kpi${a ? ' alert' : ''}"><img class="kpi-ic" src="icons/nav-${ic}.webp" width="44" height="44" alt="" decoding="async"><span>${l}</span><b>${n}</b></div>`;
 function renderAdmin() {
   loadMe();
   $('#gate').hidden = !!me; $('#desk').hidden = !me;
@@ -2043,22 +2069,22 @@ function renderAdmin() {
   const tabs = TABS.filter(x => can(x.p));
   if (!tab || !tabs.some(x => x.t === tab)) tab = tabs[0].t;
   $('#meBox').innerHTML = `<span class="who-chip"><b>${esc(me.name)}</b><span class="tag gold">${ROLE_LBL[me.role]}</span></span>`;
-  $('#subtabs').innerHTML = tabs.map(x => { const c = x.c ? x.c() : ''; return `<button role="tab" data-t="${x.t}" aria-selected="${x.t === tab}"><svg class="ni" viewBox="0 0 24 24" aria-hidden="true">${NAV_IC[x.t] || ''}</svg><span>${t(x.l)}</span>${c !== '' && c != null ? `<span class="cnt">${c}</span>` : ''}</button>`; }).join('');
+  $('#subtabs').innerHTML = tabs.map(x => { const c = x.c ? x.c() : ''; return `<button role="tab" data-t="${x.t}" aria-selected="${x.t === tab}"><span class="ni"><img src="icons/nav-${NAV_IC[x.t] || 'gift'}.webp" width="30" height="30" alt="" decoding="async"></span><span class="nl">${t(x.l)}</span>${c !== '' && c != null ? `<span class="cnt">${c}</span>` : ''}</button>`; }).join('');
   if (matchMedia('(max-width: 860px)').matches) { const sel = $('#subtabs [aria-selected="true"]'); if (sel) $('#subtabs').scrollLeft += sel.getBoundingClientRect().left - $('#subtabs').getBoundingClientRect().left - 8; }
   $$('#subtabs button').forEach(b => b.addEventListener('click', () => { tab = b.dataset.t; filt = { q:'', status:'', kind:'' }; renderAdmin(); }));
   // KPIs
   if (me.role === 'volunteer') {
     const mt = myTasks();
-    $('#kpis').innerHTML = [[t('استلامات مطلوبة'), mt.filter(x => x.type === 'pickup').length, false], [t('توصيلات مطلوبة'), mt.filter(x => x.type === 'deliver').length, false]]
-      .map(([l, n, a]) => `<div class="kpi${a ? ' alert' : ''}"><span>${l}</span><b>${n}</b></div>`).join('');
+    $('#kpis').innerHTML = [[t('استلامات مطلوبة'), mt.filter(x => x.type === 'pickup').length, false, 'stock'], [t('توصيلات مطلوبة'), mt.filter(x => x.type === 'deliver').length, false, 'truck']]
+      .map(([l, n, a, ic]) => kpiHTML(l, n, a, ic)).join('');
   } else {
     const D = db.donations, R = db.requests, ex = expiryAlerts();
     const pendingD = D.filter(d => d.status === 'new').length, pendingR = R.filter(r => r.status === 'new').length;
     $('#kpis').innerHTML = [
-      ['تبرعات بانتظار المراجعة', pendingD, pendingD > 0], ['طلبات بانتظار التحقق', pendingR, pendingR > 0],
-      ['تبرعات في المستودع', inStock().length, false], ['تنبيهات الصلاحية', ex.length, ex.some(x => x.level !== 'soon')],
-      ['مستفيدون ينتظرون التخصيص', R.filter(r => r.status === 'verified').length, false], ['تبرعات سُلّمت', D.filter(d => d.status === 'delivered').length, false]
-    ].map(([l, n, a]) => `<div class="kpi${a ? ' alert' : ''}"><span>${t(l)}</span><b>${n}</b></div>`).join('');
+      ['تبرعات بانتظار المراجعة', pendingD, pendingD > 0, 'search'], ['طلبات بانتظار التحقق', pendingR, pendingR > 0, 'shield'],
+      ['تبرعات في المستودع', inStock().length, false, 'stock'], ['تنبيهات الصلاحية', ex.length, ex.some(x => x.level !== 'soon'), 'clock'],
+      ['مستفيدون ينتظرون التخصيص', R.filter(r => r.status === 'verified').length, false, 'people'], ['تبرعات سُلّمت', D.filter(d => d.status === 'delivered').length, false, 'gift']
+    ].map(([l, n, a, ic]) => kpiHTML(t(l), n, a, ic)).join('');
   }
   $('#expBanner').innerHTML = can('allocate') && tab !== 'stock' ? expiryBanner(false) : '';
   wireOpen($('#expBanner'));
@@ -2829,7 +2855,7 @@ function renderAccount() {
 }
 function drawCert(cv, name, n, delivered) {
   const g = cv.getContext('2d'), W = cv.width, H = cv.height, rtl = !!LANGS[LANG].rtl;
-  const disp = '"Tajawal", "IBM Plex Sans Arabic", Tahoma, sans-serif', body = '"IBM Plex Sans Arabic", "IBM Plex Sans", Tahoma, sans-serif';
+  const disp = '"IBM Plex Sans Arabic", "IBM Plex Sans", Tahoma, sans-serif', body = '"IBM Plex Sans Arabic", "IBM Plex Sans", Tahoma, sans-serif';
   g.clearRect(0, 0, W, H);
   g.fillStyle = '#8A1538'; g.fillRect(0, 0, W, H);
   g.fillStyle = '#FFFDF9'; g.fillRect(40, 40, W - 80, H - 80);
