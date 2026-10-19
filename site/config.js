@@ -8,6 +8,6 @@
    إذا تُرك الحقلان فارغين يعمل الموقع نسخةً تجريبية دون اتصال.
    ===================================================================== */
 window.SHARE_BLESSINGS_CONFIG = {
-  supabaseUrl: '',
-  supabaseAnonKey: ''
+  supabaseUrl: 'https://ljofskzhtcnyvwvxullb.supabase.co',
+  supabaseAnonKey: 'sb_publishable_XR048iT7DZHPAtcoxWMC-A_tykB0tX1'
 };
