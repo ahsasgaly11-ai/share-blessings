@@ -492,7 +492,6 @@ html[dir="rtl"] .ticker-track { animation-name: tk-rtl; }
 .ticker-track span { padding-inline: 18px; }
 .ticker-track .sacred { font-family: "IBM Plex Sans Arabic", "Noto Naskh Arabic", Tahoma, sans-serif; unicode-bidi: isolate; color: #fff4d6; }
 .ticker-track i { font-style: normal; color: var(--gold, #C9A24B); font-size: .7rem; }
-.ticker-x { flex: none; width: 40px; height: 100%; border: 0; background: rgba(0,0,0,.18); color: #fff; cursor: pointer; font-size: .9rem; }
 body.has-ticker { padding-bottom: 40px; }
 body.has-ticker .toast { bottom: calc(58px + env(safe-area-inset-bottom, 0px)); }
 @keyframes tk-ltr { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -1244,7 +1243,6 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
 </main>
 <div class="ticker" id="ticker" hidden>
   <div class="ticker-view"><div class="ticker-track" id="tickerTrack"></div></div>
-  <button class="ticker-x" id="tickerX" type="button" aria-label="إخفاء الشريط">✕</button>
 </div>
 
 <footer class="site">
@@ -3163,18 +3161,15 @@ function isSacred(x) {
   const letters = (x.match(/[\u0621-\u064A]/g) || []).length, marks = (x.match(/[\u064B-\u0652]/g) || []).length;
   return letters > 12 && marks / letters > 0.35;
 }
-let tickerClosed = false;
-try { tickerClosed = sessionStorage.getItem('sb.tickerClosed') === '1'; } catch (e) {}
 function renderTicker() {
   const T = SITE.ticker, items = (T.items || []).map(x => String(x).trim()).filter(Boolean), bar = $('#ticker');
-  const show = T.on !== false && items.length > 0 && !tickerClosed && location.hash !== '#admin';
+  const show = T.on !== false && items.length > 0 && location.hash !== '#admin';
   bar.hidden = !show; document.body.classList.toggle('has-ticker', show);
   if (!show) return;
   const one = items.map(x => (isSacred(x) ? `<span class="sacred" lang="ar" dir="rtl" data-notr>${esc(x)}</span>` : `<span>${esc(t(x))}</span>`) + '<i aria-hidden="true">◆</i>').join('');
   const track = $('#tickerTrack'); track.innerHTML = one + one;   // two copies so the loop has no gap
   requestAnimationFrame(() => { track.style.setProperty('--tk-dur', Math.max(12, track.scrollWidth / 2 / (TK_SPEED[T.speed] || 70)) + 's'); });
 }
-$('#tickerX').addEventListener('click', () => { tickerClosed = true; try { sessionStorage.setItem('sb.tickerClosed', '1'); } catch (e) {} renderTicker(); });
 window.addEventListener('hashchange', renderTicker);
 
 /* ---- campaigns and coverage on the home page ---- */
