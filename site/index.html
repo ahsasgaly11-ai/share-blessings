@@ -349,6 +349,12 @@ section.view { display: block; }
 .mv-item input[type=number] { width: 64px; flex: none; text-align: center; padding: 6px 4px; }
 .mv-item span { min-width: 0; line-height: 1.35; }
 .move-ids { display: flex; gap: 8px; flex-wrap: wrap; }
+.place-box { display: grid; gap: 10px; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 10px; }
+.place-box[hidden], #d_otherPlace[hidden] { display: none; }
+.place-note { font-size: .88rem; }
+.offer-card { border: 1px solid var(--gold); background: var(--gold-soft); border-radius: 12px; padding: 16px 18px; display: grid; gap: 10px; }
+.offer-card h3 { display: flex; gap: 8px; align-items: center; }
+.offer-card .form-actions { margin: 0; }
 @media (max-width: 680px) { .mv-grid { grid-template-columns: 1fr 1fr; gap: 6px; } .mv-item { padding: 6px 8px; } .mv-item span { font-size: .86rem; } .mv-item input[type=number] { width: 46px; padding: 6px 2px; } }
 .need-band { margin-top: 64px; border-radius: 16px; background: var(--gold-soft); border: 1px solid var(--line); padding: 28px 32px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
 .need-band > div { flex: 1 1 320px; display: grid; gap: 6px; }
@@ -431,7 +437,7 @@ label.f small { font-weight: 400; color: var(--muted); }
 .icon-pick { display: flex; gap: 8px; align-items: center; }
 .icon-pick img { width: 44px; height: 44px; object-fit: contain; }
 .donor-note textarea { border-color: var(--primary); background: var(--surface); }
-input[type=text], input[type=tel], input[type=number], input[type=date], input[type=password], select, textarea {
+input[type=text], input[type=tel], input[type=number], input[type=date], input[type=password], input[type=url], input[type=email], select, textarea {
   width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); min-width: 0;
 }
 textarea { min-height: 80px; resize: vertical; }
@@ -1046,6 +1052,18 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
         <label><input type="radio" name="d_method" value="pickup" checked><span>استلام من عنواني</span></label>
         <label><input type="radio" name="d_method" value="dropoff"><span>أوصله بنفسي إلى نقطة التجميع</span></label>
       </div>
+      <div id="d_placeBox" class="place-box">
+        <div class="seg" role="radiogroup" aria-label="مكان الاستلام">
+          <label><input type="radio" name="d_place" value="home" checked><span>من بيتي (العنوان أعلاه)</span></label>
+          <label><input type="radio" name="d_place" value="other"><span>مكان آخر أحدده</span></label>
+        </div>
+        <div class="grid" id="d_otherPlace" hidden>
+          <label class="f">وصف المكان<input type="text" id="d_placeText" maxlength="200" placeholder="مثال: مواقف المجمع التجاري، عند البوابة 2"></label>
+          <label class="f">رابط المكان من خرائط Google <small>اختياري</small><input type="url" id="d_placeMap" dir="ltr" placeholder="https://maps.app.goo.gl/..."></label>
+        </div>
+        <label class="check"><input type="checkbox" id="d_direct" checked><span>لا مانع أن يأتي المستفيد بنفسه لاستلامه مني بدل المتطوع</span></label>
+        <p class="muted place-note">لا نشارك مكان الاستلام إلا مع مستفيد تحقق منه المشرفون وبعد موافقته على الموعد، ولا نشارك رقم هاتفك مع أحد.</p>
+      </div>
       <div class="grid">
         <label class="f">الوقت المفضّل
           <select id="d_slot">
@@ -1507,6 +1525,7 @@ Object.assign(EN, {"نعمة الجيران": "Blessings next door", "احتيا
 Object.assign(EN, {"أنا مغادر قطر": "I'm leaving Qatar", "قبل ما تسافر… خلّ بيتك نعمة": "Before you fly… let your home be a blessing", "سجّل محتويات بيتك مرة واحدة قبل سفرك، ونرتّب استلامها كلها في موعد واحد قبل موعد سفرك، ثم نوزّعها على أكثر من أسرة محتاجة.": "Register your home's contents once before you leave. We collect everything in a single visit before your travel date, then share it between several families in need.", "بيانات التواصل وموعد السفر": "Contact details and travel date", "تاريخ السفر": "Travel date", "تاريخ السفر {0}": "Travels on {0}", "الوقت المفضّل للاستلام": "Preferred pickup time", "نحاول الاستلام قبل سفرك بيومين على الأقل.": "We aim to collect at least two days before you travel.", "يتبقى على سفرك {0} يومًا. نحاول الاستلام قبل سفرك بيومين على الأقل.": "{0} days until you travel. We aim to collect at least two days before.", "رقم الشقة، الطابق، وجود مصعد": "Flat number, floor, whether there is a lift", "اختياري، يساعد سيارة النقل على الوصول": "Optional; helps the truck find you", "ماذا ستترك في البيت؟": "What will you leave in the home?", "اكتب العدد بجانب كل ما تريد التبرع به، واترك الباقي صفرًا. لا حاجة لوصف كل قطعة.": "Type how many of each thing you want to give and leave the rest at zero. No need to describe every piece.", "صور الغرف": "Photos of the rooms", "حتى {0} صور، صورة لكل غرفة تكفي": "Up to {0} photos; one per room is enough", "اضغط لاختيار الصور أو التقاطها": "Tap to choose or take photos", "صوّر الغرفة كاملة بحيث تظهر القطع بوضوح": "Photograph the whole room so the pieces are clearly visible", "أؤكد أن الأجهزة تعمل وآمنة، وأن الأثاث والأغراض نظيفة وسليمة.": "I confirm the appliances work and are safe, and the furniture and other things are clean and undamaged.", "مثال: المفتاح مع حارس المبنى بعد سفري": "Example: the key is with the building guard after I leave", "إرسال محتويات البيت للمراجعة": "Send the home's contents for review", "بالإرسال توافق على معالجة بياناتك وفق": "By sending, you agree to us processing your data under the", "كيف نرتّبها لك؟": "How we arrange it for you", "يراجع المشرفون الصور، وتظهر طلبات المغادرين أولًا حسب أقرب موعد سفر.": "Supervisors review the photos; people leaving Qatar are shown first, by nearest travel date.", "نحدد موعد استلام واحد لكل محتويات البيت قبل سفرك.": "We set one pickup for everything in the home before you travel.", "تُوزَّع القطع على أكثر من أسرة: الثلاجة لأسرة، والسرير لأخرى.": "The pieces go to several families: the fridge to one, the bed to another.", "تتابع أثر تبرعك من أي بلد برقم الطلب.": "Follow where your donation went from any country with the request number.", "للطعام الجاف والملابس استخدم نموذج التبرع العادي.": "For dry food and clothes, use the regular donation form.", "انتهى عقدك وستغادر؟ صوّر غرف بيتك وحدد موعد سفرك، ونستلم الأثاث والأجهزة كلها في موعد واحد قبل سفرك ونوزّعها على أسر محتاجة.": "Contract over and leaving? Photograph your rooms and set your travel date. We collect all the furniture and appliances in one visit before you fly and share them with families in need.", "سجّل محتويات بيتك": "Register your home's contents", "حدّد تاريخ سفرك، من الغد وحتى ستة أشهر.": "Set your travel date, from tomorrow up to six months ahead.", "اكتب عدد قطعة واحدة على الأقل مما ستتركه في البيت.": "Enter a number for at least one thing you will leave in the home.", "أرفق صورة واحدة على الأقل لغرف البيت.": "Attach at least one photo of the rooms.", "سُجّل جزء من البيت فقط ({0}). أرسل الباقي مرة أخرى أو راسلنا عبر واتساب.": "Only part of the home was registered ({0}). Send the rest again or message us on WhatsApp.", "شكرًا لك، ورحلة سعيدة": "Thank you, and have a good trip", "استلمنا محتويات بيتك وسيراجعها المشرفون": "We have your home's contents; supervisors will review them", "سجّلنا {0} طلبات، طلبًا لكل نوع، وسنرتّب استلامها كلها في موعد واحد قبل سفرك في {1}.": "We registered {0} requests, one per kind, and will collect them all in one visit before you travel on {1}.", "احتفظ بهذه الأرقام. تستطيع متابعة أثر تبرعك من أي بلد عبر «تتبّع طلبي» بالرقم وآخر 4 أرقام من هاتفك ({0}).": "Keep these numbers. You can follow your donation from any country on “Track my request” with the number and the last 4 digits of your phone ({0}).", "مغادر قطر": "Leaving Qatar", "من نفس البيت:": "From the same home:", "سافر المتبرّع": "Donor has left", "يسافر اليوم": "Travels today", "يسافر بعد {0} يومًا": "Travels in {0} days", "بيوت مغادرين تنتظر الاستلام": "Homes of people leaving, waiting for pickup", "فتح": "Open", "صاحب التبرع يسافر في {0}. حدّد الاستلام قبل ذلك.": "The donor travels on {0}. Set the pickup before then.", "نفس الموعد لباقي تبرعات هذا البيت المعتمدة: {0}": "Same pickup for this home's other approved donations: {0}", "الموعد بعد تاريخ سفر المتبرّع ({0})": "That date is after the donor's travel date ({0})", "حُدّد موعد واحد لـ{0} تبرعات من نفس البيت": "One pickup set for {0} donations from the same home"});
 Object.assign(EN, {"تبرعك يترك أثرًا": "Your giving leaves a mark"});
 Object.assign(EN, {"(أنا)": "(me)", "لا يوجد متطوعو توصيل في الفريق بعد. أضفهم من تبويب «الفريق» بدور «متطوع توصيل»، أو اختر نفسك إن كنت ستتولى المهمة بنفسك.": "There are no delivery volunteers on the team yet. Add them from the “Team” tab with the “Delivery volunteer” role, or pick yourself if you will do it.", "فتح تبويب الفريق": "Open the Team tab"});
+Object.assign(EN, {"أكّد المستفيد {0} أنه سيحضر لاستلام التبرع: {1} · {2}.": "Beneficiary {0} confirmed they will come to collect: {1} · {2}.", "أكّد المستفيد أنه سيحضر لاستلام تبرعك في الموعد.": "The beneficiary confirmed they will come to collect your donation on time.", "أكّد مستفيد متحقَّق منه أنه سيحضر لاستلام تبرعك منك مباشرة: {0}.": "A verified beneficiary confirmed they will come to collect your donation from you: {0}.", "أُرسل الموعد. أشعر المستفيد عبر واتساب": "Appointment sent. Notify the beneficiary on WhatsApp", "أُرسل موعد استلام {0} إلى المستفيد {1}": "Pickup appointment for {0} sent to beneficiary {1}", "أُرسل موعد الاستلام إلى المستفيد {0}: {1} · {2}. ننتظر موافقته من صفحة «تتبّع طلبي».": "Appointment sent to beneficiary {0}: {1} · {2}. Waiting for their answer on “Track my request”.", "أُعيد التبرع لتحديد موعد جديد": "The donation is back for a new appointment", "إبلاغ المتبرّع عبر واتساب": "Tell the donor on WhatsApp", "إذا تعذّر حضورك فأخبرنا عبر واتساب ليُعطى التبرع لأسرة أخرى.": "If you cannot come, tell us on WhatsApp so the donation can go to another family.", "إرسال الموعد للمستفيد": "Send the appointment to the beneficiary", "إشعار المستفيد عبر واتساب": "Notify the beneficiary on WhatsApp", "اخترنا لتبرعك أسرة متحقَّقًا منها، وننتظر تأكيدها لموعد الاستلام ({0}).": "We chose a verified family for your donation and are waiting for them to confirm the pickup ({0}).", "استلم": "Collected", "استلم التبرع {0} مباشرة من المتبرّع": "Collected donation {0} directly from the donor", "اعتذر": "Declined", "اعتذر المستفيد {0} عن الموعد. اختر مستفيدًا آخر أو متطوعًا.": "Beneficiary {0} declined the appointment. Choose another beneficiary or a volunteer.", "اعتذر المستفيد {0} عن موعد استلام {1}": "Beneficiary {0} declined the pickup of {1}", "اعتذرت عن موعد الاستلام. سنبحث لك عن تبرع آخر مناسب.": "You declined the pickup. We will look for another suitable donation for you.", "افتح الرابط واكتب آخر 4 أرقام من هاتفك، ثم اضغط «موافق، سأحضر» لتظهر لك تفاصيل المكان.": "Open the link, type the last 4 digits of your phone, then press “Yes, I'll come” to see the place details.", "الخريطة": "Map", "السلام عليكم، معكم منصة أثر. شكرًا لتبرعك {0}. أكّد مستفيد متحقَّق منه أنه سيحضر لاستلامه منك مباشرة {1} · {2}. لا نشارك رقم هاتفك معه. جزاك الله خيرًا.": "Hello from Athar. Thank you for your donation {0}. A verified beneficiary confirmed they will come to collect it from you on {1} · {2}. We do not share your phone number with them. Thank you.", "السلام عليكم، معكم منصة أثر. وجدنا لطلبك {0} تبرعًا مناسبًا: {1}. موعد الاستلام {2} · {3}.": "Hello from Athar. We found a suitable donation for your request {0}: {1}. Pickup: {2} · {3}.", "المستفيد يستلمه مباشرة": "The beneficiary collects it directly", "المكان في منطقة {0}.": "The place is in zone {0}.", "الموعد: {0}": "When: {0}", "الوقت": "Time", "بانتظار رد المستفيد": "Waiting for the beneficiary", "بانتظار رده": "Waiting for answer", "بعد موافقتك يظهر لك مكان الاستلام بالتفصيل. احضر في الموعد واستلمه من المتبرّع مباشرة.": "Once you accept, the exact pickup place appears here. Come on time and collect it directly from the donor.", "تسليم مباشر": "Direct handover", "تم التسليم للمستفيد": "Handed to the beneficiary", "حدّد تاريخ الموعد": "Set the appointment date", "رابط المكان من خرائط Google": "Place link from Google Maps", "رقم هاتفك كاملًا للتأكيد": "Your full phone number to confirm", "سحب الموعد": "Withdraw the appointment", "سيحضر": "Will come", "سيحضر المستفيد في الموعد": "The beneficiary will come on time", "سُحب الموعد": "Appointment withdrawn", "سُحب الموعد من المستفيد {0}.": "The appointment was withdrawn from beneficiary {0}.", "سُحب موعد استلام {0} من المستفيد {1}": "Pickup of {0} withdrawn from beneficiary {1}", "سُلّم {0} مباشرة إلى المستفيد {1}": "{0} handed directly to beneficiary {1}", "سُلّم مباشرة إلى المستفيد": "Handed directly to the beneficiary", "شكرًا لإبلاغنا": "Thank you for letting us know", "شكرًا، أكّدنا حضورك وأبلغنا المتبرّع": "Thank you, we confirmed you are coming and told the donor", "صِف مكان الاستلام الذي تحدده.": "Describe the pickup place you choose.", "لا أستطيع": "I can't", "لا مانع أن يأتي المستفيد بنفسه لاستلامه مني بدل المتطوع": "I don't mind the beneficiary coming to collect it from me instead of a volunteer", "لا نشارك رقم هاتفك مع المستفيد. إذا تغيّر شيء فراسلنا عبر واتساب.": "We don't share your phone number with the beneficiary. If anything changes, message us on WhatsApp.", "لا نشارك مكان الاستلام إلا مع مستفيد تحقق منه المشرفون وبعد موافقته على الموعد، ولا نشارك رقم هاتفك مع أحد.": "We share the pickup place only with a beneficiary verified by our supervisors, and only after they accept the appointment. We never share your phone number.", "لديك موعد لاستلام تبرع": "You have a donation pickup appointment", "لم يحضر": "Didn't come", "لم يحضر المستفيد": "The beneficiary didn't come", "لم يحضر المستفيد {0} في الموعد. اختر مستفيدًا آخر أو متطوعًا.": "Beneficiary {0} did not come. Choose another beneficiary or a volunteer.", "لم يحضر المستفيد {0} لاستلام {1}": "Beneficiary {0} did not come to collect {1}", "لم يحضر المستفيد في الموعد": "The beneficiary did not come", "لم يحضر في موعد الاستلام": "Did not come to the pickup", "لم يعد هذا الموعد متاحًا. تواصل معنا عبر واتساب.": "This appointment is no longer available. Contact us on WhatsApp.", "متطوع من الفريق": "A team volunteer", "مثال: مواقف المجمع التجاري، عند البوابة 2": "Example: the mall car park, by gate 2", "مكان آخر أحدده": "Another place I choose", "مكان آخر:": "Another place:", "مكان الاستلام": "Pickup place", "مكان الاستلام:": "Pickup place:", "من بيتي (العنوان أعلاه)": "From my home (the address above)", "من يستلم التبرع؟": "Who collects the donation?", "موافق، سأحضر": "Yes, I'll come", "موعد استلام": "Pickup appointment", "موعد التسليم المباشر للمستفيد": "Direct handover to the beneficiary", "موعدك مؤكد": "Your appointment is confirmed", "هذا المستفيد غير متاح الآن": "This beneficiary is not available now", "وافق المستفيد {0} على موعد استلام {1}": "Beneficiary {0} accepted the pickup of {1}", "وصف المكان": "Place description", "يقبل أن يستلمه المستفيد مباشرة": "Accepts direct handover to a beneficiary", "أكّد حضوره لاستلام التبرع": "Confirmed they will come to collect", "أكّد المستفيد حضوره": "The beneficiary confirmed"});
 // t('نص {0}', x): the current language's text, the Arabic source when untranslated; {n} are filled with the arguments
 const t = (s, ...a) => { const r = TR ? (TR[s] != null ? TR[s] : s) : (OV[s] != null ? OV[s] : s); return a.length ? String(r).replace(/\{(\d+)\}/g, (_, i) => a[+i] ?? '') : r; };
 const SEP = () => LANGS[LANG].rtl ? '، ' : ', ';
@@ -1614,8 +1633,8 @@ const findDon = id => db.donations.find(x => x.id === id);
 const findReq = id => db.requests.find(x => x.id === id);
 /* كل انتقال يمر بالمشرف بالترتيب، ولا يمكن تخطي خطوة اعتماد. الإلغاء متاح لصاحب الطلب قبل الاستلام أو المطابقة فقط */
 const NEXT = {
-  D: { new:['approved','rejected','cancelled'], approved:['scheduled','rejected','cancelled'], scheduled:['received','rejected'], received:['allocated','closed','delivered'], allocated:['delivered'] },
-  R: { new:['verified','rejected','cancelled'], verified:['matched','rejected','cancelled'], matched:['delivered'] },
+  D: { new:['approved','rejected','cancelled'], approved:['scheduled','rejected','cancelled'], scheduled:['received','rejected','delivered','approved'], received:['allocated','closed','delivered'], allocated:['delivered'] },
+  R: { new:['verified','rejected','cancelled'], verified:['matched','rejected','cancelled'], matched:['delivered','verified'] },
 };
 function setStatus(rec, status, note) {
   const allowed = (NEXT[rec.id[0]][rec.status] || []);
@@ -1692,8 +1711,9 @@ function seed() {
 /* ================= routing ================= */
 const VIEWS = ['home','donate','request','track','account','admin','privacy','move'];
 function route(keepScroll) {
-  const h = (location.hash || '#home').slice(1);
+  const [h, arg] = (location.hash || '#home').slice(1).split('?');
   const v = VIEWS.includes(h) ? h : 'home';
+  if (v === 'track' && arg && normCode(decodeURIComponent(arg))) { $('#trackCode').value = normCode(decodeURIComponent(arg)); $('#trackOut').innerHTML = ''; }
   $('#drawer').hidden = true; $('#scrim').hidden = true; $('#lightbox').hidden = true;
   VIEWS.forEach(x => { $('#v-' + x).hidden = x !== v; });
   $$('nav.tabs a').forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + v ? 'page' : 'false'));
@@ -1907,15 +1927,16 @@ $('#donForm').addEventListener('submit', e => {
   if (isGoods(kind) && GOODS[kind].needPhoto && !donPhotos.length) errs.push(t('أرفق صورة واحدة على الأقل لـ{0} حتى يقرر المشرف قبولها.', KIND[kind]));
   const target = $('#d_target').value;
   if (target === 'person' && (!v('d_pName') || !v('d_pAddr'))) errs.push('اكتب اسم المستفيد المحدد وعنوانه.');
+  if ($('input[name=d_method]:checked').value === 'pickup' && $('input[name=d_place]:checked').value === 'other' && !mark($('#d_placeText'), v('d_placeText').length < 4)) errs.push('صِف مكان الاستلام الذي تحدده.');
   const box = $('#d_err');
   if (errs.length) { box.innerHTML = `<b>${t('راجع الحقول التالية:')}</b><br>` + [...new Set(errs)].map(x => esc(t(x))).join('<br>'); box.hidden = false; box.scrollIntoView({ behavior:'smooth', block:'center' }); return; }
   box.hidden = true;
   if (CLOUD) { submitDonationCloud({ kind, name: v('d_name'), phone: v('d_phone'), addr:{ zone:v('d_zone'), street:v('d_street'), bldg:v('d_bldg') }, details: v('d_details'),
     method: $('input[name=d_method]:checked').value, slot: $('#d_slot').value, target, person: target === 'person' ? { name:v('d_pName'), addr:v('d_pAddr') } : null,
-    items, notes: v('d_notes'), lang: LANG, near, ...(pendingWish ? { wish: pendingWish.id } : {}), ...geoFromForm('d') }, box); return; }
+    items, notes: v('d_notes'), lang: LANG, near, ...donPlace(), ...(pendingWish ? { wish: pendingWish.id } : {}), ...geoFromForm('d') }, box); return; }
   const rec = { id: nextId('d'), kind, name: v('d_name'), phone: v('d_phone'), addr:{ zone:v('d_zone'), street:v('d_street'), bldg:v('d_bldg') }, details: v('d_details'),
     method: $('input[name=d_method]:checked').value, slot: $('#d_slot').value, target, person: target === 'person' ? { name:v('d_pName'), addr:v('d_pAddr') } : null,
-    items, photos: donPhotos.slice(), notes: v('d_notes'), lang: LANG, status:'new', allocatedTo:null, near, ...(pendingWish ? { wish: pendingWish.id } : {}), history:[{ status:'new', at:nowISO(), note:'' }], createdAt: nowISO(), ...geoFromForm('d') };
+    items, photos: donPhotos.slice(), notes: v('d_notes'), lang: LANG, status:'new', allocatedTo:null, near, ...donPlace(), ...(pendingWish ? { wish: pendingWish.id } : {}), history:[{ status:'new', at:nowISO(), note:'' }], createdAt: nowISO(), ...geoFromForm('d') };
   db.donations.unshift(rec); log(t('تبرع جديد {0} من {1}', rec.id, rec.name), rec.name);
   if (!save()) {
     db.donations.shift(); db.log.shift(); db.seq.d -= 1;
@@ -1924,7 +1945,7 @@ $('#donForm').addEventListener('submit', e => {
   donPhotos = []; renderThumbs(); resetGeo('d'); $('#d_maplink').value = ''; pendingWish = null; syncWishNote();
   $('#donForm').hidden = true;
   $('#donDone').innerHTML = receiptHTML(rec, 'd', true); $('#donDone').hidden = false;
-  wireReceipt($('#donDone'), () => { $('#donForm').reset(); resetGeo('d'); syncDonKind(); $('#d_personWrap').hidden = true; $$('[data-plate=d] b').forEach(b => b.textContent = '–'); $('#donForm').hidden = false; $('#donDone').hidden = true; });
+  wireReceipt($('#donDone'), () => { $('#donForm').reset(); resetGeo('d'); syncDonKind(); syncPlace(); $('#d_personWrap').hidden = true; $$('[data-plate=d] b').forEach(b => b.textContent = '–'); $('#donForm').hidden = false; $('#donDone').hidden = true; });
   window.scrollTo(0, 0);
 });
 
@@ -1944,7 +1965,7 @@ async function submitDonationCloud(p, box) {
 function showDonDone(rec) {
   $('#donForm').hidden = true;
   $('#donDone').innerHTML = receiptHTML(rec, 'd', true); $('#donDone').hidden = false;
-  wireReceipt($('#donDone'), () => { $('#donForm').reset(); resetGeo('d'); syncDonKind(); $('#d_personWrap').hidden = true; $$('[data-plate=d] b').forEach(b => b.textContent = '–'); $('#donForm').hidden = false; $('#donDone').hidden = true; });
+  wireReceipt($('#donDone'), () => { $('#donForm').reset(); resetGeo('d'); syncDonKind(); syncPlace(); $('#d_personWrap').hidden = true; $$('[data-plate=d] b').forEach(b => b.textContent = '–'); $('#donForm').hidden = false; $('#donDone').hidden = true; });
   window.scrollTo(0, 0);
 }
 async function submitRequestCloud(p, box) {
@@ -1961,6 +1982,20 @@ async function submitRequestCloud(p, box) {
     window.scrollTo(0, 0);
   } catch (e) { box.innerHTML = esc(t('تعذّر الإرسال: {0}', cloudErr(e))); box.hidden = false; }
   finally { btn.disabled = false; document.body.classList.remove('busy'); }
+}
+
+// where the donor hands the donation over: shown for "pickup from me" only
+function syncPlace() {
+  const pick = $('input[name=d_method]:checked').value === 'pickup';
+  $('#d_placeBox').hidden = !pick;
+  $('#d_otherPlace').hidden = !pick || $('input[name=d_place]:checked').value !== 'other';
+}
+$$('input[name=d_method], input[name=d_place]').forEach(r => r.addEventListener('change', syncPlace)); syncPlace();
+function donPlace() {
+  if ($('input[name=d_method]:checked').value !== 'pickup') return {};
+  const other = $('input[name=d_place]:checked').value === 'other';
+  return { place: other ? { type: 'other', text: $('#d_placeText').value.trim().slice(0, 200), mapUrl: /^https?:\/\//i.test($('#d_placeMap').value.trim()) ? $('#d_placeMap').value.trim() : '' } : { type: 'home' },
+    direct: $('#d_direct').checked };
 }
 
 /* ================= beneficiary form ================= */
@@ -2046,7 +2081,9 @@ $$('[data-preset]').forEach(a => a.addEventListener('click', () => { pendingWish
 
 /* ================= receipt & timeline ================= */
 function timelineHTML(rec, k) {
-  const flow = k === 'd' ? DON_FLOW : REQ_FLOW, lbl = k === 'd' ? DON_LBL : REQ_LBL, hint = k === 'd' ? DON_HINT : REQ_HINT;
+  const direct = k === 'd' && isDirect(rec);
+  const flow = k === 'd' ? (direct ? ['new', 'approved', 'scheduled', 'delivered'] : DON_FLOW) : REQ_FLOW, lbl = k === 'd' ? DON_LBL : REQ_LBL;
+  const hint = k === 'd' ? (direct ? { ...DON_HINT, scheduled: t('أكّد المستفيد أنه سيحضر لاستلام تبرعك في الموعد.') } : DON_HINT) : REQ_HINT;
   if (['rejected','cancelled','closed'].includes(rec.status)) {
     const hs = rec.history.filter((h, i, arr) => arr.findIndex(x => x.status === h.status) === i);
     return '<ul class="timeline">' + hs.map((h, i) => {
@@ -2058,7 +2095,7 @@ function timelineHTML(rec, k) {
   return '<ul class="timeline">' + flow.map((s, i) => {
     const h = [...rec.history].reverse().find(x => x.status === s);
     const cls = i < idx || (i === idx && s === flow[flow.length - 1]) ? 'done' : i === idx ? 'now' : '';
-    const label = (k === 'd' && s === 'scheduled' && rec.method === 'dropoff') ? t('موعد التسليم في نقطة التجميع') : lbl[s];
+    const label = (k === 'd' && s === 'scheduled' && rec.method === 'dropoff') ? t('موعد التسليم في نقطة التجميع') : direct && s === 'scheduled' ? t('موعد التسليم المباشر للمستفيد') : lbl[s];
     const sub = h ? `${fmtDT(h.at)}${h.note ? ` · <span>${esc(t(h.note))}</span>` : ''}` : (i === idx + 1 ? t('الخطوة التالية') : '');
     return `<li class="${cls}"><span class="dot">${cls === 'done' ? '✓' : i + 1}</span><div><b>${label}</b><small>${i === idx ? `<span>${esc(hint[s])}</span>` + (sub ? ' · ' : '') : ''}${sub}</small></div></li>`;
   }).join('') + '</ul>';
@@ -2116,7 +2153,7 @@ async function doTrack() {
   // رسالة واحدة للحالتين حتى لا يُستدلّ على وجود أرقام طلبات الآخرين
   if (!rec || String(rec.phone).slice(-4) !== last4) { out.innerHTML = `<div class="note bad">${t('لم نجد طلبًا بالرقم {0} مسجّلًا بهاتف ينتهي بـ {1}. تأكد من البيانات وحاول مرة أخرى.', esc(code), esc(last4))}</div>`; return; }
   const k = code[0] === 'D' ? 'd' : 'r';
-  out.innerHTML = receiptHTML(rec, k, false); out.firstElementChild.insertAdjacentHTML('beforeend', manageHTML(rec, k)); wireReceipt(out); wireManage(out, rec, k);
+  out.innerHTML = receiptHTML(rec, k, false); out.firstElementChild.insertAdjacentHTML('beforeend', offerCardHTML(rec, k) + manageHTML(rec, k)); wireReceipt(out); wireManage(out, rec, k); wireOffer(out, rec);
 }
 $('#trackForm').addEventListener('submit', e => { e.preventDefault(); doTrack(); });
 
@@ -2379,7 +2416,7 @@ function donTable() {
     ${rows.map(d => {
       const part = d.status === 'received' && (d.allocations || []).length;
       return `<tr data-open="d:${d.id}"><td class="id">${d.id}</td><td>${esc(d.name)}<br><small class="muted num" dir="ltr">${esc(d.phone)}</small></td>
-      <td>${KIND[d.kind]}${moveOpen(d) ? ' ' + moveTag(d) : ''}${d.photos && d.photos.length ? ` <span class="tag" title="${t('صور مرفقة')}"><svg width="11" height="11" style="vertical-align:-1px"><use href="#i-camera"/></svg> ${d.photos.length}</span>` : ''}${expiringSoon(d) && ['received','approved','scheduled','new'].includes(d.status) ? ` <span class="tag hot">${t('صلاحية قريبة')}</span>` : ''}${d.edits && d.edits.length ? ` <span class="tag">${t('عُدّل')}</span>` : ''}</td>
+      <td>${KIND[d.kind]}${moveOpen(d) ? ' ' + moveTag(d) : ''}${d.status === 'approved' && d.handover && d.handover.state === 'offered' ? ` <span class="tag gold">${t('بانتظار رد المستفيد')}</span>` : d.status === 'scheduled' && isDirect(d) ? ` <span class="tag gold">${t('تسليم مباشر')}</span>` : ''}${d.photos && d.photos.length ? ` <span class="tag" title="${t('صور مرفقة')}"><svg width="11" height="11" style="vertical-align:-1px"><use href="#i-camera"/></svg> ${d.photos.length}</span>` : ''}${expiringSoon(d) && ['received','approved','scheduled','new'].includes(d.status) ? ` <span class="tag hot">${t('صلاحية قريبة')}</span>` : ''}${d.edits && d.edits.length ? ` <span class="tag">${t('عُدّل')}</span>` : ''}</td>
       <td style="max-width:240px">${esc(itemsSummary(d))}</td><td>${addrCell(d.addr)}</td><td>${TARGET[d.target]}</td>
       <td><span class="pill s-${d.status}">${DON_LBL[d.status]}</span>${part ? ` <span class="tag gold">${t('مخصّص جزئيًا')}</span>` : ''}</td><td class="num">${fmtDate(d.createdAt)}</td></tr>`;
     }).join('')}
@@ -2388,7 +2425,7 @@ function donTable() {
 function reqTable() {
   const rows = db.requests.filter(matchFilter);
   return toolbar(REQ_LBL) + `<div class="table-wrap"><table><thead><tr><th>${t('الرقم')}</th><th>${t('المستفيد')}</th><th>${t('الأفراد')}</th><th>${t('الاحتياج')}</th><th>${t('العنوان')}</th><th>${t('الأولوية')}</th><th>${t('الحالة')}</th><th>${t('التاريخ')}</th></tr></thead><tbody>
-    ${rows.map(r => `<tr data-open="r:${r.id}"><td class="id">${r.id}</td><td>${esc(r.name)} <span class="tag">${r.type === 'org' ? t('مؤسسة') : t('أسرة')}</span>${openReq(r) && dupOf(r).length ? ` <span class="tag hot">${t('مكرر محتمل')}</span>` : ''}</td><td class="num">${r.size}</td>
+    ${rows.map(r => `<tr data-open="r:${r.id}"><td class="id">${r.id}</td><td>${esc(r.name)} <span class="tag">${r.type === 'org' ? t('مؤسسة') : t('أسرة')}</span>${r.offer && ['offered', 'accepted'].includes(r.offer.state) && openReq(r) ? ` <span class="tag gold">${t(r.offer.state === 'offered' ? 'عُرض عليه موعد' : 'سيحضر للاستلام')}</span>` : ''}${openReq(r) && dupOf(r).length ? ` <span class="tag hot">${t('مكرر محتمل')}</span>` : ''}</td><td class="num">${r.size}</td>
       <td style="max-width:240px">${needText(r)}</td><td>${addrCell(r.addr)}</td>
       <td>${r.urg === 'high' ? `<span class="tag hot">${t('عاجلة')}</span>` : `<span class="tag">${t('عادية')}</span>`}</td>
       <td><span class="pill s-${r.status}">${REQ_LBL[r.status]}</span></td><td class="num">${fmtDate(r.createdAt)}</td></tr>`).join('')}
@@ -2433,7 +2470,7 @@ function myTasks() {
   if (!me) return [];
   const all = can('tasksAll'), out = [];
   db.donations.forEach(d => {
-    if (d.status === 'scheduled' && d.method === 'pickup' && (all || (d.pickup && d.pickup.volId === me.id))) out.push({ type:'pickup', d });
+    if (d.status === 'scheduled' && d.method === 'pickup' && !(d.pickup && d.pickup.direct) && (all || (d.pickup && d.pickup.volId === me.id))) out.push({ type:'pickup', d });
     (d.allocations || []).forEach(a => { if (!a.delivered && (all || a.volId === me.id)) out.push({ type:'deliver', d, a }); });
   });
   return out.sort((x, y) => String((x.d.pickup || {}).date || x.a && x.a.at).localeCompare(String((y.d.pickup || {}).date || y.a && y.a.at)));
@@ -2813,12 +2850,13 @@ function openDrawer(k, id, pre) {
   const edited = rec.edits && rec.edits.length ? `<p class="note">${t('عدّل صاحب الطلب بياناته {0} مرة، آخرها {1}.', rec.edits.length, fmtDT(rec.edits[rec.edits.length - 1].at))}</p>` : '';
   const kv = isD
     ? `<dt>${t('المتبرّع')}</dt><dd>${esc(rec.name)}</dd><dt>${t('الهاتف')}</dt><dd class="num" dir="ltr">${esc(rec.phone)}</dd><dt>${t('العنوان')}</dt><dd>${plateTxt(rec.addr)}${rec.details ? '<br><span class="muted">' + esc(rec.details) + '</span>' : ''}<div style="margin-top:6px">${locHTML(rec, 'd:' + rec.id)}</div></dd>
-       <dt>${t('التسليم')}</dt><dd>${rec.method === 'pickup' ? t('استلام من العنوان') : t('يوصله لنقطة التجميع')} · ${SLOT[rec.slot]}</dd><dt>${t('الجهة')}</dt><dd>${TARGET[rec.target]}${rec.person ? ': ' + esc(rec.person.name) + ' (' + esc(rec.person.addr) + ')' : ''}</dd>
+       <dt>${t('التسليم')}</dt><dd>${rec.method === 'pickup' ? t('استلام من العنوان') : t('يوصله لنقطة التجميع')} · ${SLOT[rec.slot]}${rec.method === 'pickup' && rec.place && rec.place.type === 'other' ? `<br>${t('مكان آخر:')} ${esc(rec.place.text)}${rec.place.mapUrl ? ` · <a href="${esc(rec.place.mapUrl)}" target="_blank" rel="noopener">${t('الخريطة')}</a>` : ''}` : ''}${rec.direct ? `<br><span class="tag gold">${t('يقبل أن يستلمه المستفيد مباشرة')}</span>` : ''}</dd><dt>${t('الجهة')}</dt><dd>${TARGET[rec.target]}${rec.person ? ': ' + esc(rec.person.name) + ' (' + esc(rec.person.addr) + ')' : ''}</dd>
        ${rec.move ? `<dt>${t('مغادر قطر')}</dt><dd>${t('تاريخ السفر {0}', fmtDate(rec.move.date))} ${moveOpen(rec) ? moveTag(rec) : ''}${moveSibs(rec).length ? `<br><span class="muted">${t('من نفس البيت:')}</span> ${moveSibs(rec).map(x => `<button type="button" class="linkish" data-open="d:${x.id}">${x.id}</button> <span class="tag">${KIND[x.kind]}</span>`).join(' ')}` : ''}</dd>` : ''}
        ${rec.wish ? `<dt>${t('أمنية')}</dt><dd><button type="button" class="linkish" data-open="r:${esc(rec.wish)}">${esc(rec.wish)}</button> <span class="tag gold">${t('يلبّي أمنية مجهولة')}</span></dd>` : ''}
        ${rec.pickup ? `<dt>${t('الموعد')}</dt><dd>${fmtDate(rec.pickup.date)} · ${esc(rec.pickup.vol)}</dd>` : ''}${rec.notes ? `<dt>${t('ملاحظة المتبرّع')}</dt><dd data-tr-src="notes">${esc(rec.notes)}</dd>` : ''}`
     : `<dt>${t('المستفيد')}</dt><dd>${esc(rec.name)} <span class="tag">${rec.type === 'org' ? t('مؤسسة') : t('أسرة')}</span></dd><dt>${t('الهاتف')}</dt><dd class="num" dir="ltr">${esc(rec.phone)}</dd><dt>${t('الأفراد')}</dt><dd class="num">${rec.size}</dd>
        <dt>${t('العنوان')}</dt><dd>${plateTxt(rec.addr)}${rec.details ? '<br><span class="muted">' + esc(rec.details) + '</span>' : ''}<div style="margin-top:6px">${locHTML(rec, 'r:' + rec.id)}</div></dd><dt>${t('الأولوية')}</dt><dd>${rec.urg === 'high' ? t('عاجلة') : t('عادية')}</dd>
+       ${rec.offer ? `<dt>${t('موعد استلام')}</dt><dd>${fmtDate(rec.offer.date)} · ${SLOT[rec.offer.slot] || ''} · <button type="button" class="linkish" data-open="d:${esc(rec.offer.from)}">${esc(rec.offer.from)}</button> <span class="tag${rec.offer.state === 'accepted' ? ' gold' : ''}">${t(OFFER_LBL[rec.offer.state] || '')}</span></dd>` : ''}
        ${rec.notes ? `<dt>${t('الحالة')}</dt><dd data-tr-src="notes">${esc(rec.notes)}</dd>` : ''}`;
   const reqGot = !isD ? reqAllocs(rec) : [];
   dr.innerHTML = `<header><h3>${rec.id}</h3><span class="pill s-${rec.status}">${(isD ? DON_LBL : REQ_LBL)[rec.status]}</span><button class="btn btn-ghost btn-sm" type="button" data-close aria-label="${t('إغلاق')}">✕</button></header>
@@ -2852,6 +2890,119 @@ function wishBoxHTML(r) {
     <label class="f">${t('نص الأمنية')} <small>${t('اكتبه بلغتك، ويُترجم تلقائيًا')}</small><textarea id="wishText" rows="2" maxlength="160" dir="auto">${esc(w.text || wishSuggest(r))}</textarea></label>
     <div><button class="btn btn-primary btn-sm" type="button" data-act="wishSave">${t('حفظ الأمنية')}</button> <span class="muted" id="wishSt"></span></div></div></details>`;
 }
+/* ================= direct handover =================
+   When the donor agreed, a verified beneficiary collects the donation from the donor's place, with no volunteer and no warehouse.
+   The supervisor sends the appointment; the beneficiary accepts or declines from «تتبّع طلبي»; the donor then sees that they will come.
+   The beneficiary sees the exact place only after accepting, and neither side sees the other's phone. */
+function isDirect(d) { return !!(d.handover && ['accepted', 'done'].includes(d.handover.state)); }
+const offerOpen = r => !!(r.offer && r.offer.state === 'offered');
+const OFFER_LBL = { offered: 'بانتظار رده', accepted: 'سيحضر', declined: 'اعتذر', withdrawn: 'سُحب الموعد', noshow: 'لم يحضر', done: 'استلم' };
+function placeLabel(d) {
+  const p = d.place || { type: 'home' };
+  return p.type === 'other' ? esc(p.text || '') : plateTxt(d.addr) + (d.details ? ' · ' + esc(d.details) : '');
+}
+// what the beneficiary may see once they accept: the place only, no name and no phone
+function placeFor(d) {
+  const p = d.place || { type: 'home' };
+  return p.type === 'other' ? { type: 'other', text: p.text || '', mapUrl: p.mapUrl || '', geo: parseMapsUrl(p.mapUrl || '') }
+    : { type: 'home', addr: d.addr, details: d.details || '', mapUrl: d.mapUrl || '', geo: d.geo || null };
+}
+function directFormHTML(rec, max) {
+  const reqs = db.requests.filter(r => r.status === 'verified' && r.kind === rec.kind && !offerOpen(r)).map(r => ({ r, s: score(rec, r) }))
+    .sort((a, b) => (b.s - a.s) || ((b.r.urg === 'high') - (a.r.urg === 'high')));
+  if (!reqs.length) return `<p class="muted">${t('لا يوجد مستفيد متحقق منه لهذا النوع بعد.')}</p>`;
+  const first = max && max < addDays(1) ? max : addDays(1);
+  return `<div class="grid"><label class="f">${t('موعد التسليم')}<input type="date" id="hoDate" value="${first}" min="${addDays(0)}"${max ? ` max="${max}"` : ''}></label>
+      <label class="f">${t('الوقت')}<select id="hoSlot">${opts(SLOT, rec.slot)}</select></label></div>
+    <label class="f">${t('المستفيد')}<select id="hoTo">${reqs.map(x => `<option value="${x.r.id}"${x.r.id === rec.wish ? ' selected' : ''}>${x.r.id} · ${esc(x.r.name)} · ${t('منطقة {0}', esc(x.r.addr.zone))}${x.s ? ' · ' + t('تطابق {0}%', x.s) : ''}${x.r.urg === 'high' ? ' · ' + t('عاجلة') : ''}</option>`).join('')}</select></label>
+    <p class="muted">${t('مكان الاستلام:')} ${placeLabel(rec)}</p>
+    <button class="btn btn-primary" data-act="offer" type="button">${t('إرسال الموعد للمستفيد')}</button>`;
+}
+function handoverNote(rec) {
+  const h = rec.handover; if (!h) return '';
+  const msg = { declined: 'اعتذر المستفيد {0} عن الموعد. اختر مستفيدًا آخر أو متطوعًا.', withdrawn: 'سُحب الموعد من المستفيد {0}.', noshow: 'لم يحضر المستفيد {0} في الموعد. اختر مستفيدًا آخر أو متطوعًا.' }[h.state];
+  return msg ? `<p class="note bad">${t(msg, esc(h.to))}</p>` : '';
+}
+function handoverWaitHTML(rec) {
+  const h = rec.handover;
+  return `<div class="note">${t('أُرسل موعد الاستلام إلى المستفيد {0}: {1} · {2}. ننتظر موافقته من صفحة «تتبّع طلبي».', `<button type="button" class="linkish" data-open="r:${esc(h.to)}">${esc(h.to)}</button>`, fmtDate(h.date), SLOT[h.slot] || '')}</div>
+    <div class="form-actions">${findReq(h.to) ? `<a class="btn btn-primary" data-wa="ben" target="_blank" rel="noopener">${t('إشعار المستفيد عبر واتساب')}</a>` : ''}<button class="btn btn-ghost" data-act="offerWithdraw" type="button">${t('سحب الموعد')}</button></div>`;
+}
+function handoverDoneHTML(rec) {
+  const h = rec.handover || {};
+  return `<div class="note">✅ ${t('أكّد المستفيد {0} أنه سيحضر لاستلام التبرع: {1} · {2}.', `<button type="button" class="linkish" data-open="r:${esc(h.to)}">${esc(h.to)}</button>`, fmtDate(h.date || rec.pickup.date), SLOT[h.slot || rec.slot] || '')}</div>
+    <div class="form-actions"><a class="btn btn-ghost" data-wa="donor" target="_blank" rel="noopener">${t('إبلاغ المتبرّع عبر واتساب')}</a></div>
+    <div class="form-actions"><button class="btn btn-primary" data-act="handDone" type="button">${t('تم التسليم للمستفيد')}</button><button class="btn btn-danger" data-act="handNoshow" type="button">${t('لم يحضر المستفيد')}</button></div>`;
+}
+// WhatsApp texts in the supervisor's language, translated to the receiver's language; the link is added after translation
+const trackLink = code => `${location.origin}${location.pathname}#track?${code}`;
+function benMsg(d, r) {
+  const h = d.handover, zone = r.offer && r.offer.zone;
+  return t('السلام عليكم، معكم منصة أثر. وجدنا لطلبك {0} تبرعًا مناسبًا: {1}. موعد الاستلام {2} · {3}.', r.id, itemsSummary(d), fmtDate(h.date), SLOT[h.slot] || '')
+    + (zone ? ' ' + t('المكان في منطقة {0}.', zone) : '') + ' ' + t('افتح الرابط واكتب آخر 4 أرقام من هاتفك، ثم اضغط «موافق، سأحضر» لتظهر لك تفاصيل المكان.');
+}
+function donorMsg(d) {
+  const h = d.handover || {};
+  return t('السلام عليكم، معكم منصة أثر. شكرًا لتبرعك {0}. أكّد مستفيد متحقَّق منه أنه سيحضر لاستلامه منك مباشرة {1} · {2}. لا نشارك رقم هاتفك معه. جزاك الله خيرًا.',
+    d.id, fmtDate(h.date || d.pickup.date), SLOT[h.slot || d.slot] || '');
+}
+async function wireWa(dr, rec) {
+  for (const a of $$('[data-wa]', dr)) {
+    const ben = a.dataset.wa === 'ben', to = ben ? findReq(rec.handover.to) : rec; if (!to) continue;
+    const text = ben ? benMsg(rec, to) : donorMsg(rec), link = trackLink(ben ? to.id : rec.id), lang = to.lang || 'ar';
+    const set = msg => { a.href = `https://wa.me/974${to.phone}?text=${encodeURIComponent(msg + '\n' + link)}`; };
+    set(text);
+    if (lang !== LANG) { try { set(await mt(text, lang, LANG)); } catch (e) {} }
+  }
+}
+// the card on «تتبّع طلبي»: the beneficiary answers the appointment; the donor sees that they will come
+function offerCardHTML(rec, k) {
+  if (k === 'r' && rec.offer) {
+    const o = rec.offer, when = `${fmtDate(o.date)} · ${SLOT[o.slot] || ''}`, what = esc(itemsSummary({ kind: o.kind, items: o.items || [] }));
+    if (o.state === 'offered' && rec.status === 'verified') return `<div class="offer-card"><h3>🎁 ${t('لديك موعد لاستلام تبرع')}</h3>
+      <p><b>${what}</b></p><p>${t('الموعد: {0}', when)}${o.zone ? ' · ' + t('منطقة {0}', esc(o.zone)) : ''}</p>
+      <p class="muted">${t('بعد موافقتك يظهر لك مكان الاستلام بالتفصيل. احضر في الموعد واستلمه من المتبرّع مباشرة.')}</p>
+      <label class="f" style="max-width:320px">${t('رقم هاتفك كاملًا للتأكيد')}<input type="tel" id="oPhone" inputmode="numeric" maxlength="8" dir="ltr" placeholder="3xxxxxxx"></label>
+      <div class="form-actions"><button class="btn btn-primary" type="button" data-offer="yes">${t('موافق، سأحضر')}</button><button class="btn btn-ghost" type="button" data-offer="no">${t('لا أستطيع')}</button></div></div>`;
+    if (o.state === 'accepted') {
+      const p = o.place || {}, map = p.geo ? mapsUrl(p.geo) : /^https?:\/\//i.test(p.mapUrl || '') ? p.mapUrl : '';
+      return `<div class="offer-card"><h3>✅ ${t('موعدك مؤكد')}</h3><p><b>${what}</b></p><p>${t('الموعد: {0}', when)}</p>
+        <div><b>${t('مكان الاستلام:')}</b> ${p.type === 'other' ? esc(p.text || '') : p.addr ? plateTxt(p.addr) + (p.details ? ' · ' + esc(p.details) : '') : ''}</div>
+        ${map ? `<div><a class="btn btn-ghost btn-sm" href="${esc(map)}" target="_blank" rel="noopener">${t('عرض على الخريطة')}</a></div>` : ''}
+        <p class="muted">${t('إذا تعذّر حضورك فأخبرنا عبر واتساب ليُعطى التبرع لأسرة أخرى.')} <a href="https://wa.me/${waIntl()}" target="_blank" rel="noopener">${t('تواصل عبر واتساب')}</a></p></div>`;
+    }
+    if (o.state === 'declined') return `<p class="note">${t('اعتذرت عن موعد الاستلام. سنبحث لك عن تبرع آخر مناسب.')}</p>`;
+    return '';
+  }
+  if (k === 'd' && rec.handover) {
+    const h = rec.handover, when = `${fmtDate(h.date)} · ${SLOT[h.slot] || ''}`;
+    if (h.state === 'offered' && rec.status === 'approved') return `<p class="note">${t('اخترنا لتبرعك أسرة متحقَّقًا منها، وننتظر تأكيدها لموعد الاستلام ({0}).', when)}</p>`;
+    if (h.state === 'accepted') return `<div class="offer-card"><h3>✅ ${t('سيحضر المستفيد في الموعد')}</h3><p>${t('أكّد مستفيد متحقَّق منه أنه سيحضر لاستلام تبرعك منك مباشرة: {0}.', when)}</p>
+      <p>${t('مكان الاستلام:')} ${placeLabel(rec)}</p><p class="muted">${t('لا نشارك رقم هاتفك مع المستفيد. إذا تغيّر شيء فراسلنا عبر واتساب.')}</p></div>`;
+  }
+  return '';
+}
+function wireOffer(out, rec) {
+  $$('[data-offer]', out).forEach(b => b.addEventListener('click', async () => {
+    const yes = b.dataset.offer === 'yes', ph = toLatin($('#oPhone', out).value).replace(/\D/g, '');
+    if (!phoneOk(ph)) { toast(t('اكتب رقم الهاتف كاملًا (8 أرقام).')); mark($('#oPhone', out), true); return; }
+    $$('[data-offer]', out).forEach(x => { x.disabled = true; });
+    if (CLOUD) {
+      const { error } = await sb.rpc('owner_respond', { p_code: rec.id, p_phone: ph, p_accept: yes });
+      if (error) { toast(cloudErr(error)); $$('[data-offer]', out).forEach(x => { x.disabled = false; }); return; }
+    } else {
+      if (ph !== String(rec.phone)) { toast(t('رقم الهاتف لا يطابق الطلب.')); $$('[data-offer]', out).forEach(x => { x.disabled = false; }); return; }
+      const d = findDon(rec.offer.from);
+      if (!d || d.status !== 'approved' || !d.handover || d.handover.to !== rec.id || d.handover.state !== 'offered') { toast(cloudErr({ message: 'offer_gone' })); return; }
+      const st = yes ? 'accepted' : 'declined', at = nowISO();
+      Object.assign(rec.offer, { state: st, answeredAt: at }); Object.assign(d.handover, { state: st, answeredAt: at });
+      if (yes) { setStatus(rec, 'matched', 'أكّد حضوره لاستلام التبرع'); setStatus(d, 'scheduled', 'أكّد المستفيد حضوره'); d.pickup = { date: d.handover.date, vol: 'المستفيد', volId: null, direct: true }; }
+      log(yes ? t('وافق المستفيد {0} على موعد استلام {1}', rec.id, d.id) : t('اعتذر المستفيد {0} عن موعد استلام {1}', rec.id, d.id), t('صاحب الطلب')); save();
+    }
+    await doTrack(); toast(yes ? t('شكرًا، أكّدنا حضورك وأبلغنا المتبرّع') : t('شكرًا لإبلاغنا'));
+  }));
+}
+
 function actionsHTML(rec, k, pre) {
   const reasons = k === 'd'
     ? ['الصور غير واضحة أو لا تطابق الوصف','الصلاحية قريبة جدًا','صنف غير مقبول (ليس جافًا)','العبوات مفتوحة','الملابس غير صالحة','الجهاز لا يعمل أو غير آمن','الأثاث تالف أو غير نظيف','تعذّر التواصل مع المتبرّع']
@@ -2865,11 +3016,18 @@ function actionsHTML(rec, k, pre) {
         <div class="form-actions"><button class="btn btn-primary" data-act="approve" type="button">${t('اعتماد التبرع')}</button><button class="btn btn-danger" data-act="reject" type="button">${t('رفض')}</button></div></div>${rejectBox}`;
       case 'approved': if (!can('schedule')) return noRight; {
         const mvMax = rec.move && daysUntil(rec.move.date) >= 0 ? rec.move.date : '', sibs = moveSibs(rec).filter(x => x.status === 'approved');
-        return `${mvMax ? `<p class="note">${t('صاحب التبرع يسافر في {0}. حدّد الاستلام قبل ذلك.', fmtDate(rec.move.date))}</p>` : ''}<div class="grid"><label class="f">${rec.method === 'dropoff' ? t('موعد التسليم') : t('موعد الاستلام')}<input type="date" id="pkDate" value="${mvMax && mvMax < addDays(1) ? mvMax : addDays(1)}" min="${addDays(0)}"${mvMax ? ` max="${mvMax}"` : ''}></label>
+        const mvNote = mvMax ? `<p class="note">${t('صاحب التبرع يسافر في {0}. حدّد الاستلام قبل ذلك.', fmtDate(rec.move.date))}</p>` : '';
+        const volBlock = `<div class="grid"><label class="f">${rec.method === 'dropoff' ? t('موعد التسليم') : t('موعد الاستلام')}<input type="date" id="pkDate" value="${mvMax && mvMax < addDays(1) ? mvMax : addDays(1)}" min="${addDays(0)}"${mvMax ? ` max="${mvMax}"` : ''}></label>
         <label class="f">${rec.method === 'dropoff' ? t('نقطة التجميع') : t('المتطوّع')}<select id="pkVol">${rec.method === 'dropoff' ? sitePoints().map(p => `<option value="${p}">${t(p)}</option>`).join('') : pickupOpts()}</select></label></div>${rec.method === 'dropoff' ? '' : noVolNote()}
         ${sibs.length ? `<label class="check"><input type="checkbox" id="pkAll" checked><span>${t('نفس الموعد لباقي تبرعات هذا البيت المعتمدة: {0}', sibs.map(x => x.id).join(SEP()))}</span></label>` : ''}
-        <button class="btn btn-primary" data-act="schedule" type="button">${t('تحديد الموعد وإبلاغ المتبرّع')}</button>`; }
-      case 'scheduled': if (!canReceive(rec)) return noRight; return `<label class="check"><input type="checkbox" id="qc"><span>${t('فحصت {0}.', qcText(rec))}</span></label>
+        <button class="btn btn-primary" data-act="schedule" type="button">${t('تحديد الموعد وإبلاغ المتبرّع')}</button>`;
+        if (rec.handover && rec.handover.state === 'offered') return mvNote + handoverWaitHTML(rec);
+        if (rec.method !== 'pickup' || !rec.direct) return mvNote + volBlock;
+        const benFirst = !volunteers().length;   // with no volunteers on the team, the direct handover is the natural choice
+        return mvNote + handoverNote(rec) + `<div class="seg" role="radiogroup" aria-label="${t('من يستلم التبرع؟')}"><label><input type="radio" name="pkWho" value="vol"${benFirst ? '' : ' checked'}><span>${t('متطوع من الفريق')}</span></label><label><input type="radio" name="pkWho" value="ben"${benFirst ? ' checked' : ''}><span>${t('المستفيد يستلمه مباشرة')}</span></label></div>
+          <div id="pkVolBox"${benFirst ? ' hidden' : ''}>${volBlock}</div><div id="pkBenBox"${benFirst ? '' : ' hidden'}>${directFormHTML(rec, mvMax)}</div>`; }
+      case 'scheduled': if (rec.pickup && rec.pickup.direct) return can('schedule') ? handoverDoneHTML(rec) : noRight;
+        if (!canReceive(rec)) return noRight; return `<label class="check"><input type="checkbox" id="qc"><span>${t('فحصت {0}.', qcText(rec))}</span></label>
         <button class="btn btn-primary" data-act="receive" type="button">${t('تأكيد الاستلام في المستودع')}</button>`;
       case 'received': {
         if (!can('allocate')) return noRight;
@@ -2921,6 +3079,41 @@ function wireActions(dr, rec, k) {
   $$('[data-alloc]', dr).forEach(b => b.addEventListener('click', () => { const [did, rid] = b.dataset.alloc.split('|'); openDrawer('d', did, rid); }));
   $$('[data-adeliver]', dr).forEach(b => b.addEventListener('click', () => { try { deliverAlloc(rec, rec.allocations.find(a => a.id === b.dataset.adeliver)); done(t('سُجّل التسليم. شكرًا للفريق')); } catch (e) { toast(e.message); } }));
   act('reject', () => { $('#rejBox', dr).hidden = false; });
+  $$('input[name=pkWho]', dr).forEach(r => r.addEventListener('change', () => { const ben = $('input[name=pkWho]:checked', dr).value === 'ben'; $('#pkVolBox', dr).hidden = ben; $('#pkBenBox', dr).hidden = !ben; }));
+  wireOpen($('footer', dr)); if (k === 'd') wireWa(dr, rec);
+  act('offer', () => {
+    const date = $('#hoDate', dr).value, slot = $('#hoSlot', dr).value, r = findReq($('#hoTo', dr).value);
+    if (!date || daysUntil(date) < 0) { toast(t('حدّد تاريخ الموعد')); return; }
+    if (rec.move && date > rec.move.date && daysUntil(rec.move.date) >= 0) { toast(t('الموعد بعد تاريخ سفر المتبرّع ({0})', fmtDate(rec.move.date))); return; }
+    if (!r || r.status !== 'verified' || offerOpen(r)) { toast(t('هذا المستفيد غير متاح الآن')); return; }
+    const at = nowISO();
+    rec.handover = { to: r.id, date, slot, state: 'offered', at, by: actor() };
+    r.offer = { from: rec.id, date, slot, zone: rec.place && rec.place.type === 'other' ? '' : rec.addr.zone, kind: rec.kind, items: rec.items.map(({ left, ...it }) => ({ ...it, qty: left == null ? +it.qty : +left })), place: placeFor(rec), state: 'offered', at };
+    log(t('أُرسل موعد استلام {0} إلى المستفيد {1}', rec.id, r.id));
+    done(t('أُرسل الموعد. أشعر المستفيد عبر واتساب'));
+  });
+  act('offerWithdraw', () => {
+    const r = findReq(rec.handover.to);
+    rec.handover.state = 'withdrawn'; if (r && r.offer && r.offer.from === rec.id) r.offer.state = 'withdrawn';
+    log(t('سُحب موعد استلام {0} من المستفيد {1}', rec.id, rec.handover.to)); done(t('سُحب الموعد'));
+  });
+  act('handDone', () => {
+    const r = findReq(rec.handover.to), at = nowISO();
+    const lines = rec.items.map((it, i) => ({ i, qty: itemLeft(it) })).filter(l => l.qty > 0);
+    rec.items.forEach(it => { it.left = 0; });
+    rec.allocations = rec.allocations || [];
+    rec.allocations.push({ id: 'A' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), to: rec.handover.to, lines, volId: null, direct: true, delivered: true, at, deliveredAt: at, by: actor(), deliveredBy: actor() });
+    rec.handover.state = 'done';
+    setStatus(rec, 'delivered', t('سُلّم مباشرة إلى المستفيد'));
+    if (r) { if (r.offer && r.offer.from === rec.id) r.offer.state = 'done'; if (r.status === 'matched') setStatus(r, 'delivered', t('استلم التبرع {0} مباشرة من المتبرّع', rec.id)); }
+    log(t('سُلّم {0} مباشرة إلى المستفيد {1}', rec.id, rec.handover.to)); done(t('سُجّل التسليم. شكرًا للفريق'));
+  });
+  act('handNoshow', () => {
+    const r = findReq(rec.handover.to);
+    rec.handover.state = 'noshow'; setStatus(rec, 'approved', t('لم يحضر المستفيد في الموعد')); rec.pickup = null;
+    if (r && r.offer && r.offer.from === rec.id) { r.offer.state = 'noshow'; if (r.status === 'matched') setStatus(r, 'verified', t('لم يحضر في موعد الاستلام')); }
+    log(t('لم يحضر المستفيد {0} لاستلام {1}', rec.handover.to, rec.id)); done(t('أُعيد التبرع لتحديد موعد جديد'));
+  });
   $$('[data-goteam]', dr).forEach(b => b.addEventListener('click', () => { closeDrawer(); tab = 'team'; renderAdmin(); }));
   act('rejectConfirm', () => { const why = $('#rejWhy', dr).value; setStatus(rec, 'rejected', why); log(t('رفض {0}: {1}', rec.id, t(why))); done(t('تم الرفض وإبلاغ صاحب الطلب')); });
   act('approve', () => {
@@ -4003,7 +4196,7 @@ function markClean() {
 function cloudErr(e) {
   const m = (e && (e.message || e.error_description)) || String(e);
   const map = { not_found: 'رقم الهاتف لا يطابق الطلب.', not_allowed: 'لا يمكن تنفيذ هذا الإجراء في هذه المرحلة.', bad_phone: 'رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 3 أو 5 أو 6 أو 7.',
-    bad_photos: 'تعذّر رفع الصور. حاول مرة أخرى.', bad_email: 'البريد الإلكتروني غير صحيح.', intake_closed: 'الاستقبال متوقف مؤقتًا.', kind_closed: 'لا نستقبل هذا الصنف حاليًا.', weak_password: 'كلمة المرور يجب أن تكون 8 أحرف على الأقل.', bad_name: 'اكتب اسم العضو', payload_too_large: 'البيانات أكبر من المسموح.', 'Invalid login credentials': 'البريد أو كلمة المرور غير صحيحة.' };
+    bad_photos: 'تعذّر رفع الصور. حاول مرة أخرى.', offer_gone: 'لم يعد هذا الموعد متاحًا. تواصل معنا عبر واتساب.', bad_email: 'البريد الإلكتروني غير صحيح.', intake_closed: 'الاستقبال متوقف مؤقتًا.', kind_closed: 'لا نستقبل هذا الصنف حاليًا.', weak_password: 'كلمة المرور يجب أن تكون 8 أحرف على الأقل.', bad_name: 'اكتب اسم العضو', payload_too_large: 'البيانات أكبر من المسموح.', 'Invalid login credentials': 'البريد أو كلمة المرور غير صحيحة.' };
   const key = Object.keys(map).find(k => m.includes(k));
   return key ? t(map[key]) : (/fetch|network/i.test(m) ? t('تعذّر الاتصال بالخادم. تحقق من الإنترنت وحاول مرة أخرى.') : m);
 }
