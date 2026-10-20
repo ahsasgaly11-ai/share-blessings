@@ -125,6 +125,30 @@ html[lang="fa"] { --f-display: "Vazirmatn", "IBM Plex Sans Arabic", Tahoma, sans
 .topbar .wrap { display: flex; align-items: center; gap: 20px; padding-block: 12px; flex-wrap: wrap; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); margin-inline-end: auto; }
 .brand svg { width: 46px; height: 46px; flex: none; }
+/* the 3D logo: badge, dots and bowl are separate layers at different depths; the badge has an extruded edge */
+.logo3d { --s: 46px; --d: calc(var(--s) / 46); position: relative; display: inline-block; width: var(--s); height: var(--s); flex: none; perspective: calc(var(--s) * 6); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.logo3d.big { --s: 112px; display: block; margin-bottom: 18px; }
+.l3, .l3-sway { position: absolute; inset: 0; transform-style: preserve-3d; }
+.l3 { transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .35s cubic-bezier(.2,.7,.3,1); }
+.l3-sway { animation: l3-sway 7s ease-in-out infinite alternate; }
+.logo3d svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: translateZ(calc(var(--d) * var(--z) * 1.6)); backface-visibility: visible; }
+.l3-face { fill: #8A1538; }
+.l3-edge { fill: #4A0A1E; }
+.l3-dot { animation: l3-drop .9s cubic-bezier(.34,1.56,.64,1) both; animation-delay: calc(.25s + var(--i) * .16s); }
+.l3-shadow { position: absolute; left: 14%; right: 14%; bottom: -8%; height: 12%; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.35), transparent); filter: blur(2px); animation: l3-shadow 7s ease-in-out infinite alternate; }
+.logo3d:not(.big) .l3-shadow { display: none; }
+.logo3d.big .l3-face { stroke: #E8C47F; stroke-width: .9; }
+.logo3d.big .l3::before { content: ''; position: absolute; inset: -14%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,214,140,.32), transparent 70%); transform: translateZ(calc(var(--d) * -6)); }
+.logo3d.spin .l3-sway { animation: l3-spin 1.1s cubic-bezier(.45,.05,.2,1); }
+.logo3d[data-r="a"] .l3-dot { animation-name: l3-drop2; animation-delay: calc(.1s + var(--i) * .14s); }
+.logo3d[data-r="b"] .l3-dot { animation-delay: calc(.1s + var(--i) * .14s); }
+@keyframes l3-sway { from { transform: rotateY(-18deg) rotateX(8deg); } to { transform: rotateY(18deg) rotateX(-6deg); } }
+@keyframes l3-shadow { from { transform: translateX(-6%) scaleX(.9); } to { transform: translateX(6%) scaleX(.9); } }
+@keyframes l3-drop { 0% { translate: 0 -90%; opacity: 0; } 35% { opacity: 1; } 100% { translate: 0 0; opacity: 1; } }
+@keyframes l3-drop2 { 0% { translate: 0 -90%; opacity: 0; } 35% { opacity: 1; } 100% { translate: 0 0; opacity: 1; } }
+@keyframes l3-spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+@media (prefers-reduced-motion: reduce) { .l3-sway, .l3-dot, .l3-shadow { animation: none !important; } .l3 { transition: none; } }
+
 .brand b { font-family: var(--f-display); font-size: 1.35rem; font-weight: 800; display: block; line-height: 1.2; color: var(--primary-text); }
 .brand small { display: block; font-size: .8rem; color: var(--muted); line-height: 1.3; }
 nav.tabs { display: flex; gap: 2px; overflow-x: auto; max-width: 100%; scrollbar-width: none; }
@@ -709,6 +733,18 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
   <symbol id="i-eye" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.1A9.7 9.7 0 0 1 12 5c5 0 9 5 9 7 0 .8-.6 2-1.7 3.3M6.5 6.6C4.4 8 3 10.4 3 12c0 2 4 7 9 7 1.7 0 3.2-.5 4.5-1.3"/></g></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
   <symbol id="i-gift" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 21V7"/><path d="M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></g></symbol>
+  <symbol id="lg-badge" viewBox="0 0 48 48"><path d="M24.00 1.00 L27.58 3.71 L31.87 2.39 L34.30 6.16 L38.78 6.38 L39.78 10.76 L43.92 12.50 L43.36 16.95 L46.65 20.01 L44.60 24.00 L46.65 27.99 L43.36 31.05 L43.92 35.50 L39.78 37.24 L38.78 41.62 L34.30 41.84 L31.87 45.61 L27.58 44.29 L24.00 47.00 L20.42 44.29 L16.13 45.61 L13.70 41.84 L9.22 41.62 L8.22 37.24 L4.08 35.50 L4.64 31.05 L1.35 27.99 L3.40 24.00 L1.35 20.01 L4.64 16.95 L4.08 12.50 L8.22 10.76 L9.22 6.38 L13.70 6.16 L16.13 2.39 L20.42 3.71z"/></symbol>
+  <symbol id="lg-bowl" viewBox="0 0 48 48">
+    <defs><clipPath id="lgBowlClip"><path d="M10.2 24.4h27.6c-.8 6.9-6.6 11.5-13.8 11.5s-13-4.6-13.8-11.5z"/></clipPath>
+      <linearGradient id="lgSheen" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+    <path d="M10.2 24.4h27.6c-.8 6.9-6.6 11.5-13.8 11.5s-13-4.6-13.8-11.5z" fill="#D9B26A"/>
+    <path d="M10.2 24.4h27.6" stroke="#F0D59A" stroke-width="1.2"/>
+    <g clip-path="url(#lgBowlClip)"><rect x="-14" y="20" width="9" height="20" fill="url(#lgSheen)" transform="skewX(-20)">
+      <animate attributeName="x" values="-14;-14;52" keyTimes="0;.7;1" dur="5s" repeatCount="indefinite"/></rect></g>
+    <path d="M19.6 37.6h8.8" stroke="#D9B26A" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="lg-d1" viewBox="0 0 48 48"><circle cx="24" cy="14.6" r="3.7" fill="#D9B26A"/><circle cx="22.9" cy="13.4" r="1.1" fill="#fff" opacity=".6"/></symbol>
+  <symbol id="lg-d2" viewBox="0 0 48 48"><circle cx="19.6" cy="22.2" r="3.7" fill="#FFFFFF"/><circle cx="18.5" cy="21" r="1.1" fill="#E9DCE0"/></symbol>
+  <symbol id="lg-d3" viewBox="0 0 48 48"><circle cx="28.4" cy="22.2" r="3.7" fill="#FFFFFF"/><circle cx="27.3" cy="21" r="1.1" fill="#E9DCE0"/></symbol>
   <symbol id="logo" viewBox="0 0 48 48">
     <!-- «ث»: a giving bowl with three dots, the heart of «أثر»; serrated edge like the flag -->
     <path d="M24.00 1.00 L27.58 3.71 L31.87 2.39 L34.30 6.16 L38.78 6.38 L39.78 10.76 L43.92 12.50 L43.36 16.95 L46.65 20.01 L44.60 24.00 L46.65 27.99 L43.36 31.05 L43.92 35.50 L39.78 37.24 L38.78 41.62 L34.30 41.84 L31.87 45.61 L27.58 44.29 L24.00 47.00 L20.42 44.29 L16.13 45.61 L13.70 41.84 L9.22 41.62 L8.22 37.24 L4.08 35.50 L4.64 31.05 L1.35 27.99 L3.40 24.00 L1.35 20.01 L4.64 16.95 L4.08 12.50 L8.22 10.76 L9.22 6.38 L13.70 6.16 L16.13 2.39 L20.42 3.71z" fill="#8A1538"/>
@@ -737,7 +773,11 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
 <header class="topbar">
   <div class="wrap">
     <a class="brand" href="#home" aria-label="أثر - الرئيسية">
-      <svg><use href="#logo"/></svg>
+      <span class="logo3d" aria-hidden="true"><span class="l3-shadow"></span><span class="l3"><span class="l3-sway">
+        <svg class="l3-edge" style="--z:-3"><use href="#lg-badge"/></svg><svg class="l3-edge" style="--z:-2"><use href="#lg-badge"/></svg><svg class="l3-edge" style="--z:-1"><use href="#lg-badge"/></svg>
+        <svg class="l3-face" style="--z:0"><use href="#lg-badge"/></svg>
+        <svg class="l3-dot" style="--z:3;--i:0"><use href="#lg-d1"/></svg><svg class="l3-dot" style="--z:3;--i:1"><use href="#lg-d2"/></svg><svg class="l3-dot" style="--z:3;--i:2"><use href="#lg-d3"/></svg>
+        <svg class="l3-bowl" style="--z:6"><use href="#lg-bowl"/></svg></span></span></span>
       <span><b>أثر</b><small>تبرعك يترك أثرًا</small></span>
     </a>
     <nav class="tabs" aria-label="الأقسام">
@@ -759,6 +799,11 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
   <div class="band hero">
     <div class="wrap">
       <div>
+        <span class="logo3d big" aria-hidden="true"><span class="l3-shadow"></span><span class="l3"><span class="l3-sway">
+        <svg class="l3-edge" style="--z:-3"><use href="#lg-badge"/></svg><svg class="l3-edge" style="--z:-2"><use href="#lg-badge"/></svg><svg class="l3-edge" style="--z:-1"><use href="#lg-badge"/></svg>
+        <svg class="l3-face" style="--z:0"><use href="#lg-badge"/></svg>
+        <svg class="l3-dot" style="--z:3;--i:0"><use href="#lg-d1"/></svg><svg class="l3-dot" style="--z:3;--i:1"><use href="#lg-d2"/></svg><svg class="l3-dot" style="--z:3;--i:2"><use href="#lg-d3"/></svg>
+        <svg class="l3-bowl" style="--z:6"><use href="#lg-bowl"/></svg></span></span></span>
         <p class="eyebrow">لأن النعمة تدوم بالمشاركة</p>
         <h1>ما يزيد عن حاجتك <em>نعمةٌ</em><br>ينتظرها بيتٌ قريب منك</h1>
         <p class="lead">تبرّع بالأرز والدقيق والحبوب والمعلبات، والملابس، والأجهزة الكهربائية وقطع الأثاث. يراجع المشرفون كل طلب، ويستلمونه من عنوانك حسب اللوحة المنزلية، ثم يوصلونه إلى الأسر المحتاجة والمؤسسات الخيرية.</p>
@@ -1657,6 +1702,26 @@ function route(keepScroll) {
   if (keepScroll !== true) window.scrollTo(0, 0);
 }
 window.addEventListener('hashchange', () => route());
+
+/* ================= 3D logo =================
+   Tilts toward the pointer on devices with a mouse; a click or tap spins it once and drops the three dots into the bowl again. */
+$$('.logo3d').forEach(el => {
+  const l3 = $('.l3', el), big = el.classList.contains('big'), area = big ? el.closest('.hero') : el.closest('.brand');
+  const lim = v => Math.max(-28, Math.min(28, v));
+  if (area && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    area.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect(), k = big ? 1 / 14 : 1 / 3;
+      l3.style.setProperty('--ry', lim((e.clientX - r.left - r.width / 2) * k) + 'deg');
+      l3.style.setProperty('--rx', lim(-(e.clientY - r.top - r.height / 2) * k) + 'deg');
+    });
+    area.addEventListener('pointerleave', () => { l3.style.removeProperty('--rx'); l3.style.removeProperty('--ry'); });
+  }
+  el.addEventListener('click', () => {
+    el.classList.remove('spin'); void el.offsetWidth; el.classList.add('spin');
+    el.dataset.r = el.dataset.r === 'a' ? 'b' : 'a';   // switching the animation name restarts the drop
+  });
+  el.addEventListener('animationend', e => { if (e.animationName === 'l3-spin') el.classList.remove('spin'); });
+});
 
 /* ================= theme ================= */
 $('#themeBtn').addEventListener('click', () => {
