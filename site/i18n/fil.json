@@ -1025,7 +1025,10 @@
   "نفس الموعد لباقي تبرعات هذا البيت المعتمدة: {0}": "Parehong pagkuha para sa iba pang aprubadong donasyon ng bahay na ito: {0}",
   "الموعد بعد تاريخ سفر المتبرّع ({0})": "Lampas na ito sa petsa ng biyahe ng donor ({0})",
   "حُدّد موعد واحد لـ{0} تبرعات من نفس البيت": "Iisang pagkuha ang itinakda para sa {0} donasyon mula sa iisang bahay",
-  "تبرعك يترك أثرًا": "Nag-iiwan ng bakas ang iyong pagbibigay"
+  "تبرعك يترك أثرًا": "Nag-iiwan ng bakas ang iyong pagbibigay",
+  "(أنا)": "(ako)",
+  "لا يوجد متطوعو توصيل في الفريق بعد. أضفهم من تبويب «الفريق» بدور «متطوع توصيل»، أو اختر نفسك إن كنت ستتولى المهمة بنفسك.": "Wala pang delivery volunteer sa team. Idagdag sila mula sa tab na “Team” bilang “Delivery volunteer”, o piliin ang sarili mo kung ikaw ang gagawa.",
+  "فتح تبويب الفريق": "Buksan ang tab na Team"
  },
  "maps": {
   "FOOD": {

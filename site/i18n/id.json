@@ -1025,7 +1025,10 @@
   "نفس الموعد لباقي تبرعات هذا البيت المعتمدة: {0}": "Jadwal yang sama untuk donasi lain dari rumah ini yang sudah disetujui: {0}",
   "الموعد بعد تاريخ سفر المتبرّع ({0})": "Tanggal itu setelah tanggal keberangkatan donatur ({0})",
   "حُدّد موعد واحد لـ{0} تبرعات من نفس البيت": "Satu jadwal penjemputan untuk {0} donasi dari rumah yang sama",
-  "تبرعك يترك أثرًا": "Donasi Anda meninggalkan jejak"
+  "تبرعك يترك أثرًا": "Donasi Anda meninggalkan jejak",
+  "(أنا)": "(saya)",
+  "لا يوجد متطوعو توصيل في الفريق بعد. أضفهم من تبويب «الفريق» بدور «متطوع توصيل»، أو اختر نفسك إن كنت ستتولى المهمة بنفسك.": "Belum ada relawan pengantar di tim. Tambahkan dari tab “Tim” dengan peran “Relawan pengantar”, atau pilih diri Anda jika Anda yang mengerjakannya.",
+  "فتح تبويب الفريق": "Buka tab Tim"
  },
  "maps": {
   "FOOD": {
