@@ -1149,7 +1149,23 @@
   "مثال: قطر الخيرية، برنامج طيف": "Contoh: Qatar Charity, program Tayf",
   "مطلوب": "Wajib",
   "لا يوجد مستفيد متحقق منه لهذا النوع بعد. يمكنك تسليمه لمتطوع أو للمدير دون تحديد مستفيد.": "Belum ada penerima terverifikasi untuk jenis ini. Anda bisa menyerahkannya ke relawan atau pengelola tanpa memilih penerima.",
-  "تسليم بلا مستفيد محدد": "Serahkan tanpa penerima tertentu"
+  "تسليم بلا مستفيد محدد": "Serahkan tanpa penerima tertentu",
+  "تعديل مسار الطلب (للمدير)": "Ubah alur permintaan (pengelola)",
+  "اختر المرحلة الصحيحة واكتب السبب. يظهر السبب في مسار الطلب، وتُخفى المراحل التي بعدها.": "Pilih tahap yang benar dan tulis alasannya. Alasan tampil di alur permintaan, dan tahap setelahnya disembunyikan.",
+  "المرحلة": "Tahap",
+  "(الحالية)": "(saat ini)",
+  "مثال: سُجّل الاستلام بالخطأ": "Contoh: pengambilan tercatat karena kesalahan",
+  "تطبيق التعديل": "Terapkan perubahan",
+  "وُزّع جزء من هذا التبرع، فلا يمكن إرجاعه إلى ما قبل المستودع. ألغِ التوزيع أولًا.": "Sebagian donasi ini sudah dibagikan, jadi tidak bisa dikembalikan ke sebelum gudang. Batalkan alokasi dulu.",
+  "للتبرع موعد تسليم مباشر قائم. اسحب الموعد أولًا.": "Donasi ini punya jadwal serah terima langsung. Tarik jadwalnya dulu.",
+  "لا يمكن جعله مخصّصًا أو مسلَّمًا دون توزيع. خصّص الكميات من المستودع.": "Tidak bisa ditandai dialokasikan atau diserahkan tanpa alokasi. Alokasikan jumlahnya dari gudang.",
+  "خُصّص لهذا الطلب جزء من تبرع، فلا يمكن إرجاعه إلى ما قبل المطابقة.": "Sebagian donasi sudah dialokasikan ke permintaan ini, jadi tidak bisa dikembalikan ke sebelum pencocokan.",
+  "لهذا الطلب موعد استلام قائم. اسحبه من نافذة التبرع أولًا.": "Permintaan ini punya jadwal pengambilan. Tarik dulu dari jendela donasi.",
+  "تعديل من المدير: {0}": "Dikoreksi pengelola: {0}",
+  "عدّل {0} مسار {1} إلى «{2}»: {3}": "{0} memindahkan {1} ke “{2}”: {3}",
+  "هذه هي المرحلة الحالية": "Ini tahap saat ini",
+  "اكتب سبب التعديل": "Tulis alasan perubahan",
+  "عُدّل مسار الطلب": "Alur permintaan diperbarui"
  },
  "maps": {
   "FOOD": {

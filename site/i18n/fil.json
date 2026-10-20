@@ -1149,7 +1149,23 @@
   "مثال: قطر الخيرية، برنامج طيف": "Halimbawa: Qatar Charity, programang Tayf",
   "مطلوب": "Kailangan",
   "لا يوجد مستفيد متحقق منه لهذا النوع بعد. يمكنك تسليمه لمتطوع أو للمدير دون تحديد مستفيد.": "Wala pang na-verify na benepisyaryo para sa uring ito. Maaari mo itong ibigay sa volunteer o manager nang hindi pumipili ng benepisyaryo.",
-  "تسليم بلا مستفيد محدد": "Abot nang walang tiyak na benepisyaryo"
+  "تسليم بلا مستفيد محدد": "Abot nang walang tiyak na benepisyaryo",
+  "تعديل مسار الطلب (للمدير)": "I-edit ang daloy ng kahilingan (manager)",
+  "اختر المرحلة الصحيحة واكتب السبب. يظهر السبب في مسار الطلب، وتُخفى المراحل التي بعدها.": "Piliin ang tamang yugto at isulat ang dahilan. Lalabas ang dahilan sa daloy, at itatago ang mga yugto pagkatapos nito.",
+  "المرحلة": "Yugto",
+  "(الحالية)": "(kasalukuyan)",
+  "مثال: سُجّل الاستلام بالخطأ": "Halimbawa: naitala ang pagkuha nang mali",
+  "تطبيق التعديل": "Ilapat ang pagbabago",
+  "وُزّع جزء من هذا التبرع، فلا يمكن إرجاعه إلى ما قبل المستودع. ألغِ التوزيع أولًا.": "May bahagi nang naipamahagi, kaya hindi na maibabalik bago ang bodega. Kanselahin muna ang alokasyon.",
+  "للتبرع موعد تسليم مباشر قائم. اسحب الموعد أولًا.": "May bukas na appointment ng direktang pag-abot. Bawiin muna ito.",
+  "لا يمكن جعله مخصّصًا أو مسلَّمًا دون توزيع. خصّص الكميات من المستودع.": "Hindi ito maitatakdang naipamahagi o naibigay nang walang alokasyon. Maglaan ng dami mula sa bodega.",
+  "خُصّص لهذا الطلب جزء من تبرع، فلا يمكن إرجاعه إلى ما قبل المطابقة.": "May bahagi ng donasyon na nailaan sa kahilingang ito, kaya hindi na maibabalik bago ang pagtutugma.",
+  "لهذا الطلب موعد استلام قائم. اسحبه من نافذة التبرع أولًا.": "May bukas na appointment ng pagkuha ang kahilingang ito. Bawiin muna mula sa window ng donasyon.",
+  "تعديل من المدير: {0}": "Itinama ng manager: {0}",
+  "عدّل {0} مسار {1} إلى «{2}»: {3}": "Inilipat ni {0} ang {1} sa “{2}”: {3}",
+  "هذه هي المرحلة الحالية": "Ito na ang kasalukuyang yugto",
+  "اكتب سبب التعديل": "Isulat ang dahilan ng pagbabago",
+  "عُدّل مسار الطلب": "Na-update ang daloy ng kahilingan"
  },
  "maps": {
   "FOOD": {

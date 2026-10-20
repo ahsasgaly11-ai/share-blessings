@@ -1533,6 +1533,7 @@ Object.assign(EN, {"أُعيد التبرع {0} للمتبرع للتعديل: {
 Object.assign(EN, {"أقبل أن يأتي المستفيد بنفسه لاستلامه مني بدل المتطوع، إن وافق المشرفون على ذلك": "I accept that the beneficiary may collect it from me instead of a volunteer, if the supervisors approve", "يستلم التبرعَ عادةً متطوعٌ من الفريق ويوصله إلى المستحقين. لا نشارك مكان الاستلام إلا مع مستفيد تحقق منه المشرفون وبعد موافقته على الموعد، ولا نشارك رقم هاتفك مع أحد.": "Normally a team volunteer collects the donation and delivers it to those in need. We share the pickup place only with a beneficiary verified by our supervisors, after they accept the appointment, and we never share your phone number.", "المستفيد يستلمه مباشرة (استثناء)": "The beneficiary collects it directly (exception)", "أوافق بصفتي مشرفًا على أن يستلمه المستفيد مباشرة دون متطوع، وأتحمّل مسؤولية هذا القرار.": "As a supervisor, I approve the beneficiary collecting it directly without a volunteer, and I take responsibility for this decision.", "لم يوافق المتبرّع على التسليم المباشر. اختر متطوعًا.": "The donor did not agree to a direct handover. Choose a volunteer.", "التسليم المباشر يحتاج موافقتك الصريحة بصفتك مشرفًا، وإلا فاختر متطوعًا.": "A direct handover needs your explicit approval as a supervisor; otherwise choose a volunteer.", "وافق {0} على التسليم المباشر للتبرع {1} دون متطوع": "{0} approved the direct handover of {1} without a volunteer", "تسليم مباشر بموافقة {0}": "Direct handover approved by {0}"});
 Object.assign(EN, {"بلا مستفيد محدد": "No specific beneficiary", "بلا مستفيد محدد (يتولاه متطوع أو المدير)": "No specific beneficiary (a volunteer or the manager takes it)", "اختر المتطوّع أو المدير الذي سيتولى تسليمه": "Choose the volunteer or manager who will hand it over", "جهة التسليم أو ملاحظة": "Where it goes, or a note", "مثال: قطر الخيرية، برنامج طيف": "Example: Qatar Charity, Tayf programme", "مطلوب": "Required", "لا يوجد مستفيد متحقق منه لهذا النوع بعد. يمكنك تسليمه لمتطوع أو للمدير دون تحديد مستفيد.": "There is no verified beneficiary for this kind yet. You can hand it to a volunteer or the manager without choosing a beneficiary."});
 Object.assign(EN, {"تسليم بلا مستفيد محدد": "Hand over, no beneficiary set"});
+Object.assign(EN, {"تعديل مسار الطلب (للمدير)": "Edit the request path (manager)", "اختر المرحلة الصحيحة واكتب السبب. يظهر السبب في مسار الطلب، وتُخفى المراحل التي بعدها.": "Choose the correct stage and write the reason. The reason appears in the request path, and the stages after it are hidden.", "المرحلة": "Stage", "(الحالية)": "(current)", "مثال: سُجّل الاستلام بالخطأ": "Example: the pickup was recorded by mistake", "تطبيق التعديل": "Apply change", "وُزّع جزء من هذا التبرع، فلا يمكن إرجاعه إلى ما قبل المستودع. ألغِ التوزيع أولًا.": "Part of this donation has been shared out, so it can't go back before the warehouse. Cancel the allocation first.", "للتبرع موعد تسليم مباشر قائم. اسحب الموعد أولًا.": "This donation has an open direct-handover appointment. Withdraw it first.", "لا يمكن جعله مخصّصًا أو مسلَّمًا دون توزيع. خصّص الكميات من المستودع.": "It can't be marked allocated or delivered without an allocation. Allocate the quantities from the warehouse.", "خُصّص لهذا الطلب جزء من تبرع، فلا يمكن إرجاعه إلى ما قبل المطابقة.": "Part of a donation was allocated to this request, so it can't go back before matching.", "لهذا الطلب موعد استلام قائم. اسحبه من نافذة التبرع أولًا.": "This request has an open pickup appointment. Withdraw it from the donation window first.", "تعديل من المدير: {0}": "Corrected by the manager: {0}", "عدّل {0} مسار {1} إلى «{2}»: {3}": "{0} moved {1} to “{2}”: {3}", "هذه هي المرحلة الحالية": "That is the current stage", "اكتب سبب التعديل": "Write the reason for the change", "عُدّل مسار الطلب": "The request path was updated"});
 // t('نص {0}', x): the current language's text, the Arabic source when untranslated; {n} are filled with the arguments
 const t = (s, ...a) => { const r = TR ? (TR[s] != null ? TR[s] : s) : (OV[s] != null ? OV[s] : s); return a.length ? String(r).replace(/\{(\d+)\}/g, (_, i) => a[+i] ?? '') : r; };
 const SEP = () => LANGS[LANG].rtl ? '، ' : ', ';
@@ -2146,7 +2147,7 @@ function timelineHTML(rec, k) {
   const flow = k === 'd' ? (direct ? ['new', 'approved', 'scheduled', 'delivered'] : DON_FLOW) : REQ_FLOW, lbl = k === 'd' ? DON_LBL : REQ_LBL;
   const hint = k === 'd' ? (direct ? { ...DON_HINT, scheduled: t('أكّد المستفيد أنه سيحضر لاستلام تبرعك في الموعد.') } : DON_HINT) : REQ_HINT;
   if (['rejected','cancelled','closed'].includes(rec.status)) {
-    const hs = rec.history.filter((h, i, arr) => arr.findIndex(x => x.status === h.status) === i);
+    const hs = rec.history.filter(h => !h.undone).filter((h, i, arr) => arr.findIndex(x => x.status === h.status) === i);
     return '<ul class="timeline">' + hs.map((h, i) => {
       const last = i === hs.length - 1, bad = last && rec.status !== 'closed';
       return `<li class="${last ? 'now' : 'done'}"><span class="dot"${bad ? ' style="border-color:var(--bad);color:var(--bad)"' : ''}>${bad ? '✕' : '✓'}</span><div><b>${lbl[h.status]}</b><small>${fmtDT(h.at)}${h.note ? ` · <span>${esc(t(h.note))}</span>` : ''}</small></div></li>`;
@@ -2154,7 +2155,7 @@ function timelineHTML(rec, k) {
   }
   const idx = flow.indexOf(rec.status);
   return '<ul class="timeline">' + flow.map((s, i) => {
-    const h = [...rec.history].reverse().find(x => x.status === s);
+    const h = [...rec.history].reverse().find(x => x.status === s && !x.undone);
     const cls = i < idx || (i === idx && s === flow[flow.length - 1]) ? 'done' : i === idx ? 'now' : '';
     const label = (k === 'd' && s === 'scheduled' && rec.method === 'dropoff') ? t('موعد التسليم في نقطة التجميع') : direct && s === 'scheduled' ? t('موعد التسليم المباشر للمستفيد') : lbl[s];
     const sub = h ? `${fmtDT(h.at)}${h.note ? ` · <span>${esc(t(h.note))}</span>` : ''}` : (i === idx + 1 ? t('الخطوة التالية') : '');
@@ -2930,6 +2931,7 @@ function openDrawer(k, id, pre) {
       <dl class="kv">${kv}</dl>${isD ? galleryHTML(rec) : ''}<div><h3 style="margin-bottom:8px">${isD ? t('الأصناف') : t('الاحتياج')}</h3>${items}</div>
       ${isD ? allocListHTML(rec) : reqGot.length ? `<div><h3 style="margin-bottom:8px">${t('ما خُصّص لهذا الطلب')}</h3><div class="mini-items">${reqGot.map(x => `<div><b class="num" dir="ltr">${x.d.id}</b><span>${esc(linesText(x.d, x.a.lines))}</span>${x.a.delivered ? `<span class="tag" style="color:var(--ok)">${t('سُلّم')}</span>` : `<span class="tag gold">${t('بانتظار التوصيل')}</span>`}</div>`).join('')}</div></div>` : ''}
       ${isD ? staffToolsHTML(rec) : wishBoxHTML(rec)}
+      ${pathEditHTML(rec, k)}
       ${mtBoxHTML(rec, isD)}
       <div><h3 style="margin-bottom:8px">${t('مسار الطلب')}</h3>${timelineHTML(rec, k)}</div></div>
     <footer>${actionsHTML(rec, k, pre)}</footer>`;
@@ -3070,6 +3072,45 @@ function wireOffer(out, rec) {
   }));
 }
 
+/* ---- the manager corrects the tracking path: moves the request to any stage, with a reason shown in the timeline ----
+   Steps after the new stage are marked undone (kept for the record, hidden from the timeline). The database lets only the manager skip steps. */
+const isManager = () => !!me && me.role === 'admin';
+function pathStatuses(rec, k) {
+  return k === 'd' ? [...(isDirect(rec) ? ['new', 'approved', 'scheduled', 'delivered'] : DON_FLOW), 'rejected', 'cancelled', 'closed'] : [...REQ_FLOW, 'rejected', 'cancelled'];
+}
+function pathEditHTML(rec, k) {
+  if (!isManager()) return '';
+  const lbl = k === 'd' ? DON_LBL : REQ_LBL;
+  return `<details class="wo"><summary>${t('تعديل مسار الطلب (للمدير)')}</summary>
+    <p class="muted">${t('اختر المرحلة الصحيحة واكتب السبب. يظهر السبب في مسار الطلب، وتُخفى المراحل التي بعدها.')}</p>
+    <div class="grid"><label class="f">${t('المرحلة')}<select id="pathTo">${pathStatuses(rec, k).map(x => `<option value="${x}"${x === rec.status ? ' selected' : ''}>${lbl[x]}${x === rec.status ? ' ' + t('(الحالية)') : ''}</option>`).join('')}</select></label>
+      <label class="f">${t('السبب')}<input type="text" id="pathWhy" maxlength="160" placeholder="${t('مثال: سُجّل الاستلام بالخطأ')}"></label></div>
+    <button class="btn btn-ghost btn-sm" type="button" data-act="pathSet">${t('تطبيق التعديل')}</button></details>`;
+}
+// what stops a manual move: it must not leave allocations, appointments or deliveries pointing at a stage that no longer exists
+function pathBlock(rec, k, to) {
+  if (k === 'd') {
+    const early = ['new', 'approved', 'scheduled'].includes(to);
+    if ((rec.allocations || []).length && (early || ['rejected', 'cancelled'].includes(to))) return t('وُزّع جزء من هذا التبرع، فلا يمكن إرجاعه إلى ما قبل المستودع. ألغِ التوزيع أولًا.');
+    if (rec.handover && ['offered', 'accepted'].includes(rec.handover.state)) return t('للتبرع موعد تسليم مباشر قائم. اسحب الموعد أولًا.');
+    if (['allocated', 'delivered'].includes(to) && !(rec.allocations || []).length && !isDirect(rec)) return t('لا يمكن جعله مخصّصًا أو مسلَّمًا دون توزيع. خصّص الكميات من المستودع.');
+  } else {
+    const got = reqAllocs(rec);
+    if (got.length && ['new', 'verified', 'rejected', 'cancelled'].includes(to)) return t('خُصّص لهذا الطلب جزء من تبرع، فلا يمكن إرجاعه إلى ما قبل المطابقة.');
+    if (rec.offer && ['offered', 'accepted'].includes(rec.offer.state)) return t('لهذا الطلب موعد استلام قائم. اسحبه من نافذة التبرع أولًا.');
+  }
+  return '';
+}
+function moveTrack(rec, k, to, why) {
+  const flow = pathStatuses(rec, k).filter(x => !['rejected', 'cancelled', 'closed'].includes(x)), at = nowISO();
+  const ti = flow.indexOf(to);
+  // undo every step that comes after the new stage (or the end states when going back into the flow)
+  rec.history.forEach(h => { if (h.undone) return; const hi = flow.indexOf(h.status); if ((ti >= 0 && hi > ti) || (ti >= 0 && hi < 0)) h.undone = at; });
+  if (k === 'd' && ['new', 'approved'].includes(to)) rec.pickup = null;
+  rec.status = to;
+  rec.history.push({ status: to, at, note: t('تعديل من المدير: {0}', why), manual: true, by: actor() });
+  log(t('عدّل {0} مسار {1} إلى «{2}»: {3}', actor(), rec.id, (k === 'd' ? DON_LBL : REQ_LBL)[to], why));
+}
 function staffEditHTML(rec) {
   const itemsOk = ['new', 'approved', 'scheduled'].includes(rec.status) && !(rec.allocations || []).length;
   return `<form class="sheet" id="sEdit" hidden><fieldset><legend>${t('تعديل بيانات التبرع')}</legend>
@@ -3180,6 +3221,13 @@ function wireActions(dr, rec, k) {
   $$('[data-alloc]', dr).forEach(b => b.addEventListener('click', () => { const [did, rid] = b.dataset.alloc.split('|'); openDrawer('d', did, rid); }));
   $$('[data-adeliver]', dr).forEach(b => b.addEventListener('click', () => { try { deliverAlloc(rec, rec.allocations.find(a => a.id === b.dataset.adeliver)); done(t('سُجّل التسليم. شكرًا للفريق')); } catch (e) { toast(e.message); } }));
   act('reject', () => { $('#rejBox', dr).hidden = false; });
+  act('pathSet', () => {
+    const to = $('#pathTo', dr).value, why = $('#pathWhy', dr).value.trim();
+    if (to === rec.status) { toast(t('هذه هي المرحلة الحالية')); return; }
+    if (why.length < 3) { toast(t('اكتب سبب التعديل')); mark($('#pathWhy', dr), true); return; }
+    const block = pathBlock(rec, k, to); if (block) { toast(block); return; }
+    moveTrack(rec, k, to, why); done(t('عُدّل مسار الطلب'));
+  });
   act('retOpen', () => { $('#retBox', dr).hidden = false; $('#retNote', dr).focus(); });
   act('retConfirm', () => {
     const note = $('#retNote', dr).value.trim(); if (note.length < 3) { toast(t('اكتب ما يحتاج تعديلًا')); return; }
