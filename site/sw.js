@@ -1,5 +1,5 @@
 /* أثر: يحفظ ملفات الموقع ليفتح دون اتصال. الخطوط تُحفظ عند أول تحميل لها. */
-const CACHE = 'share-blessings-v27';
+const CACHE = 'share-blessings-v28';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './favicon.svg', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './config.js'];
 
 self.addEventListener('install', e => {

@@ -349,6 +349,9 @@ section.view { display: block; }
 .mv-item input[type=number] { width: 64px; flex: none; text-align: center; padding: 6px 4px; }
 .mv-item span { min-width: 0; line-height: 1.35; }
 .move-ids { display: flex; gap: 8px; flex-wrap: wrap; }
+.thumb .ph-n { display: grid; place-items: center; height: 100%; font-size: .82rem; color: var(--muted); text-align: center; padding: 6px; }
+.ret-note { display: grid; gap: 4px; }
+.staff-tools { display: flex; gap: 8px; flex-wrap: wrap; }
 .place-box { display: grid; gap: 10px; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 10px; }
 .place-box[hidden], #d_otherPlace[hidden] { display: none; }
 .place-note { font-size: .88rem; }
@@ -1526,6 +1529,7 @@ Object.assign(EN, {"أنا مغادر قطر": "I'm leaving Qatar", "قبل ما
 Object.assign(EN, {"تبرعك يترك أثرًا": "Your giving leaves a mark"});
 Object.assign(EN, {"(أنا)": "(me)", "لا يوجد متطوعو توصيل في الفريق بعد. أضفهم من تبويب «الفريق» بدور «متطوع توصيل»، أو اختر نفسك إن كنت ستتولى المهمة بنفسك.": "There are no delivery volunteers on the team yet. Add them from the “Team” tab with the “Delivery volunteer” role, or pick yourself if you will do it.", "فتح تبويب الفريق": "Open the Team tab"});
 Object.assign(EN, {"أكّد المستفيد {0} أنه سيحضر لاستلام التبرع: {1} · {2}.": "Beneficiary {0} confirmed they will come to collect: {1} · {2}.", "أكّد المستفيد أنه سيحضر لاستلام تبرعك في الموعد.": "The beneficiary confirmed they will come to collect your donation on time.", "أكّد مستفيد متحقَّق منه أنه سيحضر لاستلام تبرعك منك مباشرة: {0}.": "A verified beneficiary confirmed they will come to collect your donation from you: {0}.", "أُرسل الموعد. أشعر المستفيد عبر واتساب": "Appointment sent. Notify the beneficiary on WhatsApp", "أُرسل موعد استلام {0} إلى المستفيد {1}": "Pickup appointment for {0} sent to beneficiary {1}", "أُرسل موعد الاستلام إلى المستفيد {0}: {1} · {2}. ننتظر موافقته من صفحة «تتبّع طلبي».": "Appointment sent to beneficiary {0}: {1} · {2}. Waiting for their answer on “Track my request”.", "أُعيد التبرع لتحديد موعد جديد": "The donation is back for a new appointment", "إبلاغ المتبرّع عبر واتساب": "Tell the donor on WhatsApp", "إذا تعذّر حضورك فأخبرنا عبر واتساب ليُعطى التبرع لأسرة أخرى.": "If you cannot come, tell us on WhatsApp so the donation can go to another family.", "إرسال الموعد للمستفيد": "Send the appointment to the beneficiary", "إشعار المستفيد عبر واتساب": "Notify the beneficiary on WhatsApp", "اخترنا لتبرعك أسرة متحقَّقًا منها، وننتظر تأكيدها لموعد الاستلام ({0}).": "We chose a verified family for your donation and are waiting for them to confirm the pickup ({0}).", "استلم": "Collected", "استلم التبرع {0} مباشرة من المتبرّع": "Collected donation {0} directly from the donor", "اعتذر": "Declined", "اعتذر المستفيد {0} عن الموعد. اختر مستفيدًا آخر أو متطوعًا.": "Beneficiary {0} declined the appointment. Choose another beneficiary or a volunteer.", "اعتذر المستفيد {0} عن موعد استلام {1}": "Beneficiary {0} declined the pickup of {1}", "اعتذرت عن موعد الاستلام. سنبحث لك عن تبرع آخر مناسب.": "You declined the pickup. We will look for another suitable donation for you.", "افتح الرابط واكتب آخر 4 أرقام من هاتفك، ثم اضغط «موافق، سأحضر» لتظهر لك تفاصيل المكان.": "Open the link, type the last 4 digits of your phone, then press “Yes, I'll come” to see the place details.", "الخريطة": "Map", "السلام عليكم، معكم منصة أثر. شكرًا لتبرعك {0}. أكّد مستفيد متحقَّق منه أنه سيحضر لاستلامه منك مباشرة {1} · {2}. لا نشارك رقم هاتفك معه. جزاك الله خيرًا.": "Hello from Athar. Thank you for your donation {0}. A verified beneficiary confirmed they will come to collect it from you on {1} · {2}. We do not share your phone number with them. Thank you.", "السلام عليكم، معكم منصة أثر. وجدنا لطلبك {0} تبرعًا مناسبًا: {1}. موعد الاستلام {2} · {3}.": "Hello from Athar. We found a suitable donation for your request {0}: {1}. Pickup: {2} · {3}.", "المستفيد يستلمه مباشرة": "The beneficiary collects it directly", "المكان في منطقة {0}.": "The place is in zone {0}.", "الموعد: {0}": "When: {0}", "الوقت": "Time", "بانتظار رد المستفيد": "Waiting for the beneficiary", "بانتظار رده": "Waiting for answer", "بعد موافقتك يظهر لك مكان الاستلام بالتفصيل. احضر في الموعد واستلمه من المتبرّع مباشرة.": "Once you accept, the exact pickup place appears here. Come on time and collect it directly from the donor.", "تسليم مباشر": "Direct handover", "تم التسليم للمستفيد": "Handed to the beneficiary", "حدّد تاريخ الموعد": "Set the appointment date", "رابط المكان من خرائط Google": "Place link from Google Maps", "رقم هاتفك كاملًا للتأكيد": "Your full phone number to confirm", "سحب الموعد": "Withdraw the appointment", "سيحضر": "Will come", "سيحضر المستفيد في الموعد": "The beneficiary will come on time", "سُحب الموعد": "Appointment withdrawn", "سُحب الموعد من المستفيد {0}.": "The appointment was withdrawn from beneficiary {0}.", "سُحب موعد استلام {0} من المستفيد {1}": "Pickup of {0} withdrawn from beneficiary {1}", "سُلّم {0} مباشرة إلى المستفيد {1}": "{0} handed directly to beneficiary {1}", "سُلّم مباشرة إلى المستفيد": "Handed directly to the beneficiary", "شكرًا لإبلاغنا": "Thank you for letting us know", "شكرًا، أكّدنا حضورك وأبلغنا المتبرّع": "Thank you, we confirmed you are coming and told the donor", "صِف مكان الاستلام الذي تحدده.": "Describe the pickup place you choose.", "لا أستطيع": "I can't", "لا مانع أن يأتي المستفيد بنفسه لاستلامه مني بدل المتطوع": "I don't mind the beneficiary coming to collect it from me instead of a volunteer", "لا نشارك رقم هاتفك مع المستفيد. إذا تغيّر شيء فراسلنا عبر واتساب.": "We don't share your phone number with the beneficiary. If anything changes, message us on WhatsApp.", "لا نشارك مكان الاستلام إلا مع مستفيد تحقق منه المشرفون وبعد موافقته على الموعد، ولا نشارك رقم هاتفك مع أحد.": "We share the pickup place only with a beneficiary verified by our supervisors, and only after they accept the appointment. We never share your phone number.", "لديك موعد لاستلام تبرع": "You have a donation pickup appointment", "لم يحضر": "Didn't come", "لم يحضر المستفيد": "The beneficiary didn't come", "لم يحضر المستفيد {0} في الموعد. اختر مستفيدًا آخر أو متطوعًا.": "Beneficiary {0} did not come. Choose another beneficiary or a volunteer.", "لم يحضر المستفيد {0} لاستلام {1}": "Beneficiary {0} did not come to collect {1}", "لم يحضر المستفيد في الموعد": "The beneficiary did not come", "لم يحضر في موعد الاستلام": "Did not come to the pickup", "لم يعد هذا الموعد متاحًا. تواصل معنا عبر واتساب.": "This appointment is no longer available. Contact us on WhatsApp.", "متطوع من الفريق": "A team volunteer", "مثال: مواقف المجمع التجاري، عند البوابة 2": "Example: the mall car park, by gate 2", "مكان آخر أحدده": "Another place I choose", "مكان آخر:": "Another place:", "مكان الاستلام": "Pickup place", "مكان الاستلام:": "Pickup place:", "من بيتي (العنوان أعلاه)": "From my home (the address above)", "من يستلم التبرع؟": "Who collects the donation?", "موافق، سأحضر": "Yes, I'll come", "موعد استلام": "Pickup appointment", "موعد التسليم المباشر للمستفيد": "Direct handover to the beneficiary", "موعدك مؤكد": "Your appointment is confirmed", "هذا المستفيد غير متاح الآن": "This beneficiary is not available now", "وافق المستفيد {0} على موعد استلام {1}": "Beneficiary {0} accepted the pickup of {1}", "وصف المكان": "Place description", "يقبل أن يستلمه المستفيد مباشرة": "Accepts direct handover to a beneficiary", "أكّد حضوره لاستلام التبرع": "Confirmed they will come to collect", "أكّد المستفيد حضوره": "The beneficiary confirmed"});
+Object.assign(EN, {"أُعيد التبرع {0} للمتبرع للتعديل: {1}": "Donation {0} sent back to the donor for changes: {1}", "أُعيد الطلب للمتبرع. أبلغه عبر واتساب": "Sent back to the donor. Tell them on WhatsApp", "أُعيد للمتبرع": "Sent back to donor", "أُعيد للمتبرع للتعديل": "Sent back to the donor for changes", "إرجاع للمتبرع للتعديل": "Send back to the donor for changes", "إرجاع وإبلاغ المتبرّع": "Send back and tell the donor", "إضافة صور": "Add photos", "اكتب ما يحتاج تعديلًا": "Write what needs changing", "السلام عليكم، معكم منصة أثر. نحتاج تعديلًا على تبرعك {0}: {1}. افتح الرابط واكتب آخر 4 أرقام من هاتفك، ثم اضغط «تعديل الطلب».": "Hello from Athar. Your donation {0} needs a change: {1}. Open the link, type the last 4 digits of your phone, then press “Edit request”.", "الصور": "Photos", "تعديل البيانات": "Edit details", "تعديل بيانات التبرع": "Edit donation details", "حتى {0} صور": "Up to {0} photos", "حذف التبرع": "Delete donation", "حذف التبرع {0} ({1})": "Deleted donation {0} ({1})", "حذف التبرع {0} نهائيًا؟ لا يمكن التراجع عن ذلك.": "Delete donation {0} permanently? This cannot be undone.", "حُذف التبرع": "Donation deleted", "راجع كميات الأصناف.": "Check the item quantities.", "صورة {0}": "Photo {0}", "طلب المشرفون تعديلًا على تبرعك:": "Our supervisors asked for a change to your donation:", "عدّل {0} بيانات التبرع {1}": "{0} edited donation {1}", "عدّل البيانات أدناه ثم اضغط «حفظ التعديلات»، وسيراجعه المشرفون من جديد.": "Edit the details below, then press “Save changes”, and our supervisors will review it again.", "عدّل المتبرع الطلب {0} بعد إرجاعه": "The donor edited {0} after it was sent back", "عدّل المتبرع الطلب بعد إرجاعه ({0}). راجعه من جديد.": "The donor edited it after it was sent back ({0}). Review it again.", "عدّل المشرفون البيانات {0} مرة، آخرها {1} ({2}).": "Supervisors edited the details {0} times, last on {1} ({2}).", "عدّله المتبرع": "Edited by donor", "لا تملك صلاحية حذف هذا التبرع.": "You don't have permission to delete this donation.", "لا يمكن تعديل الأصناف بعد استلام التبرع أو توزيعه.": "Items can't be changed after the donation is received or shared out.", "ما الذي يحتاج تعديلًا؟": "What needs changing?", "مثال: الصور غير واضحة، أرفق صورة للجهاز من الأمام": "Example: the photos aren't clear, add a front photo of the appliance"});
 // t('نص {0}', x): the current language's text, the Arabic source when untranslated; {n} are filled with the arguments
 const t = (s, ...a) => { const r = TR ? (TR[s] != null ? TR[s] : s) : (OV[s] != null ? OV[s] : s); return a.length ? String(r).replace(/\{(\d+)\}/g, (_, i) => a[+i] ?? '') : r; };
 const SEP = () => LANGS[LANG].rtl ? '، ' : ', ';
@@ -1633,7 +1637,7 @@ const findDon = id => db.donations.find(x => x.id === id);
 const findReq = id => db.requests.find(x => x.id === id);
 /* كل انتقال يمر بالمشرف بالترتيب، ولا يمكن تخطي خطوة اعتماد. الإلغاء متاح لصاحب الطلب قبل الاستلام أو المطابقة فقط */
 const NEXT = {
-  D: { new:['approved','rejected','cancelled'], approved:['scheduled','rejected','cancelled'], scheduled:['received','rejected','delivered','approved'], received:['allocated','closed','delivered'], allocated:['delivered'] },
+  D: { new:['approved','rejected','cancelled'], approved:['scheduled','rejected','cancelled','new'], scheduled:['received','rejected','delivered','approved'], received:['allocated','closed','delivered'], allocated:['delivered'] },
   R: { new:['verified','rejected','cancelled'], verified:['matched','rejected','cancelled'], matched:['delivered','verified'] },
 };
 function setStatus(rec, status, note) {
@@ -1809,8 +1813,8 @@ wirePlate('d'); wirePlate('r');
 const opts = (obj, sel) => Object.entries(obj).map(([v, t]) => `<option value="${v}"${v === sel ? ' selected' : ''}>${esc(t)}</option>`).join('');
 let rowSeq = 0;
 function donKind() { return $('input[name=d_kind]:checked').value; }
-function addItemRow(data) {
-  const k = donKind(); const id = ++rowSeq; const row = document.createElement('div');
+function addItemRow(data, box = $('#d_items'), k = donKind()) {
+  const id = ++rowSeq; const row = document.createElement('div');
   row.className = 'item-row' + (k === 'clothes' ? ' cl' : isGoods(k) ? (GOODS[k].extra ? ' gx' : ' ot') : '');
   if (k === 'food') {
     const it = data || { type:'rice', qty:'', unit:'kg', exp:'' };
@@ -1841,10 +1845,10 @@ function addItemRow(data) {
       <label class="f">العدد<input type="number" min="1" data-k="qty" id="ci_q${id}" value="${esc(it.qty)}"></label>
       <button type="button" class="rm" aria-label="حذف الصنف">×</button>`;
   }
-  row.querySelector('.rm').addEventListener('click', () => { if ($$('#d_items .item-row').length > 1) row.remove(); else toast('يلزم صنف واحد على الأقل'); });
-  $('#d_items').appendChild(row);
+  row.querySelector('.rm').addEventListener('click', () => { if ($$('.item-row', box).length > 1) row.remove(); else toast(t('يلزم صنف واحد على الأقل')); });
+  box.appendChild(row);
 }
-function resetItems(list) { $('#d_items').innerHTML = ''; (list && list.length ? list : [null]).forEach(addItemRow); }
+function resetItems(list) { $('#d_items').innerHTML = ''; (list && list.length ? list : [null]).forEach(it => addItemRow(it)); }
 function syncDonKind() {
   const k = donKind(), food = k === 'food';
   $('#d_foodNote').hidden = !food; $('#d_sealedWrap').hidden = !food; $('#d_cleanWrap').hidden = food;
@@ -1854,6 +1858,59 @@ function syncDonKind() {
 }
 $$('input[name=d_kind]').forEach(r => r.addEventListener('change', syncDonKind));
 $('#d_addItem').addEventListener('click', () => addItemRow());
+// reads item rows built by addItemRow, with the same checks as the donation form
+function readItems(box, kind) {
+  const items = [], errs = [];
+  $$('.item-row', box).forEach(row => {
+    const it = {}; $$('[data-k]', row).forEach(el => { it[el.dataset.k] = el.value.trim(); });
+    it.qty = +toLatin(it.qty);
+    if (!mark($('[data-k=qty]', row), !(it.qty > 0))) errs.push('حدّد كمية كل صنف.');
+    if (kind === 'food') {
+      const e = $('[data-k=exp]', row);
+      if (!it.exp) { mark(e, true); errs.push('أدخل تاريخ انتهاء كل صنف غذائي.'); }
+      else if (daysUntil(it.exp) < MIN_DAYS) { mark(e, true); errs.push(t('صنف «{0}» ينتهي خلال أقل من {1} يومًا، ولا يمكن قبوله.', FOOD[it.type], MIN_DAYS)); }
+      else mark(e, false);
+    }
+    if (isGoods(kind) && !mark($('[data-k=desc]', row), !it.desc)) errs.push('اكتب وصفًا لكل قطعة.');
+    items.push(it);
+  });
+  if (!items.length) errs.push('يلزم صنف واحد على الأقل');
+  return { items, errs: [...new Set(errs)].map(x => t(x)) };
+}
+// a small preview kept with each photo, so the donor can see their photos (the photos themselves are for supervisors only)
+function makeThumb(src) {
+  return new Promise(res => {
+    const img = new Image();
+    img.onload = () => { const k = Math.min(1, 96 / Math.max(img.width, img.height)), c = document.createElement('canvas');
+      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); res(c.toDataURL('image/jpeg', .5)); };
+    img.onerror = () => res(''); img.src = src;
+  });
+}
+// photo list editor: remove existing photos, add new ones, up to MAX_PHOTOS
+function photoEdHTML() {
+  return `<div class="uploader"><div class="head"><b>${t('الصور')}</b><span class="private"><svg width="12" height="12"><use href="#i-lock"/></svg>${t('يراها المشرفون فقط')}</span><small class="muted">${t('حتى {0} صور', MAX_PHOTOS)}</small></div>
+    <div class="thumbs" data-pe-list></div>
+    <label class="drop" data-pe-drop><svg width="26" height="26"><use href="#i-camera"/></svg><b>${t('إضافة صور')}</b><input type="file" accept="image/*" multiple data-pe-input></label></div>`;
+}
+function wirePhotoEd(root, old) {   // old: [{ src, label }] in their stored order
+  const st = { keep: old.map((_, i) => i), added: [], changed: () => st.keep.length !== old.length || st.added.length > 0 };
+  const list = $('[data-pe-list]', root), drop = $('[data-pe-drop]', root);
+  const draw = () => {
+    const shown = [...st.keep.map(i => ({ ...old[i], rm: () => { st.keep = st.keep.filter(x => x !== i); draw(); } })),
+      ...st.added.map((src, j) => ({ src, rm: () => { st.added.splice(j, 1); draw(); } }))];
+    list.innerHTML = shown.map((x, n) => `<div class="thumb">${x.src ? `<img src="${x.src}" alt="">` : `<span class="ph-n">${esc(x.label || '')}</span>`}<button type="button" class="x" data-n="${n}" aria-label="${t('حذف الصورة')}">×</button></div>`).join('');
+    $$('[data-n]', list).forEach(b => b.addEventListener('click', () => shown[+b.dataset.n].rm()));
+    drop.hidden = shown.length >= MAX_PHOTOS;
+  };
+  $('[data-pe-input]', root).addEventListener('change', async e => {
+    for (const f of [...e.target.files].filter(f => /^image\//.test(f.type))) {
+      if (st.keep.length + st.added.length >= MAX_PHOTOS) { toast(t('الحد الأقصى {0} صور', MAX_PHOTOS)); break; }
+      try { st.added.push(await compressImage(f)); } catch (err) { toast(t('تعذّر قراءة إحدى الصور')); }
+    }
+    e.target.value = ''; draw();
+  });
+  draw(); return st;
+}
 $('#d_target').addEventListener('change', e => { $('#d_personWrap').hidden = e.target.value !== 'person'; });
 resetItems();
 
@@ -1953,6 +2010,7 @@ async function submitDonationCloud(p, box) {
   const btn = $('#donForm button[type=submit]'); btn.disabled = true; document.body.classList.add('busy');
   try {
     p.photos = donPhotos.length ? await uploadPhotos(donPhotos) : [];
+    p.thumbs = await Promise.all(donPhotos.map(makeThumb));
     const { data, error } = await sb.rpc('submit_donation', { p });
     if (error) throw error;
     const rec = { ...p, id: data.id, status: 'new', history: [{ status: 'new', at: data.createdAt, note: '' }], createdAt: data.createdAt, allocations: [] };
@@ -2416,7 +2474,7 @@ function donTable() {
     ${rows.map(d => {
       const part = d.status === 'received' && (d.allocations || []).length;
       return `<tr data-open="d:${d.id}"><td class="id">${d.id}</td><td>${esc(d.name)}<br><small class="muted num" dir="ltr">${esc(d.phone)}</small></td>
-      <td>${KIND[d.kind]}${moveOpen(d) ? ' ' + moveTag(d) : ''}${d.status === 'approved' && d.handover && d.handover.state === 'offered' ? ` <span class="tag gold">${t('بانتظار رد المستفيد')}</span>` : d.status === 'scheduled' && isDirect(d) ? ` <span class="tag gold">${t('تسليم مباشر')}</span>` : ''}${d.photos && d.photos.length ? ` <span class="tag" title="${t('صور مرفقة')}"><svg width="11" height="11" style="vertical-align:-1px"><use href="#i-camera"/></svg> ${d.photos.length}</span>` : ''}${expiringSoon(d) && ['received','approved','scheduled','new'].includes(d.status) ? ` <span class="tag hot">${t('صلاحية قريبة')}</span>` : ''}${d.edits && d.edits.length ? ` <span class="tag">${t('عُدّل')}</span>` : ''}</td>
+      <td>${KIND[d.kind]}${d.returned && d.returned.open && d.status === 'new' ? ` <span class="tag hot">${t('أُعيد للمتبرع')}</span>` : d.returned && d.returned.doneAt && d.status === 'new' ? ` <span class="tag gold">${t('عدّله المتبرع')}</span>` : ''}${moveOpen(d) ? ' ' + moveTag(d) : ''}${d.status === 'approved' && d.handover && d.handover.state === 'offered' ? ` <span class="tag gold">${t('بانتظار رد المستفيد')}</span>` : d.status === 'scheduled' && isDirect(d) ? ` <span class="tag gold">${t('تسليم مباشر')}</span>` : ''}${d.photos && d.photos.length ? ` <span class="tag" title="${t('صور مرفقة')}"><svg width="11" height="11" style="vertical-align:-1px"><use href="#i-camera"/></svg> ${d.photos.length}</span>` : ''}${expiringSoon(d) && ['received','approved','scheduled','new'].includes(d.status) ? ` <span class="tag hot">${t('صلاحية قريبة')}</span>` : ''}${d.edits && d.edits.length ? ` <span class="tag">${t('عُدّل')}</span>` : ''}</td>
       <td style="max-width:240px">${esc(itemsSummary(d))}</td><td>${addrCell(d.addr)}</td><td>${TARGET[d.target]}</td>
       <td><span class="pill s-${d.status}">${DON_LBL[d.status]}</span>${part ? ` <span class="tag gold">${t('مخصّص جزئيًا')}</span>` : ''}</td><td class="num">${fmtDate(d.createdAt)}</td></tr>`;
     }).join('')}
@@ -2847,7 +2905,9 @@ function openDrawer(k, id, pre) {
     }).join('')}</div>`
     : `<p>${needText(rec)}${rec.sizes ? ` · ${t('المقاسات:')} ${esc(rec.sizes)}` : ''}</p>`;
   const dups = !isD && openReq(rec) ? dupOf(rec) : [];
-  const edited = rec.edits && rec.edits.length ? `<p class="note">${t('عدّل صاحب الطلب بياناته {0} مرة، آخرها {1}.', rec.edits.length, fmtDT(rec.edits[rec.edits.length - 1].at))}</p>` : '';
+  const own = (rec.edits || []).filter(e => !e.by), staffEd = (rec.edits || []).filter(e => e.by);
+  const edited = (own.length ? `<p class="note">${t('عدّل صاحب الطلب بياناته {0} مرة، آخرها {1}.', own.length, fmtDT(own[own.length - 1].at))}</p>` : '')
+    + (staffEd.length ? `<p class="muted">${t('عدّل المشرفون البيانات {0} مرة، آخرها {1} ({2}).', staffEd.length, fmtDT(staffEd[staffEd.length - 1].at), esc(staffEd[staffEd.length - 1].by))}</p>` : '');
   const kv = isD
     ? `<dt>${t('المتبرّع')}</dt><dd>${esc(rec.name)}</dd><dt>${t('الهاتف')}</dt><dd class="num" dir="ltr">${esc(rec.phone)}</dd><dt>${t('العنوان')}</dt><dd>${plateTxt(rec.addr)}${rec.details ? '<br><span class="muted">' + esc(rec.details) + '</span>' : ''}<div style="margin-top:6px">${locHTML(rec, 'd:' + rec.id)}</div></dd>
        <dt>${t('التسليم')}</dt><dd>${rec.method === 'pickup' ? t('استلام من العنوان') : t('يوصله لنقطة التجميع')} · ${SLOT[rec.slot]}${rec.method === 'pickup' && rec.place && rec.place.type === 'other' ? `<br>${t('مكان آخر:')} ${esc(rec.place.text)}${rec.place.mapUrl ? ` · <a href="${esc(rec.place.mapUrl)}" target="_blank" rel="noopener">${t('الخريطة')}</a>` : ''}` : ''}${rec.direct ? `<br><span class="tag gold">${t('يقبل أن يستلمه المستفيد مباشرة')}</span>` : ''}</dd><dt>${t('الجهة')}</dt><dd>${TARGET[rec.target]}${rec.person ? ': ' + esc(rec.person.name) + ' (' + esc(rec.person.addr) + ')' : ''}</dd>
@@ -2863,7 +2923,7 @@ function openDrawer(k, id, pre) {
     <div class="body">${dups.length ? `<p class="note bad">${t('تنبيه: يوجد طلب مفتوح آخر بنفس الهاتف أو العنوان:')} ${dups.map(x => `<button type="button" class="linkish" data-open="r:${x.id}">${x.id}</button>`).join(' ')}</p>` : ''}${edited}
       <dl class="kv">${kv}</dl>${isD ? galleryHTML(rec) : ''}<div><h3 style="margin-bottom:8px">${isD ? t('الأصناف') : t('الاحتياج')}</h3>${items}</div>
       ${isD ? allocListHTML(rec) : reqGot.length ? `<div><h3 style="margin-bottom:8px">${t('ما خُصّص لهذا الطلب')}</h3><div class="mini-items">${reqGot.map(x => `<div><b class="num" dir="ltr">${x.d.id}</b><span>${esc(linesText(x.d, x.a.lines))}</span>${x.a.delivered ? `<span class="tag" style="color:var(--ok)">${t('سُلّم')}</span>` : `<span class="tag gold">${t('بانتظار التوصيل')}</span>`}</div>`).join('')}</div></div>` : ''}
-      ${isD ? '' : wishBoxHTML(rec)}
+      ${isD ? staffToolsHTML(rec) : wishBoxHTML(rec)}
       ${mtBoxHTML(rec, isD)}
       <div><h3 style="margin-bottom:8px">${t('مسار الطلب')}</h3>${timelineHTML(rec, k)}</div></div>
     <footer>${actionsHTML(rec, k, pre)}</footer>`;
@@ -2948,8 +3008,8 @@ function donorMsg(d) {
 }
 async function wireWa(dr, rec) {
   for (const a of $$('[data-wa]', dr)) {
-    const ben = a.dataset.wa === 'ben', to = ben ? findReq(rec.handover.to) : rec; if (!to) continue;
-    const text = ben ? benMsg(rec, to) : donorMsg(rec), link = trackLink(ben ? to.id : rec.id), lang = to.lang || 'ar';
+    const kind = a.dataset.wa, ben = kind === 'ben', to = ben ? findReq(rec.handover.to) : rec; if (!to) continue;
+    const text = ben ? benMsg(rec, to) : kind === 'ret' ? retMsg(rec) : donorMsg(rec), link = trackLink(ben ? to.id : rec.id), lang = to.lang || 'ar';
     const set = msg => { a.href = `https://wa.me/974${to.phone}?text=${encodeURIComponent(msg + '\n' + link)}`; };
     set(text);
     if (lang !== LANG) { try { set(await mt(text, lang, LANG)); } catch (e) {} }
@@ -3003,6 +3063,39 @@ function wireOffer(out, rec) {
   }));
 }
 
+function staffEditHTML(rec) {
+  const itemsOk = ['new', 'approved', 'scheduled'].includes(rec.status) && !(rec.allocations || []).length;
+  return `<form class="sheet" id="sEdit" hidden><fieldset><legend>${t('تعديل بيانات التبرع')}</legend>
+    <div class="grid"><label class="f">${t('الاسم')}<input type="text" id="seName" maxlength="80" value="${esc(rec.name)}"></label>
+      <label class="f">${t('الهاتف')}<input type="tel" id="sePhone" maxlength="8" inputmode="numeric" dir="ltr" value="${esc(rec.phone)}"></label></div>
+    <div class="grid"><label class="f">${t('المنطقة')}<input type="number" id="seZone" min="1" max="99" value="${esc(rec.addr.zone)}"></label>
+      <label class="f">${t('الشارع')}<input type="number" id="seStreet" min="1" max="9999" value="${esc(rec.addr.street)}"></label>
+      <label class="f">${t('المبنى')}<input type="number" id="seBldg" min="1" max="9999" value="${esc(rec.addr.bldg)}"></label></div>
+    <label class="f">${t('تفاصيل المكان')}<input type="text" id="seDetails" value="${esc(rec.details || '')}"></label>
+    <div class="grid"><label class="f">${t('الوقت المفضّل')}<select id="seSlot">${opts(SLOT, rec.slot)}</select></label>
+      <label class="f">${t('طريقة التسليم')}<select id="seMethod">${opts({ pickup: t('استلام من عنواني'), dropoff: t('أوصله بنفسي إلى نقطة التجميع') }, rec.method)}</select></label></div>
+    ${itemsOk ? `<div><b>${t('الأصناف')}</b><div class="items" id="seItems"></div><button type="button" class="btn btn-ghost btn-sm" id="seAdd">${t('+ إضافة صنف')}</button></div>` : `<p class="muted">${t('لا يمكن تعديل الأصناف بعد استلام التبرع أو توزيعه.')}</p>`}
+    ${photoEdHTML()}
+    <label class="f">${t('ملاحظة المتبرّع')}<textarea id="seNotes">${esc(rec.notes || '')}</textarea></label>
+    <div class="note bad" id="seErr" hidden></div>
+    <div class="form-actions"><button class="btn btn-primary" type="submit">${t('حفظ التعديلات')}</button><button class="btn btn-ghost" type="button" data-se-cancel>${t('إلغاء')}</button></div></fieldset></form>`;
+}
+function staffToolsHTML(rec) {
+  if (!can('review')) return '';
+  const canRet = ['new', 'approved'].includes(rec.status) && !(rec.handover && rec.handover.state === 'offered');
+  const canDel = !(rec.allocations || []).length && !(rec.handover && ['offered', 'accepted'].includes(rec.handover.state));
+  const r = rec.returned;
+  return `<div style="display:grid;gap:10px">
+    ${r && r.open && rec.status === 'new' ? `<div class="note bad ret-note"><b>${t('أُعيد للمتبرع للتعديل')}</b><span dir="auto">${esc(r.note)}</span><div><a class="btn btn-ghost btn-sm" data-wa="ret" target="_blank" rel="noopener">${t('إبلاغ المتبرّع عبر واتساب')}</a></div></div>`
+      : r && !r.open && r.doneAt ? `<p class="note">${t('عدّل المتبرع الطلب بعد إرجاعه ({0}). راجعه من جديد.', fmtDT(r.doneAt))}</p>` : ''}
+    <div class="staff-tools"><button class="btn btn-ghost btn-sm" type="button" data-act="sEditOpen">${t('تعديل البيانات')}</button>
+      ${canRet ? `<button class="btn btn-ghost btn-sm" type="button" data-act="retOpen">${t('إرجاع للمتبرع للتعديل')}</button>` : ''}
+      ${canDel ? `<button class="btn btn-danger btn-sm" type="button" data-act="delDon">${t('حذف التبرع')}</button>` : ''}</div>
+    <div id="retBox" hidden class="sheet"><label class="f">${t('ما الذي يحتاج تعديلًا؟')}<textarea id="retNote" rows="2" maxlength="300" placeholder="${t('مثال: الصور غير واضحة، أرفق صورة للجهاز من الأمام')}"></textarea></label>
+      <div><button class="btn btn-primary btn-sm" type="button" data-act="retConfirm">${t('إرجاع وإبلاغ المتبرّع')}</button></div></div>
+    ${staffEditHTML(rec)}</div>`;
+}
+const retMsg = d => t('السلام عليكم، معكم منصة أثر. نحتاج تعديلًا على تبرعك {0}: {1}. افتح الرابط واكتب آخر 4 أرقام من هاتفك، ثم اضغط «تعديل الطلب».', d.id, d.returned.note);
 function actionsHTML(rec, k, pre) {
   const reasons = k === 'd'
     ? ['الصور غير واضحة أو لا تطابق الوصف','الصلاحية قريبة جدًا','صنف غير مقبول (ليس جافًا)','العبوات مفتوحة','الملابس غير صالحة','الجهاز لا يعمل أو غير آمن','الأثاث تالف أو غير نظيف','تعذّر التواصل مع المتبرّع']
@@ -3079,6 +3172,61 @@ function wireActions(dr, rec, k) {
   $$('[data-alloc]', dr).forEach(b => b.addEventListener('click', () => { const [did, rid] = b.dataset.alloc.split('|'); openDrawer('d', did, rid); }));
   $$('[data-adeliver]', dr).forEach(b => b.addEventListener('click', () => { try { deliverAlloc(rec, rec.allocations.find(a => a.id === b.dataset.adeliver)); done(t('سُجّل التسليم. شكرًا للفريق')); } catch (e) { toast(e.message); } }));
   act('reject', () => { $('#rejBox', dr).hidden = false; });
+  act('retOpen', () => { $('#retBox', dr).hidden = false; $('#retNote', dr).focus(); });
+  act('retConfirm', () => {
+    const note = $('#retNote', dr).value.trim(); if (note.length < 3) { toast(t('اكتب ما يحتاج تعديلًا')); return; }
+    if (rec.status === 'approved') { setStatus(rec, 'new', t('أُعيد للمتبرع للتعديل')); rec.pickup = null; }
+    rec.returned = { open: true, note: note.slice(0, 300), at: nowISO() };
+    log(t('أُعيد التبرع {0} للمتبرع للتعديل: {1}', rec.id, note)); done(t('أُعيد الطلب للمتبرع. أبلغه عبر واتساب'));
+  });
+  act('delDon', async () => {
+    if (!confirm(t('حذف التبرع {0} نهائيًا؟ لا يمكن التراجع عن ذلك.', rec.id))) return;
+    if (CLOUD) {
+      const { error, count } = await sb.from('donations').delete({ count: 'exact' }).eq('id', rec.id);
+      if (error || !count) { toast(error ? cloudErr(error) : t('لا تملك صلاحية حذف هذا التبرع.')); return; }
+      if ((rec.photos || []).length) sb.storage.from('donation-photos').remove(rec.photos).catch(() => {});
+      shadow.delete(rec.id);
+    }
+    db.donations = db.donations.filter(x => x.id !== rec.id);
+    log(t('حذف التبرع {0} ({1})', rec.id, rec.name)); save();
+    closeDrawer(); renderAdmin(); toast(t('حُذف التبرع'));
+  });
+  act('sEditOpen', () => {
+    const f = $('#sEdit', dr); f.hidden = !f.hidden; if (f.hidden || f.dataset.ready) return; f.dataset.ready = '1';
+    const box = $('#seItems', f);
+    if (box) { rec.items.forEach(it => { const { left, ...x } = it; addItemRow(x, box, rec.kind); }); $('#seAdd', f).addEventListener('click', () => addItemRow(null, box, rec.kind)); }
+    const pe = wirePhotoEd(f, (rec.photos || []).map((pth, i) => ({ src: photoSrc(pth) || (rec.thumbs || [])[i] || '', label: t('صورة {0}', i + 1) })));
+    $('[data-se-cancel]', f).addEventListener('click', () => { f.hidden = true; });
+    f.addEventListener('submit', async e => {
+      e.preventDefault();
+      const v = sel => $(sel, f).value.trim(), errs = [], err = $('#seErr', f);
+      if (!mark($('#seName', f), v('#seName').length < 3)) errs.push(t('اكتب الاسم الكامل.'));
+      const phone = toLatin(v('#sePhone'));
+      if (!mark($('#sePhone', f), !phoneOk(phone))) errs.push(t('رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 3 أو 5 أو 6 أو 7.'));
+      const addr = { zone: String(+toLatin(v('#seZone'))), street: String(+toLatin(v('#seStreet'))), bldg: String(+toLatin(v('#seBldg'))) };
+      if (!(+addr.zone >= 1 && +addr.zone <= 99 && +addr.street >= 1 && +addr.bldg >= 1)) errs.push(t('أكمل أرقام اللوحة المنزلية (المنطقة من 1 إلى 99).'));
+      const rd = box ? readItems(box, rec.kind) : null; if (rd) errs.push(...rd.errs);
+      if (errs.length) { err.innerHTML = errs.map(esc).join('<br>'); err.hidden = false; return; }
+      err.hidden = true;
+      const btn = $('button[type=submit]', f); btn.disabled = true;
+      try {
+        const changed = [], set = (key, val) => { if (JSON.stringify(rec[key] ?? '') !== JSON.stringify(val ?? '')) { rec[key] = val; changed.push(key); } };
+        set('name', v('#seName')); set('phone', phone); set('details', v('#seDetails')); set('slot', v('#seSlot')); set('method', v('#seMethod')); set('notes', v('#seNotes'));
+        if (JSON.stringify(rec.addr) !== JSON.stringify(addr)) { rec.addr = addr; delete rec.geo; changed.push('addr'); }
+        if (rd) set('items', rd.items);
+        if (pe.changed()) {
+          const add = CLOUD ? (pe.added.length ? await uploadPhotos(pe.added) : []) : pe.added.slice();
+          const addT = CLOUD ? await Promise.all(pe.added.map(makeThumb)) : [];
+          if (CLOUD) rec.thumbs = [...pe.keep.map(i => (rec.thumbs || [])[i] || ''), ...addT];
+          rec.photos = [...pe.keep.map(i => rec.photos[i]), ...add]; changed.push('photos');
+        }
+        if (!changed.length) { toast(t('لم تتغيّر أي بيانات')); return; }
+        rec.edits = rec.edits || []; rec.edits.push({ at: nowISO(), fields: changed, by: actor() });
+        log(t('عدّل {0} بيانات التبرع {1}', actor(), rec.id)); done(t('حُفظت التعديلات'));
+      } catch (e2) { toast(cloudErr(e2)); }
+      finally { btn.disabled = false; }
+    });
+  });
   $$('input[name=pkWho]', dr).forEach(r => r.addEventListener('change', () => { const ben = $('input[name=pkWho]:checked', dr).value === 'ben'; $('#pkVolBox', dr).hidden = ben; $('#pkBenBox', dr).hidden = !ben; }));
   wireOpen($('footer', dr)); if (k === 'd') wireWa(dr, rec);
   act('offer', () => {
@@ -3205,17 +3353,58 @@ function resetGeo(p) { geoState[p] = null; $(`#${p}_geoMsg`).textContent = ''; }
 wireGeo('d'); wireGeo('r'); wireGeo('m');
 
 /* ================= edit / cancel from the tracking page ================= */
+// the donor edits everything while the donation is new: also after a supervisor sent it back for changes
+async function saveDonorEdit(f, rec, ph, pe) {
+  const v = sel => $(sel, f).value.trim(), errs = [], box = $('#eErr', f);
+  if (!mark($('#eName', f), v('#eName').length < 3)) errs.push(t('اكتب الاسم الكامل.'));
+  const zone = toLatin(v('#eZone')), street = toLatin(v('#eStreet')), bldg = toLatin(v('#eBldg'));
+  const zb = !mark($('#eZone', f), !(+zone >= 1 && +zone <= 99)), stb = !mark($('#eStreet', f), !(+street >= 1)), bb = !mark($('#eBldg', f), !(+bldg >= 1));
+  if (zb || stb || bb) errs.push(t('أكمل أرقام اللوحة المنزلية (المنطقة من 1 إلى 99).'));
+  const rd = readItems($('#eItems', f), rec.kind); errs.push(...rd.errs);
+  const method = v('#eMethod'), other = method === 'pickup' && $('input[name=e_place]:checked', f).value === 'other';
+  if (other && !mark($('#ePlaceText', f), v('#ePlaceText').length < 4)) errs.push(t('صِف مكان الاستلام الذي تحدده.'));
+  if (isGoods(rec.kind) && GOODS[rec.kind].needPhoto && pe.keep.length + pe.added.length === 0) errs.push(t('أرفق صورة واحدة على الأقل لـ{0} حتى يقرر المشرف قبولها.', KIND[rec.kind]));
+  if (errs.length) { box.innerHTML = `<b>${t('راجع الحقول التالية:')}</b><br>` + errs.map(esc).join('<br>'); box.hidden = false; return; }
+  box.hidden = true;
+  const place = method === 'pickup' ? (other ? { type: 'other', text: v('#ePlaceText'), mapUrl: /^https?:\/\//i.test(v('#ePlaceMap')) ? v('#ePlaceMap') : '' } : { type: 'home' }) : null;
+  const fields = { name: v('#eName'), addr: { zone: String(+zone), street: String(+street), bldg: String(+bldg) }, details: v('#eDetails'), slot: v('#eSlot'), method, notes: v('#eNotes'), items: rd.items,
+    ...(place ? { place, direct: $('#eDirect', f).checked } : {}) };
+  const btn = $('button[type=submit]', f); btn.disabled = true;
+  try {
+    if (CLOUD) {
+      const p = { ...fields };
+      if (pe.changed()) { p.keep = pe.keep; p.add = pe.added.length ? await uploadPhotos(pe.added) : []; p.addThumbs = await Promise.all(pe.added.map(makeThumb)); }
+      const { data, error } = await sb.rpc('owner_edit', { p_code: rec.id, p_phone: ph, p });
+      if (error) throw error;
+      if (data && data.unchanged) { toast(t('لم تتغيّر أي بيانات')); return; }
+    } else {
+      const changed = [], same = (a, b) => JSON.stringify(a ?? '') === JSON.stringify(b ?? '');
+      ['name', 'details', 'slot', 'method', 'notes', 'items', 'place', 'direct'].forEach(key => { if (key in fields && !same(rec[key], fields[key])) { rec[key] = fields[key]; changed.push(key); } });
+      if (!same(rec.addr, fields.addr)) { rec.addr = fields.addr; delete rec.geo; changed.push('addr'); }
+      if (pe.changed()) { rec.photos = [...pe.keep.map(i => rec.photos[i]), ...pe.added]; changed.push('photos'); }
+      if (!changed.length) { toast(t('لم تتغيّر أي بيانات')); return; }
+      const ret = rec.returned && rec.returned.open;
+      if (ret) Object.assign(rec.returned, { open: false, doneAt: nowISO() });
+      rec.edits = rec.edits || []; rec.edits.push({ at: nowISO(), fields: changed });
+      log(ret ? t('عدّل المتبرع الطلب {0} بعد إرجاعه', rec.id) : t('عدّل صاحب الطلب {0}', rec.id), t('صاحب الطلب'));
+      if (!save()) { toast(t('تعذّر حفظ التبرع لأن مساحة التخزين ممتلئة. احذف بعض الصور وحاول مرة أخرى.')); return; }
+    }
+    await doTrack(); toast(t('حُفظت التعديلات'));
+  } catch (err) { toast(cloudErr(err)); }
+  finally { btn.disabled = false; }
+}
 function manageHTML(rec, k) {
   const isD = k === 'd';
   const canCancel = isD ? ['new','approved'].includes(rec.status) : ['new','verified'].includes(rec.status);
   const canEdit = rec.status === 'new';
   if (!canCancel && !canEdit) return ['rejected','cancelled','delivered','closed'].includes(rec.status) ? '' : `<p class="muted manage-note">${t('لا يمكن تعديل الطلب أو إلغاؤه في هذه المرحلة. إذا احتجت تغييرًا تواصل مع الفريق واذكر رقم الطلب.')}</p>`;
   const why = isD ? ['لم أعد أرغب في التبرع','تبرعت بها لجهة أخرى','تغيّر الموعد أو العنوان','سبب آخر'] : ['لم أعد بحاجة','حصلت على المساعدة من جهة أخرى','سبب آخر'];
-  return `<div class="manage">
+  const ret = isD && rec.returned && rec.returned.open && rec.status === 'new';
+  return `<div class="manage">${ret ? `<div class="note bad ret-note"><b>${t('طلب المشرفون تعديلًا على تبرعك:')}</b><span dir="auto">${esc(rec.returned.note)}</span><small>${t('عدّل البيانات أدناه ثم اضغط «حفظ التعديلات»، وسيراجعه المشرفون من جديد.')}</small></div>` : ''}
     <label class="f" style="max-width:320px">${t('رقم الهاتف كاملًا لتأكيد التعديل أو الإلغاء')}<input type="tel" id="mPhone" inputmode="numeric" maxlength="8" dir="ltr" placeholder="5xxxxxxx"></label>
     <div class="form-actions">${canEdit ? `<button class="btn btn-ghost" type="button" data-m="edit">${t('تعديل الطلب')}</button>` : ''}${canCancel ? `<button class="btn btn-danger" type="button" data-m="cancel">${t('إلغاء الطلب')}</button>` : ''}
       ${canEdit ? `<small class="muted">${t('التعديل متاح حتى يبدأ المشرف المراجعة.')}</small>` : ''}</div>
-    <div id="mEdit" hidden>${editForm(rec, k)}</div>
+    <div id="mEdit"${ret ? '' : ' hidden'}>${editForm(rec, k)}</div>
     <div id="mCancel" hidden class="sheet"><label class="f">${t('سبب الإلغاء')}<select id="cWhy">${why.map(x => `<option value="${x}">${t(x)}</option>`).join('')}</select></label>
       <div><button class="btn btn-danger" type="button" data-m="cancelConfirm">${t('تأكيد الإلغاء')}</button></div></div>
   </div>`;
@@ -3223,11 +3412,26 @@ function manageHTML(rec, k) {
 function editForm(rec, k) {
   const common = `<label class="f">${t('تفاصيل المكان')}<input type="text" id="eDetails" value="${esc(rec.details)}"></label>`;
   const save = `<div class="form-actions"><button class="btn btn-primary" type="submit">${t('حفظ التعديلات')}</button></div>`;
-  if (k === 'd') return `<form class="sheet" id="editForm"><fieldset><legend>${t('تعديل التبرع')}</legend>
-    <div class="grid">${rec.items.map((it, i) => `<label class="f">${esc(itemName(rec, it))} <small>${itemUnit(rec, it)}</small><input type="number" min="1" step="any" value="${it.qty}" data-eq="${i}"></label>`).join('')}</div>
+  if (k === 'd') {
+    const pl = rec.place || { type: 'home' };
+    return `<form class="sheet" id="editForm"><fieldset><legend>${t('تعديل التبرع')}</legend>
+    <label class="f">${t('الاسم')}<input type="text" id="eName" maxlength="80" value="${esc(rec.name)}"></label>
+    <div class="grid"><label class="f">${t('المنطقة')}<input type="number" id="eZone" min="1" max="99" inputmode="numeric" value="${esc(rec.addr.zone)}"></label>
+      <label class="f">${t('الشارع')}<input type="number" id="eStreet" min="1" max="9999" inputmode="numeric" value="${esc(rec.addr.street)}"></label>
+      <label class="f">${t('المبنى')}<input type="number" id="eBldg" min="1" max="9999" inputmode="numeric" value="${esc(rec.addr.bldg)}"></label></div>
+    ${common}
+    <div><b>${t('الأصناف')}</b><div class="items" id="eItems"></div><button type="button" class="btn btn-ghost btn-sm" id="eAddItem">${t('+ إضافة صنف')}</button></div>
+    ${photoEdHTML()}
     <div class="grid"><label class="f">${t('الوقت المفضّل')}<select id="eSlot">${opts(SLOT, rec.slot)}</select></label>
       <label class="f">${t('طريقة التسليم')}<select id="eMethod">${opts({ pickup: t('استلام من عنواني'), dropoff: t('أوصله بنفسي إلى نقطة التجميع') }, rec.method)}</select></label></div>
-    ${common}<label class="f">${t('ملاحظات')}<textarea id="eNotes">${esc(rec.notes || '')}</textarea></label>${save}</fieldset></form>`;
+    <div class="place-box" id="ePlaceBox">
+      <div class="seg" role="radiogroup" aria-label="${t('مكان الاستلام')}"><label><input type="radio" name="e_place" value="home"${pl.type === 'other' ? '' : ' checked'}><span>${t('من بيتي (العنوان أعلاه)')}</span></label><label><input type="radio" name="e_place" value="other"${pl.type === 'other' ? ' checked' : ''}><span>${t('مكان آخر أحدده')}</span></label></div>
+      <div class="grid" id="eOther"><label class="f">${t('وصف المكان')}<input type="text" id="ePlaceText" maxlength="200" value="${esc(pl.text || '')}"></label>
+        <label class="f">${t('رابط المكان من خرائط Google')} <small>${t('اختياري')}</small><input type="url" id="ePlaceMap" dir="ltr" value="${esc(pl.mapUrl || '')}"></label></div>
+      <label class="check"><input type="checkbox" id="eDirect"${rec.direct === false ? '' : ' checked'}><span>${t('لا مانع أن يأتي المستفيد بنفسه لاستلامه مني بدل المتطوع')}</span></label></div>
+    <label class="f">${t('ملاحظات')}<textarea id="eNotes">${esc(rec.notes || '')}</textarea></label>
+    <div class="note bad" id="eErr" hidden></div>${save}</fieldset></form>`;
+  }
   return `<form class="sheet" id="editForm"><fieldset><legend>${t('تعديل الطلب')}</legend>
     <div class="grid"><label class="f">${t('عدد الأفراد')}<input type="number" id="eSize" min="1" value="${rec.size}"></label>
       <label class="f">${t('درجة الاحتياج')}<select id="eUrg">${opts({ normal: t('عادية'), high: t('عاجلة') }, rec.urg)}</select></label></div>
@@ -3258,29 +3462,30 @@ function wireManage(out, rec, k) {
     log(t('ألغى صاحب الطلب {0}: {1}', rec.id, t(why)), t('صاحب الطلب')); save(); doTrack(); toast(t('أُلغي الطلب'));
   });
   const f = $('#editForm', out);
+  let pe = null;
+  if (f && k === 'd') {
+    const box = $('#eItems', f); rec.items.forEach(it => { const { left, ...x } = it; addItemRow(x, box, rec.kind); });
+    $('#eAddItem', f).addEventListener('click', () => addItemRow(null, box, rec.kind));
+    const n = CLOUD ? (rec.photoCount || 0) : (rec.photos || []).length;
+    pe = wirePhotoEd(f, Array.from({ length: n }, (_, i) => ({ src: CLOUD ? (rec.thumbs || [])[i] || '' : rec.photos[i], label: t('صورة {0}', i + 1) })));
+    const syncP = () => { const pick = $('#eMethod', f).value === 'pickup'; $('#ePlaceBox', f).hidden = !pick; $('#eOther', f).hidden = !pick || $('input[name=e_place]:checked', f).value !== 'other'; };
+    $$('#eMethod, input[name=e_place]', f).forEach(x => x.addEventListener('change', syncP)); syncP();
+  }
   if (f) f.addEventListener('submit', e => {
     e.preventDefault();
     if (rec.status !== 'new') { toast(t('لا يمكن التعديل بعد بدء المراجعة')); return; }
     const ph = phoneOkFor(); if (!ph) return;
+    if (k === 'd') { saveDonorEdit(f, rec, ph, pe); return; }
     if (CLOUD) {
       const val = sel => { const el = $(sel, f); return el ? el.value.trim() : undefined; };
-      const p = k === 'd'
-        ? { qty: $$('[data-eq]', f).map(i => +toLatin(i.value)), slot: val('#eSlot'), method: val('#eMethod'), details: val('#eDetails'), notes: val('#eNotes') }
-        : { size: toLatin(val('#eSize')), urg: val('#eUrg'), details: val('#eDetails'), notes: val('#eNotes'), goodsDesc: val('#eGoods'), sizes: val('#eSizes') };
+      const p = { size: toLatin(val('#eSize')), urg: val('#eUrg'), details: val('#eDetails'), notes: val('#eNotes'), goodsDesc: val('#eGoods'), sizes: val('#eSizes') };
       Object.keys(p).forEach(x => p[x] === undefined && delete p[x]);
       viaRpc('owner_edit', { p_code: rec.id, p_phone: ph, p }, t('حُفظت التعديلات')); return;
     }
     const changed = [];
-    if (k === 'd') {
-      let bad = false;
-      $$('[data-eq]', f).forEach(inp => { const v = +toLatin(inp.value), it = rec.items[+inp.dataset.eq]; if (!(v > 0)) { bad = true; mark(inp, true); return; } if (v !== +it.qty) { it.qty = v; changed.push('qty'); } });
-      if (bad) { toast(t('حدّد كمية صحيحة لكل صنف')); return; }
-      [['slot','#eSlot'],['method','#eMethod'],['details','#eDetails'],['notes','#eNotes']].forEach(([key, sel]) => { const v = $(sel, f).value.trim(); if ((rec[key] || '') !== v) { rec[key] = v; changed.push(key); } });
-    } else {
-      const size = +toLatin($('#eSize', f).value); if (!(size >= 1)) { mark($('#eSize', f), true); return; }
-      if (size !== rec.size) { rec.size = size; changed.push('size'); }
-      [['urg','#eUrg'],['details','#eDetails'],['notes','#eNotes'],['goodsDesc','#eGoods'],['sizes','#eSizes']].forEach(([key, sel]) => { const el = $(sel, f); if (!el) return; const v = el.value.trim(); if ((rec[key] || '') !== v) { rec[key] = v; changed.push(key); } });
-    }
+    const size = +toLatin($('#eSize', f).value); if (!(size >= 1)) { mark($('#eSize', f), true); return; }
+    if (size !== rec.size) { rec.size = size; changed.push('size'); }
+    [['urg','#eUrg'],['details','#eDetails'],['notes','#eNotes'],['goodsDesc','#eGoods'],['sizes','#eSizes']].forEach(([key, sel]) => { const el = $(sel, f); if (!el) return; const v = el.value.trim(); if ((rec[key] || '') !== v) { rec[key] = v; changed.push(key); } });
     if (!changed.length) { toast(t('لم تتغيّر أي بيانات')); return; }
     rec.edits = rec.edits || []; rec.edits.push({ at: nowISO(), fields: changed });
     log(t('عدّل صاحب الطلب {0}', rec.id), t('صاحب الطلب')); save(); doTrack(); toast(t('حُفظت التعديلات'));
@@ -3880,8 +4085,9 @@ $('#moveForm').addEventListener('submit', async e => {
     const btn = $('#moveForm button[type=submit]'); btn.disabled = true; document.body.classList.add('busy');
     try {
       const photos = await uploadPhotos(movePhotos);   // one upload, shared by every donation of this house
+      const thumbs = await Promise.all(movePhotos.map(makeThumb));
       for (const k of kinds) {
-        const p = { ...base, kind: k, items: byKind[k], photos };
+        const p = { ...base, kind: k, items: byKind[k], photos, thumbs };
         const { data, error } = await sb.rpc('submit_donation', { p });
         if (error) throw error;
         const rec = { ...p, id: data.id, status: 'new', history: [{ status: 'new', at: data.createdAt, note: '' }], createdAt: data.createdAt, allocations: [] };
@@ -4196,7 +4402,7 @@ function markClean() {
 function cloudErr(e) {
   const m = (e && (e.message || e.error_description)) || String(e);
   const map = { not_found: 'رقم الهاتف لا يطابق الطلب.', not_allowed: 'لا يمكن تنفيذ هذا الإجراء في هذه المرحلة.', bad_phone: 'رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 3 أو 5 أو 6 أو 7.',
-    bad_photos: 'تعذّر رفع الصور. حاول مرة أخرى.', offer_gone: 'لم يعد هذا الموعد متاحًا. تواصل معنا عبر واتساب.', bad_email: 'البريد الإلكتروني غير صحيح.', intake_closed: 'الاستقبال متوقف مؤقتًا.', kind_closed: 'لا نستقبل هذا الصنف حاليًا.', weak_password: 'كلمة المرور يجب أن تكون 8 أحرف على الأقل.', bad_name: 'اكتب اسم العضو', payload_too_large: 'البيانات أكبر من المسموح.', 'Invalid login credentials': 'البريد أو كلمة المرور غير صحيحة.' };
+    bad_photos: 'تعذّر رفع الصور. حاول مرة أخرى.', bad_addr: 'أكمل أرقام اللوحة المنزلية (المنطقة من 1 إلى 99).', bad_items: 'راجع كميات الأصناف.', bad_place: 'صِف مكان الاستلام الذي تحدده.', offer_gone: 'لم يعد هذا الموعد متاحًا. تواصل معنا عبر واتساب.', bad_email: 'البريد الإلكتروني غير صحيح.', intake_closed: 'الاستقبال متوقف مؤقتًا.', kind_closed: 'لا نستقبل هذا الصنف حاليًا.', weak_password: 'كلمة المرور يجب أن تكون 8 أحرف على الأقل.', bad_name: 'اكتب اسم العضو', payload_too_large: 'البيانات أكبر من المسموح.', 'Invalid login credentials': 'البريد أو كلمة المرور غير صحيحة.' };
   const key = Object.keys(map).find(k => m.includes(k));
   return key ? t(map[key]) : (/fetch|network/i.test(m) ? t('تعذّر الاتصال بالخادم. تحقق من الإنترنت وحاول مرة أخرى.') : m);
 }
