@@ -13,6 +13,7 @@ window.sbLoadFont=function(l){if(!F[l])return;var id='font-'+F[l].split(':')[0];
 sbLoadFont(l);})();</script>
 <meta name="theme-color" content="#8A1538">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -709,12 +710,12 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
   <symbol id="i-gift" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 21V7"/><path d="M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></g></symbol>
   <symbol id="logo" viewBox="0 0 48 48">
-    <path d="M24 2l5.2 6.4 8.2-1 1 8.2L44.8 21 40.6 28l1.4 8.1-8.1 1.6L29.6 45 24 39.4 18.4 45l-4.3-7.3L6 36.1 7.4 28 3.2 21l6.4-5.4 1-8.2 8.2 1z" fill="#8A1538"/>
-    <circle cx="24" cy="24" r="13.5" fill="none" stroke="#D9B26A" stroke-width="1.2"/>
-    <g fill="#FFFFFF"><path d="M24 34V16" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
-      <ellipse cx="20.6" cy="18" rx="1.9" ry="3.4" transform="rotate(-28 20.6 18)"/><ellipse cx="27.4" cy="18" rx="1.9" ry="3.4" transform="rotate(28 27.4 18)"/>
-      <ellipse cx="20.2" cy="23.8" rx="1.9" ry="3.4" transform="rotate(-32 20.2 23.8)"/><ellipse cx="27.8" cy="23.8" rx="1.9" ry="3.4" transform="rotate(32 27.8 23.8)"/>
-      <ellipse cx="24" cy="13.4" rx="1.7" ry="2.9" fill="#D9B26A"/></g>
+    <!-- «ث»: a giving bowl with three dots, the heart of «أثر»; serrated edge like the flag -->
+    <path d="M24.00 1.00 L27.58 3.71 L31.87 2.39 L34.30 6.16 L38.78 6.38 L39.78 10.76 L43.92 12.50 L43.36 16.95 L46.65 20.01 L44.60 24.00 L46.65 27.99 L43.36 31.05 L43.92 35.50 L39.78 37.24 L38.78 41.62 L34.30 41.84 L31.87 45.61 L27.58 44.29 L24.00 47.00 L20.42 44.29 L16.13 45.61 L13.70 41.84 L9.22 41.62 L8.22 37.24 L4.08 35.50 L4.64 31.05 L1.35 27.99 L3.40 24.00 L1.35 20.01 L4.64 16.95 L4.08 12.50 L8.22 10.76 L9.22 6.38 L13.70 6.16 L16.13 2.39 L20.42 3.71z" fill="#8A1538"/>
+  <circle cx="19.6" cy="22.2" r="3.7" fill="#FFFFFF"/><circle cx="28.4" cy="22.2" r="3.7" fill="#FFFFFF"/>
+  <circle cx="24" cy="14.6" r="3.7" fill="#D9B26A"/>
+  <path d="M10.2 24.4h27.6c-.8 6.9-6.6 11.5-13.8 11.5s-13-4.6-13.8-11.5z" fill="#D9B26A"/>
+  <path d="M19.6 37.6h8.8" stroke="#D9B26A" stroke-width="2.4" stroke-linecap="round"/>
   </symbol>
 </svg>
 
@@ -3080,13 +3081,14 @@ function drawCert(cv, name, n, delivered) {
   g.fillStyle = '#8A1538';
   for (let x = 40; x < W - 40; x += 36) { g.beginPath(); g.moveTo(x, 40); g.lineTo(x + 18, 64); g.lineTo(x + 36, 40); g.fill(); g.beginPath(); g.moveTo(x, H - 40); g.lineTo(x + 18, H - 64); g.lineTo(x + 36, H - 40); g.fill(); }
   g.strokeStyle = '#C9A15A'; g.lineWidth = 3; g.strokeRect(84, 96, W - 168, H - 192); g.lineWidth = 1; g.strokeRect(96, 108, W - 192, H - 216);
-  // seal
-  const sx = W / 2, sy = 200;
-  g.fillStyle = '#8A1538'; g.beginPath(); g.arc(sx, sy, 58, 0, Math.PI * 2); g.fill();
-  g.strokeStyle = '#D9B26A'; g.lineWidth = 3; g.beginPath(); g.arc(sx, sy, 48, 0, Math.PI * 2); g.stroke();
-  g.strokeStyle = '#FFFFFF'; g.lineWidth = 4; g.beginPath(); g.moveTo(sx, sy + 32); g.lineTo(sx, sy - 22); g.stroke();
-  g.fillStyle = '#FFFFFF'; [[-9, -14, -0.5], [9, -14, 0.5], [-10, 2, -0.55], [10, 2, 0.55], [-10, 18, -0.6], [10, 18, 0.6]].forEach(([dx, dy, r]) => { g.save(); g.translate(sx + dx, sy + dy); g.rotate(r); g.beginPath(); g.ellipse(0, 0, 5, 10, 0, 0, Math.PI * 2); g.fill(); g.restore(); });
-  g.fillStyle = '#D9B26A'; g.beginPath(); g.ellipse(sx, sy - 30, 4.5, 8, 0, 0, Math.PI * 2); g.fill();
+  // seal: the site logo drawn at 2.6x
+  const sx = W / 2, sy = 200, k = 2.6;
+  g.save(); g.translate(sx - 24 * k, sy - 24 * k); g.scale(k, k);
+  g.fillStyle = '#8A1538'; g.fill(new Path2D('M24.00 1.00 L27.58 3.71 L31.87 2.39 L34.30 6.16 L38.78 6.38 L39.78 10.76 L43.92 12.50 L43.36 16.95 L46.65 20.01 L44.60 24.00 L46.65 27.99 L43.36 31.05 L43.92 35.50 L39.78 37.24 L38.78 41.62 L34.30 41.84 L31.87 45.61 L27.58 44.29 L24.00 47.00 L20.42 44.29 L16.13 45.61 L13.70 41.84 L9.22 41.62 L8.22 37.24 L4.08 35.50 L4.64 31.05 L1.35 27.99 L3.40 24.00 L1.35 20.01 L4.64 16.95 L4.08 12.50 L8.22 10.76 L9.22 6.38 L13.70 6.16 L16.13 2.39 L20.42 3.71z'));
+  [[19.6, 22.2, '#FFFFFF'], [28.4, 22.2, '#FFFFFF'], [24, 14.6, '#D9B26A']].forEach(([x, y, c]) => { g.fillStyle = c; g.beginPath(); g.arc(x, y, 3.7, 0, Math.PI * 2); g.fill(); });
+  g.fillStyle = '#D9B26A'; g.fill(new Path2D('M10.2 24.4h27.6c-.8 6.9-6.6 11.5-13.8 11.5s-13-4.6-13.8-11.5z'));
+  g.strokeStyle = '#D9B26A'; g.lineWidth = 2.4; g.lineCap = 'round'; g.beginPath(); g.moveTo(19.6, 37.6); g.lineTo(28.4, 37.6); g.stroke();
+  g.restore(); g.lineCap = 'butt';
   g.textAlign = 'center'; g.direction = rtl ? 'rtl' : 'ltr';
   g.fillStyle = '#8A1538'; g.font = `800 70px ${disp}`; g.fillText(t('شهادة شكر وتقدير'), W / 2, 345);
   g.fillStyle = '#4A3A40'; g.font = `400 34px ${body}`; g.fillText(t('تتقدّم منصة «أثر» بخالص الشكر والتقدير إلى'), W / 2, 430);
