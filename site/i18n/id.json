@@ -1133,7 +1133,15 @@
   "لا تملك صلاحية حذف هذا التبرع.": "Anda tidak berhak menghapus donasi ini.",
   "لا يمكن تعديل الأصناف بعد استلام التبرع أو توزيعه.": "Barang tidak bisa diubah setelah donasi diterima atau dibagikan.",
   "ما الذي يحتاج تعديلًا؟": "Apa yang perlu diperbaiki?",
-  "مثال: الصور غير واضحة، أرفق صورة للجهاز من الأمام": "Contoh: foto kurang jelas, lampirkan foto bagian depan alat"
+  "مثال: الصور غير واضحة، أرفق صورة للجهاز من الأمام": "Contoh: foto kurang jelas, lampirkan foto bagian depan alat",
+  "أقبل أن يأتي المستفيد بنفسه لاستلامه مني بدل المتطوع، إن وافق المشرفون على ذلك": "Saya bersedia penerima sendiri yang mengambil dari saya, bukan relawan, jika pengawas menyetujui",
+  "يستلم التبرعَ عادةً متطوعٌ من الفريق ويوصله إلى المستحقين. لا نشارك مكان الاستلام إلا مع مستفيد تحقق منه المشرفون وبعد موافقته على الموعد، ولا نشارك رقم هاتفك مع أحد.": "Biasanya relawan tim yang mengambil donasi dan mengantarkannya ke yang berhak. Tempat pengambilan hanya dibagikan ke penerima terverifikasi setelah ia menyetujui jadwal, dan nomor telepon Anda tidak dibagikan ke siapa pun.",
+  "المستفيد يستلمه مباشرة (استثناء)": "Penerima mengambil langsung (pengecualian)",
+  "أوافق بصفتي مشرفًا على أن يستلمه المستفيد مباشرة دون متطوع، وأتحمّل مسؤولية هذا القرار.": "Sebagai pengawas, saya menyetujui penerima mengambil langsung tanpa relawan, dan saya bertanggung jawab atas keputusan ini.",
+  "لم يوافق المتبرّع على التسليم المباشر. اختر متطوعًا.": "Donatur tidak menyetujui serah terima langsung. Pilih relawan.",
+  "التسليم المباشر يحتاج موافقتك الصريحة بصفتك مشرفًا، وإلا فاختر متطوعًا.": "Serah terima langsung butuh persetujuan tegas Anda sebagai pengawas; jika tidak, pilih relawan.",
+  "وافق {0} على التسليم المباشر للتبرع {1} دون متطوع": "{0} menyetujui serah terima langsung {1} tanpa relawan",
+  "تسليم مباشر بموافقة {0}": "Serah terima langsung disetujui {0}"
  },
  "maps": {
   "FOOD": {

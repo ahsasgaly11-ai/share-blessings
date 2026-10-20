@@ -1133,7 +1133,15 @@
   "لا تملك صلاحية حذف هذا التبرع.": "Wala kang pahintulot na burahin ang donasyong ito.",
   "لا يمكن تعديل الأصناف بعد استلام التبرع أو توزيعه.": "Hindi na mababago ang mga item kapag natanggap o naipamahagi na ang donasyon.",
   "ما الذي يحتاج تعديلًا؟": "Ano ang kailangang ayusin?",
-  "مثال: الصور غير واضحة، أرفق صورة للجهاز من الأمام": "Halimbawa: malabo ang mga larawan, magdagdag ng larawan ng harap ng appliance"
+  "مثال: الصور غير واضحة، أرفق صورة للجهاز من الأمام": "Halimbawa: malabo ang mga larawan, magdagdag ng larawan ng harap ng appliance",
+  "أقبل أن يأتي المستفيد بنفسه لاستلامه مني بدل المتطوع، إن وافق المشرفون على ذلك": "Tinatanggap kong ang benepisyaryo mismo ang kumuha sa akin sa halip na volunteer, kung papayag ang mga superbisor",
+  "يستلم التبرعَ عادةً متطوعٌ من الفريق ويوصله إلى المستحقين. لا نشارك مكان الاستلام إلا مع مستفيد تحقق منه المشرفون وبعد موافقته على الموعد، ولا نشارك رقم هاتفك مع أحد.": "Karaniwan, isang volunteer ng team ang kumukuha ng donasyon at naghahatid sa nangangailangan. Ibinabahagi lang namin ang lugar sa na-verify na benepisyaryo pagkatapos niyang pumayag, at hindi namin ibinabahagi ang numero mo.",
+  "المستفيد يستلمه مباشرة (استثناء)": "Direktang kukunin ng benepisyaryo (eksepsiyon)",
+  "أوافق بصفتي مشرفًا على أن يستلمه المستفيد مباشرة دون متطوع، وأتحمّل مسؤولية هذا القرار.": "Bilang superbisor, pinapayagan kong direktang kunin ito ng benepisyaryo nang walang volunteer, at pananagutan ko ang desisyong ito.",
+  "لم يوافق المتبرّع على التسليم المباشر. اختر متطوعًا.": "Hindi pumayag ang donor sa direktang pag-abot. Pumili ng volunteer.",
+  "التسليم المباشر يحتاج موافقتك الصريحة بصفتك مشرفًا، وإلا فاختر متطوعًا.": "Kailangan ng direktang pag-abot ang tahasang pahintulot mo bilang superbisor; kung hindi, pumili ng volunteer.",
+  "وافق {0} على التسليم المباشر للتبرع {1} دون متطوع": "Inaprubahan ni {0} ang direktang pag-abot ng {1} nang walang volunteer",
+  "تسليم مباشر بموافقة {0}": "Direktang pag-abot na inaprubahan ni {0}"
  },
  "maps": {
   "FOOD": {
