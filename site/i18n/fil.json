@@ -1141,7 +1141,15 @@
   "لم يوافق المتبرّع على التسليم المباشر. اختر متطوعًا.": "Hindi pumayag ang donor sa direktang pag-abot. Pumili ng volunteer.",
   "التسليم المباشر يحتاج موافقتك الصريحة بصفتك مشرفًا، وإلا فاختر متطوعًا.": "Kailangan ng direktang pag-abot ang tahasang pahintulot mo bilang superbisor; kung hindi, pumili ng volunteer.",
   "وافق {0} على التسليم المباشر للتبرع {1} دون متطوع": "Inaprubahan ni {0} ang direktang pag-abot ng {1} nang walang volunteer",
-  "تسليم مباشر بموافقة {0}": "Direktang pag-abot na inaprubahan ni {0}"
+  "تسليم مباشر بموافقة {0}": "Direktang pag-abot na inaprubahan ni {0}",
+  "بلا مستفيد محدد": "Walang tiyak na benepisyaryo",
+  "بلا مستفيد محدد (يتولاه متطوع أو المدير)": "Walang tiyak na benepisyaryo (volunteer o manager ang hahawak)",
+  "اختر المتطوّع أو المدير الذي سيتولى تسليمه": "Piliin ang volunteer o manager na mag-aabot nito",
+  "جهة التسليم أو ملاحظة": "Saan ibibigay o tala",
+  "مثال: قطر الخيرية، برنامج طيف": "Halimbawa: Qatar Charity, programang Tayf",
+  "مطلوب": "Kailangan",
+  "لا يوجد مستفيد متحقق منه لهذا النوع بعد. يمكنك تسليمه لمتطوع أو للمدير دون تحديد مستفيد.": "Wala pang na-verify na benepisyaryo para sa uring ito. Maaari mo itong ibigay sa volunteer o manager nang hindi pumipili ng benepisyaryo.",
+  "تسليم بلا مستفيد محدد": "Abot nang walang tiyak na benepisyaryo"
  },
  "maps": {
   "FOOD": {

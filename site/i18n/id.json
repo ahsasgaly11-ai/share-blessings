@@ -1141,7 +1141,15 @@
   "لم يوافق المتبرّع على التسليم المباشر. اختر متطوعًا.": "Donatur tidak menyetujui serah terima langsung. Pilih relawan.",
   "التسليم المباشر يحتاج موافقتك الصريحة بصفتك مشرفًا، وإلا فاختر متطوعًا.": "Serah terima langsung butuh persetujuan tegas Anda sebagai pengawas; jika tidak, pilih relawan.",
   "وافق {0} على التسليم المباشر للتبرع {1} دون متطوع": "{0} menyetujui serah terima langsung {1} tanpa relawan",
-  "تسليم مباشر بموافقة {0}": "Serah terima langsung disetujui {0}"
+  "تسليم مباشر بموافقة {0}": "Serah terima langsung disetujui {0}",
+  "بلا مستفيد محدد": "Tanpa penerima tertentu",
+  "بلا مستفيد محدد (يتولاه متطوع أو المدير)": "Tanpa penerima tertentu (diurus relawan atau pengelola)",
+  "اختر المتطوّع أو المدير الذي سيتولى تسليمه": "Pilih relawan atau pengelola yang akan menyerahkannya",
+  "جهة التسليم أو ملاحظة": "Tujuan penyerahan atau catatan",
+  "مثال: قطر الخيرية، برنامج طيف": "Contoh: Qatar Charity, program Tayf",
+  "مطلوب": "Wajib",
+  "لا يوجد مستفيد متحقق منه لهذا النوع بعد. يمكنك تسليمه لمتطوع أو للمدير دون تحديد مستفيد.": "Belum ada penerima terverifikasi untuk jenis ini. Anda bisa menyerahkannya ke relawan atau pengelola tanpa memilih penerima.",
+  "تسليم بلا مستفيد محدد": "Serahkan tanpa penerima tertentu"
  },
  "maps": {
   "FOOD": {
