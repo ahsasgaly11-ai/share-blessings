@@ -114,9 +114,10 @@ html[lang="fa"] { --f-display: "Vazirmatn", "IBM Plex Sans Arabic", Tahoma, sans
 .lang-menu { position: relative; }
 .dnat { position: absolute !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important; padding: 0 !important; border: 0 !important; }
 label.f { position: relative; }
-.dsel { display: flex; gap: 6px; direction: ltr; unicode-bidi: isolate; }
+.dsel { display: flex; gap: 6px; unicode-bidi: isolate; }
 .dsel select { flex: 1 1 0; min-width: 0; padding-inline: 8px 4px; font-variant-numeric: tabular-nums; }
-.dsel .d-y { flex-grow: 1.3; }
+.dsel .d-y { flex-grow: 1.2; }
+.dsel .d-m { flex-grow: 1.6; }
 .lang-btn { display: inline-flex; align-items: center; gap: 6px; }
 .lang-native { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; inset-inline-start: 0; top: 0; }
 .lang-list { position: absolute; top: calc(100% + 6px); inset-inline-end: 0; z-index: 60; min-width: 200px; margin: 0; padding: 6px; list-style: none; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 18px 40px -12px rgba(40,5,15,.35), 0 4px 10px rgba(40,5,15,.1); }
@@ -3794,7 +3795,7 @@ function applyLang(l) {
   const qk = $('input[name=q_item]:checked'); const qv = qk && qk.value; renderQuick(); if (qv) { const el = $(`input[name=q_item][value="${qv}"]`); if (el) el.checked = true; }
   $('#d_cleanTxt').textContent = isGoods(donKind()) ? GOODS[donKind()].clean : t('أؤكد أن الملابس نظيفة وصالحة للاستخدام.');
   $('#langSel').value = LANG; syncLangMenu();
-  applySite();
+  applySite(); if (typeof refreshDates === 'function') refreshDates();
   translateTree(document.body);
   route(true);
 }
@@ -4455,25 +4456,38 @@ async function saveSite() {
 }
 loadSite();
 
-/* ================= dates in English =================
-   Every date field is shown as three English dropdowns (day · month · year) with Latin digits, whatever the
-   device language. The original <input type="date"> stays in the page (hidden) and keeps the value, so the
-   rest of the code reads and writes it as before. */
-const MON_EN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+/* ================= date dropdowns =================
+   Every date field is shown as three dropdowns (day · month · year) in the site language, with Latin digits,
+   whatever the device language. The original <input type="date"> stays in the page (hidden) and keeps the
+   value, so the rest of the code reads and writes it as before. */
+const DATE_PH = {
+  ar: ['اليوم', 'الشهر', 'السنة'], en: ['Day', 'Month', 'Year'], ur: ['دن', 'مہینہ', 'سال'], fa: ['روز', 'ماه', 'سال'],
+  hi: ['दिन', 'महीना', 'साल'], fil: ['Araw', 'Buwan', 'Taon'], ne: ['दिन', 'महिना', 'वर्ष'], bn: ['দিন', 'মাস', 'বছর'], id: ['Hari', 'Bulan', 'Tahun'],
+};
+// month names in the current language (Gregorian calendar; Persian is forced to Gregorian in LOCALE too)
+const MONTHS_NE = ['जनवरी', 'फेब्रुअरी', 'मार्च', 'अप्रिल', 'मे', 'जुन', 'जुलाई', 'अगस्ट', 'सेप्टेम्बर', 'अक्टोबर', 'नोभेम्बर', 'डिसेम्बर'];
+const monthNames = () => {
+  const f = new Intl.DateTimeFormat(LOCALE(), { month: 'long', calendar: 'gregory' }), out = Array.from({ length: 12 }, (_, i) => f.format(new Date(2026, i, 15)));
+  return LANG === 'ne' && /^[A-Za-z]/.test(out[0]) ? MONTHS_NE : out;   // some browsers lack Nepali month names
+};
 const NATIVE_VALUE = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
 function enhanceDate(inp) {
   if (inp.dataset.dsel) return;
   inp.dataset.dsel = '1'; inp.classList.add('dnat'); inp.tabIndex = -1;
-  const box = document.createElement('span'); box.className = 'dsel'; box.dir = 'ltr'; box.setAttribute('data-notr', '');
+  const box = document.createElement('span'); box.className = 'dsel'; box.setAttribute('data-notr', '');
   const mk = (cls, label) => { const s = document.createElement('select'); s.className = cls; s.setAttribute('aria-label', label); box.appendChild(s); return s; };
   const dd = mk('d-d', 'Day'), mm = mk('d-m', 'Month'), yy = mk('d-y', 'Year');
   inp.after(box);
   const fill = () => {
     const now = new Date().getFullYear(), min = inp.min ? +inp.min.slice(0, 4) : now - 1, max = inp.max ? +inp.max.slice(0, 4) : Math.max(min, now) + 10;
-    yy.innerHTML = '<option value="">Year</option>' + Array.from({ length: max - min + 1 }, (_, i) => `<option>${min + i}</option>`).join('');
-    mm.innerHTML = '<option value="">Mon</option>' + MON_EN.map((m, i) => `<option value="${String(i + 1).padStart(2, '0')}">${m}</option>`).join('');
-    dd.innerHTML = '<option value="">Day</option>' + Array.from({ length: 31 }, (_, i) => `<option>${String(i + 1).padStart(2, '0')}</option>`).join('');
+    const ph = DATE_PH[LANG] || DATE_PH.en, months = monthNames();
+    box.dir = LANGS[LANG].rtl ? 'rtl' : 'ltr'; box.lang = LANG;
+    dd.setAttribute('aria-label', ph[0]); mm.setAttribute('aria-label', ph[1]); yy.setAttribute('aria-label', ph[2]);
+    yy.innerHTML = `<option value="">${ph[2]}</option>` + Array.from({ length: max - min + 1 }, (_, i) => `<option>${min + i}</option>`).join('');
+    mm.innerHTML = `<option value="">${ph[1]}</option>` + months.map((m, i) => `<option value="${String(i + 1).padStart(2, '0')}">${m}</option>`).join('');
+    dd.innerHTML = `<option value="">${ph[0]}</option>` + Array.from({ length: 31 }, (_, i) => `<option>${String(i + 1).padStart(2, '0')}</option>`).join('');
   };
+  box.refresh = () => { fill(); show(NATIVE_VALUE.get.call(inp)); };
   const show = v => {
     const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || '');
     if (m && ![...yy.options].some(o => o.value === m[1])) yy.insertAdjacentHTML('beforeend', `<option>${m[1]}</option>`);
@@ -4496,6 +4510,8 @@ function enhanceDate(inp) {
   if (inp.required) dd.required = mm.required = yy.required = true;
 }
 const enhanceDates = root => { if (root.querySelectorAll) root.querySelectorAll('input[type="date"]').forEach(enhanceDate); };
+// after a language change: month names, labels and direction follow the new language
+const refreshDates = () => $$('.dsel').forEach(b => b.refresh && b.refresh());
 enhanceDates(document);
 new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) { if (n.matches('input[type="date"]')) enhanceDate(n); else enhanceDates(n); } })))
   .observe(document.body, { childList: true, subtree: true });
