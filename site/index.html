@@ -3,23 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>أثر</title>
+<title>أثر | منصة التبرع العيني في قطر</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<script>(function(){var l='ar';try{l=localStorage.getItem('shareBlessings.lang')||'ar'}catch(e){}
+<script>(function(){var l='ar';try{l=localStorage.getItem('shareBlessings.lang')||'ar';var th=localStorage.getItem('shareBlessings.theme');if(th)document.documentElement.dataset.theme=th}catch(e){}
 if(['ar','en','ur','fa','hi','fil','ne','bn','id'].indexOf(l)<0)l='ar';
 var r=document.documentElement;r.lang=l;r.dir=(l==='ar'||l==='ur'||l==='fa')?'rtl':'ltr';
 var F={hi:'Noto+Sans+Devanagari:wght@400;600;700',ne:'Noto+Sans+Devanagari:wght@400;600;700',bn:'Noto+Sans+Bengali:wght@400;600;700',ur:'Noto+Naskh+Arabic:wght@400;600;700',fa:'Vazirmatn:wght@400;600;700;800'};
 window.sbLoadFont=function(l){if(!F[l])return;var id='font-'+F[l].split(':')[0];if(document.getElementById(id))return;var k=document.createElement('link');k.rel='stylesheet';k.id=id;k.href='https://fonts.googleapis.com/css2?family='+F[l]+'&display=swap';document.head.appendChild(k);};
 sbLoadFont(l);})();</script>
-<meta name="theme-color" content="#8A1538">
+<meta name="theme-color" content="#8A1538" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#4A0A1E" media="(prefers-color-scheme: dark)">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="description" content="منصة أثر للتبرع العيني في قطر: مواد غذائية جافة وملابس، بين المتبرعين والمشرفين والمستفيدين.">
+<meta name="description" content="أثر منصة مجتمعية للتبرع العيني في قطر: تبرّع بالمواد الغذائية الجافة والملابس والأجهزة الكهربائية والأثاث، ويوصلها فريق من المشرفين والمتطوعين إلى الأسر المحتاجة. تبرعك يترك أثرًا.">
+<link rel="canonical" href="https://share-blessings.pages.dev/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="أثر">
+<meta property="og:locale" content="ar_QA">
+<meta property="og:url" content="https://share-blessings.pages.dev/">
+<meta property="og:title" content="أثر | منصة التبرع العيني في قطر">
+<meta property="og:description" content="تبرّع بما يزيد عن حاجتك من غذاء وملابس وأجهزة وأثاث، ونوصله إلى أسرة قريبة منك. تبرعك يترك أثرًا.">
+<meta property="og:image" content="https://share-blessings.pages.dev/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="شعار أثر">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"أثر","alternateName":"Athar","url":"https://share-blessings.pages.dev/","logo":"https://share-blessings.pages.dev/icon-512.png","areaServed":"QA","email":"Ahsas.galy11@gmail.com","contactPoint":{"@type":"ContactPoint","contactType":"customer support","telephone":"+974-7077-6067","availableLanguage":["ar","en","ur","fa","hi","fil","ne","bn","id"]}}</script>
 <script src="config.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.min.js"></script>
+<script src="vendor/supabase.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
@@ -82,9 +95,9 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16.5px/1.85 var(--f-body); overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--primary-deep); }
 h1, h2, h3 { font-family: var(--f-display); line-height: 1.45; text-wrap: balance; margin: 0; font-weight: 700; }
-h1 { font-size: clamp(1.9rem, 4.6vw, 3rem); font-weight: 800; }
+h1 { font-size: clamp(1.9rem, 4.6vw, 3rem); font-weight: 700; }
 h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-family: var(--f-body); }
-h3 { font-size: 1.12rem; font-family: var(--f-body); font-weight: 800; }
+h3 { font-size: 1.12rem; font-family: var(--f-body); font-weight: 700; }
 p { margin: 0; }
 a { color: var(--primary-text); }
 button, input, select, textarea { font: inherit; color: inherit; }
@@ -155,7 +168,7 @@ label.f { position: relative; }
 @keyframes l3-spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
 @media (prefers-reduced-motion: reduce) { .l3-sway, .l3-dot, .l3-shadow { animation: none !important; } .l3 { transition: none; } }
 
-.brand b { font-family: var(--f-display); font-size: 1.35rem; font-weight: 800; display: block; line-height: 1.2; color: var(--primary-text); }
+.brand b { font-family: var(--f-display); font-size: 1.35rem; font-weight: 700; display: block; line-height: 1.2; color: var(--primary-text); }
 .brand small { display: block; font-size: 1.02rem; font-weight: 600; color: var(--muted); line-height: 1.35; }
 header .brand small { color: var(--gold); }
 nav.tabs { display: flex; gap: 2px; overflow-x: auto; max-width: 100%; scrollbar-width: none; }
@@ -430,7 +443,7 @@ label.f small { font-weight: 400; color: var(--muted); }
 .mt-out:not([hidden]) { display: grid; gap: 8px; }
 .mt-list .tr { color: var(--primary-text); font-weight: 700; }
 .set-card { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
-.set-card > summary { cursor: pointer; padding: 14px 16px; font-weight: 800; font-family: var(--f-display); list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+.set-card > summary { cursor: pointer; padding: 14px 16px; font-weight: 700; font-family: var(--f-display); list-style: none; display: flex; justify-content: space-between; gap: 10px; }
 .set-card > summary::after { content: '▾'; color: var(--muted); }
 .set-card[open] > summary::after { content: '▴'; }
 .set-card > .in { padding: 0 16px 16px; display: grid; gap: 12px; }
@@ -493,6 +506,10 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); o
 .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .lightbox { position: fixed; inset: 0; z-index: 70; background: rgba(15,4,9,.88); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); cursor: zoom-out; }
 .lightbox img { max-width: 100%; max-height: 85vh; border-radius: 10px; box-shadow: var(--shadow-lg); }
+.down-bar { position: sticky; top: 0; z-index: 80; display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 10px 16px; background: #8A1C2B; color: #fff; font-weight: 600; text-align: center; }
+.down-bar .btn { background: #fff; color: #8A1C2B; }
+#rules { scroll-margin-top: 96px; }
+.lightbox .lb-x { position: absolute; top: max(14px, env(safe-area-inset-top, 0px)); inset-inline-end: 14px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.16); color: #fff; font-size: 1.6rem; line-height: 1; cursor: pointer; }
 .lightbox p { color: #fff; margin-top: 10px; text-align: center; font-size: .94rem; }
 .review-gate { display: grid; gap: 10px; padding: 12px; border-radius: 10px; background: var(--surface-2); }
 .note { padding: 10px 14px; border-radius: 10px; background: var(--gold-soft); color: var(--ink); font-size: .94rem; }
@@ -882,22 +899,22 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
   <div class="wrap sec">
     <div class="sec-head"><div><p class="eyebrow">مجالات التبرع</p><h2>ماذا يمكنك أن تشارك؟</h2><p>اختر الصنف لتبدأ نموذج التبرع مباشرة.</p></div></div>
     <div class="cats">
-      <a class="cat" href="#donate" data-preset="food:rice"><span class="ic tile3d"><img class="i3" src="icons/sack.webp" width="68" height="68" alt="" decoding="async"></span><b>أرز وحبوب</b><small>أكياس مغلقة</small></a>
-      <a class="cat" href="#donate" data-preset="food:flour"><span class="ic tile3d"><img class="i3" src="icons/wheat.webp" width="68" height="68" alt="" decoding="async"></span><b>قمح ودقيق</b><small>بالكيلوغرام</small></a>
-      <a class="cat" href="#donate" data-preset="food:legumes"><span class="ic tile3d"><img class="i3" src="icons/beans.webp" width="68" height="68" alt="" decoding="async"></span><b>بقوليات</b><small>عدس، حمص، فول</small></a>
-      <a class="cat" href="#donate" data-preset="food:canned"><span class="ic tile3d"><img class="i3" src="icons/can.webp" width="68" height="68" alt="" decoding="async"></span><b>معلبات</b><small>صلاحية أطول من 30 يومًا</small></a>
-      <a class="cat" href="#donate" data-preset="food:dates"><span class="ic tile3d"><img class="i3" src="icons/dates.webp" width="68" height="68" alt="" decoding="async"></span><b>تمور مغلّفة</b><small>من خير هذه الأرض</small></a>
-      <a class="cat" href="#donate" data-preset="clothes:winter"><span class="ic tile3d"><img class="i3" src="icons/cat-coat.webp" width="68" height="68" alt="" decoding="async"></span><b>ملابس شتوية</b><small>رجال · نساء · أطفال</small></a>
-      <a class="cat" href="#donate" data-preset="clothes:kids"><span class="ic tile3d"><img class="i3" src="icons/cat-kid.webp" width="68" height="68" alt="" decoding="async"></span><b>ملابس أطفال</b><small>يومية وصيفية</small></a>
-      <a class="cat" href="#donate" data-preset="elec:fridge"><span class="ic tile3d"><img class="i3" src="icons/cat-fridge.webp" width="68" height="68" alt="" decoding="async"></span><b>أجهزة كهربائية</b><small>ثلاجات، غسالات، مكيفات</small></a>
-      <a class="cat" href="#donate" data-preset="furn:bed"><span class="ic tile3d"><img class="i3" src="icons/cat-sofa.webp" width="68" height="68" alt="" decoding="async"></span><b>أثاث منزلي</b><small>أسرّة، كنب، خزائن</small></a>
-      <a class="cat" href="#donate" data-preset="other:blankets"><span class="ic tile3d"><img class="i3" src="icons/cat-box.webp" width="68" height="68" alt="" decoding="async"></span><b>أخرى</b><small>بطانيات، أدوات مدرسية، مستلزمات منزلية</small></a>
+      <a class="cat" href="#donate" data-preset="food:rice"><span class="ic tile3d"><img class="i3" src="icons/sack.webp" width="68" height="68" alt="" decoding="async" loading="lazy"></span><b>أرز وحبوب</b><small>أكياس مغلقة</small></a>
+      <a class="cat" href="#donate" data-preset="food:flour"><span class="ic tile3d"><img class="i3" src="icons/wheat.webp" width="68" height="68" alt="" decoding="async" loading="lazy"></span><b>قمح ودقيق</b><small>بالكيلوغرام</small></a>
+      <a class="cat" href="#donate" data-preset="food:legumes"><span class="ic tile3d"><img class="i3" src="icons/beans.webp" width="68" height="68" alt="" decoding="async" loading="lazy"></span><b>بقوليات</b><small>عدس، حمص، فول</small></a>
+      <a class="cat" href="#donate" data-preset="food:canned"><span class="ic tile3d"><img class="i3" src="icons/can.webp" width="68" height="68" alt="" decoding="async" loading="lazy"></span><b>معلبات</b><small>صلاحية أطول من 30 يومًا</small></a>
+      <a class="cat" href="#donate" data-preset="food:dates"><span class="ic tile3d"><img class="i3" src="icons/dates.webp" width="68" height="68" alt="" decoding="async" loading="lazy"></span><b>تمور مغلّفة</b><small>من خير هذه الأرض</small></a>
+      <a class="cat" href="#donate" data-preset="clothes:winter"><span class="ic tile3d"><img class="i3" src="icons/cat-coat.webp" width="68" height="68" alt="" decoding="async" loading="lazy"></span><b>ملابس شتوية</b><small>رجال · نساء · أطفال</small></a>
+      <a class="cat" href="#donate" data-preset="clothes:kids"><span class="ic tile3d"><img class="i3" src="icons/cat-kid.webp" width="68" height="68" alt="" decoding="async" loading="lazy"></span><b>ملابس أطفال</b><small>يومية وصيفية</small></a>
+      <a class="cat" href="#donate" data-preset="elec:fridge"><span class="ic tile3d"><img class="i3" src="icons/cat-fridge.webp" width="68" height="68" alt="" decoding="async" loading="lazy"></span><b>أجهزة كهربائية</b><small>ثلاجات، غسالات، مكيفات</small></a>
+      <a class="cat" href="#donate" data-preset="furn:bed"><span class="ic tile3d"><img class="i3" src="icons/cat-sofa.webp" width="68" height="68" alt="" decoding="async" loading="lazy"></span><b>أثاث منزلي</b><small>أسرّة، كنب، خزائن</small></a>
+      <a class="cat" href="#donate" data-preset="other:blankets"><span class="ic tile3d"><img class="i3" src="icons/cat-box.webp" width="68" height="68" alt="" decoding="async" loading="lazy"></span><b>أخرى</b><small>بطانيات، أدوات مدرسية، مستلزمات منزلية</small></a>
     </div>
   </div>
 
   <div class="wrap sec" id="secMove">
     <div class="move-band">
-      <span class="tile3d" style="width:84px;height:84px"><img class="i3" src="icons/cat-sofa.webp" width="56" height="56" alt="" decoding="async"></span>
+      <span class="tile3d" style="width:84px;height:84px"><img class="i3" src="icons/cat-sofa.webp" width="56" height="56" alt="" decoding="async" loading="lazy"></span>
       <div><p class="eyebrow">أنا مغادر قطر</p><h2>قبل ما تسافر… خلّ بيتك نعمة</h2><p>انتهى عقدك وستغادر؟ صوّر غرف بيتك وحدد موعد سفرك، ونستلم الأثاث والأجهزة كلها في موعد واحد قبل سفرك ونوزّعها على أسر محتاجة.</p></div>
       <a class="btn btn-primary btn-lg" href="#move">سجّل محتويات بيتك</a>
     </div>
@@ -907,19 +924,19 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
     <div class="sec-head"><div><p class="eyebrow">الحملات الحالية</p><h2>حملات موسمية تحتاج مشاركتك</h2></div></div>
     <div class="camps">
       <article class="camp">
-        <div class="art band"><span class="badge">حملة الموسم</span><img class="i3" src="icons/cat-coat.webp" width="104" height="104" alt="" decoding="async"></div>
+        <div class="art band"><span class="badge">حملة الموسم</span><img class="i3" src="icons/cat-coat.webp" width="104" height="104" alt="" decoding="async" loading="lazy"></div>
         <div class="body"><h3>كسوة الشتاء</h3><p>ملابس شتوية دافئة للأطفال والأسر قبل موسم البرد.</p>
           <div class="prog"><i data-camp-bar="winter"></i></div><div class="prog-row"><span>جُمع <b data-camp-val="winter">0</b> قطعة</span><span>الهدف <b>300</b></span></div>
           <a class="btn btn-primary btn-sm" href="#donate" data-preset="clothes:winter">شارك في الحملة</a></div>
       </article>
       <article class="camp">
-        <div class="art night"><span class="badge">رمضان</span><img class="i3" src="icons/lantern.webp" width="104" height="104" alt="" decoding="async"></div>
+        <div class="art night"><span class="badge">رمضان</span><img class="i3" src="icons/lantern.webp" width="104" height="104" alt="" decoding="async" loading="lazy"></div>
         <div class="body"><h3>السلة الرمضانية</h3><p>أرز ودقيق وبقوليات وسكر تكفي الأسرة طوال الشهر.</p>
           <div class="prog"><i data-camp-bar="ramadan"></i></div><div class="prog-row"><span>جُمع <b data-camp-val="ramadan">0</b> كجم</span><span>الهدف <b>1,000</b></span></div>
           <a class="btn btn-primary btn-sm" href="#donate" data-preset="food:rice">شارك في الحملة</a></div>
       </article>
       <article class="camp">
-        <div class="art gold"><span class="badge">مستمرة</span><img class="i3" src="icons/dates.webp" width="104" height="104" alt="" decoding="async"></div>
+        <div class="art gold"><span class="badge">مستمرة</span><img class="i3" src="icons/dates.webp" width="104" height="104" alt="" decoding="async" loading="lazy"></div>
         <div class="body"><h3>تمور الخير</h3><p>تمور مغلّفة توزّع مع السلال الغذائية على الأسر.</p>
           <div class="prog"><i data-camp-bar="dates"></i></div><div class="prog-row"><span>جُمع <b data-camp-val="dates">0</b> كجم</span><span>الهدف <b>200</b></span></div>
           <a class="btn btn-primary btn-sm" href="#donate" data-preset="food:dates">شارك في الحملة</a></div>
@@ -938,12 +955,12 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
   </div>
 
   <div class="wrap sec">
-    <div class="sec-head"><div><p class="eyebrow">شروط التبرع</p><h2>ما نستقبله وما نعتذر عنه</h2></div></div>
+    <div class="sec-head" id="rules"><div><p class="eyebrow">شروط التبرع</p><h2>ما نستقبله وما نعتذر عنه</h2></div></div>
     <div class="rules">
-      <div class="yes"><h3><img class="rb" src="icons/check.webp" width="34" height="34" alt="" decoding="async">نستقبل</h3><ul>
-        <li><img class="ri" src="icons/sack.webp" width="40" height="40" alt="" decoding="async">الأرز، القمح، الدقيق، وجميع أنواع الحبوب</li><li><img class="ri" src="icons/beans.webp" width="40" height="40" alt="" decoding="async">البقوليات: عدس، حمص، فول</li><li><img class="ri" src="icons/can.webp" width="40" height="40" alt="" decoding="async">المعلبات والمعكرونة والسكر</li><li><img class="ri" src="icons/dates.webp" width="40" height="40" alt="" decoding="async">التمور والحليب المجفف المغلّف</li><li><img class="ri" src="icons/tee.webp" width="40" height="40" alt="" decoding="async">ملابس نظيفة للرجال والنساء والأطفال</li><li><img class="ri" src="icons/fridge.webp" width="40" height="40" alt="" decoding="async">أجهزة كهربائية تعمل وآمنة، وأثاث منزلي سليم ونظيف</li><li><img class="ri" src="icons/box.webp" width="40" height="40" alt="" decoding="async">أخرى: بطانيات، أدوات مدرسية، مستلزمات نظافة وأدوات منزلية صالحة</li></ul></div>
-      <div class="no"><h3><img class="rb" src="icons/cross.webp" width="34" height="34" alt="" decoding="async">لا نستقبل</h3><ul>
-        <li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async">الوجبات الجاهزة وأطعمة المطاعم</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async">فائض الولائم والمناسبات</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async">المخبوزات والخضراوات الطازجة</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async">عبوات مفتوحة أو تنتهي صلاحيتها خلال 30 يومًا</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async">ملابس تالفة أو غير نظيفة</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async">أجهزة معطلة أو أسلاكها مكشوفة، وأثاث مكسور</li></ul></div>
+      <div class="yes"><h3><img class="rb" src="icons/check.webp" width="34" height="34" alt="" decoding="async" loading="lazy">نستقبل</h3><ul>
+        <li><img class="ri" src="icons/sack.webp" width="40" height="40" alt="" decoding="async" loading="lazy">الأرز، القمح، الدقيق، وجميع أنواع الحبوب</li><li><img class="ri" src="icons/beans.webp" width="40" height="40" alt="" decoding="async" loading="lazy">البقوليات: عدس، حمص، فول</li><li><img class="ri" src="icons/can.webp" width="40" height="40" alt="" decoding="async" loading="lazy">المعلبات والمعكرونة والسكر</li><li><img class="ri" src="icons/dates.webp" width="40" height="40" alt="" decoding="async" loading="lazy">التمور والحليب المجفف المغلّف</li><li><img class="ri" src="icons/tee.webp" width="40" height="40" alt="" decoding="async" loading="lazy">ملابس نظيفة للرجال والنساء والأطفال</li><li><img class="ri" src="icons/fridge.webp" width="40" height="40" alt="" decoding="async" loading="lazy">أجهزة كهربائية تعمل وآمنة، وأثاث منزلي سليم ونظيف</li><li><img class="ri" src="icons/box.webp" width="40" height="40" alt="" decoding="async" loading="lazy">أخرى: بطانيات، أدوات مدرسية، مستلزمات نظافة وأدوات منزلية صالحة</li></ul></div>
+      <div class="no"><h3><img class="rb" src="icons/cross.webp" width="34" height="34" alt="" decoding="async" loading="lazy">لا نستقبل</h3><ul>
+        <li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async" loading="lazy">الوجبات الجاهزة وأطعمة المطاعم</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async" loading="lazy">فائض الولائم والمناسبات</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async" loading="lazy">المخبوزات والخضراوات الطازجة</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async" loading="lazy">عبوات مفتوحة أو تنتهي صلاحيتها خلال 30 يومًا</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async" loading="lazy">ملابس تالفة أو غير نظيفة</li><li><img class="ri sm" src="icons/cross.webp" width="22" height="22" alt="" decoding="async" loading="lazy">أجهزة معطلة أو أسلاكها مكشوفة، وأثاث مكسور</li></ul></div>
     </div>
   </div>
 
@@ -964,7 +981,7 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
       <a class="btn btn-primary" data-cfg="wa" href="https://wa.me/97470776067" target="_blank" rel="noopener">تواصل عبر واتساب</a>
     </div>
     <div class="need-band">
-      <span class="tile3d" style="width:84px;height:84px"><img class="i3" src="icons/box.webp" width="56" height="56" alt="" decoding="async"></span>
+      <span class="tile3d" style="width:84px;height:84px"><img class="i3" src="icons/box.webp" width="56" height="56" alt="" decoding="async" loading="lazy"></span>
       <div><h2>هل تحتاج أنت أو أسرتك إلى مساعدة؟</h2><p>قدّم طلبك وسيتواصل معك أحد المشرفين للتحقق. بياناتك لا تظهر لأي متبرّع.</p></div>
       <a class="btn btn-primary btn-lg" href="#request">قدّم طلب احتياج</a>
     </div>
@@ -1002,7 +1019,7 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
     <fieldset>
       <legend><i><b>١</b></i>بيانات التواصل</legend>
       <div class="grid">
-        <label class="f">الاسم<input type="text" id="d_name" autocomplete="name" required></label>
+        <label class="f">الاسم<input type="text" id="d_name" autocomplete="name" minlength="3" maxlength="80" required></label>
         <label class="f">رقم هاتف التواصل <small>8 أرقام</small><input type="tel" id="d_phone" inputmode="numeric" maxlength="8" placeholder="5xxxxxxx" dir="ltr" required></label>
       </div>
     </fieldset>
@@ -1030,11 +1047,11 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
     <fieldset>
       <legend><i><b>٣</b></i>ماذا تريد أن تشارك؟</legend>
       <div class="seg big" role="radiogroup" aria-label="نوع التبرع">
-        <label><input type="radio" name="d_kind" value="food" checked><span><img class="i3" src="icons/wheat.webp" width="30" height="30" alt="" decoding="async">مواد غذائية جافة</span></label>
-        <label><input type="radio" name="d_kind" value="clothes"><span><img class="i3" src="icons/tee.webp" width="30" height="30" alt="" decoding="async">ملابس</span></label>
-        <label><input type="radio" name="d_kind" value="elec"><span><img class="i3" src="icons/fridge.webp" width="30" height="30" alt="" decoding="async">أجهزة كهربائية</span></label>
-        <label><input type="radio" name="d_kind" value="furn"><span><img class="i3" src="icons/sofa.webp" width="30" height="30" alt="" decoding="async">أثاث منزلي</span></label>
-        <label><input type="radio" name="d_kind" value="other"><span><img class="i3" src="icons/box.webp" width="30" height="30" alt="" decoding="async">أخرى</span></label>
+        <label><input type="radio" name="d_kind" value="food" checked><span><img class="i3" src="icons/wheat.webp" width="30" height="30" alt="" decoding="async" loading="lazy">مواد غذائية جافة</span></label>
+        <label><input type="radio" name="d_kind" value="clothes"><span><img class="i3" src="icons/tee.webp" width="30" height="30" alt="" decoding="async" loading="lazy">ملابس</span></label>
+        <label><input type="radio" name="d_kind" value="elec"><span><img class="i3" src="icons/fridge.webp" width="30" height="30" alt="" decoding="async" loading="lazy">أجهزة كهربائية</span></label>
+        <label><input type="radio" name="d_kind" value="furn"><span><img class="i3" src="icons/sofa.webp" width="30" height="30" alt="" decoding="async" loading="lazy">أثاث منزلي</span></label>
+        <label><input type="radio" name="d_kind" value="other"><span><img class="i3" src="icons/box.webp" width="30" height="30" alt="" decoding="async" loading="lazy">أخرى</span></label>
       </div>
       <div id="d_elecNote" class="note" hidden>نستقبل الأجهزة التي تعمل وآمنة فقط. اذكر عمر الجهاز تقريبًا، و<b>أرفق صورة واحدة على الأقل</b>. تُستلم الأجهزة الكبيرة بسيارة نقل بعد اعتماد المشرف.</div>
       <div id="d_furnNote" class="note" hidden>نستقبل الأثاث السليم والنظيف فقط. اذكر المقاس إن أمكن، و<b>أرفق صورة واحدة على الأقل</b>. تُستلم القطع الكبيرة بسيارة نقل بعد اعتماد المشرف.</div>
@@ -1134,7 +1151,7 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
     <fieldset>
       <legend><i><b>١</b></i>بيانات التواصل وموعد السفر</legend>
       <div class="grid">
-        <label class="f">الاسم<input type="text" id="m_name" autocomplete="name" required></label>
+        <label class="f">الاسم<input type="text" id="m_name" autocomplete="name" minlength="3" maxlength="80" required></label>
         <label class="f">رقم هاتف التواصل <small>8 أرقام</small><input type="tel" id="m_phone" inputmode="numeric" maxlength="8" placeholder="5xxxxxxx" dir="ltr" required></label>
         <label class="f">تاريخ السفر<input type="date" id="m_date" required></label>
         <label class="f">الوقت المفضّل للاستلام
@@ -1225,9 +1242,9 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
         <label><input type="radio" name="r_type" value="org"><span>مؤسسة خيرية</span></label>
       </div>
       <div class="grid">
-        <label class="f"><span id="r_nameLbl">الاسم</span><input type="text" id="r_name" required></label>
+        <label class="f"><span id="r_nameLbl">الاسم</span><input type="text" id="r_name" minlength="3" maxlength="80" required></label>
         <label class="f">رقم هاتف التواصل<input type="tel" id="r_phone" inputmode="numeric" maxlength="8" dir="ltr" placeholder="3xxxxxxx" required></label>
-        <label class="f"><span id="r_sizeLbl">عدد أفراد الأسرة</span><input type="number" id="r_size" min="1" max="5000" value="4" required></label>
+        <label class="f"><span id="r_sizeLbl">عدد أفراد الأسرة</span><input type="number" id="r_size" min="1" max="9999" step="1" value="4" required></label>
       </div>
     </fieldset>
 
@@ -1254,11 +1271,11 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
     <fieldset>
       <legend><i><b>٣</b></i>ما الذي تحتاجه؟</legend>
       <div class="seg big" role="radiogroup" aria-label="نوع الاحتياج">
-        <label><input type="radio" name="r_kind" value="food" checked><span><img class="i3" src="icons/wheat.webp" width="30" height="30" alt="" decoding="async">مواد غذائية</span></label>
-        <label><input type="radio" name="r_kind" value="clothes"><span><img class="i3" src="icons/tee.webp" width="30" height="30" alt="" decoding="async">ملابس</span></label>
-        <label><input type="radio" name="r_kind" value="elec"><span><img class="i3" src="icons/fridge.webp" width="30" height="30" alt="" decoding="async">أجهزة كهربائية</span></label>
-        <label><input type="radio" name="r_kind" value="furn"><span><img class="i3" src="icons/sofa.webp" width="30" height="30" alt="" decoding="async">أثاث منزلي</span></label>
-        <label><input type="radio" name="r_kind" value="other"><span><img class="i3" src="icons/box.webp" width="30" height="30" alt="" decoding="async">أخرى</span></label>
+        <label><input type="radio" name="r_kind" value="food" checked><span><img class="i3" src="icons/wheat.webp" width="30" height="30" alt="" decoding="async" loading="lazy">مواد غذائية</span></label>
+        <label><input type="radio" name="r_kind" value="clothes"><span><img class="i3" src="icons/tee.webp" width="30" height="30" alt="" decoding="async" loading="lazy">ملابس</span></label>
+        <label><input type="radio" name="r_kind" value="elec"><span><img class="i3" src="icons/fridge.webp" width="30" height="30" alt="" decoding="async" loading="lazy">أجهزة كهربائية</span></label>
+        <label><input type="radio" name="r_kind" value="furn"><span><img class="i3" src="icons/sofa.webp" width="30" height="30" alt="" decoding="async" loading="lazy">أثاث منزلي</span></label>
+        <label><input type="radio" name="r_kind" value="other"><span><img class="i3" src="icons/box.webp" width="30" height="30" alt="" decoding="async" loading="lazy">أخرى</span></label>
       </div>
       <div id="r_foodBox" class="seg"></div>
       <div id="r_clothBox" hidden style="display:grid;gap:12px">
@@ -1488,11 +1505,11 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
     <div class="wrap cols">
       <div style="display:grid;gap:12px;align-content:start">
         <a class="brand" href="#home"><svg><use href="#logo"/></svg><span><b>أثر</b><small>تبرّع عيني في قطر</small></span></a>
-        <p style="font-size:.9rem;max-width:30em">منصة تربط من لديه فائض من المواد الغذائية الجافة والملابس بمن يحتاجها، عبر فريق من المشرفين والمتطوعين.</p>
+        <p style="font-size:.9rem;max-width:30em">منصة تربط من لديه فائض من المواد الغذائية الجافة والملابس والأجهزة الكهربائية والأثاث بمن يحتاجها، عبر فريق من المشرفين والمتطوعين.</p>
       </div>
       <div><h4>للمتبرعين</h4><ul><li><a href="#donate">سجّل تبرعًا</a></li><li><a href="#move">أنا مغادر قطر</a></li><li><a href="#donate" data-preset="clothes:winter">حملة كسوة الشتاء</a></li><li><a href="#track">تتبّع تبرعك</a></li><li><a href="#account">تبرعاتي وشهادة الشكر</a></li></ul></div>
       <div><h4>للمستفيدين</h4><ul><li><a href="#request">قدّم طلب احتياج</a></li><li><a href="#track">تتبّع طلبك</a></li></ul></div>
-      <div><h4>الفريق</h4><ul><li><a href="#admin">بوابة المشرفين</a></li><li><a href="#home">شروط التبرع</a></li><li><a href="#privacy">سياسة الخصوصية</a></li></ul></div>
+      <div><h4>الفريق</h4><ul><li><a href="#admin">بوابة المشرفين</a></li><li><a href="#rules">شروط التبرع</a></li><li><a href="#privacy">سياسة الخصوصية</a></li></ul></div>
       <div><h4>تواصل معنا</h4><ul class="contact-list"><li><a data-cfg="wa" href="https://wa.me/97470776067" target="_blank" rel="noopener">واتساب: <bdi dir="ltr" data-cfg="wa-txt" style="direction:ltr;unicode-bidi:isolate">&#x200E;+974 7077 6067</bdi></a></li><li><a data-cfg="mail" href="mailto:ahsas.galy11@gmail.com"><span dir="ltr" data-cfg="mail-txt">ahsas.galy11@gmail.com</span></a></li></ul></div>
     </div>
     <div class="wrap legal"><span>© 2026 أثر. جميع الحقوق محفوظة.</span><span>صُنع في قطر 🇶🇦</span></div>
@@ -1500,8 +1517,8 @@ html[dir="ltr"] .subtabs button:hover { transform: translateX(2px); }
 </footer>
 
 <div class="scrim" id="scrim" hidden></div>
-<aside class="drawer" id="drawer" hidden aria-modal="true" role="dialog"></aside>
-<div class="lightbox" id="lightbox" hidden role="dialog" aria-label="عرض الصورة"><div><img id="lbImg" alt=""><p id="lbCap"></p></div></div>
+<aside class="drawer" id="drawer" hidden aria-modal="true" role="dialog" aria-labelledby="drTitle"></aside>
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="عرض الصورة" tabindex="-1"><button class="lb-x" type="button" aria-label="إغلاق">×</button><div><img id="lbImg" alt=""><p id="lbCap"></p></div></div>
 <div class="toast" id="toast" hidden role="status"></div>
 
 <script>
@@ -1532,6 +1549,7 @@ Object.assign(EN, {"الشريط المتحرك أسفل الموقع": "Scrolli
 Object.assign(EN, {"آية أو حديث: يبقى بالعربية في كل اللغات": "Quran verse or hadith: stays in Arabic in every language"});
 Object.assign(EN, {"مناطق التغطية": "Coverage", "نستلم تبرعك من جميع بلديات قطر": "We collect donations across all municipalities of Qatar", "يحدد المشرف موعد الاستلام من عنوانك حسب اللوحة المنزلية بعد اعتماد التبرع.": "Once your donation is approved, a supervisor schedules pickup from your address using your blue plate.", "الدوحة": "Doha", "الريان": "Al Rayyan", "الوكرة": "Al Wakrah", "الظعاين": "Al Daayen", "أم صلال": "Umm Salal", "الخور والذخيرة": "Al Khor & Al Thakhira", "الشمال": "Al Shamal", "الشحانية": "Al Shahaniya", "السد · الدفنة · المنصورة · الهلال": "Al Sadd · Al Dafna · Al Mansoura · Al Hilal", "الريان الجديد · معيذر · الوعب · عين خالد": "New Rayyan · Muaither · Al Waab · Ain Khaled", "الوكرة · الوكير · مسيعيد": "Al Wakrah · Al Wukair · Mesaieed", "لوسيل · لعبيب · سميسمة · الظعاين": "Lusail · Leabaib · Simaisma · Al Daayen", "أم صلال محمد · أم صلال علي · أم العمد": "Umm Salal Mohammed · Umm Salal Ali · Umm Al Amad", "الخور · الذخيرة": "Al Khor · Al Thakhira", "الرويس · أبو ظلوف": "Al Ruwais · Abu Dhalouf", "الشحانية · دخان · الجميلية": "Al Shahaniya · Dukhan · Al Jemailiya", "تفضّل التسليم بنفسك؟": "Prefer to drop it off yourself?", "راسلنا عبر واتساب لنحدد معك موعدًا ومكانًا قريبًا منك.": "Message us on WhatsApp and we will arrange a time and a place near you.", "تواصل عبر واتساب": "Contact us on WhatsApp", "تواصل معنا": "Contact us", "واتساب:": "WhatsApp:", "© 2026 أثر. جميع الحقوق محفوظة.": "© 2026 Athar. All rights reserved."});
 Object.assign(EN, {"نعمة الجيران": "Blessings next door", "احتياجات قريبة منك": "Needs near you", "أسر تحقق منها المشرفون وتنتظر من يشاركها. لا نعرض اسمًا ولا عنوانًا، ونحسب المسافة داخل جهازك فقط.": "Families our supervisors have verified, waiting for someone to share with them. We never show a name or an address, and distance is worked out on your device only.", "أمنيات مجهولة": "Anonymous wishes", "كتبها المشرفون عن أسر متحقَّق منها، دون أي بيانات شخصية": "Written by supervisors about verified families, with no personal details", "عرض كل الأمنيات": "Show all wishes", "إظهار «نعمة الجيران» والأمنيات المجهولة": "Show “Blessings next door” and anonymous wishes", "{0} لأسرة من {1} أفراد": "{0} for a family of {1}", "{0} لمؤسسة خيرية": "{0} for a charity", "أسر قريبة منك تنتظر مشاركتك. اعرف الأقرب إليك": "Families near you are waiting for your help. See who is closest", "أسرة من {0} أفراد": "A family of {0}", "ألبّي هذه الأمنية": "I'll fulfil this wish", "أمنية": "Wish", "أمنية مجهولة في الموقع": "Anonymous wish on the site", "أُوقف نشر الأمنية": "The wish is no longer published", "إيقاف نشر أمنية الطلب {0}": "Stopped publishing the wish of request {0}", "احتياجات قريبة منك: {0}": "Needs near you: {0}", "احتياجات متحقَّق منها تنتظر متبرعًا: {0}": "Verified needs waiting for a donor: {0}", "استخدم موقعي": "Use my location", "اكتب نص الأمنية": "Write the wish text", "اكتبه بلغتك، ويُترجم تلقائيًا": "Write it in your language; it is translated automatically", "انشر هذا الاحتياج كأمنية مجهولة": "Publish this need as an anonymous wish", "تبرع عام بدلًا من ذلك": "Make a general donation instead", "تبرعك يلبّي أمنية مجهولة:": "Your donation answers an anonymous wish:", "تظهر للزوار مع رقم المنطقة فقط حتى يلبّيها متبرّع قريب، وتختفي تلقائيًا بعد التخصيص. لا تكتب اسمًا أو رقم هاتف أو عنوانًا.": "Visitors see it with the zone number only so a nearby donor can answer it; it disappears by itself after allocation. Do not write a name, phone number or address.", "تعذّر تحديد موقعك. اكتب رقم منطقتك من اللوحة الزرقاء بدلًا من ذلك.": "Could not find your location. Type your zone number from the blue plate instead.", "جارٍ ترجمة الأمنية…": "Translating the wish…", "حدّد موقعك لنريك الأقرب إليك.": "Set your location to see the closest ones.", "حسب موقعك الحالي": "By your current location", "حفظ الأمنية": "Save wish", "رقم المنطقة من 1 إلى 99، تجده في أعلى اللوحة الزرقاء على باب منزلك.": "The zone number is 1 to 99; it is at the top of the blue plate on your door.", "رقم منطقتك": "Your zone no.", "رقم منطقتك من اللوحة الزرقاء": "Your zone number from the blue plate", "ضمن {0} كم من موقعك تقريبًا.": "Within about {0} km of you.", "عرض": "Show", "على بعد نحو {0} كم": "About {0} km away", "في منطقتك": "In your zone", "في منطقتك.": "In your zone.", "قريبة جدًا منك": "Very close to you", "لا تكتب في الأمنية رقم هاتف أو بريدًا أو رابطًا": "Do not put a phone number, email or link in the wish", "لا توجد احتياجات قريبة منك الآن": "No needs near you right now", "منشورة": "Published", "منطقتك: {0}": "Your zone: {0}", "نشر أمنية مجهولة للطلب {0}": "Published an anonymous wish for request {0}", "نص الأمنية": "Wish text", "نُشرت الأمنية في الموقع دون أي بيانات شخصية": "The wish is on the site with no personal details", "نُشرت الأمنية، وتعذّرت ترجمتها إلى {0} لغات فتظهر فيها بلغتها الأصلية.": "The wish is published; it could not be translated into {0} languages, so it shows there in its original language.", "هذه أقرب الاحتياجات إليك، وكلها في قطر.": "Here are the closest ones to you, all within Qatar.", "يلبّي أمنية مجهولة": "Answers an anonymous wish", "يلبّيها متبرّع": "A donor is answering it", "يلبّيها متبرّع الآن": "A donor is answering it now"});
+Object.assign(EN, {"محاولات كثيرة. انتظر ساعة ثم حاول مرة أخرى.": "Too many attempts. Wait an hour and try again.", "وصلنا عدد كبير من الطلبات من هذا الرقم اليوم. حاول غدًا أو تواصل معنا عبر واتساب.": "We've received many submissions from this number today. Try again tomorrow or contact us on WhatsApp.", "عدد الأفراد يجب أن يكون رقمًا صحيحًا من 1 إلى 9999.": "The number of people must be a whole number from 1 to 9999.", "نوع التبرع غير صحيح.": "The donation type is not valid.", "هذا البريد مسجّل بحساب لم يُؤكَّد. احذفه من Supabase ثم أعد المحاولة.": "This email belongs to an unconfirmed account. Delete it in Supabase, then try again.", "اكتب الاسم (من 3 إلى 80 حرفًا).": "Enter the name (3 to 80 characters).", "تغيير الموعد أو المتطوّع، أو رفض التبرع": "Change the date or volunteer, or reject the donation", "حفظ الموعد الجديد": "Save new date", "اختر تاريخًا من اليوم فصاعدًا": "Choose today or a later date", "تعذّر الاتصال بخادم المنصة، فلا يمكن إرسال الطلبات الآن. تحقق من الإنترنت ثم أعد تحميل الصفحة.": "We can't reach the platform's server, so nothing can be sent right now. Check your internet, then reload the page.", "إعادة التحميل": "Reload", "منصة تربط من لديه فائض من المواد الغذائية الجافة والملابس والأجهزة الكهربائية والأثاث بمن يحتاجها، عبر فريق من المشرفين والمتطوعين.": "A platform that connects people with spare dry food, clothes, appliances and furniture to those who need them, through a team of supervisors and volunteers."});
 Object.assign(EN, {"أنا مغادر قطر": "I'm leaving Qatar", "قبل ما تسافر… خلّ بيتك نعمة": "Before you fly… let your home be a blessing", "سجّل محتويات بيتك مرة واحدة قبل سفرك، ونرتّب استلامها كلها في موعد واحد قبل موعد سفرك، ثم نوزّعها على أكثر من أسرة محتاجة.": "Register your home's contents once before you leave. We collect everything in a single visit before your travel date, then share it between several families in need.", "بيانات التواصل وموعد السفر": "Contact details and travel date", "تاريخ السفر": "Travel date", "تاريخ السفر {0}": "Travels on {0}", "الوقت المفضّل للاستلام": "Preferred pickup time", "نحاول الاستلام قبل سفرك بيومين على الأقل.": "We aim to collect at least two days before you travel.", "يتبقى على سفرك {0} يومًا. نحاول الاستلام قبل سفرك بيومين على الأقل.": "{0} days until you travel. We aim to collect at least two days before.", "رقم الشقة، الطابق، وجود مصعد": "Flat number, floor, whether there is a lift", "اختياري، يساعد سيارة النقل على الوصول": "Optional; helps the truck find you", "ماذا ستترك في البيت؟": "What will you leave in the home?", "اكتب العدد بجانب كل ما تريد التبرع به، واترك الباقي صفرًا. لا حاجة لوصف كل قطعة.": "Type how many of each thing you want to give and leave the rest at zero. No need to describe every piece.", "صور الغرف": "Photos of the rooms", "حتى {0} صور، صورة لكل غرفة تكفي": "Up to {0} photos; one per room is enough", "اضغط لاختيار الصور أو التقاطها": "Tap to choose or take photos", "صوّر الغرفة كاملة بحيث تظهر القطع بوضوح": "Photograph the whole room so the pieces are clearly visible", "أؤكد أن الأجهزة تعمل وآمنة، وأن الأثاث والأغراض نظيفة وسليمة.": "I confirm the appliances work and are safe, and the furniture and other things are clean and undamaged.", "مثال: المفتاح مع حارس المبنى بعد سفري": "Example: the key is with the building guard after I leave", "إرسال محتويات البيت للمراجعة": "Send the home's contents for review", "بالإرسال توافق على معالجة بياناتك وفق": "By sending, you agree to us processing your data under the", "كيف نرتّبها لك؟": "How we arrange it for you", "يراجع المشرفون الصور، وتظهر طلبات المغادرين أولًا حسب أقرب موعد سفر.": "Supervisors review the photos; people leaving Qatar are shown first, by nearest travel date.", "نحدد موعد استلام واحد لكل محتويات البيت قبل سفرك.": "We set one pickup for everything in the home before you travel.", "تُوزَّع القطع على أكثر من أسرة: الثلاجة لأسرة، والسرير لأخرى.": "The pieces go to several families: the fridge to one, the bed to another.", "تتابع أثر تبرعك من أي بلد برقم الطلب.": "Follow where your donation went from any country with the request number.", "للطعام الجاف والملابس استخدم نموذج التبرع العادي.": "For dry food and clothes, use the regular donation form.", "انتهى عقدك وستغادر؟ صوّر غرف بيتك وحدد موعد سفرك، ونستلم الأثاث والأجهزة كلها في موعد واحد قبل سفرك ونوزّعها على أسر محتاجة.": "Contract over and leaving? Photograph your rooms and set your travel date. We collect all the furniture and appliances in one visit before you fly and share them with families in need.", "سجّل محتويات بيتك": "Register your home's contents", "حدّد تاريخ سفرك، من الغد وحتى ستة أشهر.": "Set your travel date, from tomorrow up to six months ahead.", "اكتب عدد قطعة واحدة على الأقل مما ستتركه في البيت.": "Enter a number for at least one thing you will leave in the home.", "أرفق صورة واحدة على الأقل لغرف البيت.": "Attach at least one photo of the rooms.", "سُجّل جزء من البيت فقط ({0}). أرسل الباقي مرة أخرى أو راسلنا عبر واتساب.": "Only part of the home was registered ({0}). Send the rest again or message us on WhatsApp.", "شكرًا لك، ورحلة سعيدة": "Thank you, and have a good trip", "استلمنا محتويات بيتك وسيراجعها المشرفون": "We have your home's contents; supervisors will review them", "سجّلنا {0} طلبات، طلبًا لكل نوع، وسنرتّب استلامها كلها في موعد واحد قبل سفرك في {1}.": "We registered {0} requests, one per kind, and will collect them all in one visit before you travel on {1}.", "احتفظ بهذه الأرقام. تستطيع متابعة أثر تبرعك من أي بلد عبر «تتبّع طلبي» بالرقم وآخر 4 أرقام من هاتفك ({0}).": "Keep these numbers. You can follow your donation from any country on “Track my request” with the number and the last 4 digits of your phone ({0}).", "مغادر قطر": "Leaving Qatar", "من نفس البيت:": "From the same home:", "سافر المتبرّع": "Donor has left", "يسافر اليوم": "Travels today", "يسافر بعد {0} يومًا": "Travels in {0} days", "بيوت مغادرين تنتظر الاستلام": "Homes of people leaving, waiting for pickup", "فتح": "Open", "صاحب التبرع يسافر في {0}. حدّد الاستلام قبل ذلك.": "The donor travels on {0}. Set the pickup before then.", "نفس الموعد لباقي تبرعات هذا البيت المعتمدة: {0}": "Same pickup for this home's other approved donations: {0}", "الموعد بعد تاريخ سفر المتبرّع ({0})": "That date is after the donor's travel date ({0})", "حُدّد موعد واحد لـ{0} تبرعات من نفس البيت": "One pickup set for {0} donations from the same home"});
 Object.assign(EN, {"تبرعك يترك أثرًا": "Your giving leaves a mark"});
 Object.assign(EN, {"(أنا)": "(me)", "لا يوجد متطوعو توصيل في الفريق بعد. أضفهم من تبويب «الفريق» بدور «متطوع توصيل»، أو اختر نفسك إن كنت ستتولى المهمة بنفسك.": "There are no delivery volunteers on the team yet. Add them from the “Team” tab with the “Delivery volunteer” role, or pick yourself if you will do it.", "فتح تبويب الفريق": "Open the Team tab"});
@@ -1548,7 +1566,12 @@ const LOCALE = () => LANGS[LANG].loc;
 /* cloud config: filled in config.js; without it the site runs as an offline demo */
 const CFG = window.SHARE_BLESSINGS_CONFIG || {};
 const CLOUD = !!(CFG.supabaseUrl && CFG.supabaseAnonKey && window.supabase);
+// the site is set up for the cloud but its library didn't load (an old cached copy, a blocked file): never fall back to the demo data,
+// or a visitor would "send" a donation that only lands in their own browser
+const CLOUD_DOWN = !!(CFG.supabaseUrl && CFG.supabaseAnonKey && !window.supabase);
 const sb = CLOUD ? window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey) : null;
+// some functions answer a refusal as {error:'…'} (so the server can still count the failed attempt): treat it like any other error
+if (sb) { const rpc = sb.rpc.bind(sb); sb.rpc = (...a) => rpc(...a).then(r => r && r.data && typeof r.data.error === 'string' ? { data: null, error: { message: r.data.error } } : r); }
 
 /* ================= reference data ================= */
 const FOOD = { rice:'أرز', flour:'دقيق وقمح', legumes:'بقوليات (عدس، حمص، فول)', pasta:'معكرونة وشعيرية', canned:'معلبات', sugar:'سكر وملح', dates:'تمور مغلّفة', milk:'حليب مجفف', oil:'زيت طبخ مغلق', other:'مواد جافة أخرى' };
@@ -1590,12 +1613,17 @@ const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 const nowISO = () => new Date().toISOString();
 const dayMs = 864e5;
-const addDays = (n, base = new Date()) => new Date(base.getTime() + n * dayMs).toISOString().slice(0, 10);
-const daysUntil = d => Math.ceil((new Date(d + 'T00:00:00') - new Date(new Date().toISOString().slice(0,10) + 'T00:00:00')) / dayMs);
-const fmtDate = iso => { try { return new Date(iso).toLocaleDateString(LOCALE(), { day:'numeric', month:'short' }); } catch (e) { return iso.slice(0,10); } };
-const fmtDT = iso => { try { return new Date(iso).toLocaleString(LOCALE(), { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }); } catch (e) { return iso; } };
+// all dates follow Qatar time, wherever the visitor is: "today" changes at midnight in Doha, and a date-only value is shown as written
+const QA_TZ = 'Asia/Qatar';
+const qaDay = (d = new Date()) => { try { return new Intl.DateTimeFormat('en-CA', { timeZone: QA_TZ, year:'numeric', month:'2-digit', day:'2-digit' }).format(new Date(d)); } catch (e) { return new Date(d).toISOString().slice(0, 10); } };
+const addDays = (n, base = new Date()) => qaDay(new Date(base).getTime() + n * dayMs);
+const daysUntil = d => Math.round((Date.parse(String(d).slice(0, 10) + 'T00:00:00Z') - Date.parse(qaDay() + 'T00:00:00Z')) / dayMs);
+const fmtDate = iso => { try { const only = /^\d{4}-\d{2}-\d{2}$/.test(iso); return new Date(only ? iso + 'T00:00:00Z' : iso).toLocaleDateString(LOCALE(), { day:'numeric', month:'short', timeZone: only ? 'UTC' : QA_TZ }); } catch (e) { return String(iso).slice(0,10); } };
+const fmtDT = iso => { try { return new Date(iso).toLocaleString(LOCALE(), { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit', timeZone: QA_TZ }); } catch (e) { return iso; } };
 const fmtN = n => Number(n || 0).toLocaleString('en-US');
-const plateTxt = a => t('منطقة {0} · شارع {1} · مبنى {2}', a.zone, a.street, a.bldg);
+// street and building on the blue plate: a whole number from 1 to 9999
+const plateNum = x => /^[0-9]{1,4}$/.test(String(x ?? '').trim()) && +x >= 1;
+const plateTxt = a => t('منطقة {0} · شارع {1} · مبنى {2}', esc(a.zone), esc(a.street), esc(a.bldg));
 
 function toast(msg) {
   const t = $('#toast'); t.textContent = msg; t.hidden = false;
@@ -1609,11 +1637,11 @@ let me = null;
 let db = load();
 let pendingPreset = null;
 function load() {
-  if (CLOUD) return { donations: [], requests: [], team: [], log: [], seq: { d: 0, r: 0 } };
+  if (CLOUD || CLOUD_DOWN) return { donations: [], requests: [], team: [], log: [], seq: { d: 0, r: 0 } };
   try { const s = localStorage.getItem(LS_KEY); if (s) return migrate(JSON.parse(s)); } catch (e) {}
   return seed();
 }
-function save() { if (CLOUD) { cloudSave(); return true; } try { localStorage.setItem(LS_KEY, JSON.stringify(db)); return true; } catch (e) { return false; } }
+function save() { if (CLOUD_DOWN) return false; if (CLOUD) { cloudSave(); return true; } try { localStorage.setItem(LS_KEY, JSON.stringify(db)); return true; } catch (e) { return false; } }
 function log(text, by) { db.log.unshift({ at: nowISO(), text, by: by || actor() }); db.log = db.log.slice(0, 300); }
 function actor() { return me ? me.name : t('النظام'); }
 function defaultTeam() { return [
@@ -1738,9 +1766,17 @@ function route(keepScroll) {
   if (v === 'move') renderMove();
   if (v === 'account') renderAccount();
   if (v === 'track' && keepScroll && $('#trackOut').innerHTML) doTrack();
-  if (keepScroll !== true) window.scrollTo(0, 0);
+  setTitle(v);
+  // #rules: the donation rules section on the home page
+  if (keepScroll !== true) { if (h === 'rules') requestAnimationFrame(() => $('#rules').scrollIntoView({ block: 'start' })); else window.scrollTo(0, 0); }
 }
 window.addEventListener('hashchange', () => route());
+// the tab title names the page, in the site language: "Track my request | Athar"
+const VIEW_TITLE = { home:'تبرّع عيني في قطر', donate:'أرغب في المشاركة', request:'أرغب في الحصول', track:'تتبّع طلبي', account:'تبرعاتي', admin:'المشرفون', privacy:'سياسة الخصوصية', move:'أنا مغادر قطر' };
+function setTitle(v) {
+  v = v || ((location.hash || '#home').slice(1).split('?')[0]); if (!VIEW_TITLE[v]) v = 'home';
+  document.title = `${t(VIEW_TITLE[v])} | ${BUNDLE ? BUNDLE.title : 'أثر'}`;
+}
 
 /* ================= 3D logo =================
    Tilts toward the pointer on devices with a mouse; a click or tap spins it once and drops the three dots into the bowl again. */
@@ -1800,7 +1836,7 @@ const QUICK = {
 function renderQuick() {
   const k = $('input[name=q_kind]:checked').value;
   $('#qFoot').textContent = t({ food:'نستقبل المواد الجافة المغلّفة فقط', clothes:'ملابس نظيفة وصالحة للاستخدام', elec:'أجهزة تعمل وآمنة، مع صورة واحدة على الأقل', furn:'أثاث سليم ونظيف، مع صورة واحدة على الأقل', other:'أغراض نظيفة وصالحة للاستخدام' }[k]);
-  $('#qItems').innerHTML = QUICK[k].map(([v, lbl, ic], i) => `<label><input type="radio" name="q_item" value="${v}"${i ? '' : ' checked'}><span><img class="i3" src="icons/${ic.slice(2)}.webp" width="46" height="46" alt="" decoding="async">${lbl}</span></label>`).join('');
+  $('#qItems').innerHTML = QUICK[k].map(([v, lbl, ic], i) => `<label><input type="radio" name="q_item" value="${v}"${i ? '' : ' checked'}><span><img class="i3" src="icons/${ic.slice(2)}.webp" width="46" height="46" alt="" decoding="async" loading="lazy">${lbl}</span></label>`).join('');
 }
 $$('input[name=q_kind]').forEach(r => r.addEventListener('change', renderQuick)); renderQuick();
 $('#quickForm').addEventListener('submit', e => {
@@ -1909,7 +1945,7 @@ function wirePhotoEd(root, old) {   // old: [{ src, label }] in their stored ord
   const draw = () => {
     const shown = [...st.keep.map(i => ({ ...old[i], rm: () => { st.keep = st.keep.filter(x => x !== i); draw(); } })),
       ...st.added.map((src, j) => ({ src, rm: () => { st.added.splice(j, 1); draw(); } }))];
-    list.innerHTML = shown.map((x, n) => `<div class="thumb">${x.src ? `<img src="${x.src}" alt="">` : `<span class="ph-n">${esc(x.label || '')}</span>`}<button type="button" class="x" data-n="${n}" aria-label="${t('حذف الصورة')}">×</button></div>`).join('');
+    list.innerHTML = shown.map((x, n) => `<div class="thumb">${x.src ? `<img src="${esc(x.src)}" alt="">` : `<span class="ph-n">${esc(x.label || '')}</span>`}<button type="button" class="x" data-n="${n}" aria-label="${t('حذف الصورة')}">×</button></div>`).join('');
     $$('[data-n]', list).forEach(b => b.addEventListener('click', () => shown[+b.dataset.n].rm()));
     drop.hidden = shown.length >= MAX_PHOTOS;
   };
@@ -1975,7 +2011,7 @@ $('#donForm').addEventListener('submit', e => {
   if (!mark($('#d_name'), v('d_name').length < 3)) errs.push('اكتب الاسم الكامل.');
   if (!mark($('#d_phone'), !phoneOk(v('d_phone')))) errs.push('رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 3 أو 5 أو 6 أو 7.');
   const zoneBad = !(+v('d_zone') >= 1 && +v('d_zone') <= 99);
-  mark($('#d_zone'), zoneBad); const stBad = !mark($('#d_street'), !(+v('d_street') >= 1)); const bBad = !mark($('#d_bldg'), !(+v('d_bldg') >= 1));
+  mark($('#d_zone'), zoneBad); const stBad = !mark($('#d_street'), !plateNum(v('d_street'))); const bBad = !mark($('#d_bldg'), !plateNum(v('d_bldg')));
   if (zoneBad || stBad || bBad) errs.push('أكمل أرقام اللوحة المنزلية (المنطقة من 1 إلى 99).');
   const kind = donKind(); const items = []; let near = false;
   $$('#d_items .item-row').forEach(row => {
@@ -2094,9 +2130,9 @@ $('#reqForm').addEventListener('submit', e => {
   const errs = []; const v = id => $('#' + id).value.trim();
   if (!mark($('#r_name'), v('r_name').length < 3)) errs.push('اكتب الاسم.');
   if (!mark($('#r_phone'), !phoneOk(v('r_phone')))) errs.push('رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 3 أو 5 أو 6 أو 7.');
-  if (!mark($('#r_size'), !(+v('r_size') >= 1))) errs.push('حدّد عدد الأفراد.');
-  const zb = !mark($('#r_zone'), !(+v('r_zone') >= 1 && +v('r_zone') <= 99)), sb = !mark($('#r_street'), !(+v('r_street') >= 1)), bb = !mark($('#r_bldg'), !(+v('r_bldg') >= 1));
-  if (zb || sb || bb) errs.push('أكمل أرقام اللوحة المنزلية.');
+  if (!mark($('#r_size'), !/^[0-9]{1,4}$/.test(v('r_size')) || +v('r_size') < 1)) errs.push('عدد الأفراد يجب أن يكون رقمًا صحيحًا من 1 إلى 9999.');
+  const zb = !mark($('#r_zone'), !(+v('r_zone') >= 1 && +v('r_zone') <= 99)), stb = !mark($('#r_street'), !plateNum(v('r_street'))), bb = !mark($('#r_bldg'), !plateNum(v('r_bldg')));
+  if (zb || stb || bb) errs.push('أكمل أرقام اللوحة المنزلية.');
   const kind = $('input[name=r_kind]:checked').value;
   const foodTypes = checkedVals('r_food'), cats = checkedVals('r_cat'), types = checkedVals('r_ctype'), goodsTypes = checkedVals('r_other');
   if (kind === 'food' && !foodTypes.length) errs.push('اختر صنفًا غذائيًا واحدًا على الأقل.');
@@ -2357,10 +2393,12 @@ function suggestionsFor(r) {
 }
 
 /* ================= location (Qatar national address → map) ================= */
-const mapsUrl = g => `https://www.google.com/maps/search/?api=1&query=${g.lat},${g.lng}`;
+const mapsUrl = g => `https://www.google.com/maps/search/?api=1&query=${+g.lat},${+g.lng}`;
+// روابط يكتبها الزائر: https فقط، وأي شيء آخر لا يصبح رابطًا
+const safeUrl = u => /^https?:\/\//i.test(u || '') ? esc(u) : '#';
 function locHTML(rec, key) {
   if (rec.geo) return `<a class="btn btn-ghost btn-sm" href="${mapsUrl(rec.geo)}" target="_blank" rel="noopener"><svg width="14" height="14"><use href="#i-pin"/></svg>${t('افتح الموقع في الخرائط')}</a>`;
-  if (rec.mapUrl) return `<a class="btn btn-ghost btn-sm" href="${esc(rec.mapUrl)}" target="_blank" rel="noopener"><svg width="14" height="14"><use href="#i-pin"/></svg>${t('رابط الموقع من صاحب الطلب')}</a>`;
+  if (rec.mapUrl) return `<a class="btn btn-ghost btn-sm" href="${safeUrl(rec.mapUrl)}" target="_blank" rel="noopener"><svg width="14" height="14"><use href="#i-pin"/></svg>${t('رابط الموقع من صاحب الطلب')}</a>`;
   return `<button class="btn btn-ghost btn-sm" type="button" data-locate="${key}"><svg width="14" height="14"><use href="#i-pin"/></svg>${t('حدّد الموقع من العنوان الوطني')}</button>`;
 }
 function wireLocate(root) {
@@ -2418,7 +2456,7 @@ $('#logoutBtn').addEventListener('click', async () => {
 
 // 3D icon for each dashboard section
 const NAV_IC = { donations: 'gift', requests: 'house', match: 'link', stock: 'stock', tasks: 'truck', people: 'people', reports: 'chart', team: 'id', site: 'gear', backup: 'db', log: 'log' };
-const kpiHTML = (l, n, a, ic) => `<div class="kpi${a ? ' alert' : ''}"><img class="kpi-ic" src="icons/nav-${ic}.webp" width="44" height="44" alt="" decoding="async"><span>${l}</span><b>${n}</b></div>`;
+const kpiHTML = (l, n, a, ic) => `<div class="kpi${a ? ' alert' : ''}"><img class="kpi-ic" src="icons/nav-${ic}.webp" width="44" height="44" alt="" decoding="async" loading="lazy"><span>${l}</span><b>${n}</b></div>`;
 function renderAdmin() {
   loadMe();
   $('#gate').hidden = !!me; $('#desk').hidden = !me;
@@ -2427,7 +2465,7 @@ function renderAdmin() {
   const tabs = TABS.filter(x => can(x.p));
   if (!tab || !tabs.some(x => x.t === tab)) tab = tabs[0].t;
   $('#meBox').innerHTML = `<span class="who-chip"><b>${esc(me.name)}</b><span class="tag gold">${ROLE_LBL[me.role]}</span></span>`;
-  $('#subtabs').innerHTML = tabs.map(x => { const c = x.c ? x.c() : ''; return `<button role="tab" data-t="${x.t}" aria-selected="${x.t === tab}"><span class="ni"><img src="icons/nav-${NAV_IC[x.t] || 'gift'}.webp" width="30" height="30" alt="" decoding="async"></span><span class="nl">${t(x.l)}</span>${c !== '' && c != null ? `<span class="cnt">${c}</span>` : ''}</button>`; }).join('');
+  $('#subtabs').innerHTML = tabs.map(x => { const c = x.c ? x.c() : ''; return `<button role="tab" data-t="${x.t}" aria-selected="${x.t === tab}"><span class="ni"><img src="icons/nav-${NAV_IC[x.t] || 'gift'}.webp" width="30" height="30" alt="" decoding="async" loading="lazy"></span><span class="nl">${t(x.l)}</span>${c !== '' && c != null ? `<span class="cnt">${c}</span>` : ''}</button>`; }).join('');
   if (matchMedia('(max-width: 860px)').matches) { const sel = $('#subtabs [aria-selected="true"]'); if (sel) $('#subtabs').scrollLeft += sel.getBoundingClientRect().left - $('#subtabs').getBoundingClientRect().left - 8; }
   $$('#subtabs button').forEach(b => b.addEventListener('click', () => { tab = b.dataset.t; filt = { q:'', status:'', kind:'' }; renderAdmin(); }));
   // KPIs
@@ -2480,7 +2518,7 @@ function matchFilter(rec) {
   return (!filt.status || rec.status === filt.status) && (!filt.kind || rec.kind === filt.kind) &&
     (!q || [rec.id, rec.name, rec.phone].some(x => String(x).toLowerCase().includes(q)));
 }
-const addrCell = a => `<span class="num" dir="ltr">${a.zone}/${a.street}/${a.bldg}</span>`;
+const addrCell = a => `<span class="num" dir="ltr">${esc(a.zone)}/${esc(a.street)}/${esc(a.bldg)}</span>`;
 function donTable() {
   // households leaving Qatar come first, closest travel date first
   const rows = db.donations.filter(matchFilter).sort((a, b) => (moveOpen(b) - moveOpen(a)) || (moveOpen(a) && moveOpen(b) ? a.move.date.localeCompare(b.move.date) : 0));
@@ -2547,7 +2585,7 @@ function myTasks() {
   });
   return out.sort((x, y) => String((x.d.pickup || {}).date || x.a && x.a.at).localeCompare(String((y.d.pickup || {}).date || y.a && y.a.at)));
 }
-function plateMini(a) { return `<span class="plate-mini"><span>${a.zone}</span><span>${a.street}</span><span>${a.bldg}</span></span>`; }
+function plateMini(a) { return `<span class="plate-mini"><span>${esc(a.zone)}</span><span>${esc(a.street)}</span><span>${esc(a.bldg)}</span></span>`; }
 function tasksView() {
   const list = myTasks();
   const head = `<div class="toolbar" style="margin-bottom:12px"><button class="btn btn-ghost btn-sm" type="button" id="mapBtn"><svg width="14" height="14"><use href="#i-pin"/></svg>${t('عرض المهام على الخريطة')}</button><span class="muted">${t('المواقع تُحدَّد تلقائيًا من العنوان الوطني (اللوحة الزرقاء).')}</span></div><div id="taskMap" class="task-map" hidden></div>`;
@@ -2601,8 +2639,8 @@ function loadLeaflet() {
   if (window.L) return Promise.resolve();
   if (leafletP) return leafletP;
   leafletP = new Promise((resolve, reject) => {
-    const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'; document.head.appendChild(css);
-    const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+    const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'; css.integrity = 'sha384-c6Rcwz4e4CITMbu/NBmnNS8yN2sC3cUElMEMfP3vqqKFp7GOYaaBBCqmaWBjmkjb'; css.crossOrigin = 'anonymous'; document.head.appendChild(css);
+    const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js'; s.integrity = 'sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO'; s.crossOrigin = 'anonymous';
     s.onload = () => window.L ? resolve() : reject(new Error('no L')); s.onerror = () => { leafletP = null; reject(new Error('load')); };
     document.head.appendChild(s);
     setTimeout(() => { if (!window.L) { leafletP = null; reject(new Error('timeout')); } }, 8000);
@@ -2615,7 +2653,7 @@ function peopleView() {
   db.donations.forEach(d => { const p = m[d.phone] = m[d.phone] || { name:d.name, phone:d.phone, n:0, done:0, last:d.createdAt, zone:d.addr.zone }; p.n++; if (d.status === 'delivered') p.done++; if (d.createdAt > p.last) p.last = d.createdAt; });
   const list = Object.values(m).sort((a, b) => b.n - a.n || (b.last > a.last ? 1 : -1));
   return `<div class="table-wrap"><table><thead><tr><th>${t('المتبرّع')}</th><th>${t('الهاتف')}</th><th>${t('المنطقة')}</th><th>${t('عدد التبرعات')}</th><th>${t('سُلّمت')}</th><th>${t('آخر تبرع')}</th></tr></thead><tbody>
-    ${list.map(p => `<tr data-q="${esc(p.phone)}"><td>${esc(p.name)} ${donorBadge(p.n)}</td><td class="num" dir="ltr">${esc(p.phone)}</td><td class="num">${p.zone}</td><td class="num">${p.n}</td><td class="num">${p.done}</td><td class="num">${fmtDate(p.last)}</td></tr>`).join('')}
+    ${list.map(p => `<tr data-q="${esc(p.phone)}"><td>${esc(p.name)} ${donorBadge(p.n)}</td><td class="num" dir="ltr">${esc(p.phone)}</td><td class="num">${esc(p.zone)}</td><td class="num">${p.n}</td><td class="num">${p.done}</td><td class="num">${fmtDate(p.last)}</td></tr>`).join('')}
   </tbody></table></div>`;
 }
 const donorBadge = n => n >= 3 ? `<span class="tag gold">${t('متبرّع ذهبي')}</span>` : n === 2 ? `<span class="tag">${t('متبرّع متكرر')}</span>` : '';
@@ -2642,7 +2680,7 @@ function reportData() {
     byZone[t('منطقة {0}', d.addr.zone)] = (byZone[t('منطقة {0}', d.addr.zone)] || 0) + 1;
     if (!['rejected','cancelled'].includes(d.status)) d.items.forEach(it => { if (d.kind === 'food') { if (it.unit === 'kg') kg += +it.qty; } else if (d.kind === 'clothes') pcs += +it.qty; else goodsPcs += +it.qty; });
   });
-  db.donations.forEach(d => { const k = d.createdAt.slice(0, 7); byMonth[k] = (byMonth[k] || 0) + 1; });
+  db.donations.forEach(d => { const k = qaDay(d.createdAt).slice(0, 7); byMonth[k] = (byMonth[k] || 0) + 1; });
   const months = Object.keys(byMonth).sort().slice(-6).map(k => [new Date(k + '-01T00:00:00').toLocaleDateString(LOCALE(), { month: 'short', year: 'numeric' }), byMonth[k]]);
   const served = R.filter(r => r.status === 'delivered').reduce((s, r) => s + (+r.size || 0), 0);
   return { D, R, kg, pcs, goodsPcs, served,
@@ -2680,10 +2718,10 @@ function csvDownload(kind) {
   const head = D ? ['الرقم','التاريخ','المتبرع','الهاتف','النوع','الأصناف','المنطقة','الشارع','المبنى','الجهة','الحالة']
                  : ['الرقم','التاريخ','المستفيد','الهاتف','النوع','الاحتياج','الأفراد','المنطقة','الشارع','المبنى','الأولوية','الحالة'];
   const body = rows.map(r => D
-    ? [r.id, r.createdAt.slice(0, 10), r.name, r.phone, KIND[r.kind], itemsSummary(r), r.addr.zone, r.addr.street, r.addr.bldg, TARGET[r.target], DON_LBL[r.status]]
-    : [r.id, r.createdAt.slice(0, 10), r.name, r.phone, KIND[r.kind], needText(r).replace(/<[^>]+>/g, ''), r.size, r.addr.zone, r.addr.street, r.addr.bldg, r.urg === 'high' ? t('عاجلة') : t('عادية'), REQ_LBL[r.status]]);
+    ? [r.id, qaDay(r.createdAt), r.name, r.phone, KIND[r.kind], itemsSummary(r), r.addr.zone, r.addr.street, r.addr.bldg, TARGET[r.target], DON_LBL[r.status]]
+    : [r.id, qaDay(r.createdAt), r.name, r.phone, KIND[r.kind], needText(r).replace(/<[^>]+>/g, ''), r.size, r.addr.zone, r.addr.street, r.addr.bldg, r.urg === 'high' ? t('عاجلة') : t('عادية'), REQ_LBL[r.status]]);
   const csv = '﻿' + [head.map(h => t(h)), ...body].map(row => row.map(c => `"${String(c ?? '').replace(/"/g, '""')}"`).join(',')).join('\r\n');
-  downloadBlob(new Blob([csv], { type: 'text/csv;charset=utf-8' }), `share-blessings-${kind}-${addDays(0)}.csv`);
+  downloadBlob(new Blob([csv], { type: 'text/csv;charset=utf-8' }), `athar-${kind}-${addDays(0)}.csv`);
 }
 function downloadBlob(blob, name) {
   try { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); toast(t('بدأ التنزيل: {0}', name)); }
@@ -2840,7 +2878,7 @@ function wireTab(body) {
     $('button', cell).addEventListener('click', () => { const p = toLatin(inp.value).trim(); if (!/^\d{4}$/.test(p)) { toast(t('رمز الدخول 4 أرقام')); return; } u.pin = p; log(t('تغيير رمز دخول {0}', u.name)); save(); renderAdmin(); toast(t('حُفظ الرمز')); });
   }));
   // backup
-  const bd = $('#bkDown', body); if (bd) bd.addEventListener('click', () => downloadBlob(new Blob([JSON.stringify(db)], { type: 'application/json' }), `share-blessings-backup-${addDays(0)}.json`));
+  const bd = $('#bkDown', body); if (bd) bd.addEventListener('click', () => downloadBlob(new Blob([JSON.stringify(db)], { type: 'application/json' }), `athar-backup-${addDays(0)}.json`));
   const bf = $('#bkFile', body);
   if (bf) bf.addEventListener('change', () => {
     const f = bf.files[0]; if (!f) return;
@@ -2890,11 +2928,28 @@ function galleryHTML(rec) {
     ${ph.length ? `<div class="gallery">${ph.map((src, i) => `<button type="button" class="thumb" data-zoom="${i}" aria-label="${t('تكبير الصورة {0}', i + 1)}"><img src="${photoSrc(src)}" data-path="${esc(src)}" alt=""></button>`).join('')}</div>`
       : `<p class="note">${t('لم يرفق المتبرّع صورًا. تحقّق من الأصناف هاتفيًا أو عند الاستلام.')}</p>`}</div>`;
 }
-function openLightbox(src, cap) { $('#lbImg').src = src; $('#lbCap').textContent = cap; $('#lightbox').hidden = false; }
-$('#lightbox').addEventListener('click', () => { $('#lightbox').hidden = true; });
-function closeDrawer() { $('#drawer').hidden = true; $('#scrim').hidden = true; drawerState = null; }
+let lbReturn = null;
+function openLightbox(src, cap) { lbReturn = document.activeElement; $('#lbImg').src = src; $('#lbCap').textContent = cap; $('#lightbox').hidden = false; $('#lightbox .lb-x').focus(); }
+function closeLightbox() { $('#lightbox').hidden = true; if (lbReturn && lbReturn.isConnected) lbReturn.focus(); lbReturn = null; }
+$('#lightbox').addEventListener('click', closeLightbox);
+let drawerReturn = null;
+function closeDrawer() {
+  $('#drawer').hidden = true; $('#scrim').hidden = true; drawerState = null;
+  const back = drawerReturn; drawerReturn = null;
+  if (back && back.isConnected) back.focus();
+  else if (back && back.dataset && back.dataset.open) { const row = document.querySelector(`[data-open="${back.dataset.open}"]`); if (row) row.focus(); }
+}
+// keep Tab inside the open drawer or photo viewer
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Tab') return;
+  const box = !$('#lightbox').hidden ? $('#lightbox') : !$('#drawer').hidden ? $('#drawer') : null; if (!box) return;
+  const f = [...box.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]):not([type=hidden]), select:not([disabled]), textarea:not([disabled]), [tabindex="0"]')].filter(x => x.offsetParent !== null);
+  if (!f.length) return;
+  if (e.shiftKey && (document.activeElement === f[0] || !box.contains(document.activeElement))) { e.preventDefault(); f[f.length - 1].focus(); }
+  else if (!e.shiftKey && (document.activeElement === f[f.length - 1] || !box.contains(document.activeElement))) { e.preventDefault(); f[0].focus(); }
+});
 $('#scrim').addEventListener('click', closeDrawer);
-document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!$('#lightbox').hidden) $('#lightbox').hidden = true; else if (!$('#drawer').hidden) closeDrawer(); });
+document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!$('#lightbox').hidden) closeLightbox(); else if (!$('#drawer').hidden) closeDrawer(); });
 
 function allocListHTML(d) {
   const al = d.allocations || [];
@@ -2912,10 +2967,10 @@ function openDrawer(k, id, pre) {
   const items = isD ? `<div class="mini-items">${rec.items.map(it => {
       const left = ['received','allocated','delivered','closed'].includes(rec.status) && itemLeft(it) !== +it.qty ? ` <span class="tag gold">${t('المتبقي {0}', fmtN(itemLeft(it)))}</span>` : '';
       return isGoods(rec.kind)
-      ? `<div><b>${GOODS[rec.kind].types[it.type]}</b><span>${esc(it.desc)}</span><span class="num">${t('{0} قطعة', it.qty)}</span><span class="tag">${GOODS[rec.kind].cond[it.cond] || ''}</span>${it.age ? `<span class="tag">${t('عمره {0} سنوات', esc(it.age))}</span>` : ''}${it.size ? `<span class="tag">${esc(it.size)}</span>` : ''}${left}</div>`
+      ? `<div><b>${GOODS[rec.kind].types[it.type]}</b><span>${esc(it.desc)}</span><span class="num">${t('{0} قطعة', esc(it.qty))}</span><span class="tag">${GOODS[rec.kind].cond[it.cond] || ''}</span>${it.age ? `<span class="tag">${t('عمره {0} سنوات', esc(it.age))}</span>` : ''}${it.size ? `<span class="tag">${esc(it.size)}</span>` : ''}${left}</div>`
       : rec.kind === 'food'
-      ? `<div><b>${FOOD[it.type]}</b><span class="num">${it.qty} ${UNITS[it.unit]}</span><span class="${daysUntil(it.exp) < NEAR_DAYS ? 'tag hot' : 'tag'}">${t('ينتهي {0}', fmtDate(it.exp))} · ${daysUntil(it.exp) < 0 ? t('انتهت منذ {0} يومًا', -daysUntil(it.exp)) : t('بعد {0} يومًا', daysUntil(it.exp))}</span>${left}</div>`
-      : `<div><b>${CAT[it.cat]} · ${CTYPE[it.type]}</b><span class="num">${t('{0} قطعة', it.qty)}</span><span class="tag">${COND[it.cond]}</span>${it.size ? `<span class="tag">${esc(it.size)}</span>` : ''}${left}</div>`;
+      ? `<div><b>${FOOD[it.type]}</b><span class="num">${esc(it.qty)} ${UNITS[it.unit] || ''}</span><span class="${daysUntil(it.exp) < NEAR_DAYS ? 'tag hot' : 'tag'}">${t('ينتهي {0}', fmtDate(it.exp))} · ${daysUntil(it.exp) < 0 ? t('انتهت منذ {0} يومًا', -daysUntil(it.exp)) : t('بعد {0} يومًا', daysUntil(it.exp))}</span>${left}</div>`
+      : `<div><b>${CAT[it.cat]} · ${CTYPE[it.type]}</b><span class="num">${t('{0} قطعة', esc(it.qty))}</span><span class="tag">${COND[it.cond]}</span>${it.size ? `<span class="tag">${esc(it.size)}</span>` : ''}${left}</div>`;
     }).join('')}</div>`
     : `<p>${needText(rec)}${rec.sizes ? ` · ${t('المقاسات:')} ${esc(rec.sizes)}` : ''}</p>`;
   const dups = !isD && openReq(rec) ? dupOf(rec) : [];
@@ -2924,7 +2979,7 @@ function openDrawer(k, id, pre) {
     + (staffEd.length ? `<p class="muted">${t('عدّل المشرفون البيانات {0} مرة، آخرها {1} ({2}).', staffEd.length, fmtDT(staffEd[staffEd.length - 1].at), esc(staffEd[staffEd.length - 1].by))}</p>` : '');
   const kv = isD
     ? `<dt>${t('المتبرّع')}</dt><dd>${esc(rec.name)}</dd><dt>${t('الهاتف')}</dt><dd class="num" dir="ltr">${esc(rec.phone)}</dd><dt>${t('العنوان')}</dt><dd>${plateTxt(rec.addr)}${rec.details ? '<br><span class="muted">' + esc(rec.details) + '</span>' : ''}<div style="margin-top:6px">${locHTML(rec, 'd:' + rec.id)}</div></dd>
-       <dt>${t('التسليم')}</dt><dd>${rec.method === 'pickup' ? t('استلام من العنوان') : t('يوصله لنقطة التجميع')} · ${SLOT[rec.slot]}${rec.method === 'pickup' && rec.place && rec.place.type === 'other' ? `<br>${t('مكان آخر:')} ${esc(rec.place.text)}${rec.place.mapUrl ? ` · <a href="${esc(rec.place.mapUrl)}" target="_blank" rel="noopener">${t('الخريطة')}</a>` : ''}` : ''}${rec.direct ? `<br><span class="tag gold">${t('يقبل أن يستلمه المستفيد مباشرة')}</span>` : ''}</dd><dt>${t('الجهة')}</dt><dd>${TARGET[rec.target]}${rec.person ? ': ' + esc(rec.person.name) + ' (' + esc(rec.person.addr) + ')' : ''}</dd>
+       <dt>${t('التسليم')}</dt><dd>${rec.method === 'pickup' ? t('استلام من العنوان') : t('يوصله لنقطة التجميع')} · ${SLOT[rec.slot]}${rec.method === 'pickup' && rec.place && rec.place.type === 'other' ? `<br>${t('مكان آخر:')} ${esc(rec.place.text)}${rec.place.mapUrl ? ` · <a href="${safeUrl(rec.place.mapUrl)}" target="_blank" rel="noopener">${t('الخريطة')}</a>` : ''}` : ''}${rec.direct ? `<br><span class="tag gold">${t('يقبل أن يستلمه المستفيد مباشرة')}</span>` : ''}</dd><dt>${t('الجهة')}</dt><dd>${TARGET[rec.target]}${rec.person ? ': ' + esc(rec.person.name) + ' (' + esc(rec.person.addr) + ')' : ''}</dd>
        ${rec.move ? `<dt>${t('مغادر قطر')}</dt><dd>${t('تاريخ السفر {0}', fmtDate(rec.move.date))} ${moveOpen(rec) ? moveTag(rec) : ''}${moveSibs(rec).length ? `<br><span class="muted">${t('من نفس البيت:')}</span> ${moveSibs(rec).map(x => `<button type="button" class="linkish" data-open="d:${x.id}">${x.id}</button> <span class="tag">${KIND[x.kind]}</span>`).join(' ')}` : ''}</dd>` : ''}
        ${rec.wish ? `<dt>${t('أمنية')}</dt><dd><button type="button" class="linkish" data-open="r:${esc(rec.wish)}">${esc(rec.wish)}</button> <span class="tag gold">${t('يلبّي أمنية مجهولة')}</span></dd>` : ''}
        ${rec.pickup ? `<dt>${t('الموعد')}</dt><dd>${fmtDate(rec.pickup.date)} · ${esc(rec.pickup.vol)}</dd>` : ''}${rec.notes ? `<dt>${t('ملاحظة المتبرّع')}</dt><dd data-tr-src="notes">${esc(rec.notes)}</dd>` : ''}`
@@ -2933,7 +2988,7 @@ function openDrawer(k, id, pre) {
        ${rec.offer ? `<dt>${t('موعد استلام')}</dt><dd>${fmtDate(rec.offer.date)} · ${SLOT[rec.offer.slot] || ''} · <button type="button" class="linkish" data-open="d:${esc(rec.offer.from)}">${esc(rec.offer.from)}</button> <span class="tag${rec.offer.state === 'accepted' ? ' gold' : ''}">${t(OFFER_LBL[rec.offer.state] || '')}</span></dd>` : ''}
        ${rec.notes ? `<dt>${t('الحالة')}</dt><dd data-tr-src="notes">${esc(rec.notes)}</dd>` : ''}`;
   const reqGot = !isD ? reqAllocs(rec) : [];
-  dr.innerHTML = `<header><h3>${rec.id}</h3><span class="pill s-${rec.status}">${(isD ? DON_LBL : REQ_LBL)[rec.status]}</span><button class="btn btn-ghost btn-sm" type="button" data-close aria-label="${t('إغلاق')}">✕</button></header>
+  dr.innerHTML = `<header><h3 id="drTitle">${rec.id}</h3><span class="pill s-${rec.status}">${(isD ? DON_LBL : REQ_LBL)[rec.status]}</span><button class="btn btn-ghost btn-sm" type="button" data-close aria-label="${t('إغلاق')}">✕</button></header>
     <div class="body">${dups.length ? `<p class="note bad">${t('تنبيه: يوجد طلب مفتوح آخر بنفس الهاتف أو العنوان:')} ${dups.map(x => `<button type="button" class="linkish" data-open="r:${x.id}">${x.id}</button>`).join(' ')}</p>` : ''}${edited}
       <dl class="kv">${kv}</dl>${isD ? galleryHTML(rec) : ''}<div><h3 style="margin-bottom:8px">${isD ? t('الأصناف') : t('الاحتياج')}</h3>${items}</div>
       ${isD ? allocListHTML(rec) : reqGot.length ? `<div><h3 style="margin-bottom:8px">${t('ما خُصّص لهذا الطلب')}</h3><div class="mini-items">${reqGot.map(x => `<div><b class="num" dir="ltr">${x.d.id}</b><span>${esc(linesText(x.d, x.a.lines))}</span>${x.a.delivered ? `<span class="tag" style="color:var(--ok)">${t('سُلّم')}</span>` : `<span class="tag gold">${t('بانتظار التوصيل')}</span>`}</div>`).join('')}</div></div>` : ''}
@@ -2942,6 +2997,7 @@ function openDrawer(k, id, pre) {
       ${mtBoxHTML(rec, isD)}
       <div><h3 style="margin-bottom:8px">${t('مسار الطلب')}</h3>${timelineHTML(rec, k)}</div></div>
     <footer>${actionsHTML(rec, k, pre)}</footer>`;
+  if (dr.hidden) drawerReturn = document.activeElement;   // focus goes back to the row that opened it
   dr.hidden = false; $('#scrim').hidden = false;
   $('[data-close]', dr).addEventListener('click', closeDrawer);
   $$('[data-zoom]', dr).forEach(b => b.addEventListener('click', () => openLightbox(photoSrc(rec.photos[+b.dataset.zoom]), t('{0} · صورة {1} من {2}', rec.id, +b.dataset.zoom + 1, rec.photos.length))));
@@ -3174,9 +3230,17 @@ function actionsHTML(rec, k, pre) {
         // a volunteer collects the donation and delivers it; the direct handover is an exception the supervisor approves explicitly
         return mvNote + handoverNote(rec) + `<div class="seg" role="radiogroup" aria-label="${t('من يستلم التبرع؟')}"><label><input type="radio" name="pkWho" value="vol" checked><span>${t('متطوع من الفريق')}</span></label><label><input type="radio" name="pkWho" value="ben"><span>${t('المستفيد يستلمه مباشرة (استثناء)')}</span></label></div>
           <div id="pkVolBox">${volBlock}</div><div id="pkBenBox" hidden>${directFormHTML(rec, mvMax)}</div>`; }
-      case 'scheduled': if (rec.pickup && rec.pickup.direct) return can('schedule') ? handoverDoneHTML(rec) : noRight;
-        if (!canReceive(rec)) return noRight; return `<label class="check"><input type="checkbox" id="qc"><span>${t('فحصت {0}.', qcText(rec))}</span></label>
-        <button class="btn btn-primary" data-act="receive" type="button">${t('تأكيد الاستلام في المستودع')}</button>`;
+      case 'scheduled': { if (rec.pickup && rec.pickup.direct) return can('schedule') ? handoverDoneHTML(rec) : noRight;
+        const recv = canReceive(rec) ? `<label class="check"><input type="checkbox" id="qc"><span>${t('فحصت {0}.', qcText(rec))}</span></label>
+        <button class="btn btn-primary" data-act="receive" type="button">${t('تأكيد الاستلام في المستودع')}</button>` : '';
+        // the volunteer can't make it, or the donor asked for another day: change the booking, or reject the donation
+        const pk = rec.pickup || {}, cur = rec.method === 'dropoff' ? pk.vol : pk.volId;
+        const opts = (rec.method === 'dropoff' ? sitePoints().map(p => `<option value="${p}">${t(p)}</option>`).join('') : pickupOpts()).replace(`value="${cur}"`, `value="${cur}" selected`);
+        const manage = can('schedule') ? `<details class="resched"><summary>${t('تغيير الموعد أو المتطوّع، أو رفض التبرع')}</summary>
+          <div class="grid"><label class="f">${rec.method === 'dropoff' ? t('موعد التسليم') : t('موعد الاستلام')}<input type="date" id="pkDate" value="${esc(pk.date && daysUntil(pk.date) >= 0 ? pk.date : addDays(1))}" min="${addDays(0)}"></label>
+          <label class="f">${rec.method === 'dropoff' ? t('نقطة التجميع') : t('المتطوّع')}<select id="pkVol">${opts}</select></label></div>
+          <div class="form-actions"><button class="btn btn-ghost" data-act="reschedule" type="button">${t('حفظ الموعد الجديد')}</button><button class="btn btn-danger" data-act="reject" type="button">${t('رفض')}</button></div>${rejectBox}</details>` : '';
+        return recv || manage ? recv + manage : noRight; }
       case 'received': {
         if (!can('allocate')) return noRight;
         pre = pre || rec.wish;   // a donation made for a wish goes to that family first
@@ -3247,7 +3311,10 @@ function wireActions(dr, rec, k) {
     if (CLOUD) {
       const { error, count } = await sb.from('donations').delete({ count: 'exact' }).eq('id', rec.id);
       if (error || !count) { toast(error ? cloudErr(error) : t('لا تملك صلاحية حذف هذا التبرع.')); return; }
-      if ((rec.photos || []).length) sb.storage.from('donation-photos').remove(rec.photos).catch(() => {});
+      // donations of the same house share one upload: keep any photo another donation still shows
+      const inUse = new Set(db.donations.filter(x => x !== rec).flatMap(x => x.photos || []));
+      const gone = (rec.photos || []).filter(x => !inUse.has(x));
+      if (gone.length) sb.storage.from('donation-photos').remove(gone).catch(() => {});
       shadow.delete(rec.id);
     }
     db.donations = db.donations.filter(x => x.id !== rec.id);
@@ -3267,7 +3334,7 @@ function wireActions(dr, rec, k) {
       const phone = toLatin(v('#sePhone'));
       if (!mark($('#sePhone', f), !phoneOk(phone))) errs.push(t('رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 3 أو 5 أو 6 أو 7.'));
       const addr = { zone: String(+toLatin(v('#seZone'))), street: String(+toLatin(v('#seStreet'))), bldg: String(+toLatin(v('#seBldg'))) };
-      if (!(+addr.zone >= 1 && +addr.zone <= 99 && +addr.street >= 1 && +addr.bldg >= 1)) errs.push(t('أكمل أرقام اللوحة المنزلية (المنطقة من 1 إلى 99).'));
+      if (!(+addr.zone >= 1 && +addr.zone <= 99 && plateNum(addr.street) && plateNum(addr.bldg))) errs.push(t('أكمل أرقام اللوحة المنزلية (المنطقة من 1 إلى 99).'));
       const rd = box ? readItems(box, rec.kind) : null; if (rd) errs.push(...rd.errs);
       if (errs.length) { err.innerHTML = errs.map(esc).join('<br>'); err.hidden = false; return; }
       err.hidden = true;
@@ -3330,6 +3397,15 @@ function wireActions(dr, rec, k) {
   });
   $$('[data-goteam]', dr).forEach(b => b.addEventListener('click', () => { closeDrawer(); tab = 'team'; renderAdmin(); }));
   act('rejectConfirm', () => { const why = $('#rejWhy', dr).value; setStatus(rec, 'rejected', why); log(t('رفض {0}: {1}', rec.id, t(why))); done(t('تم الرفض وإبلاغ صاحب الطلب')); });
+  act('reschedule', () => {
+    const date = $('#pkDate', dr).value, v = $('#pkVol', dr).value;
+    if (!date || !v) { toast(rec.method === 'dropoff' ? t('حدّد التاريخ ونقطة التجميع') : t('حدّد التاريخ والمتطوّع (أضف متطوعين من تبويب الفريق)')); return; }
+    if (daysUntil(date) < 0) { toast(t('اختر تاريخًا من اليوم فصاعدًا')); return; }
+    const vol = rec.method === 'dropoff' ? v : memberName(v);
+    rec.pickup = { ...rec.pickup, date, vol, volId: rec.method === 'dropoff' ? null : v };
+    rec.history.push({ status: 'scheduled', at: nowISO(), note: `${fmtDate(date)} · ${vol}` });
+    log(t('جدولة {0} في {1} مع {2}', rec.id, date, vol)); done(t('حُدّد الموعد'));
+  });
   act('approve', () => {
     if (!$('#rv', dr).checked) { toast(t('راجع الصور والتفاصيل وأكّد ذلك قبل الاعتماد')); return; }
     setStatus(rec, 'approved', rec.photos && rec.photos.length ? t('بعد مراجعة {0} صور', rec.photos.length) : t('دون صور')); log(t('اعتماد التبرع {0}', rec.id)); done(t('اعتُمد التبرع'));
@@ -3337,6 +3413,7 @@ function wireActions(dr, rec, k) {
   act('schedule', () => {
     const date = $('#pkDate', dr).value, v = $('#pkVol', dr).value;
     if (!date || !v) { toast(rec.method === 'dropoff' ? t('حدّد التاريخ ونقطة التجميع') : t('حدّد التاريخ والمتطوّع (أضف متطوعين من تبويب الفريق)')); return; }
+    if (daysUntil(date) < 0) { toast(t('اختر تاريخًا من اليوم فصاعدًا')); return; }
     if (rec.move && date > rec.move.date && daysUntil(rec.move.date) >= 0) { toast(t('الموعد بعد تاريخ سفر المتبرّع ({0})', fmtDate(rec.move.date))); return; }
     const vol = rec.method === 'dropoff' ? v : memberName(v);
     const all = [rec, ...($('#pkAll', dr) && $('#pkAll', dr).checked ? moveSibs(rec).filter(x => x.status === 'approved' && x.method === rec.method) : [])];
@@ -3429,7 +3506,7 @@ async function saveDonorEdit(f, rec, ph, pe) {
   const v = sel => $(sel, f).value.trim(), errs = [], box = $('#eErr', f);
   if (!mark($('#eName', f), v('#eName').length < 3)) errs.push(t('اكتب الاسم الكامل.'));
   const zone = toLatin(v('#eZone')), street = toLatin(v('#eStreet')), bldg = toLatin(v('#eBldg'));
-  const zb = !mark($('#eZone', f), !(+zone >= 1 && +zone <= 99)), stb = !mark($('#eStreet', f), !(+street >= 1)), bb = !mark($('#eBldg', f), !(+bldg >= 1));
+  const zb = !mark($('#eZone', f), !(+zone >= 1 && +zone <= 99)), stb = !mark($('#eStreet', f), !plateNum(street)), bb = !mark($('#eBldg', f), !plateNum(bldg));
   if (zb || stb || bb) errs.push(t('أكمل أرقام اللوحة المنزلية (المنطقة من 1 إلى 99).'));
   const rd = readItems($('#eItems', f), rec.kind); errs.push(...rd.errs);
   const method = v('#eMethod'), other = method === 'pickup' && $('input[name=e_place]:checked', f).value === 'other';
@@ -3586,9 +3663,9 @@ function renderAccount() {
   $('#acctForm').hidden = !!ph;
   if (!ph || (CLOUD && !acctData)) { $('#acctForm').hidden = false; out.innerHTML = ''; return; }
   const list = CLOUD ? acctData.donations : db.donations.filter(d => d.phone === ph).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
-  const ok = list.filter(d => !['rejected','cancelled'].includes(d.status));
+  const ok = list.filter(d => !['new','rejected','cancelled'].includes(d.status));
   const delivered = list.filter(d => d.status === 'delivered').length;
-  const families = new Set(); list.forEach(d => (d.allocations || []).forEach(a => { if (a.delivered) families.add(a.to === '__target' ? d.id : a.to); }));
+  const families = new Set(); list.forEach(d => (d.allocations || []).forEach(a => { if (a.delivered && a.to !== '__open') families.add(a.to === '__target' ? d.id : a.to); }));
   const famCount = CLOUD ? acctData.families : families.size;
   const points = ok.length * 10 + delivered * 20;
   const name = CLOUD ? acctData.name || '' : (list[0] || {}).name || '';
@@ -3611,7 +3688,7 @@ function renderAccount() {
   if (cv) {
     const draw = () => drawCert(cv, name, ok.length, delivered);
     (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(draw); draw();
-    $('#certDl').addEventListener('click', () => cv.toBlob(b => b && downloadBlob(b, `share-blessings-certificate-${ph.slice(-4)}.png`), 'image/png'));
+    $('#certDl').addEventListener('click', () => cv.toBlob(b => b && downloadBlob(b, `athar-certificate-${ph.slice(-4)}.png`), 'image/png'));
   }
 }
 function drawCert(cv, name, n, delivered) {
@@ -3783,7 +3860,7 @@ function applyLang(l) {
   const root = document.documentElement;
   root.lang = LANG; root.dir = LANGS[LANG].rtl ? 'rtl' : 'ltr';
   if (window.sbLoadFont) window.sbLoadFont(LANG);
-  document.title = BUNDLE ? BUNDLE.title : 'أثر';
+  setTitle();
   applyLabels();
   // rebuild controls whose labels come from code, keeping what the person already chose
   const kept = $$('#d_items .item-row').map(row => { const it = {}; $$('[data-k]', row).forEach(el => { it[el.dataset.k] = el.value; }); return it; });
@@ -3856,8 +3933,10 @@ function mergeSite(d) {
   if (!d || typeof d !== 'object') return b;
   ['contact', 'banner', 'intake', 'kinds', 'sections', 'ticker'].forEach(k => { if (d[k] && typeof d[k] === 'object') Object.assign(b[k], d[k]); });
   ['campaigns', 'areas', 'points'].forEach(k => { if (Array.isArray(d[k])) b[k] = d[k]; });
-  if (d.texts && typeof d.texts === 'object') b.texts = d.texts;
-  if (d.tr && typeof d.tr === 'object') b.tr = d.tr;
+  // edited texts and their translations replace page text as-is, so they may never carry markup (a typo, or an odd machine translation)
+  const plain = o => Object.fromEntries(Object.entries(o || {}).filter(([, v]) => typeof v === 'string').map(([k, v]) => [k, v.replace(/[<>]/g, '')]));
+  if (d.texts && typeof d.texts === 'object') b.texts = plain(d.texts);
+  if (d.tr && typeof d.tr === 'object') b.tr = Object.fromEntries(Object.entries(d.tr).filter(([, v]) => v && typeof v === 'object').map(([l, v]) => [l, plain(v)]));
   return b;
 }
 SITE = mergeSite(null);
@@ -3930,7 +4009,7 @@ const campPreset = c => `${c.kind}:${(c.types && c.types[0]) || Object.keys(type
 function renderCamps() {
   const box = $('#secCamps .camps'); if (!box) return;
   box.innerHTML = SITE.campaigns.filter(c => c.on).map(c => `<article class="camp">
-    <div class="art ${THEMES[c.theme] ? c.theme : 'band'}">${c.badge ? `<span class="badge">${esc(t(c.badge))}</span>` : ''}<img class="i3" src="icons/${esc(ICONS.includes(c.icon) ? c.icon : 'box')}.webp" width="104" height="104" alt="" decoding="async"></div>
+    <div class="art ${THEMES[c.theme] ? c.theme : 'band'}">${c.badge ? `<span class="badge">${esc(t(c.badge))}</span>` : ''}<img class="i3" src="icons/${esc(ICONS.includes(c.icon) ? c.icon : 'box')}.webp" width="104" height="104" alt="" decoding="async" loading="lazy"></div>
     <div class="body"><h3>${esc(t(c.title))}</h3><p>${esc(t(c.desc))}</p>
       <div class="prog"><i data-camp-bar="${esc(c.id)}"></i></div><div class="prog-row"><span>${t('جُمع')} <b data-camp-val="${esc(c.id)}">0</b> ${t(campUnit(c))}</span><span>${t('الهدف')} <b>${fmtN(c.target)}</b></span></div>
       <a class="btn btn-primary btn-sm" href="#donate" data-preset="${esc(campPreset(c))}">${t('شارك في الحملة')}</a></div></article>`).join('');
@@ -3958,7 +4037,7 @@ function campTotals(dons) {
 }
 function renderAreas() {
   const box = $('#secCover .points'); if (!box) return;
-  box.innerHTML = SITE.areas.map(a => `<div class="point area"><img class="pin3d" src="icons/pin.webp" width="40" height="40" alt="" decoding="async"><div><b>${esc(t(a.name))}</b><small>${esc(t(a.list))}</small></div></div>`).join('');
+  box.innerHTML = SITE.areas.map(a => `<div class="point area"><img class="pin3d" src="icons/pin.webp" width="40" height="40" alt="" decoding="async" loading="lazy"><div><b>${esc(t(a.name))}</b><small>${esc(t(a.list))}</small></div></div>`).join('');
 }
 
 /* ---- «نعمة الجيران» و«أمنيات مجهولة» ----
@@ -4051,13 +4130,13 @@ async function renderNear() {
   // what is needed nearby (or everywhere before the visitor sets a location), one chip per kind
   const byKind = {}; (located && nearN ? near : N.zones).forEach(x => { byKind[x.k] = (byKind[x.k] || 0) + x.n; });
   $('#nearKinds').innerHTML = Object.keys(KIND).filter(k => byKind[k] && kindOn(k)).map(k =>
-    `<a href="#donate" data-preset="${k}:${Object.keys(typeMap(k))[0]}"><img class="i3" src="icons/${KIND_IC[k]}.webp" width="30" height="30" alt="" decoding="async">${t(KIND[k])} <b>${fmtN(byKind[k])}</b></a>`).join('');
+    `<a href="#donate" data-preset="${k}:${Object.keys(typeMap(k))[0]}"><img class="i3" src="icons/${KIND_IC[k]}.webp" width="30" height="30" alt="" decoding="async" loading="lazy">${t(KIND[k])} <b>${fmtN(byKind[k])}</b></a>`).join('');
   $$('#nearKinds [data-preset]').forEach(a => a.addEventListener('click', () => { pendingWish = null; pendingPreset = a.dataset.preset; if (location.hash === '#donate') applyPreset(); }));
   // wishes: open ones first, then the closest, then urgent
   const ws = N.wishes.slice().sort((a, b) => (a.taken - b.taken) || ((dist[a.z] ?? (nearMe && nearMe.zone === a.z ? 0 : 999)) - (dist[b.z] ?? (nearMe && nearMe.zone === b.z ? 0 : 999))) || ((b.urg === 'high') - (a.urg === 'high')));
   $('#wishWrap').hidden = !ws.length;
   $('#wishList').innerHTML = (wishAll ? ws : ws.slice(0, WISH_SHOW)).map(w => `<article class="wish${w.taken ? ' taken' : ''}">
-    <div class="wish-top"><img class="i3" src="icons/${KIND_IC[w.k] || 'box'}.webp" width="38" height="38" alt="" decoding="async"><span class="tag${isNear(w.z) ? ' gold' : ''}">${nearLbl(w.z, dist[w.z])}</span>${w.urg === 'high' ? `<span class="tag hot">${t('عاجلة')}</span>` : ''}</div>
+    <div class="wish-top"><img class="i3" src="icons/${KIND_IC[w.k] || 'box'}.webp" width="38" height="38" alt="" decoding="async" loading="lazy"><span class="tag${isNear(w.z) ? ' gold' : ''}">${nearLbl(w.z, dist[w.z])}</span>${w.urg === 'high' ? `<span class="tag hot">${t('عاجلة')}</span>` : ''}</div>
     <p class="wish-text" dir="auto" data-notr>${esc(wishText(w))}</p>
     <small>${w.t === 'org' ? t('مؤسسة خيرية') : t('أسرة من {0} أفراد', w.size)}</small>
     ${w.taken ? `<span class="tag gold">${t('يلبّيها متبرّع الآن')}</span>` : `<a class="btn btn-primary btn-sm" href="#donate" data-wish="${esc(w.id)}">${t('ألبّي هذه الأمنية')}</a>`}</article>`).join('');
@@ -4099,7 +4178,7 @@ let movePhotos = [];
 wirePlate('m');
 function renderMove() {
   const kept = {}; $$('#m_items [data-mv]').forEach(i => { kept[i.dataset.mv] = i.value; });
-  $('#m_items').innerHTML = MOVE_KINDS.filter(kindOn).map(k => `<div class="mv-group"><h4><img class="i3" src="icons/${KIND_IC[k]}.webp" width="30" height="30" alt="" decoding="async">${esc(KIND[k])}</h4>
+  $('#m_items').innerHTML = MOVE_KINDS.filter(kindOn).map(k => `<div class="mv-group"><h4><img class="i3" src="icons/${KIND_IC[k]}.webp" width="30" height="30" alt="" decoding="async" loading="lazy">${esc(KIND[k])}</h4>
     <div class="mv-grid">${Object.entries(GOODS[k].types).map(([v, lbl]) => { const q = +kept[`${k}:${v}`] || 0;
       return `<label class="mv-item${q ? ' on' : ''}"><span>${esc(lbl)}</span><input type="number" min="0" max="20" inputmode="numeric" value="${q}" data-mv="${k}:${v}"></label>`; }).join('')}</div></div>`).join('');
   $('#m_date').min = addDays(1); $('#m_date').max = addDays(180);
@@ -4134,8 +4213,8 @@ $('#moveForm').addEventListener('submit', async e => {
   if (!mark($('#m_phone'), !phoneOk(v('m_phone')))) errs.push('رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 3 أو 5 أو 6 أو 7.');
   const date = v('m_date'), left = date ? daysUntil(date) : -1;
   if (!mark($('#m_date'), !(left >= 1 && left <= 180))) errs.push('حدّد تاريخ سفرك، من الغد وحتى ستة أشهر.');
-  const zb = !mark($('#m_zone'), !(+v('m_zone') >= 1 && +v('m_zone') <= 99)), sb = !mark($('#m_street'), !(+v('m_street') >= 1)), bb = !mark($('#m_bldg'), !(+v('m_bldg') >= 1));
-  if (zb || sb || bb) errs.push('أكمل أرقام اللوحة المنزلية (المنطقة من 1 إلى 99).');
+  const zb = !mark($('#m_zone'), !(+v('m_zone') >= 1 && +v('m_zone') <= 99)), stb = !mark($('#m_street'), !plateNum(v('m_street'))), bb = !mark($('#m_bldg'), !plateNum(v('m_bldg')));
+  if (zb || stb || bb) errs.push('أكمل أرقام اللوحة المنزلية (المنطقة من 1 إلى 99).');
   const byKind = {};
   $$('#m_items [data-mv]').forEach(i => {
     const q = Math.min(20, Math.floor(+toLatin(i.value) || 0)); if (q <= 0) return;
@@ -4300,7 +4379,7 @@ function campEditor(c, i, n) {
       <label class="f">${t('الشارة')} <small>${t('اختياري')}</small><input type="text" data-sa="${P}badge" value="${esc(c.badge)}" maxlength="24"></label></div>
     <label class="f">${t('الوصف')}<input type="text" data-sa="${P}desc" value="${esc(c.desc)}" maxlength="160"></label>
     <div class="grid">
-      <label class="f">${t('الأيقونة')}<span class="icon-pick"><img src="icons/${esc(c.icon)}.webp" alt=""><select data-sa="${P}icon">${ICONS.map(x => `<option value="${x}"${x === c.icon ? ' selected' : ''}>${x}</option>`).join('')}</select></span></label>
+      <label class="f">${t('الأيقونة')}<span class="icon-pick"><img src="icons/${esc(c.icon)}.webp" alt="" loading="lazy" decoding="async"><select data-sa="${P}icon">${ICONS.map(x => `<option value="${x}"${x === c.icon ? ' selected' : ''}>${x}</option>`).join('')}</select></span></label>
       <label class="f">${t('لون البطاقة')}<select data-sa="${P}theme">${Object.entries(THEMES).map(([k, v]) => `<option value="${k}"${k === c.theme ? ' selected' : ''}>${t(v)}</option>`).join('')}</select></label>
       <label class="f">${t('نوع التبرع')}<select data-sa="${P}kind" data-rerender>${Object.entries(KIND).map(([k, v]) => `<option value="${k}"${k === c.kind ? ' selected' : ''}>${v}</option>`).join('')}</select></label>
       <label class="f">${t('الهدف')} <small>${t(campUnit(c))}</small><input type="number" min="1" data-sa="${P}target" value="${+c.target || 0}"></label></div>
@@ -4482,7 +4561,10 @@ function enhanceDate(inp) {
     const now = new Date().getFullYear(), min = inp.min ? +inp.min.slice(0, 4) : now - 1, max = inp.max ? +inp.max.slice(0, 4) : Math.max(min, now) + 10;
     const ph = DATE_PH[LANG] || DATE_PH.en, months = monthNames();
     box.dir = LANGS[LANG].rtl ? 'rtl' : 'ltr'; box.lang = LANG;
-    dd.setAttribute('aria-label', ph[0]); mm.setAttribute('aria-label', ph[1]); yy.setAttribute('aria-label', ph[2]);
+    // screen readers hear the field's own name too ("Expiry date – Day"), not just "Day"
+    const lab = inp.closest('label'), name = lab ? [...lab.childNodes].filter(n => n.nodeType === 3).map(n => n.nodeValue).join(' ').replace(/\s+/g, ' ').trim() : '';
+    const al = x => name ? `${name} – ${x}` : x;
+    dd.setAttribute('aria-label', al(ph[0])); mm.setAttribute('aria-label', al(ph[1])); yy.setAttribute('aria-label', al(ph[2]));
     yy.innerHTML = `<option value="">${ph[2]}</option>` + Array.from({ length: max - min + 1 }, (_, i) => `<option>${min + i}</option>`).join('');
     mm.innerHTML = `<option value="">${ph[1]}</option>` + months.map((m, i) => `<option value="${String(i + 1).padStart(2, '0')}">${m}</option>`).join('');
     dd.innerHTML = `<option value="">${ph[0]}</option>` + Array.from({ length: 31 }, (_, i) => `<option>${String(i + 1).padStart(2, '0')}</option>`).join('');
@@ -4533,14 +4615,18 @@ function markClean() {
 function cloudErr(e) {
   const m = (e && (e.message || e.error_description)) || String(e);
   const map = { not_found: 'رقم الهاتف لا يطابق الطلب.', not_allowed: 'لا يمكن تنفيذ هذا الإجراء في هذه المرحلة.', bad_phone: 'رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 3 أو 5 أو 6 أو 7.',
-    bad_photos: 'تعذّر رفع الصور. حاول مرة أخرى.', bad_addr: 'أكمل أرقام اللوحة المنزلية (المنطقة من 1 إلى 99).', bad_items: 'راجع كميات الأصناف.', bad_place: 'صِف مكان الاستلام الذي تحدده.', offer_gone: 'لم يعد هذا الموعد متاحًا. تواصل معنا عبر واتساب.', bad_email: 'البريد الإلكتروني غير صحيح.', intake_closed: 'الاستقبال متوقف مؤقتًا.', kind_closed: 'لا نستقبل هذا الصنف حاليًا.', weak_password: 'كلمة المرور يجب أن تكون 8 أحرف على الأقل.', bad_name: 'اكتب اسم العضو', payload_too_large: 'البيانات أكبر من المسموح.', 'Invalid login credentials': 'البريد أو كلمة المرور غير صحيحة.' };
+    bad_photos: 'تعذّر رفع الصور. حاول مرة أخرى.', bad_addr: 'أكمل أرقام اللوحة المنزلية (المنطقة من 1 إلى 99).', bad_items: 'راجع كميات الأصناف.', bad_place: 'صِف مكان الاستلام الذي تحدده.', offer_gone: 'لم يعد هذا الموعد متاحًا. تواصل معنا عبر واتساب.', bad_email: 'البريد الإلكتروني غير صحيح.', intake_closed: 'الاستقبال متوقف مؤقتًا.', kind_closed: 'لا نستقبل هذا الصنف حاليًا.', weak_password: 'كلمة المرور يجب أن تكون 8 أحرف على الأقل.', bad_name: 'اكتب الاسم (من 3 إلى 80 حرفًا).', payload_too_large: 'البيانات أكبر من المسموح.', rate_limited: 'محاولات كثيرة. انتظر ساعة ثم حاول مرة أخرى.', too_many: 'وصلنا عدد كبير من الطلبات من هذا الرقم اليوم. حاول غدًا أو تواصل معنا عبر واتساب.', bad_size: 'عدد الأفراد يجب أن يكون رقمًا صحيحًا من 1 إلى 9999.', bad_kind: 'نوع التبرع غير صحيح.', unconfirmed_user: 'هذا البريد مسجّل بحساب لم يُؤكَّد. احذفه من Supabase ثم أعد المحاولة.', 'Invalid login credentials': 'البريد أو كلمة المرور غير صحيحة.' };
   const key = Object.keys(map).find(k => m.includes(k));
   return key ? t(map[key]) : (/fetch|network/i.test(m) ? t('تعذّر الاتصال بالخادم. تحقق من الإنترنت وحاول مرة أخرى.') : m);
 }
+let cloudSaving = false;
 function cloudSave() {
+  cloudSaving = true;
   savingQ = savingQ.then(async () => {
     let failed = null;
-    for (const [table, list] of [['donations', db.donations], ['requests', db.requests]]) {
+    // requests first: if a beneficiary changed their request meanwhile, the donation that depends on it is not saved either.
+    // volunteers can't write requests (only read the ones they deliver to), so what they change there, like a map pin, stays on this device
+    for (const [table, list] of [['requests', can('verify') ? db.requests : []], ['donations', db.donations]]) {
       for (const r of list) {
         const prev = shadow.get(r.id), cur = JSON.stringify(r);
         if (prev === cur) continue;
@@ -4559,7 +4645,7 @@ function cloudSave() {
       if (!error) logs.forEach(l => { l._saved = true; });
     }
     if (failed) { closeDrawer(); toast(t('لم يُحفظ التعديل: {0} أُعيد تحميل البيانات.', failed)); await reloadCloud(); renderAdmin(); }
-  }).catch(e => { toast(cloudErr(e)); });
+  }).catch(e => { toast(cloudErr(e)); }).finally(() => { cloudSaving = false; });
   return savingQ;
 }
 async function reloadCloud() {
@@ -4636,6 +4722,13 @@ async function fetchStats() {
 }
 
 /* ---- boot ---- */
+if (CLOUD_DOWN) {
+  const bar = document.createElement('div'); bar.className = 'down-bar'; bar.setAttribute('role', 'alert');
+  bar.innerHTML = `<span>${t('تعذّر الاتصال بخادم المنصة، فلا يمكن إرسال الطلبات الآن. تحقق من الإنترنت ثم أعد تحميل الصفحة.')}</span><button class="btn btn-sm" type="button">${t('إعادة التحميل')}</button>`;
+  bar.querySelector('button').addEventListener('click', () => location.reload());
+  document.body.prepend(bar);
+  document.addEventListener('submit', e => { e.preventDefault(); e.stopImmediatePropagation(); toast(t('تعذّر الاتصال بالخادم. تحقق من الإنترنت وحاول مرة أخرى.')); }, true);
+}
 if (CLOUD) {
   document.body.classList.add('cloud');
   $$('.local-only').forEach(el => { el.hidden = true; });
@@ -4669,7 +4762,10 @@ if (CLOUD) {
     pwClose(); toast(t('تم تغيير كلمة المرور'));
   });
   $('#refreshBtn').addEventListener('click', async () => { await reloadCloud(); renderAdmin(); toast(t('حُدّثت البيانات')); });
-  setInterval(() => { if (me && !document.hidden && $('#drawer').hidden && location.hash === '#admin') reloadCloud().then(renderAdmin); }, 60000);
+  // refresh the lists every minute, but not while someone is typing, saving, or working in a tab whose forms a re-render would wipe
+  const busyAdmin = () => { const a = document.activeElement; return (a && a.closest && a.closest('#v-admin') && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))
+    || ['team', 'site', 'backup'].includes(tab) || !!document.querySelector('#v-admin .leaflet-container') || cloudSaving; };
+  setInterval(() => { if (me && !document.hidden && $('#drawer').hidden && location.hash === '#admin' && !busyAdmin()) reloadCloud().then(renderAdmin); }, 60000);
   sb.auth.getSession().then(({ data }) => { if (data.session) startStaffSession().then(st => { if (st === 'not_staff') showClaim(); if (location.hash === '#admin') renderAdmin(); }); });
 } else if (CFG.supabaseUrl) {
   toast(t('تعذّر تحميل مكتبة الاتصال بقاعدة البيانات. تحقق من الإنترنت.'));

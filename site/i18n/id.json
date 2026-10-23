@@ -1165,7 +1165,19 @@
   "عدّل {0} مسار {1} إلى «{2}»: {3}": "{0} memindahkan {1} ke “{2}”: {3}",
   "هذه هي المرحلة الحالية": "Ini tahap saat ini",
   "اكتب سبب التعديل": "Tulis alasan perubahan",
-  "عُدّل مسار الطلب": "Alur permintaan diperbarui"
+  "عُدّل مسار الطلب": "Alur permintaan diperbarui",
+  "محاولات كثيرة. انتظر ساعة ثم حاول مرة أخرى.": "Terlalu banyak percobaan. Tunggu satu jam lalu coba lagi.",
+  "وصلنا عدد كبير من الطلبات من هذا الرقم اليوم. حاول غدًا أو تواصل معنا عبر واتساب.": "Kami sudah menerima banyak kiriman dari nomor ini hari ini. Coba lagi besok atau hubungi kami lewat WhatsApp.",
+  "عدد الأفراد يجب أن يكون رقمًا صحيحًا من 1 إلى 9999.": "Jumlah orang harus bilangan bulat dari 1 sampai 9999.",
+  "نوع التبرع غير صحيح.": "Jenis donasi tidak valid.",
+  "هذا البريد مسجّل بحساب لم يُؤكَّد. احذفه من Supabase ثم أعد المحاولة.": "Email ini milik akun yang belum dikonfirmasi. Hapus di Supabase, lalu coba lagi.",
+  "اكتب الاسم (من 3 إلى 80 حرفًا).": "Tulis nama (3 sampai 80 karakter).",
+  "تغيير الموعد أو المتطوّع، أو رفض التبرع": "Ubah tanggal atau relawan, atau tolak donasi",
+  "حفظ الموعد الجديد": "Simpan tanggal baru",
+  "اختر تاريخًا من اليوم فصاعدًا": "Pilih hari ini atau tanggal sesudahnya",
+  "تعذّر الاتصال بخادم المنصة، فلا يمكن إرسال الطلبات الآن. تحقق من الإنترنت ثم أعد تحميل الصفحة.": "Server platform tidak dapat dijangkau, jadi belum bisa mengirim apa pun. Periksa internet, lalu muat ulang halaman.",
+  "إعادة التحميل": "Muat ulang",
+  "منصة تربط من لديه فائض من المواد الغذائية الجافة والملابس والأجهزة الكهربائية والأثاث بمن يحتاجها، عبر فريق من المشرفين والمتطوعين.": "Platform yang menghubungkan orang yang punya kelebihan makanan kering, pakaian, peralatan listrik, dan perabot dengan mereka yang membutuhkan, melalui tim pengawas dan relawan."
  },
  "maps": {
   "FOOD": {

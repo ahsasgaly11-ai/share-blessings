@@ -1,22 +1,24 @@
 {
-  "name": "أثر",
+  "id": "./",
+  "name": "أثر | منصة التبرع العيني في قطر",
   "short_name": "أثر",
   "description": "منصة مجتمعية للتبرع العيني في قطر: مواد غذائية جافة، ملابس، أجهزة كهربائية وأثاث.",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#F7F4F5",
   "theme_color": "#8A1538",
+  "categories": ["lifestyle", "social"],
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
     { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "أرغب في المشاركة", "url": "./index.html#donate" },
-    { "name": "تتبّع طلبي", "url": "./index.html#track" },
-    { "name": "بوابة المشرفين", "url": "./index.html#admin" }
+    { "name": "أرغب في المشاركة", "url": "./#donate", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "تتبّع طلبي", "url": "./#track", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "بوابة المشرفين", "url": "./#admin", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] }
   ]
 }

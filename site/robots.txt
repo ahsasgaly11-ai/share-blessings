@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://share-blessings.pages.dev/sitemap.xml

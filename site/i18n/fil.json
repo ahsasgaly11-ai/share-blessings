@@ -1165,7 +1165,19 @@
   "عدّل {0} مسار {1} إلى «{2}»: {3}": "Inilipat ni {0} ang {1} sa “{2}”: {3}",
   "هذه هي المرحلة الحالية": "Ito na ang kasalukuyang yugto",
   "اكتب سبب التعديل": "Isulat ang dahilan ng pagbabago",
-  "عُدّل مسار الطلب": "Na-update ang daloy ng kahilingan"
+  "عُدّل مسار الطلب": "Na-update ang daloy ng kahilingan",
+  "محاولات كثيرة. انتظر ساعة ثم حاول مرة أخرى.": "Masyadong maraming pagsubok. Maghintay ng isang oras at subukang muli.",
+  "وصلنا عدد كبير من الطلبات من هذا الرقم اليوم. حاول غدًا أو تواصل معنا عبر واتساب.": "Marami na kaming natanggap mula sa numerong ito ngayong araw. Subukang muli bukas o kontakin kami sa WhatsApp.",
+  "عدد الأفراد يجب أن يكون رقمًا صحيحًا من 1 إلى 9999.": "Ang bilang ng tao ay dapat buong numero mula 1 hanggang 9999.",
+  "نوع التبرع غير صحيح.": "Hindi wasto ang uri ng donasyon.",
+  "هذا البريد مسجّل بحساب لم يُؤكَّد. احذفه من Supabase ثم أعد المحاولة.": "Ang email na ito ay nasa account na hindi pa kumpirmado. Burahin ito sa Supabase, saka subukang muli.",
+  "اكتب الاسم (من 3 إلى 80 حرفًا).": "Ilagay ang pangalan (3 hanggang 80 titik).",
+  "تغيير الموعد أو المتطوّع، أو رفض التبرع": "Palitan ang petsa o boluntaryo, o tanggihan ang donasyon",
+  "حفظ الموعد الجديد": "I-save ang bagong petsa",
+  "اختر تاريخًا من اليوم فصاعدًا": "Pumili ng petsa ngayon o pagkatapos",
+  "تعذّر الاتصال بخادم المنصة، فلا يمكن إرسال الطلبات الآن. تحقق من الإنترنت ثم أعد تحميل الصفحة.": "Hindi maabot ang server ng platform kaya walang maipapadala ngayon. Suriin ang internet, saka i-reload ang page.",
+  "إعادة التحميل": "I-reload",
+  "منصة تربط من لديه فائض من المواد الغذائية الجافة والملابس والأجهزة الكهربائية والأثاث بمن يحتاجها، عبر فريق من المشرفين والمتطوعين.": "Isang plataporma na nag-uugnay sa may sobrang tuyong pagkain, damit, kasangkapang de-kuryente at muwebles sa mga nangangailangan, sa tulong ng mga superbisor at boluntaryo."
  },
  "maps": {
   "FOOD": {
